@@ -1,0 +1,19 @@
+.header {
+    grid-area: header;
+    background-color: #6aa7f7;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo{
+}
+
+.userIcon{
+
+}
+
+.levelIndicator{
+
+}

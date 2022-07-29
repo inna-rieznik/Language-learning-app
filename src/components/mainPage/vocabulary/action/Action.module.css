@@ -1,0 +1,10 @@
+.action{
+    height: 146px;
+    width: 471px;
+    font-size: 30px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    border-radius: 15px;
+    background-color: #FFC2C2;
+    text-align: center;
+}

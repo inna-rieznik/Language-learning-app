@@ -1,0 +1,14 @@
+
+.content {
+    grid-area: content;
+
+
+}
+
+.subContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.image {
+    float: right;
+}

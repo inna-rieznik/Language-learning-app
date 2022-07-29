@@ -1,0 +1,14 @@
+
+.primary{
+    background-color: #ff777b;
+}
+
+.button{
+    height: 76px;
+    width: 471px;
+    background-color: #ff777b;
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
