@@ -1,17 +1,44 @@
 import Logo from '../../images/rocket-ship-svgrepo-com.svg'
 import UserIcon from '../../images/user-svgrepo-com.svg'
+import Logout from '../../images/logout.svg'
 import s from './Header.module.css'
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 
 const Header = () => {
+
+    const navigate = useNavigate();
+    const navigateToLogin = () => {
+        navigate('/login');
+    }
+    const navigateToUserInfo = () => {
+        navigate('/user');
+    }
+
     return (
 
         <header className={s.header}>
+
             <NavLink to='/'>
-            <img className={s.logo} src={Logo} alt="Logo" width="44" height="44"/>
+                <img className={s.logo} src={Logo} alt="Logo" width="44" height="44"/>
             </NavLink>
-            <a className={s.levelIndicator} href='#s'>Level 1 </a>
-            <img className={s.userIcon} src={UserIcon} alt="User icon" width="32" height="32"/>
+            <nav className={s.menu}>
+                <ul className={s.list}>
+                    <li className={s.item}>
+                        <p className={s.level}>Level 5</p>
+                    </li>
+                    <li className={s.item} >
+                        <p className={s.levelIndicator}>[********-------------------]</p>
+                    </li>
+                    <li className={s.item}>
+                        <button  onClick={navigateToUserInfo}>
+                        <img className={s.userIcon} src={UserIcon} alt="User icon" width="32" height="32"/></button>
+                    </li>
+                    <li className={s.item}>
+                        <button  onClick={navigateToLogin}><img className={s.logout} src={Logout} alt="Logout" width="32" height="32"/></button>
+                    </li>
+                </ul>
+            </nav>
+
         </header>
     );
 }
