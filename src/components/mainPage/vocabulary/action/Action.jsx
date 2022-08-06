@@ -1,10 +1,11 @@
 import s from "./Action.module.css";
+import {NavLink} from "react-router-dom";
 
 
 const Action = (props) => {
     return (
         <div className={s.action}>
-            {props.actionType}
+            <NavLink to='/vocabularyPage'>{props.actionType}</NavLink>
         </div>
     );
 }

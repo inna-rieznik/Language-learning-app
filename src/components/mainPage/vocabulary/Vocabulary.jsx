@@ -7,6 +7,7 @@ const Vocabulary = () => {
     return (
         <div className={s.vocabulary}>
             <h1>Vocabulary</h1>
+
             <Action actionType='my words'/>
             <Button buttonType='review words'/>
             <Button buttonType='+add new word'/>
