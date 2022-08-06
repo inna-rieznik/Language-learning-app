@@ -1,19 +1,46 @@
 .header {
     grid-area: header;
-    background-color: #6aa7f7;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin: 5px 20px 5px 30px;
 }
 
-.logo{
-}
-
-.userIcon{
+.logo {
 
 }
 
-.levelIndicator{
+.userIcon {
+
+}
+.level{
+    font-size: 24px;
+}
+
+.levelIndicator {
+    padding: 0 20px 0 0;
+}
+
+.menu {
+    display: flex;
+    flex: 0 0 540px;
+    justify-content: flex-end;
+}
+
+.list {
+    display: flex;
+    align-items: center;
+}
+
+.item {
+    padding: 0 10px 0 0;
+}
+
+button {
+    background-color: transparent;
+}
+
+.logout {
 
 }

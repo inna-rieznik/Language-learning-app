@@ -1,5 +1,6 @@
 import s from "./VocabularyPage.module.css";
 import {NavLink} from "react-router-dom";
+import TableWords from "./table/TableWords";
 
 const VocabularyPage = () => {
     return (
@@ -13,11 +14,10 @@ const VocabularyPage = () => {
                      /My words
                 </p>
             </div>
-
-
-            <p>bla bla bla</p>
-
-
+            <h1>My Words</h1>
+            <div>
+                <TableWords/>
+            </div>
         </div>
     );
 }
