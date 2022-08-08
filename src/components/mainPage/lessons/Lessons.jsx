@@ -8,7 +8,7 @@ const Lessons = (props) => {
     return (
         <div className={s.lessons}>
             <h1>Lessons</h1>
-            <Action actionType='review grammar'/>
+            <Action urlName='review_grammar' title='review grammar'/>
             <div>
                 <Lesson id='1'/>
                 <Lesson id='2'/>

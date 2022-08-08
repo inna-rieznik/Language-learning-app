@@ -3,10 +3,10 @@ import {NavLink} from "react-router-dom";
 
 
 const Action = (props) => {
-    let path = props.actionType;
+    let path = props.urlName;
     return (
         <div className={s.action}>
-            <NavLink to={path}>{props.actionType}</NavLink>
+            <NavLink to={path}>{props.title}</NavLink>
         </div>
     );
 }
