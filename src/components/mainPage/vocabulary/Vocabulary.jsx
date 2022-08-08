@@ -8,7 +8,7 @@ const Vocabulary = () => {
         <div className={s.vocabulary}>
             <h1>Vocabulary</h1>
 
-            <Action actionType='my words'/>
+            <Action  urlName='my_words' title='my words'/>
             <Button buttonType='review words'/>
             <Button buttonType='+add new word'/>
 
