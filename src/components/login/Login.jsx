@@ -17,8 +17,8 @@ const Login = (props) => {
                     <label className={s.label}>Full Name
                         <input className={s.item} type="text" name="name"/><br/>
                     </label>
-                    <label className={s.label}>Email
-                        <input className={s.item} type="text" name="email"/><br/>
+                    <label className={s.label}>Your email
+                        <input className={s.item} type="text" name="name"/><br/>
                     </label>
                     <label className={s.label}>Password
                         <input className={s.item} type="password" name="password"/><br/>
