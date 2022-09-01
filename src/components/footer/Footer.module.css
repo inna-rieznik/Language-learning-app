@@ -1,4 +1,10 @@
 .footer {
     grid-area: footer;
     background-color: #6aa7f7;
+
+}
+
+.info{
+    font-size: 20px;
+    padding: 30px 0;
 }

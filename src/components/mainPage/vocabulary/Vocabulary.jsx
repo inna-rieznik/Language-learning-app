@@ -9,8 +9,8 @@ const Vocabulary = () => {
             <h1>Vocabulary</h1>
 
             <Action  urlName='my_words' title='my words'/>
-            <Button buttonType='review words'/>
-            <Button buttonType='+add new word'/>
+            <Button  urlName='quiz' buttonAction='review words'/>
+            <Button  urlName='modal_add_word' buttonAction='+add new word'/>
 
         </div>
     );
