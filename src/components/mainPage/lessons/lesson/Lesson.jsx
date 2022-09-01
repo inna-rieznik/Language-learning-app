@@ -7,7 +7,7 @@ const Lesson = (props) => {
 
     return (
         <div className={s.lesson}>
-            <NavLink to={path}>Lesson {props.id}</NavLink>
+            <NavLink to={path}>Lesson {props.id} : {props.name}</NavLink>
         </div>
     );
 }
