@@ -9,6 +9,8 @@ import UserPage from "./components/userPage/UserPage";
 import WordsPage from "./components/wordsPage/WordsPage";
 import Quiz from "./components/mainPage/vocabulary/quiz/Quiz";
 import LessonPage from "./components/mainPage/lessons/lessonPage/LessonPage";
+import AddNewWord from "./components/mainPage/vocabulary/addNewWord/addNewWord";
+
 
 
 const App = (props) => {
@@ -24,11 +26,13 @@ const App = (props) => {
                     <Routes>
                         <Route path='/user' element={<UserPage/>}/>
                         <Route path='/login' element={<Login/>}/>
-                        <Route path='/' element={<MainPage lessonsData={props.lessonsData}/>}/>
-                        <Route path={'/my_words'} element={<WordsPage wordsData={props.wordsData}/>}/>
+                        <Route path='/' element={<MainPage lessonsData={props.state.lessonsData}/>}/>
+                        <Route path={'/my_words'} element={<WordsPage wordsData={props.state.wordsData}/>}/>
                         {/* <Route path={'/review_grammar'} element={}/>*/}
                         <Route path={'/quiz'} element={<Quiz/>}/>
-                        <Route path={`/lesson/${props.lessonsData.id}`} element={<LessonPage lessonsData={props.lessonsData}/>} />}
+                        <Route path={'/modal_add_word'} element={<AddNewWord/>}/>
+                        <Route path={'/my_words/modal_add_word'} element={<AddNewWord/>}/>
+                        <Route path={`/lesson/${props.state.lessonsData.id}`} element={<LessonPage lessonsData={props.state.lessonsData}/>} />}
                     </Routes>
                 </div>
                 <Footer/>

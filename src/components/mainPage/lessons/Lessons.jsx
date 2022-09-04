@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 
 
 const Lessons = (props) => {
-    let lessonsElement = props.lessonsData.map( lesson => <LessonPreview id={lesson.id} title={lesson.title}/>)
+    let lessonsElement = props.lessonsData.map(lesson => <LessonPreview id={lesson.id} title={lesson.title}/>)
 
     return (
         <div className={s.lessons}>
