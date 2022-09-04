@@ -4,11 +4,12 @@ import Lessons from "./lessons/Lessons";
 import Vocabulary from "./vocabulary/Vocabulary";
 import {NavLink} from "react-router-dom";
 
-const MainPage = () => {
+const MainPage = (props) => {
+
     return (
         <div className={s.content}>
             <div className={s.subContent}>
-                <Lessons/>
+                <Lessons lessonsData={props.lessonsData}/>
                 <Vocabulary/>
             </div>
             <div className={s.image}>

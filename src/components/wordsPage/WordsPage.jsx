@@ -1,11 +1,12 @@
-import s from "./VocabularyPage.module.css";
+import s from "./wordsPage.module.css";
 import {NavLink} from "react-router-dom";
-import TableWords from "./table/TableWords";
+import Word from "./words/Word";
 
-const VocabularyPage = () => {
+const WordsPage = (props) => {
+    let wordsElement = props.wordsData.map(word=> <Word id={word.id} cz={word.cz} eng={word.eng}/>)
+
     return (
         <div className={s.content}>
-
             <div>
                 <p>
                     <NavLink to='/'>
@@ -16,10 +17,10 @@ const VocabularyPage = () => {
             </div>
             <h1>My Words</h1>
             <div>
-                <TableWords/>
+                {wordsElement}
             </div>
         </div>
     );
 }
 
-export default VocabularyPage;
+export default WordsPage;
