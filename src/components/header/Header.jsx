@@ -3,16 +3,19 @@ import UserIcon from '../../images/user-svgrepo-com.svg'
 import Logout from '../../images/logout.svg'
 import s from './Header.module.css'
 import {NavLink, useNavigate} from "react-router-dom";
+import {IconButton} from "@mui/material";
+import PersonIcon from '@mui/icons-material/Person';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const Header = () => {
-
+/*
     const navigate = useNavigate();
     const navigateToLogin = () => {
         navigate('/login');
     }
     const navigateToUserInfo = () => {
         navigate('/user');
-    }
+    }*/
 
     return (
 
@@ -30,11 +33,17 @@ const Header = () => {
                         <p className={s.levelIndicator}>[********-------------------]</p>
                     </li>
                     <li className={s.item}>
-                        <button  onClick={navigateToUserInfo}>
-                        <img className={s.userIcon} src={UserIcon} alt="User icon" width="32" height="32"/></button>
+                        <IconButton aria-label="person" href="/user">
+                            <PersonIcon />
+                        </IconButton>
+                       {/* <button  onClick={navigateToUserInfo}>
+                        <img className={s.userIcon} src={UserIcon} alt="User icon" width="32" height="32"/></button>*/}
                     </li>
                     <li className={s.item}>
-                        <button  onClick={navigateToLogin}><img className={s.logout} src={Logout} alt="Logout" width="32" height="32"/></button>
+                        <IconButton aria-label="logout" href="/login">
+                            < LogoutIcon />
+                        </IconButton>
+                       {/* <button  onClick={navigateToLogin}><img className={s.logout} src={Logout} alt="Logout" width="32" height="32"/></button>*/}
                     </li>
                 </ul>
             </nav>
