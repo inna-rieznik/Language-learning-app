@@ -34,21 +34,22 @@ const Vocabulary = () => {
     let newWordEng = React.createRef();
 
     let addWordToVocabulary = () => {
-       debugger;
         let word = newWordCz.current.value;
         let translate = newWordEng.current.value;
         props.addWordToVocabulary(word, translate);
-        //alert(word);
+        newWordCz.current.value = null;
+        newWordEng.current.value = null;
+
     };
 
     return (
         <div className={s.vocabulary}>
             <h1>Vocabulary</h1>
 
-            <Action  urlName='my_words' title='my words'/>
-            <Button variant="contained" href='quiz' >Review words</Button>
-          {/*  <Button variant="contained" href='modal_add_word'  startIcon={<AddIcon />} >add new word</Button>*/}
-            <Button onClick={handleOpen} variant="contained" startIcon={<AddIcon />}>add new word</Button>
+            <Action urlName='my_words' title='my words'/>
+            <Button variant="contained" href='quiz'>Review words</Button>
+            {/*  <Button variant="contained" href='modal_add_word'  startIcon={<AddIcon />} >add new word</Button>*/}
+            <Button onClick={handleOpen} variant="contained" startIcon={<AddIcon/>}>add new word</Button>
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -66,7 +67,7 @@ const Vocabulary = () => {
                             Add new word
                         </Typography>
                         <Box component="form"
-                             sx={{'& > :not(style)': { m: 1, width: '25ch' },}}
+                             sx={{'& > :not(style)': {m: 1, width: '25ch'},}}
                              noValidate
                              autoComplete="off">
                             <Typography id="transition-modal-title">
@@ -77,7 +78,8 @@ const Vocabulary = () => {
                                 Translation
                             </Typography>
                             <TextField id="outlined-basic" label="Type smth" variant="outlined" inputRef={newWordEng}/>
-                            <Button variant="contained" startIcon={<AddIcon />} onClick={addWordToVocabulary}>add</Button>
+                            <Button variant="contained" startIcon={<AddIcon/>}
+                                    onClick={addWordToVocabulary}>add</Button>
                         </Box>
 
                     </Box>
