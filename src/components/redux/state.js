@@ -18,4 +18,14 @@ let state = {
 ]
 }
 
+export let addWordToVocabulary = (word, translation) => {
+    let newWord = {
+        id: 8,
+        cz: word,
+        eng: translation
+    };
+
+    state.wordsData.push(newWord)
+}
+
 export default state;
