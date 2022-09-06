@@ -10,6 +10,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
+import * as props from "../../redux/state";
 
 const style = {
     position: 'absolute',
@@ -27,6 +28,19 @@ const Vocabulary = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    //function to add data from inputs to wordsData
+    let newWordCz = React.createRef();
+    let newWordEng = React.createRef();
+
+    let addWordToVocabulary = () => {
+       debugger;
+        let word = newWordCz.current.value;
+        let translate = newWordEng.current.value;
+        props.addWordToVocabulary(word, translate);
+        //alert(word);
+    };
+
     return (
         <div className={s.vocabulary}>
             <h1>Vocabulary</h1>
@@ -58,12 +72,12 @@ const Vocabulary = () => {
                             <Typography id="transition-modal-title">
                                 Word
                             </Typography>
-                            <TextField id="outlined-basic" label="Type smth" variant="outlined" />
+                            <TextField id="outlined-basic" label="Type smth" variant="outlined" inputRef={newWordCz}/>
                             <Typography id="transition-modal-title">
                                 Translation
                             </Typography>
-                            <TextField id="outlined-basic" label="Type smth" variant="outlined" />
-                            <Button variant="contained" startIcon={<AddIcon />} >add</Button>
+                            <TextField id="outlined-basic" label="Type smth" variant="outlined" inputRef={newWordEng}/>
+                            <Button variant="contained" startIcon={<AddIcon />} onClick={addWordToVocabulary}>add</Button>
                         </Box>
 
                     </Box>

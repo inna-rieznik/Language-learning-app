@@ -24,15 +24,25 @@ const App = (props) => {
                 </div>
                 <div className="container">
                     <Routes>
-                        <Route path='/user' element={<UserPage/>}/>
-                        <Route path='/login' element={<Login/>}/>
-                        <Route path='/' element={<MainPage lessonsData={props.state.lessonsData}/>}/>
-                        <Route path={'/my_words'} element={<WordsPage wordsData={props.state.wordsData}/>}/>
+                        <Route path='/user'
+                               element={<UserPage/>}/>
+                        <Route path='/login'
+                               element={<Login/>}/>
+                        <Route path='/'
+                               element={<MainPage lessonsData={props.state.lessonsData}
+                                                  addWordToVocabulary={props.addWordToVocabulary}/>}/>
+                        <Route path={'/my_words'}
+                               element={<WordsPage wordsData={props.state.wordsData}
+                                                   addWordToVocabulary={props.addWordToVocabulary}/>}/>
                         {/* <Route path={'/review_grammar'} element={}/>*/}
-                        <Route path={'/quiz'} element={<Quiz/>}/>
-                        <Route path={'/modal_add_word'} element={<AddNewWord/>}/>
-                        <Route path={'/my_words/modal_add_word'} element={<AddNewWord/>}/>
-                        <Route path={`/lesson/${props.state.lessonsData.id}`} element={<LessonPage lessonsData={props.state.lessonsData}/>} />}
+                        <Route path={'/quiz'}
+                               element={<Quiz/>}/>
+                        <Route path={'/modal_add_word'}
+                               element={<AddNewWord/>}/>
+                        <Route path={'/my_words/modal_add_word'}
+                               element={<AddNewWord/>}/>
+                        <Route path={`/lesson/${props.state.lessonsData.id}`}
+                               element={<LessonPage lessonsData={props.state.lessonsData}/>} />}
                     </Routes>
                 </div>
                 <Footer/>

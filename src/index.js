@@ -4,13 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import state from "./components/redux/state";
+import {addWordToVocabulary} from './components/redux/state';
 
-
+//addWordToVocabulary('aaa','bb');
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App state={state}/>
+    <App state={state} addWordToVocabulary={addWordToVocabulary}/>
   </React.StrictMode>
 );
 
