@@ -3,7 +3,13 @@ import './App.css';
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import MainPage from "./components/mainPage/MainPage";
-import {BrowserRouter, Routes, Route, useNavigate} from "react-router-dom";
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+    useNavigate,
+    Navigate
+} from "react-router-dom";
 import Login from "./components/login/Login";
 import UserPage from "./components/userPage/UserPage";
 import WordsPage from "./components/wordsPage/WordsPage";
@@ -12,14 +18,13 @@ import LessonPage from "./components/mainPage/lessons/lessonPage/LessonPage";
 import AddNewWord from "./components/mainPage/vocabulary/addNewWord/addNewWord";
 
 
-
 const App = (props) => {
 
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 {/* <Login/> */}
-                  <div className="headerContainer">
+                <div className="headerContainer">
                     <Header/>
                 </div>
                 <div className="container">
@@ -41,8 +46,10 @@ const App = (props) => {
                                element={<AddNewWord/>}/>
                         <Route path={'/my_words/modal_add_word'}
                                element={<AddNewWord/>}/>
-                        <Route path={`/lesson/${props.state.lessonsData.id}`}
-                               element={<LessonPage lessonsData={props.state.lessonsData}/>} />}
+                        {/*ERROR there ------------------------------------------------------*/}
+                        <Route path={`lesson/${props.state.lessonsData.id}`}
+                               element={<LessonPage lessonsData={props.state.lessonsData}/>}/>}
+
                     </Routes>
                 </div>
                 <Footer/>
