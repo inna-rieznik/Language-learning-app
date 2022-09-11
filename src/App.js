@@ -20,6 +20,8 @@ import AddNewWord from "./components/mainPage/vocabulary/addNewWord/addNewWord";
 
 const App = (props) => {
 
+    console.log(props)
+
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -47,7 +49,7 @@ const App = (props) => {
                         <Route path={'/my_words/modal_add_word'}
                                element={<AddNewWord/>}/>
                         {/*ERROR there ------------------------------------------------------*/}
-                        <Route path={`lesson/${props.state.lessonsData.id}`}
+                        <Route path={`lesson/:lessonId`}
                                element={<LessonPage lessonsData={props.state.lessonsData}/>}/>}
 
                     </Routes>

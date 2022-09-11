@@ -1,5 +1,5 @@
 import s from "./LessonPreview.module.css";
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink, useNavigate, useParams} from "react-router-dom";
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -11,19 +11,20 @@ import * as props from "../../../redux/state";
 import LessonPage from "../lessonPage/LessonPage";
 
 const LessonPreview = (props) => {
+
     let lessonPath = `lesson/${props.id}`;
 
     let navigate = useNavigate();
 
-    const routeChange = () =>{
+    const routeChange = () => {
         let path = lessonPath;
         navigate(path);
     };
 
     return (
-        <Card sx={{ minWidth: 275 }}>
+        <Card sx={{minWidth: 275}}>
             <CardContent>
-                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
                     Lesson: {props.id}
                 </Typography>
                 <Typography variant="h5" component="div">
@@ -36,12 +37,12 @@ const LessonPreview = (props) => {
         </Card>
     );
 
-   /* return (
-        <div className={s.lessonPreview}>
-            <NavLink to={path}> Lesson {props.id} : {props.title}</NavLink>
+    /* return (
+         <div className={s.lessonPreview}>
+             <NavLink to={path}> Lesson {props.id} : {props.title}</NavLink>
 
-        </div>
-    );*/
+         </div>
+     );*/
 }
 
 export default LessonPreview;
