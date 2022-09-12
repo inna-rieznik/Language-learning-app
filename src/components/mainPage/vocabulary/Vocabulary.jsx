@@ -73,7 +73,7 @@ const Vocabulary = () => {
                             <Typography id="transition-modal-title">
                                 Word
                             </Typography>
-                            <TextField id="outlined-basic" label="Type smth" variant="outlined" inputRef={newWordCz}/>
+                            <TextField id="outlined-basic" label="Type smth" variant="outlined" inputRef={newWordCz} />
                             <Typography id="transition-modal-title">
                                 Translation
                             </Typography>

@@ -16,6 +16,8 @@ import WordsPage from "./components/wordsPage/WordsPage";
 import Quiz from "./components/mainPage/vocabulary/quiz/Quiz";
 import LessonPage from "./components/mainPage/lessons/lessonPage/LessonPage";
 import AddNewWord from "./components/mainPage/vocabulary/addNewWord/addNewWord";
+import FinalScreen from "./components/mainPage/vocabulary/quiz/finalScreen/FinalScreen";
+import Question from "./components/mainPage/vocabulary/quiz/questions/Question";
 
 
 const App = (props) => {
@@ -41,14 +43,12 @@ const App = (props) => {
                         <Route path={'/my_words'}
                                element={<WordsPage wordsData={props.state.wordsData}
                                                    addWordToVocabulary={props.addWordToVocabulary}/>}/>
-                        {/* <Route path={'/review_grammar'} element={}/>*/}
                         <Route path={'/quiz'}
                                element={<Quiz/>}/>
-                        <Route path={'/modal_add_word'}
-                               element={<AddNewWord/>}/>
-                        <Route path={'/my_words/modal_add_word'}
-                               element={<AddNewWord/>}/>
-                        {/*ERROR there ------------------------------------------------------*/}
+                        <Route path='/questions'
+                               element={<Question/>}/>
+                        <Route path='/score'
+                               element={<FinalScreen/>}/>
                         <Route path={`lesson/:lessonId`}
                                element={<LessonPage lessonsData={props.state.lessonsData}/>}/>}
 

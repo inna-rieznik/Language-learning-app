@@ -35,10 +35,6 @@ const style = {
     p: 4,
 };
 
-function handleClick(event) {
-    event.preventDefault();
-    //console.info('You clicked a breadcrumb.');
-}
 
 const WordsPage = (props) => {
     /* let wordsElement = props.wordsData.map(word => <Word id={word.id} cz={word.cz} eng={word.eng}/>)*/
@@ -63,7 +59,7 @@ const WordsPage = (props) => {
 
     return (
         <div className={s.content}>
-            <div role="presentation" onClick={handleClick}>
+
                 <Breadcrumbs aria-label="breadcrumb">
                     <Link
                         underline="hover"
@@ -74,8 +70,10 @@ const WordsPage = (props) => {
                     </Link>
                     <Typography color="text.primary">My Words</Typography>
                 </Breadcrumbs>
-            </div>
+
+
             <h1>My Words</h1>
+
             <Button onClick={handleOpen} variant="contained" startIcon={<AddIcon/>}>add new word</Button>
             <Modal
                 aria-labelledby="transition-modal-title"
