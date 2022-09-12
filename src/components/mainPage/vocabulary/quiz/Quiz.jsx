@@ -10,11 +10,28 @@ import {useState} from "react";
 import SelectField from "./SelectField";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
+import TextFieldComp from "./TextFieldComp";
 
 const Quiz = (props) => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const handleSubmit = e => {
+        e.preventDefault();
+    }
+
+    const difficultyOptions = [
+        {id: "easy", name: "Easy"},
+        {id: "medium", name: "Medium"},
+        {id: "hard", name: "Hard"}
+    ]
+
+    const typeOptions = [
+        {id: "multiple", name: "Multiple Choise"},
+        {id: "boolean", name: "True/False"}
+    ]
+
+
     //Settings component
     return (
         <div className={s.content}>
@@ -30,12 +47,13 @@ const Quiz = (props) => {
                 </Breadcrumbs>
             <h1>Quiz</h1>
             <div>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <SelectField  label="Category"/>
-                    <SelectField label="Difficulty"/>
-                    <SelectField label="Type"/>
-                    <Box>
-                        <Button onClick={handleOpen} type="submit" variant="contained" startIcon={<AddIcon/>}>Get Started</Button>
+                    <SelectField options={difficultyOptions} label="Difficulty"/>
+                    <SelectField options={typeOptions} label="Type"/>
+                    <TextFieldComp />
+                    <Box mt={3} width="100%">
+                        <Button onClick={handleOpen} type="submit" variant="contained" type="submit" startIcon={<AddIcon/>}>Get Started</Button>
                     </Box>
                 </form>
             </div>
