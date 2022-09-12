@@ -5,19 +5,21 @@ import {useState} from "react";
 
 const SelectField = (props) => {
 
-    const {label} = props;
+    const {label, options} = props;
     const [value, setValue] = useState("");
 
     const handleChange = () => { }
 
     return (
-        <Box>
-            <FormControl mr={20} fullWidth={true}>
+        <Box mt={3} width="100%">
+            <FormControl size="small" fullWidth={true}>
                 <InputLabel>{label}</InputLabel>
                 <Select value={value} label={label} onChange={handleChange}>
-                    <MenuItem>Option 1</MenuItem>
-                    <MenuItem>Option 2</MenuItem>
-                    <MenuItem>Option 3</MenuItem>
+                  {/*  {options.map(({id, name}) => (
+                        <MenuItem value={id} key={id}>
+                            {name}
+                        </MenuItem>
+                        ))}*/}
 
                 </Select>
             </FormControl>

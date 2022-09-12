@@ -21,7 +21,8 @@ const Question = (props) => {
                     <Typography color="text.primary">Questions</Typography>
                 </Breadcrumbs>
 
-            <h1>Question</h1>
+            <h1>Questions</h1>
+
         </div>
     );
 }
