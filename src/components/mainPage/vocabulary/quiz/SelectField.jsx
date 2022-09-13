@@ -10,7 +10,9 @@ const SelectField = (props) => {
     const {label, options} = props;
     const [value, setValue] = useState("");
 
-    const handleChange = () => { }
+    const handleChange = (e) => {
+        setValue(e.target.value);
+    }
 
     return (
         <Box mt={3} width="100%">

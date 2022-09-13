@@ -11,7 +11,7 @@ export let rerenderTree= (state) => {
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
         <React.StrictMode>
-            <App state={state} addWordToVocabulary={addWordToVocabulary}/>
+            <App state={state} addWordToVocabulary={addWordToVocabulary} />
         </React.StrictMode>
     );
 
