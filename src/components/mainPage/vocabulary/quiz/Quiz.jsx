@@ -20,6 +20,16 @@ const Quiz = (props) => {
         e.preventDefault();
     }
 
+    const categoryOptions = [
+        {id: 0, name: "Basic words"},
+        {id: 2, name: "Food"},
+        {id: 3, name: "Colors"},
+        {id: 4, name: "Animals"},
+        {id: 5, name: "Sports"},
+        {id: 6, name: "Art"},
+
+    ]
+
     const difficultyOptions = [
         {id: "easy", name: "Easy"},
         {id: "medium", name: "Medium"},
@@ -27,7 +37,7 @@ const Quiz = (props) => {
     ]
 
     const typeOptions = [
-        {id: "multiple", name: "Multiple Choise"},
+        {id: "multiple", name: "Multiple Choice"},
         {id: "boolean", name: "True/False"}
     ]
 
@@ -48,7 +58,7 @@ const Quiz = (props) => {
             <h1>Quiz</h1>
             <div>
                 <form onSubmit={handleSubmit}>
-                    <SelectField  label="Category"/>
+                    <SelectField options={categoryOptions} label="Category"/>
                     <SelectField options={difficultyOptions} label="Difficulty"/>
                     <SelectField options={typeOptions} label="Type"/>
                     <TextFieldComp />
