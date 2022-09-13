@@ -18,6 +18,7 @@ import LessonPage from "./components/mainPage/lessons/lessonPage/LessonPage";
 import AddNewWord from "./components/mainPage/vocabulary/addNewWord/addNewWord";
 import FinalScreen from "./components/mainPage/vocabulary/quiz/finalScreen/FinalScreen";
 import Question from "./components/mainPage/vocabulary/quiz/questions/Question";
+import {updateNewWordText} from "./components/redux/state";
 
 
 const App = (props) => {
@@ -42,7 +43,8 @@ const App = (props) => {
                                                   addWordToVocabulary={props.addWordToVocabulary}/>}/>
                         <Route path={'/my_words'}
                                element={<WordsPage wordsData={props.state.wordsData}
-                                                   addWordToVocabulary={props.addWordToVocabulary}/>}/>
+                                                   addWordToVocabulary={props.addWordToVocabulary}
+                                                   />}/>
                         <Route path={'/quiz'}
                                element={<Quiz/>}/>
                         <Route path='/questions'

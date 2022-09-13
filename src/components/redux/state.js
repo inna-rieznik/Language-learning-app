@@ -67,4 +67,9 @@ export let addWordToVocabulary = (word, translation) => {
     rerenderTree(state);
 }
 
+/*export let updateNewWordText = (newWordInput) => {
+    state.newWordText = newWordInput;
+    rerenderTree(state);
+}*/
+
 export default state;

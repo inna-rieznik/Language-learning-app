@@ -20,7 +20,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import TextField from '@mui/material/TextField';
-import {addWordToVocabulary} from "../redux/state";
+import {addWordToVocabulary, updateNewWordText} from "../redux/state";
 import * as props from "../redux/state";
 
 const style = {
@@ -56,6 +56,11 @@ const WordsPage = (props) => {
         newWordEng.current.value = null;
 
     };
+
+   /* let updateNewWordText = () => {
+        let word = newWordCz.current.value;
+        props.updateNewWordText(word);
+    }*/
 
     return (
         <div className={s.content}>
@@ -102,7 +107,7 @@ const WordsPage = (props) => {
                             <Typography id="transition-modal-title">
                                 Translation
                             </Typography>
-                            <TextField id="outlined-basic" label="Type smth" variant="outlined" inputRef={newWordEng}/>
+                            <TextField id="outlined-basic" label="Type smth" variant="outlined" inputRef={newWordEng} />
                             <Button variant="contained" startIcon={<AddIcon/>}
                                     onClick={addWordToVocabulary}>add</Button>
                         </Box>
