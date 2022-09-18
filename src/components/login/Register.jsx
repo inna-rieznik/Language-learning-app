@@ -9,7 +9,7 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 
 
-const Login = (props) => {
+const Register = (props) => {
 
     return (
         /*   <div className={s.login}>
@@ -36,23 +36,29 @@ const Login = (props) => {
                </div>
            </div>*/
         <div className={s.login}>
-            <img src={Search} alt="search" width="809" height="607"/>
+            <img src={Search} alt="search" width="809" height="706"/>
 
             <form className={s.form}>
-                <h1>Log In</h1>
+                <h1>Register</h1>
                 <Box mt={3} width="100%">
-                    <TextField id="outlined-basic" label="Login" variant="outlined"/>
+                    <TextField id="outlined-basic" label="Name" variant="outlined"/>
+                </Box>
+                <Box mt={3} width="100%">
+                    <TextField id="outlined-basic" label="Email" variant="outlined"/>
                 </Box>
                 <Box mt={3} width="100%">
                     <TextField id="outlined-basic" label="Password" variant="outlined"/>
                 </Box>
                 <Box mt={3} width="100%">
-                    <Button variant="contained">Log in</Button>
+                    <TextField id="outlined-basic" label="Password confirm" variant="outlined"/>
+                </Box>
+                <Box mt={3} width="100%">
+                    <Button variant="contained">Register</Button>
                 </Box>
             </form>
         </div>
-)
-    ;
+    )
+        ;
 }
 
-export default Login;
+export default Register;

@@ -42,15 +42,15 @@ body{
 }
 /* ---------------------------- */
 .container {
-  /*flex: 1 1 auto;
+  flex: 1 1 auto;
   display: grid;
-  grid-template-areas:
-    "header header header"
-    "content content content"
-    "footer footer footer";
-  grid-template-rows: 60px 1fr 60px;
-  grid-template-columns: 20% 1fr 15%;*/
-  margin: 0 300px;
+  /* grid-template-areas:
+     "header header header"
+     "content content content"
+     "footer footer footer";
+   grid-template-rows: 60px 1fr 60px;
+   grid-template-columns: 20% 1fr 15%;*/
+  margin: 0 150px;
 }
 
 .headerContainer{
