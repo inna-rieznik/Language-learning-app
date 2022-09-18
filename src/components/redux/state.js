@@ -53,23 +53,28 @@ let state = {
         {id: 5, cz: 'Dobrý den', eng: 'How do you do'},
         {id: 6, cz: 'Nashledanou', eng: 'Yes'},
         {id: 7, cz: 'S dovolenim', eng: 'Excuse me'}
-    ]
+    ],
+    newWordText: "fixed value",
+    newTranslationText: "fixed value"
 }
 
-export let addWordToVocabulary = (word, translation) => {
+export let addWordToVocabulary = () => {
     let newWord = {
         id: 8,
-        cz: word,
-        eng: translation
+        cz: state.newWordText,
+        eng: state.newTranslationText
     }
 
     state.wordsData.push(newWord);
+    state.newWordText = '';
+    state.newTranslationText = '';
     rerenderTree(state);
 }
 
-/*export let updateNewWordText = (newWordInput) => {
-    state.newWordText = newWordInput;
+export let updateNewWordText = (word, translation) => {
+    state.newWordText = word;
+    state.newTranslationText = translation;
     rerenderTree(state);
-}*/
+}
 
 export default state;

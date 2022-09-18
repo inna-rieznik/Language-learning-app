@@ -49,18 +49,20 @@ const WordsPage = (props) => {
     let newWordEng = React.createRef();
 
     let addWordToVocabulary = () => {
-        let word = newWordCz.current.value;
-        let translate = newWordEng.current.value;
-        props.addWordToVocabulary(word, translate);
-        newWordCz.current.value = null;
-        newWordEng.current.value = null;
+        /*let word = newWordCz.current.value;
+        let translate = newWordEng.current.value;*/
+        /*props.addWordToVocabulary(word, translate);*/
+        props.addWordToVocabulary();
+        //props.updateNewWordText('','');
+
 
     };
 
-   /* let updateNewWordText = () => {
+    let updateNewWordText = () => {
         let word = newWordCz.current.value;
-        props.updateNewWordText(word);
-    }*/
+        let translation = newWordEng.current.value;
+        props.updateNewWordText(word, translation);
+    }
 
     return (
         <div className={s.content}>
@@ -103,13 +105,23 @@ const WordsPage = (props) => {
                             <Typography id="transition-modal-title">
                                 Word
                             </Typography>
-                            <TextField id="outlined-basic" label="Type smth" variant="outlined" inputRef={newWordCz}/>
+                            <TextField id="outlined-basic"
+                                       label="Type smth"
+                                       variant="outlined"
+                                       inputRef={newWordCz}
+                                       onChange={updateNewWordText}
+                                       value={props.newWordText}/>
                             <Typography id="transition-modal-title">
                                 Translation
                             </Typography>
-                            <TextField id="outlined-basic" label="Type smth" variant="outlined" inputRef={newWordEng} />
+                            <TextField id="outlined-basic"
+                                       label="Type smth"
+                                       variant="outlined"
+                                       inputRef={newWordEng}
+                                       onChange={updateNewWordText}
+                                       value={props.newTranslationText}/>
                             <Button variant="contained" startIcon={<AddIcon/>}
-                                    onClick={addWordToVocabulary}>add</Button>
+                                    onClick={() => {addWordToVocabulary(); handleClose();}}>add</Button>
                         </Box>
 
                     </Box>

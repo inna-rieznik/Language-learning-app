@@ -79,7 +79,7 @@ const Vocabulary = () => {
                             </Typography>
                             <TextField id="outlined-basic" label="Type smth" variant="outlined" inputRef={newWordEng}/>
                             <Button variant="contained" startIcon={<AddIcon/>}
-                                    onClick={addWordToVocabulary}>add</Button>
+                                    onClick={() => {addWordToVocabulary(); handleClose();}}>add</Button>
                         </Box>
 
                     </Box>
