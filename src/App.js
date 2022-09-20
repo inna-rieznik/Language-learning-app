@@ -48,7 +48,7 @@ const App = (props) => {
                                                    addWordToVocabulary={props.addWordToVocabulary}
                                                    updateNewWordText={props.updateNewWordText}
                                                    newWordText={props.state.newWordText}
-                                                   newTranslationText={state.newTranslationText}
+                                                   newTranslationText={props.state.newTranslationText}
                                                    />}/>
                         <Route path={'/quiz'}
                                element={<Quiz/>}/>

@@ -10,7 +10,8 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import * as props from "../../redux/state";
+import {addWordToVocabulary} from "../../redux/state";
+
 
 const style = {
     position: 'absolute',
@@ -36,7 +37,7 @@ const Vocabulary = () => {
     let addWordToVocabulary = () => {
         let word = newWordCz.current.value;
         let translate = newWordEng.current.value;
-        props.addWordToVocabulary(word, translate);
+        addWordToVocabulary(word, translate);
         newWordCz.current.value = null;
         newWordEng.current.value = null;
 

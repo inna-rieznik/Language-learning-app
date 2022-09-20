@@ -1,3 +1,7 @@
+/*
+DONT NEED THIS FILE
+
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -20,4 +24,5 @@ export let rerenderTree= (state) => {
     );
 
 }
+*/
 
