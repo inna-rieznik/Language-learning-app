@@ -10,6 +10,7 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/react-dom": "^18.0.6",
     "body-parser": "^1.20.0",
     "body-parser-zlib": "^1.0.2",
     "dotenv": "^16.0.2",
@@ -36,9 +37,9 @@
       "react-app/jest"
     ]
   },
-
-  "browsers": {"zlib": false},
-
+  "browsers": {
+    "zlib": false
+  },
   "browserslist": {
     "production": [
       ">0.2%",
