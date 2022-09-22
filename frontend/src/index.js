@@ -5,26 +5,11 @@ import ReactDOM from 'react-dom/client';
 import App from "./App";
 
 
-/*
 
-const express = require("express");
-const mysql = require("mysql");
-const app = express();
 
-app.use(express.json());
 
-const db = mysql.createConnection({
-    user: "root",
-    host: "localhost",
-    password: "12345",
-    database: "mydb"
-});
 
-app.listen(3001, () => {
-    console.log("running server");
-});
 
-*/
 const root = ReactDOM.createRoot(document.getElementById('root'));
 let rerenderTree = (state) => {
 
