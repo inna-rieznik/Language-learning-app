@@ -1,3 +1,4 @@
+/*
 import s from "./Login.module.css";
 import Search from "../../images/Search.png";
 import {TextField} from "@mui/material";
@@ -38,4 +39,4 @@ const Register = (props) => {
         ;
 }
 
-export default Register;
+export default Register;*/

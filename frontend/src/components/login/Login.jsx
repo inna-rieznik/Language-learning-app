@@ -13,12 +13,18 @@ import Axios from "axios";
 
 const Login = (props) => {
 
-    const [usernameReg, setUsernameReg] = useState("");
+
+    const [usernameReg, setUsernameReg] = useState(""); //name + surname
     const [emailReg, setEmailReg] = useState("");
     const [passwordReg, setPasswordReg] = useState("");
 
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const [loginStatus, setLoginStatus] = useState("");
+
     const register = () => {
-        Axios.post('http://localhost:3000/login', {
+        Axios.post('http://localhost:3011/register', {
             username: usernameReg,
             email: emailReg,
             password:passwordReg
@@ -26,6 +32,22 @@ const Login = (props) => {
             console.log(response);
         });
     };
+
+    const login = () => {
+        Axios.post('http://localhost:3011/login', {
+            email: email,
+            password:password
+        }).then((response) => {
+            if(response.data.message){
+                setLoginStatus(response.data.message);
+            }else{
+                setLoginStatus(response.data[0].name);
+            }
+            console.log(response.data);
+        });
+    };
+
+
 
     return (
         /*   <div className={s.login}>
@@ -58,17 +80,29 @@ const Login = (props) => {
                 <h1>Log In</h1>
                 <Box mt={3} width="100%">
                     <TextField id="outlined-basic"
-                               label="Login"
+                               label="Email"
+                               onChange={(e)=> {
+                                   setEmail(e.target.value);
+                               }}
                                variant="outlined" />
                 </Box>
                 <Box mt={3} width="100%">
                     <TextField id="outlined-basic"
                                label="Password"
+                               onChange={(e)=> {
+                                   setPassword(e.target.value);
+                               }}
                                variant="outlined"/>
                 </Box>
                 <Box mt={3} width="100%">
-                    <Button variant="contained">Log in</Button>
+                    <Button onClick={login} variant="contained">Log in</Button>
                 </Box>
+
+                <div>
+                    <h1>
+                        {loginStatus}
+                    </h1>
+                </div>
             </form>
 
 

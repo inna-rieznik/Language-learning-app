@@ -20,8 +20,8 @@ app.post('/register', (req, res) => {
     const email = req.body.email;
 
     db.query(
-        "INSERT INTO mydb.users (username,password,id_user,id_language,id_role, name, email, registered_at) values(?,?,2,1,1,'Inna Rieznik',?,NULL)",
-        [username, password, email],
+        "INSERT INTO mydb.users (username,password,id_user,id_language,id_role, name, email, registered_at) values(?,?,6,1,1,?,?,NULL)",
+        [email, password, username, email],
         (err, result) => {
             if (err) {
                 console.log(err);
@@ -30,6 +30,28 @@ app.post('/register', (req, res) => {
             }
 
             res.send({status: 'ok'})
+        })
+})
+
+app.post('/login', (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    db.query(
+        "SELECT * FROM mydb.users WHERE email = ? AND password = ?",
+        [email, password],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({status: 'error', err});
+                return;
+            }
+            if (result.length > 0) {
+                res.send(result);
+            }else {
+                res.send({"message": "wrong email or password"});
+            }
+
+
         })
 })
 
