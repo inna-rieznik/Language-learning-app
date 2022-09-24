@@ -12,29 +12,6 @@ import Button from "@mui/material/Button";
 const Register = (props) => {
 
     return (
-        /*   <div className={s.login}>
-               <div className={s.image}>
-                   <img src={Search} alt="search" width="809" height="607"/>
-               </div>
-               <div className={s.form}>
-                   <h1>Log In</h1>
-                   <div className={s.info}>
-                   <form>
-                       <label className={s.label}>Full Name
-                           <input className={s.item} type="text" name="name"/><br/>
-                       </label>
-                       <label className={s.label}>Your email
-                           <input className={s.item} type="text" name="name"/><br/>
-                       </label>
-                       <label className={s.label}>Password
-                           <input className={s.item} type="password" name="password"/><br/>
-                       </label>
-                   </form>
-                   </div>
-                   <Button buttonType='submit'/>
-                   <p>You don't have an Account? REGISTER</p>
-               </div>
-           </div>*/
         <div className={s.login}>
             <img src={Search} alt="search" width="809" height="706"/>
 

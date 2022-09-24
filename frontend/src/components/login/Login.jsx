@@ -7,9 +7,25 @@ import TextFieldComp from "../mainPage/vocabulary/quiz/TextFieldComp";
 import AddIcon from "@mui/icons-material/Add";
 import * as React from "react";
 import Button from "@mui/material/Button";
+import {useState} from "react";
+import Axios from "axios";
 
 
 const Login = (props) => {
+
+    const [usernameReg, setUsernameReg] = useState("");
+    const [emailReg, setEmailReg] = useState("");
+    const [passwordReg, setPasswordReg] = useState("");
+
+    const register = () => {
+        Axios.post('http://localhost:3000/login', {
+            username: usernameReg,
+            email: emailReg,
+            password:passwordReg
+        }).then((response) => {
+            console.log(response);
+        });
+    };
 
     return (
         /*   <div className={s.login}>
@@ -36,23 +52,59 @@ const Login = (props) => {
                </div>
            </div>*/
         <div className={s.login}>
-            <img src={Search} alt="search" width="809" height="607"/>
+            {/*  <img src={Search} alt="search" width="809" height="607"/>*/}
 
             <form className={s.form}>
                 <h1>Log In</h1>
                 <Box mt={3} width="100%">
-                    <TextField id="outlined-basic" label="Login" variant="outlined"/>
+                    <TextField id="outlined-basic"
+                               label="Login"
+                               variant="outlined" />
                 </Box>
                 <Box mt={3} width="100%">
-                    <TextField id="outlined-basic" label="Password" variant="outlined"/>
+                    <TextField id="outlined-basic"
+                               label="Password"
+                               variant="outlined"/>
                 </Box>
                 <Box mt={3} width="100%">
                     <Button variant="contained">Log in</Button>
                 </Box>
             </form>
+
+
+            <form className={s.form}>
+                <h1>Register</h1>
+                <Box mt={3} width="100%">
+                    <TextField id="outlined-basic"
+                               label="Name"
+                               onChange={(e)=> {
+                                   setUsernameReg(e.target.value);
+                               }}
+                               variant="outlined"/>
+                </Box>
+                <Box mt={3} width="100%">
+                    <TextField id="outlined-basic"
+                               label="Email"
+                               onChange={(e)=> {
+                                   setEmailReg(e.target.value);
+                               }}
+                               variant="outlined"/>
+                </Box>
+                <Box mt={3} width="100%">
+                    <TextField id="outlined-basic"
+                               label="Password"
+                               onChange={(e)=> {
+                                   setPasswordReg(e.target.value);
+                               }}
+                               variant="outlined"/>
+                </Box>
+                <Box mt={3} width="100%">
+                    <Button variant="contained" onClick={register}>Register</Button>
+                </Box>
+            </form>
         </div>
-)
-    ;
+    )
+        ;
 }
 
 export default Login;
