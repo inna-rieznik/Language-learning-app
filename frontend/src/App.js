@@ -38,8 +38,8 @@ const App = (props) => {
                                element={<UserPage/>}/>
                         <Route path='/login'
                                element={<Login/>}/>
-                        <Route path='/register'
-                               element={<Register/>}/>
+                      {/*  <Route path='/register'
+                               element={<Register/>}/>*/}
                         <Route path='/'
                                element={<MainPage lessonsData={props.state.lessonsData}
                                                   addWordToVocabulary={props.addWordToVocabulary}/>}/>
