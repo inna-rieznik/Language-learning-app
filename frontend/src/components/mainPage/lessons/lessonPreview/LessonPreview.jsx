@@ -22,7 +22,7 @@ const LessonPreview = (props) => {
     };
 
     return (
-        <Card sx={{minWidth: 275}}>
+        <Card sx={{minWidth: 250}}>
             <CardContent>
                 <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
                     Lesson: {props.id}
