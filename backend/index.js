@@ -2,10 +2,12 @@ const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
 const dotenv = require('dotenv');
+const jwt = require('jsonwebtoken');
 
 dotenv.config({path: './.env'});
-
 const app = express();
+
+
 
 
 app.use(express.json()); // automatically parse every json object that was sent from FE
@@ -48,6 +50,7 @@ app.post('/register', (req, res) => {
 app.post('/login', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
+
     db.query(
         "SELECT * FROM mydb.users WHERE email = ? AND password = ?",
         [email, password],
@@ -63,11 +66,19 @@ app.post('/login', (req, res) => {
                 res.send({"message": "wrong email or password"});
             }
 
-
         })
 })
 
+/*app.post('/login', (req, res) => {
 
+
+    res.json({
+        success: true,
+        token
+    });
+
+
+});*/
 
 app.get('/api/test', (req, res) => {
     res.send({

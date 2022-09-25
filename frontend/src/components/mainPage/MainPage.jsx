@@ -10,7 +10,7 @@ const MainPage = (props) => {
         <div className={s.content}>
             <div className={s.subContent}>
                 <Lessons lessonsData={props.lessonsData}/>
-                <Vocabulary addWordToVocabulary={props.addWordToVocabulary}/>
+                <Vocabulary dispatch={props.dispatch}/>
             </div>
             <div className={s.image}>
                 <img src={ProductLaunchImg} alt="Product Launch Img" width="981" height="736"/>
