@@ -1,24 +1,37 @@
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
+const dotenv = require('dotenv');
+
+dotenv.config({path: './.env'});
+
 const app = express();
 
 
 app.use(express.json()); // automatically parse every json object that was sent from FE
 app.use(cors()); //cors send info between FE and BE
 
+//
 const db = mysql.createConnection({
-    user: "myapp",
-    host: "localhost",
-    password: "myapp1234",
-    database: "mydb"
+    user: process.env.DATABASE_USER,
+    host: process.env.DATABASE_HOST,
+    password: process.env.DATABASE_PASSWORD,
+    database: process.env.DATABASE
 });
+
+db.connect((error) => {
+    if (error) {
+        console.log(error);
+    } else {
+        console.log("MYSQL connected");
+    }
+})
+
 app.post('/register', (req, res) => {
 
     const username = req.body.username;
     const password = req.body.password;
     const email = req.body.email;
-
     db.query(
         "INSERT INTO mydb.users (username,password,id_user,id_language,id_role, name, email, registered_at) values(?,?,6,1,1,?,?,NULL)",
         [email, password, username, email],
@@ -28,7 +41,6 @@ app.post('/register', (req, res) => {
                 res.send({status: 'error', err})
                 return;
             }
-
             res.send({status: 'ok'})
         })
 })
@@ -47,13 +59,15 @@ app.post('/login', (req, res) => {
             }
             if (result.length > 0) {
                 res.send(result);
-            }else {
+            } else {
                 res.send({"message": "wrong email or password"});
             }
 
 
         })
 })
+
+
 
 app.get('/api/test', (req, res) => {
     res.send({
