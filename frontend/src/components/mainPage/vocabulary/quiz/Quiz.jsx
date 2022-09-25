@@ -1,16 +1,14 @@
-import s from "./Quiz.module.css";
-import {NavLink} from "react-router-dom";
+import * as React from "@types/react";
+import s from "./ReviewWords.module.css";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
-import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
-import Box from "@mui/material/Box";
-import {useState} from "react";
+import Action from "../action/Action";
 import SelectField from "./SelectField";
+import TextFieldComp from "./TextFieldComp";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
-import TextFieldComp from "./TextFieldComp";
 
 const Quiz = (props) => {
     const [open, setOpen] = React.useState(false);
@@ -45,16 +43,16 @@ const Quiz = (props) => {
     //Settings component
     return (
         <div className={s.content}>
-                <Breadcrumbs aria-label="breadcrumb">
-                    <Link
-                        underline="hover"
-                        color="inherit"
-                        href="/"
-                    >
-                        Home
-                    </Link>
-                    <Typography color="text.primary">Quiz</Typography>
-                </Breadcrumbs>
+            <Breadcrumbs aria-label="breadcrumb">
+                <Link
+                    underline="hover"
+                    color="inherit"
+                    href="/"
+                >
+                    Home
+                </Link>
+                <Typography color="text.primary">Quiz</Typography>
+            </Breadcrumbs>
             <h1>Quiz</h1>
             <div>
                 <form onSubmit={handleSubmit}>

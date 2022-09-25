@@ -1,4 +1,4 @@
-import s from "./Quiz.module.css";
+import s from "./ReviewWords.module.css";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
