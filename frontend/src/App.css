@@ -43,7 +43,7 @@ body{
 /* ---------------------------- */
 .container {
   flex: 1 1 auto;
-  display: grid;
+ /* display: grid;*/
   /* grid-template-areas:
      "header header header"
      "content content content"

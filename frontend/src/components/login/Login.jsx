@@ -9,44 +9,31 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import {useState} from "react";
 import Axios from "axios";
+import Link from "@mui/material/Link";
 
 
 const Login = (props) => {
 
 
-    const [usernameReg, setUsernameReg] = useState(""); //name + surname
-    const [emailReg, setEmailReg] = useState("");
-    const [passwordReg, setPasswordReg] = useState("");
-
+          //this variable is used in index.js in req.body.variable
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const [loginStatus, setLoginStatus] = useState("");
-
-    const register = () => {
-        Axios.post('http://localhost:3011/register', {
-            username: usernameReg,
-            email: emailReg,
-            password:passwordReg
-        }).then((response) => {
-            console.log(response);
-        });
-    };
+   const [loginStatus, setLoginStatus] = useState("");
 
     const login = () => {
         Axios.post('http://localhost:3011/login', {
             email: email,
-            password:password
+            password: password
         }).then((response) => {
-            if(response.data.message){
+            if (response.data.message) {
                 setLoginStatus(response.data.message);
-            }else{
+            } else {
                 setLoginStatus(response.data[0].name);
             }
             console.log(response.data);
         });
     };
-
 
 
     return (
@@ -73,26 +60,35 @@ const Login = (props) => {
                    <p>You don't have an Account? REGISTER</p>
                </div>
            </div>*/
-        <div className={s.login}>
-            {/*  <img src={Search} alt="search" width="809" height="607"/>*/}
-
+        <div>
+            <div className={s.login}>
+            <Box>
+                <img src={Search} alt="search" width="809" height="607"/>
+            </Box>
             <form className={s.form}>
                 <h1>Log In</h1>
                 <Box mt={3} width="100%">
                     <TextField id="outlined-basic"
                                label="Email"
-                               onChange={(e)=> {
+                               onChange={(e) => {
                                    setEmail(e.target.value);
                                }}
-                               variant="outlined" />
+                               variant="outlined"/>
                 </Box>
                 <Box mt={3} width="100%">
                     <TextField id="outlined-basic"
                                label="Password"
-                               onChange={(e)=> {
+                               onChange={(e) => {
                                    setPassword(e.target.value);
                                }}
                                variant="outlined"/>
+                </Box>
+                <Box mt={3} width="100%">
+                    <Link underline="hover"
+                          color="inherit"
+                          href="/register">
+                        You don't have an account? REGISTER
+                    </Link>
                 </Box>
                 <Box mt={3} width="100%">
                     <Button onClick={login} variant="contained">Log in</Button>
@@ -104,41 +100,9 @@ const Login = (props) => {
                     </h1>
                 </div>
             </form>
-
-
-            <form className={s.form}>
-                <h1>Register</h1>
-                <Box mt={3} width="100%">
-                    <TextField id="outlined-basic"
-                               label="Name"
-                               onChange={(e)=> {
-                                   setUsernameReg(e.target.value);
-                               }}
-                               variant="outlined"/>
-                </Box>
-                <Box mt={3} width="100%">
-                    <TextField id="outlined-basic"
-                               label="Email"
-                               onChange={(e)=> {
-                                   setEmailReg(e.target.value);
-                               }}
-                               variant="outlined"/>
-                </Box>
-                <Box mt={3} width="100%">
-                    <TextField id="outlined-basic"
-                               label="Password"
-                               onChange={(e)=> {
-                                   setPasswordReg(e.target.value);
-                               }}
-                               variant="outlined"/>
-                </Box>
-                <Box mt={3} width="100%">
-                    <Button variant="contained" onClick={register}>Register</Button>
-                </Box>
-            </form>
+            </div>
         </div>
-    )
-        ;
+    );
 }
 
 export default Login;

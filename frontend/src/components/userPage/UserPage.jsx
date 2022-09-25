@@ -3,6 +3,7 @@ import {NavLink} from "react-router-dom";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
+import {setLoginStatus} from "../login/Login";
 
 function handleClick(event) {
     event.preventDefault();
@@ -10,6 +11,7 @@ function handleClick(event) {
 }
 
 const UserPage = (props) => {
+
 
     return (
         <div className={s.content}>
@@ -26,6 +28,8 @@ const UserPage = (props) => {
                 </Breadcrumbs>
             </div>
             <h1>User Page</h1>
+            <h2>Name</h2>
+            <h2>Username</h2>
         </div>
     );
 }
