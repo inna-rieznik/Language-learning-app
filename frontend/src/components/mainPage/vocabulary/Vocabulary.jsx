@@ -10,7 +10,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import {addWordToVocabulary} from "../../redux/state";
+import {addWordToVocabulary, addWordToVocabularyActionCreator, updateNewWordTextActionCreator} from "../../redux/state";
 
 
 const style = {
@@ -25,7 +25,7 @@ const style = {
     p: 4,
 };
 
-const Vocabulary = () => {
+const Vocabulary = (props) => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -35,13 +35,20 @@ const Vocabulary = () => {
     let newWordEng = React.createRef();
 
     let addWordToVocabulary = () => {
-        let word = newWordCz.current.value;
+       /* let word = newWordCz.current.value;
         let translate = newWordEng.current.value;
         addWordToVocabulary(word, translate);
         newWordCz.current.value = null;
-        newWordEng.current.value = null;
-
+        newWordEng.current.value = null;*/
+        let action = addWordToVocabularyActionCreator()
+        props.dispatch(action);
     };
+    let updateNewWordText = () => {
+        let word = newWordCz.current.value;
+        let translation = newWordEng.current.value;
+        let action = updateNewWordTextActionCreator(word, translation);
+        props.dispatch(action);
+    }
 
     return (
         <div className={s.vocabulary}>
@@ -74,13 +81,27 @@ const Vocabulary = () => {
                             <Typography id="transition-modal-title">
                                 Word
                             </Typography>
-                            <TextField id="outlined-basic" label="Type smth" variant="outlined" inputRef={newWordCz} />
+                            <TextField id="outlined-basic"
+                                       label="Type smth"
+                                       variant="outlined"
+                                       inputRef={newWordCz}
+                                       onChange={updateNewWordText}
+                                       value={props.newWordText}/>
                             <Typography id="transition-modal-title">
                                 Translation
                             </Typography>
-                            <TextField id="outlined-basic" label="Type smth" variant="outlined" inputRef={newWordEng}/>
-                            <Button variant="contained" startIcon={<AddIcon/>}
-                                    onClick={() => {addWordToVocabulary(); handleClose();}}>add</Button>
+                            <TextField id="outlined-basic"
+                                       label="Type smth"
+                                       variant="outlined"
+                                       inputRef={newWordEng}
+                                       onChange={updateNewWordText}
+                                       value={props.newTranslationText}/>
+                            <Button variant="contained"
+                                    startIcon={<AddIcon/>}
+                                    onClick={() => {
+                                        addWordToVocabulary();
+                                        handleClose();
+                                    }}>add</Button>
                         </Box>
 
                     </Box>

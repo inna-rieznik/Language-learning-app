@@ -20,7 +20,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import TextField from '@mui/material/TextField';
-import {addWordToVocabulary, updateNewWordText} from "../redux/state";
+import {addWordToVocabularyActionCreator,updateNewWordTextActionCreator } from "../redux/state";
 import * as props from "../redux/state";
 
 const style = {
@@ -34,6 +34,7 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
+
 
 
 const WordsPage = (props) => {
@@ -52,7 +53,8 @@ const WordsPage = (props) => {
         /*let word = newWordCz.current.value;
         let translate = newWordEng.current.value;*/
         /*props.addWordToVocabulary(word, translate);*/
-        props.addWordToVocabulary();
+        let action = addWordToVocabularyActionCreator()
+        props.dispatch(action);
         //props.updateNewWordText('','');
 
 
@@ -61,26 +63,25 @@ const WordsPage = (props) => {
     let updateNewWordText = () => {
         let word = newWordCz.current.value;
         let translation = newWordEng.current.value;
-        props.updateNewWordText(word, translation);
+        let action = updateNewWordTextActionCreator(word, translation);
+        props.dispatch(action);
     }
 
     return (
         <div className={s.content}>
 
-                <Breadcrumbs aria-label="breadcrumb">
-                    <Link
-                        underline="hover"
-                        color="inherit"
-                        href="/"
-                    >
-                        Home
-                    </Link>
-                    <Typography color="text.primary">My Words</Typography>
-                </Breadcrumbs>
-
+            <Breadcrumbs aria-label="breadcrumb">
+                <Link
+                    underline="hover"
+                    color="inherit"
+                    href="/"
+                >
+                    Home
+                </Link>
+                <Typography color="text.primary">My Words</Typography>
+            </Breadcrumbs>
 
             <h1>My Words</h1>
-
             <Button onClick={handleOpen} variant="contained" startIcon={<AddIcon/>}>add new word</Button>
             <Modal
                 aria-labelledby="transition-modal-title"
@@ -120,8 +121,12 @@ const WordsPage = (props) => {
                                        inputRef={newWordEng}
                                        onChange={updateNewWordText}
                                        value={props.newTranslationText}/>
-                            <Button variant="contained" startIcon={<AddIcon/>}
-                                    onClick={() => {addWordToVocabulary(); handleClose();}}>add</Button>
+                            <Button variant="contained"
+                                    startIcon={<AddIcon/>}
+                                    onClick={() => {
+                                        addWordToVocabulary();
+                                        handleClose();
+                                    }}>add</Button>
                         </Box>
 
                     </Box>

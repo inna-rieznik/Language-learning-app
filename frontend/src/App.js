@@ -42,11 +42,10 @@ const App = (props) => {
                                element={<Register/>}/>
                         <Route path='/'
                                element={<MainPage lessonsData={props.state.lessonsData}
-                                                  addWordToVocabulary={props.addWordToVocabulary}/>}/>
+                                                  dispatch={props.dispatch}/>}/>
                         <Route path={'/my_words'}
                                element={<WordsPage wordsData={props.state.wordsData}
-                                                   addWordToVocabulary={props.addWordToVocabulary}
-                                                   updateNewWordText={props.updateNewWordText}
+                                                   dispatch={props.dispatch}
                                                    newWordText={props.state.newWordText}
                                                    newTranslationText={props.state.newTranslationText}
                                                    />}/>

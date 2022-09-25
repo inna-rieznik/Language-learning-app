@@ -16,8 +16,7 @@ let rerenderTree = (state) => {
     root.render(
         <React.StrictMode>
             <App state={state}
-                 addWordToVocabulary={store.addWordToVocabulary.bind(store)} // bind lets to connect method with store and not let to be called with props for another component
-                 updateNewWordText={store.updateNewWordText.bind(store)}
+                 dispatch={store.dispatch.bind(store)} // bind lets to connect method with store and not let to be called with props for another component
                  newWordText={store.getState().newWordText}
                  newTranslationText={store.getState().newTranslationText}/>
         </React.StrictMode>
