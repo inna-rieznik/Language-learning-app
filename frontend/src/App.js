@@ -13,13 +13,14 @@ import {
 import Login from "./components/login/Login";
 import UserPage from "./components/userPage/UserPage";
 import WordsPage from "./components/wordsPage/WordsPage";
-import Quiz from "./components/mainPage/vocabulary/quiz/Quiz";
+import ReviewWords from "./components/mainPage/vocabulary/quiz/ReviewWords";
 import LessonPage from "./components/mainPage/lessons/lessonPage/LessonPage";
 import AddNewWord from "./components/mainPage/vocabulary/addNewWord/addNewWord";
 import FinalScreen from "./components/mainPage/vocabulary/quiz/finalScreen/FinalScreen";
 import Question from "./components/mainPage/vocabulary/quiz/questions/Question";
 import state, {updateNewWordText} from "./components/redux/state";
 import Register from "./components/login/Register";
+import {Quiz} from "@mui/icons-material";
 
 
 
@@ -49,7 +50,9 @@ const App = (props) => {
                                                    newWordText={props.state.newWordText}
                                                    newTranslationText={props.state.newTranslationText}
                                                    />}/>
-                        <Route path={'/quiz'}
+                        <Route path={'/review_words'}
+                               element={<ReviewWords/>}/>
+                        <Route path={'/review_words/quiz'}
                                element={<Quiz/>}/>
                         <Route path='/questions'
                                element={<Question/>}/>

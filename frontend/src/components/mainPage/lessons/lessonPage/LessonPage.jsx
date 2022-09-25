@@ -17,11 +17,11 @@ const LessonPage = (props) => {
 
     return (
         <div  className={s.content}>
-            {props.lessonsData.map((title) => (
+
                 <div>
-                    <h1>Lesson {lessonId} : {title.title}</h1>
+                    <h1>Lesson {lessonId} </h1>
                 </div>
-            ))}
+
 
         </div>
     );

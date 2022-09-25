@@ -55,7 +55,7 @@ const Vocabulary = (props) => {
             <h1>Vocabulary</h1>
 
             <Action urlName='my_words' title='my words'/>
-            <Button variant="contained" href='quiz'>Review words</Button>
+            <Button variant="contained" href='review_words'>Review words</Button>
             {/*  <Button variant="contained" href='modal_add_word'  startIcon={<AddIcon />} >add new word</Button>*/}
             <Button onClick={handleOpen} variant="contained" startIcon={<AddIcon/>}>add new word</Button>
             <Modal
