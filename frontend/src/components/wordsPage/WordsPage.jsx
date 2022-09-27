@@ -20,8 +20,8 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import TextField from '@mui/material/TextField';
-import {addWordToVocabularyActionCreator,updateNewWordTextActionCreator } from "../redux/state";
-import * as props from "../redux/state";
+import {addWordToVocabularyActionCreator,updateNewWordTextActionCreator } from "../redux/WordsReducer";
+import * as props from "../redux/store";
 
 const style = {
     position: 'absolute',
@@ -111,7 +111,7 @@ const WordsPage = (props) => {
                                        variant="outlined"
                                        inputRef={newWordCz}
                                        onChange={updateNewWordText}
-                                       value={props.newWordText}/>
+                                       value={props.wordsData.newWordText}/>
                             <Typography id="transition-modal-title">
                                 Translation
                             </Typography>
@@ -120,7 +120,7 @@ const WordsPage = (props) => {
                                        variant="outlined"
                                        inputRef={newWordEng}
                                        onChange={updateNewWordText}
-                                       value={props.newTranslationText}/>
+                                       value={props.wordsData.newTranslationText}/>
                             <Button variant="contained"
                                     startIcon={<AddIcon/>}
                                     onClick={() => {
@@ -146,7 +146,7 @@ const WordsPage = (props) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {props.wordsData.map((row) => (
+                            {props.wordsData.words.map((row) => (
                                 <TableRow
                                     key={row.id}
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}

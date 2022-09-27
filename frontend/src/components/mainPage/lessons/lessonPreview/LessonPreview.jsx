@@ -7,7 +7,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import * as props from "../../../redux/state";
+import * as props from "../../../redux/store";
 import LessonPage from "../lessonPage/LessonPage";
 
 const LessonPreview = (props) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import reportWebVitals from './reportWebVitals';
-import store from "./components/redux/state";
+import store from "./components/redux/store";
 import ReactDOM from 'react-dom/client';
 import App from "./App";
 
@@ -26,7 +26,7 @@ let rerenderTree = (state) => {
 
 rerenderTree(store.getState());
 
-//imported subscribe from state.js and called rerenderTree in it -> avoid loop between index.js and state.js
+//imported subscribe from store.js and called rerenderTree in it -> avoid loop between index.js and store.js
 
 store.subscribe(rerenderTree);
 // If you want to start measuring performance in your app, pass a function
