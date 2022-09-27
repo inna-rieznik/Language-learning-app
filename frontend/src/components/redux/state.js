@@ -24,27 +24,6 @@ let store ={
                 intro_text: 'lorem ipsum',
                 grammar_rule_title: 'Grammar title',
                 grammar_rule: 'Lorem ipsum'
-            },
-            {
-                id: 4,
-                title: 'Present perfect',
-                intro_text: 'lorem ipsum',
-                grammar_rule_title: 'Grammar title',
-                grammar_rule: 'Lorem ipsum'
-            },
-            {
-                id: 5,
-                title: 'Past perfect',
-                intro_text: 'lorem ipsum',
-                grammar_rule_title: 'Grammar title',
-                grammar_rule: 'Lorem ipsum'
-            },
-            {
-                id: 6,
-                title: 'Articles',
-                intro_text: 'lorem ipsum',
-                grammar_rule_title: 'Grammar title',
-                grammar_rule: 'Lorem ipsum'
             }
         ],
         wordsData: [
