@@ -10,7 +10,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import {addWordToVocabulary, addWordToVocabularyActionCreator, updateNewWordTextActionCreator} from "../../redux/state";
+import { addWordToVocabularyActionCreator, updateNewWordTextActionCreator} from "../../redux/WordsReducer";
 
 
 const style = {

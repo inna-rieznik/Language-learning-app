@@ -18,7 +18,7 @@ import LessonPage from "./components/mainPage/lessons/lessonPage/LessonPage";
 import AddNewWord from "./components/mainPage/vocabulary/addNewWord/addNewWord";
 import FinalScreen from "./components/mainPage/vocabulary/quiz/finalScreen/FinalScreen";
 import Question from "./components/mainPage/vocabulary/quiz/questions/Question";
-import state, {updateNewWordText} from "./components/redux/state";
+import state, {updateNewWordText} from "./components/redux/reduxStore";
 import Register from "./components/login/Register";
 import {Quiz} from "@mui/icons-material";
 
