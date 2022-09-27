@@ -21,6 +21,7 @@ import Question from "./components/mainPage/vocabulary/quiz/questions/Question";
 import state, {updateNewWordText} from "./components/redux/state";
 import Register from "./components/login/Register";
 import {Quiz} from "@mui/icons-material";
+import ReviewGrammar from "./components/mainPage/vocabulary/quiz/ReviewGrammar";
 
 
 
@@ -52,6 +53,8 @@ const App = (props) => {
                                                    />}/>
                         <Route path={'/review_words'}
                                element={<ReviewWords/>}/>
+                        <Route path={'/review_grammar'}
+                               element={<ReviewGrammar/>}/>
                         <Route path={'/review_words/quiz'}
                                element={<Quiz/>}/>
                         <Route path='/questions'

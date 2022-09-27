@@ -1,4 +1,4 @@
-//import s from "./ReviewWords.module.css";
+import s from "./ReviewWords.module.css";
 import {NavLink} from "react-router-dom";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
@@ -11,7 +11,7 @@ const ReviewGrammar = (props) => {
 
     //Settings component
     return (
-        <div className={s.content}>
+        <div >
             <Breadcrumbs aria-label="breadcrumb">
                 <Link
                     underline="hover"
@@ -20,13 +20,13 @@ const ReviewGrammar = (props) => {
                 >
                     Home
                 </Link>
-                <Typography color="text.primary">ReviewWords</Typography>
+                <Typography color="text.primary">Review Grammar</Typography>
             </Breadcrumbs>
-            <h1>ReviewWords</h1>
-            <Action urlName='quiz' title='Quiz'/>
-            <Action urlName='flashcards' title='Flashcards'/>
-            <Action urlName='review_words/matching_translation' title='Matching: connect word with translation'/>
-            <Action urlName='review_words/matching_sentences' title='Complete the sentence'/>
+            <h1>Review Grammar</h1>
+            <Action urlName='select_form' title='Select the correct form of the word'/>
+            <Action urlName='write_word' title='Write the correct word'/>
+            <Action urlName='review_words/matching_sentence' title='Connect parts of the sentence'/>
+            <Action urlName='review_words/complete_sentences' title='Complete the sentence'/>
             <Action urlName='review_words/fill_the_gap' title='Fill the gap'/>
 
         </div>
