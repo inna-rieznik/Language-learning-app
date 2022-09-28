@@ -1,9 +1,29 @@
 import * as React from 'react';
 import Box from "@mui/material/Box";
 import {TextField} from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import Button from "@mui/material/Button";
+import {useState} from "react";
+import Axios from "axios";
 
 
 const CreateLesson = (props) => {
+
+    const [title, setTitle] = useState("");
+    const [introText, setIntroText] = useState("");
+    const [grammarRuleTitle, setGrammarRuleTitle] = useState("");
+    const [grammarRule, setGrammarRule] = useState("");
+
+    const addLesson = () => {
+        Axios.post('http://localhost:3011/lessons', {
+            title: title,
+            introText: introText,
+            grammarRuleTitle: grammarRuleTitle,
+            grammarRule: grammarRule
+        }).then((response) => {
+            console.log(response.data);
+        });
+    };
 
     return (
         <div>
@@ -14,13 +34,37 @@ const CreateLesson = (props) => {
                 }}
             >
                 <h2>Title</h2>
-                <TextField sx={{ paddingBottom: 2 }} fullWidth id="fullWidth" />
+                <TextField sx={{paddingBottom: 2}}
+                           fullWidth id="addTitle"
+                           onChange={(e) => {
+                               setTitle(e.target.value);
+                           }}/>
+
                 <h2>Some intro text</h2>
-                <TextField sx={{ paddingBottom: 2 }}fullWidth id="fullWidth" />
+                <TextField sx={{paddingBottom: 2}}
+                           fullWidth id="addIntro"
+                           onChange={(e) => {
+                               setIntroText(e.target.value);
+                           }}/>
+
                 <h2>Grammar rule title</h2>
-                <TextField sx={{ paddingBottom: 2 }} fullWidth id="fullWidth" />
+                <TextField sx={{paddingBottom: 2}}
+                           fullWidth id="addRuleTitle"
+                           onChange={(e) => {
+                               setGrammarRuleTitle(e.target.value);
+                           }}/>
+
                 <h2>Grammar rule</h2>
-                <TextField sx={{ paddingBottom: 2 }} fullWidth id="fullWidth" />
+                <TextField sx={{paddingBottom: 2}}
+                           fullWidth id="addRule"
+                           onChange={(e) => {
+                               setGrammarRule(e.target.value);
+                           }}/>
+                <Button type="submit"
+                        variant="contained"
+                        type="submit"
+                        onClick={addLesson}
+                        startIcon={<AddIcon/>}>Add Lesson</Button>
             </Box>
         </div>
     );

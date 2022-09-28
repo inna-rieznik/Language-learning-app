@@ -26,4 +26,24 @@ router.get('/', (req, res) => {
 
 });
 
+router.post('/', (req, res) => {
+    //to access data from FE we use body
+    const title = req.body.title;
+    const introText = req.body.introText;
+    const grammarRuleTitle = req.body.grammarRuleTitle;
+    const grammarRule = req.body.grammarRule;
+
+    db.query(
+        "INSERT INTO mydb.lessons (id_lesson, title, intro_text, grammar_rule_title, grammar_rule) values(4,?,?,?,?)",
+        [title, introText, grammarRuleTitle,grammarRule],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({status: 'error', err})
+                return;
+            }
+            res.send({status: 'ok'})
+        })
+})
+
 module.exports = router;
