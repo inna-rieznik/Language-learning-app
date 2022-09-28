@@ -15,9 +15,6 @@ import * as React from "react";
 const Lessons = (props) => {
 
 
-    const [title, setTitle] = useState("");
-    const [id, setId] = useState("");
-
     const [listOfLessons, setListOfLessons] = useState();
 
     useEffect(() => {
@@ -27,14 +24,7 @@ const Lessons = (props) => {
         });
     }, []);
 
-    const addLesson = () => {
-        Axios.post('http://localhost:3011/words', {
-            title: title,
-            id: id
-        }).then((response) => {
-            console.log(response.data);
-        });
-    };
+
 
     return (
         <div className={s.lessons}>
