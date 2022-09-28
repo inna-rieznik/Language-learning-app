@@ -21,7 +21,8 @@ import Question from "./components/mainPage/vocabulary/quiz/questions/Question";
 import state, {updateNewWordText} from "./components/redux/reduxStore";
 import Register from "./components/login/Register";
 import {Quiz} from "@mui/icons-material";
-
+import CreateLesson from "./components/mainPage/lessons/CreateLesson";
+import ReviewGrammar from "./components/mainPage/vocabulary/quiz/ReviewGrammar";
 
 
 const App = (props) => {
@@ -33,23 +34,29 @@ const App = (props) => {
                 <div className="headerContainer">
                     <Header/>
                 </div>
+
                 <div className="container">
                     <Routes>
+                        <Route path='/'
+                               element={<MainPage lessonsData={props.state.lessonsData}
+                                                  dispatch={props.dispatch}/>}/>
+                        <Route path='/create_lesson'
+                               element={<CreateLesson/>}/>
+                        <Route path='/review_grammar'
+                               element={<ReviewGrammar/>}/>
+
                         <Route path='/user'
                                element={<UserPage/>}/>
                         <Route path='/login'
                                element={<Login/>}/>
-                       <Route path='/register'
+                        <Route path='/register'
                                element={<Register/>}/>
-                        <Route path='/'
-                               element={<MainPage lessonsData={props.state.lessonsData}
-                                                  dispatch={props.dispatch}/>}/>
                         <Route path={'/my_words'}
                                element={<WordsPage wordsData={props.state.wordsData}
                                                    dispatch={props.dispatch}
                                                    newWordText={props.state.newWordText}
                                                    newTranslationText={props.state.newTranslationText}
-                                                   />}/>
+                               />}/>
                         <Route path={'/review_words'}
                                element={<ReviewWords/>}/>
                         <Route path={'/review_words/quiz'}

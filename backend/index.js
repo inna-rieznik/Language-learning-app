@@ -7,13 +7,11 @@ const jwt = require('jsonwebtoken');
 dotenv.config({path: './.env'});
 const app = express();
 
-
-
-
 app.use(express.json()); // automatically parse every json object that was sent from FE
 app.use(cors()); //cors send info between FE and BE
 
-//
+
+
 const db = mysql.createConnection({
     user: process.env.DATABASE_USER,
     host: process.env.DATABASE_HOST,
@@ -29,13 +27,22 @@ db.connect((error) => {
     }
 })
 
+//ROUTERS
+const wordRouter = require('./routes/Words')
+app.use("/words", wordRouter);
+
+const lessonRouter = require('./routes/Lessons')
+app.use("/lessons", lessonRouter);
+
+
+
 app.post('/register', (req, res) => {
 
     const username = req.body.username;
     const password = req.body.password;
     const email = req.body.email;
     db.query(
-        "INSERT INTO mydb.users (username,password,id_user,id_language,id_role, name, email, registered_at) values(?,?,7,1,1,?,?,NULL)",
+        "INSERT INTO mydb.users (username,password,id_user,id_language,id_role, name, email, registered_at) values(?,?,8,1,1,?,?,NULL)",
         [email, password, username, email],
         (err, result) => {
             if (err) {
@@ -69,22 +76,13 @@ app.post('/login', (req, res) => {
         })
 })
 
-/*app.post('/login', (req, res) => {
-
-
-    res.json({
-        success: true,
-        token
-    });
-
-
-});*/
-
 app.get('/api/test', (req, res) => {
     res.send({
         test: 233
     })
 })
+
+
 
 app.listen(3011, (hostname) => {
     console.log(`Running server on ${hostname}, port 3011`);
