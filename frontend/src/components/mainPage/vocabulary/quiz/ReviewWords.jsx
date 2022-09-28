@@ -27,7 +27,7 @@ const ReviewWords = (props) => {
             <Action urlName='flashcards' title='Flashcards'/>
             <Action urlName='review_words/matching_translation' title='Matching: connect word with translation'/>
             <Action urlName='review_words/matching_sentences' title='Complete the sentence'/>
-
+            <Action urlName='review_words/fill_the_gap' title='Fill the gap'/>
 
         </div>
     );

@@ -25,6 +25,7 @@ import CreateLesson from "./components/mainPage/lessons/CreateLesson";
 import ReviewGrammar from "./components/mainPage/vocabulary/quiz/ReviewGrammar";
 
 
+
 const App = (props) => {
 
     return (
@@ -59,6 +60,8 @@ const App = (props) => {
                                />}/>
                         <Route path={'/review_words'}
                                element={<ReviewWords/>}/>
+                        <Route path={'/review_grammar'}
+                               element={<ReviewGrammar/>}/>
                         <Route path={'/review_words/quiz'}
                                element={<Quiz/>}/>
                         <Route path='/questions'
