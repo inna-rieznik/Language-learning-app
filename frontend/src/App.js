@@ -24,6 +24,7 @@ import {Quiz} from "@mui/icons-material";
 
 
 
+
 const App = (props) => {
 
     return (
@@ -33,6 +34,7 @@ const App = (props) => {
                 <div className="headerContainer">
                     <Header/>
                 </div>
+
                 <div className="container">
                     <Routes>
                         <Route path='/user'
@@ -50,6 +52,7 @@ const App = (props) => {
                                                    newWordText={props.state.newWordText}
                                                    newTranslationText={props.state.newTranslationText}
                                                    />}/>
+                               />}/>
                         <Route path={'/review_words'}
                                element={<ReviewWords/>}/>
                         <Route path={'/review_words/quiz'}

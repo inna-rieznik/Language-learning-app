@@ -1,7 +1,4 @@
 import s from "./wordsPage.module.css";
-import {NavLink} from "react-router-dom";
-import Word from "./words/Word";
-//import Button from "../mainPage/vocabulary/action/Button";
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
@@ -20,8 +17,11 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import TextField from '@mui/material/TextField';
-import {addWordToVocabularyActionCreator,updateNewWordTextActionCreator } from "../redux/WordsReducer";
-import * as props from "../redux/store";
+import {addWordToVocabularyActionCreator, updateNewWordTextActionCreator} from "../redux/WordsReducer";
+import {useEffect, useState} from 'react';
+import axios from "axios";
+import Axios from "axios";
+
 
 const style = {
     position: 'absolute',
@@ -35,10 +35,32 @@ const style = {
     p: 4,
 };
 
-
-
 const WordsPage = (props) => {
-    /* let wordsElement = props.wordsData.map(word => <Word id={word.id} cz={word.cz} eng={word.eng}/>)*/
+
+    const [source, setSource] = useState("");
+    const [target, setTarget] = useState("");
+
+    const [WordStatus, setWordStatus] = useState("");
+
+    const [listOfWords, setListOfWords] = useState();
+
+    useEffect(() => {
+        axios.get("http://localhost:3011/words").then((response) => {
+            setListOfWords(response.data);
+            console.log(response.data);
+        });
+    }, []);
+
+    const addWord = () => {
+        Axios.post('http://localhost:3011/words', {
+            source: source,
+            target: target
+        }).then((response) => {
+            console.log(response.data);
+        });
+    };
+
+
 
     //function to add data from inputs to wordsData
     const [open, setOpen] = React.useState(false);
@@ -69,7 +91,6 @@ const WordsPage = (props) => {
 
     return (
         <div className={s.content}>
-
             <Breadcrumbs aria-label="breadcrumb">
                 <Link
                     underline="hover"
@@ -80,7 +101,6 @@ const WordsPage = (props) => {
                 </Link>
                 <Typography color="text.primary">My Words</Typography>
             </Breadcrumbs>
-
             <h1>My Words</h1>
             <Button onClick={handleOpen} variant="contained" startIcon={<AddIcon/>}>add new word</Button>
             <Modal
@@ -107,24 +127,28 @@ const WordsPage = (props) => {
                                 Word
                             </Typography>
                             <TextField id="outlined-basic"
-                                       label="Type smth"
+                                       label="Type word in czech"
                                        variant="outlined"
                                        inputRef={newWordCz}
-                                       onChange={updateNewWordText}
-                                       value={props.wordsData.newWordText}/>
+                                       onChange={(e) => {
+                                           setSource(e.target.value);
+                                       }}
+                                     /*  value={props.wordsData.newWordText}*//>
                             <Typography id="transition-modal-title">
                                 Translation
                             </Typography>
                             <TextField id="outlined-basic"
-                                       label="Type smth"
+                                       label="Type word in eng"
                                        variant="outlined"
                                        inputRef={newWordEng}
-                                       onChange={updateNewWordText}
-                                       value={props.wordsData.newTranslationText}/>
+                                       onChange={(e) => {
+                                           setTarget(e.target.value);
+                                       }}
+                                      /* value={props.wordsData.newTranslationText}*//>
                             <Button variant="contained"
                                     startIcon={<AddIcon/>}
                                     onClick={() => {
-                                        addWordToVocabulary();
+                                        addWord();
                                         handleClose();
                                     }}>add</Button>
                         </Box>
@@ -135,7 +159,6 @@ const WordsPage = (props) => {
 
 
             <div>
-                {/* {wordsElement}*/}
                 <TableContainer component={Paper}>
                     <Table sx={{minWidth: 650}} aria-label="simple table">
                         <TableHead>
@@ -146,16 +169,16 @@ const WordsPage = (props) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {props.wordsData.words.map((row) => (
+                            {listOfWords?.map((row) => (
                                 <TableRow
-                                    key={row.id}
+                                    key={row.id_word}
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                 >
                                     <TableCell component="th" scope="row">
-                                        {row.id}
+                                        {row.id_word}
                                     </TableCell>
-                                    <TableCell align="left">{row.cz}</TableCell>
-                                    <TableCell align="left">{row.eng}</TableCell>
+                                    <TableCell align="left">{row.source}</TableCell>
+                                    <TableCell align="left">{row.target}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
