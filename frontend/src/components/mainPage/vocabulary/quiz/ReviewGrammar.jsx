@@ -20,9 +20,9 @@ const ReviewGrammar = (props) => {
                 >
                     Home
                 </Link>
-                <Typography color="text.primary">ReviewWords</Typography>
+                <Typography color="text.primary">Review Grammar</Typography>
             </Breadcrumbs>
-            <h1>ReviewWords</h1>
+            <h1>Review Grammar</h1>
             <Action urlName='quiz' title='Quiz'/>
             <Action urlName='flashcards' title='Flashcards'/>
             <Action urlName='review_words/matching_translation' title='Matching: connect word with translation'/>

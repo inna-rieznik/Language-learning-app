@@ -40,8 +40,6 @@ const WordsPage = (props) => {
     const [source, setSource] = useState("");
     const [target, setTarget] = useState("");
 
-    const [WordStatus, setWordStatus] = useState("");
-
     const [listOfWords, setListOfWords] = useState();
 
     useEffect(() => {
