@@ -12,6 +12,8 @@ function handleClick(event) {
 
 const UserPage = (props) => {
 
+    let userPoints = 0;
+    let level = 1;
 
     return (
         <div className={s.content}>
@@ -30,6 +32,8 @@ const UserPage = (props) => {
             <h1>User Page</h1>
             <h2>Name</h2>
             <h2>Username</h2>
+            <h2>Level: {level}</h2>
+            <h2>Points: {userPoints}</h2>
         </div>
     );
 }

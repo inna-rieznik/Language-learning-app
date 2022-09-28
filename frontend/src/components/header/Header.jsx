@@ -19,6 +19,7 @@ const Header = () => {
 
     return (
 
+
         <header className={s.header}>
 
             <NavLink to='/'>
@@ -27,7 +28,7 @@ const Header = () => {
             <nav className={s.menu}>
                 <ul className={s.list}>
                     <li className={s.item}>
-                        <p className={s.level}>Level 5</p>
+                        <p className={s.level}>Level </p>
                     </li>
                     <li className={s.item} >
                         <p className={s.levelIndicator}>[********-------------------]</p>
