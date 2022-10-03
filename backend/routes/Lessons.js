@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
     const grammarRule = req.body.grammarRule;
 
     db.query(
-        "INSERT INTO mydb.lessons (id_lesson, title, intro_text, grammar_rule_title, grammar_rule) values(4,?,?,?,?)",
+        "INSERT INTO mydb.lessons (id_lesson, title, intro_text, grammar_rule_title, grammar_rule) values(5,?,?,?,?)",
         [title, introText, grammarRuleTitle,grammarRule],
         (err, result) => {
             if (err) {
