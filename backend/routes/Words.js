@@ -31,8 +31,9 @@ router.post('/', (req, res) => {
     //to access data from FE we use body
      const source = req.body.source;
      const target = req.body.target;
+
     db.query(
-        "INSERT INTO mydb.words (id_lesson, id_word, id_state, id_language, source, target) values(1,9,1,1,?,?)",
+        "INSERT INTO mydb.words (id_lesson, id_word, id_state, id_language, source, target) values(1, 7, 1,1,?,?)",
         [source, target],
         (err, result) => {
             if (err) {
