@@ -2,9 +2,6 @@ import s from "./Login.module.css";
 import Location from "../../images/Location.png";
 import {TextField} from "@mui/material";
 import Box from "@mui/material/Box";
-import SelectField from "../mainPage/vocabulary/quiz/SelectField";
-import TextFieldComp from "../mainPage/vocabulary/quiz/TextFieldComp";
-import AddIcon from "@mui/icons-material/Add";
 import * as React from "react";
 import Button from "@mui/material/Button";
 import Axios from "axios";
@@ -31,7 +28,7 @@ const Register = (props) => {
             email: emailReg,
             password: passwordReg
         }).then((response) => {
-            console.log(response);
+            console.log(response.data);
         });
     };
 

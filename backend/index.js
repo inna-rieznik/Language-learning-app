@@ -10,8 +10,6 @@ const app = express();
 app.use(express.json()); // automatically parse every json object that was sent from FE
 app.use(cors()); //cors send info between FE and BE
 
-
-
 const db = mysql.createConnection({
     user: process.env.DATABASE_USER,
     host: process.env.DATABASE_HOST,
@@ -27,6 +25,8 @@ db.connect((error) => {
     }
 })
 
+
+
 //ROUTERS
 const wordRouter = require('./routes/Words')
 app.use("/words", wordRouter);
@@ -34,25 +34,9 @@ app.use("/words", wordRouter);
 const lessonRouter = require('./routes/Lessons')
 app.use("/lessons", lessonRouter);
 
+const registerRouter = require('./routes/Register')
+app.use("/register", registerRouter);
 
-
-app.post('/register', (req, res) => {
-
-    const username = req.body.username;
-    const password = req.body.password;
-    const email = req.body.email;
-    db.query(
-        "INSERT INTO mydb.users (username,password,id_language,id_role, name, email, registered_at) values(?,?,1,1,?,?,NULL)",
-        [email, password, username, email],
-        (err, result) => {
-            if (err) {
-                console.log(err);
-                res.send({status: 'error', err})
-                return;
-            }
-            res.send({status: 'ok'})
-        })
-})
 
 app.post('/login', (req, res) => {
     const email = req.body.email;
