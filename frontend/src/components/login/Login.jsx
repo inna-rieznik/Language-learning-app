@@ -15,11 +15,17 @@ import Link from "@mui/material/Link";
 const Login = (props) => {
 
 
-          //this variable is used in index.js in req.body.variable
+    //this variable is used in index.js in req.body.variable
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-   const [loginStatus, setLoginStatus] = useState("");
+    const [loginStatus, setLoginStatus] = useState("");
+
+    const handleSubmit = event => {
+        console.log('handleSubmit ran');
+        event.preventDefault();
+        event.target.reset();
+    };
 
     const login = () => {
         Axios.post('http://localhost:3011/login', {
@@ -62,44 +68,45 @@ const Login = (props) => {
            </div>*/
         <div>
             <div className={s.login}>
-            <Box>
-                <img src={Search} alt="search" width="809" height="607"/>
-            </Box>
-            <form className={s.form}>
-                <h1>Log In</h1>
-                <Box mt={3} width="100%">
-                    <TextField id="outlined-basic"
-                               label="Email"
-                               onChange={(e) => {
-                                   setEmail(e.target.value);
-                               }}
-                               variant="outlined"/>
+                <Box>
+                    <img src={Search} alt="search" width="809" height="607"/>
                 </Box>
-                <Box mt={3} width="100%">
-                    <TextField id="outlined-basic"
-                               label="Password"
-                               onChange={(e) => {
-                                   setPassword(e.target.value);
-                               }}
-                               variant="outlined"/>
-                </Box>
-                <Box mt={3} width="100%">
-                    <Link underline="hover"
-                          color="inherit"
-                          href="/register">
-                        You don't have an account? REGISTER
-                    </Link>
-                </Box>
-                <Box mt={3} width="100%">
-                    <Button onClick={login} variant="contained">Log in</Button>
-                </Box>
+                <form className={s.form} onSubmit={handleSubmit}>
+                    <h1>Log In</h1>
+                    <Box mt={3} width="100%">
+                        <TextField id="outlined-basic"
+                                   label="Email"
+                                   onChange={(e) => {
+                                       setEmail(e.target.value);
+                                   }}
+                                   variant="outlined"/>
+                    </Box>
+                    <Box mt={3} width="100%">
+                        <TextField id="outlined-basic"
+                                   label="Password"
+                                   onChange={(e) => {
+                                       setPassword(e.target.value);
+                                   }}
+                                   variant="outlined"/>
+                    </Box>
+                    <Box mt={3} width="100%">
+                        <Link underline="hover"
+                              color="inherit"
+                              href="/register">
+                            You don't have an account? REGISTER
+                        </Link>
+                    </Box>
+                    <Box mt={3} width="100%">
+                        <Button onClick={login} variant="contained">Log in</Button>
+                    </Box>
+                    <div>
+                        <h1>
+                            {loginStatus}
+                        </h1>
+                    </div>
+                </form>
 
-                <div>
-                    <h1>
-                        {loginStatus}
-                    </h1>
-                </div>
-            </form>
+
             </div>
         </div>
     );

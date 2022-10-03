@@ -19,6 +19,12 @@ const Register = (props) => {
     const [emailReg, setEmailReg] = useState("");
     const [passwordReg, setPasswordReg] = useState("");
 
+    const handleSubmit = event => {
+        console.log('handleSubmit ran');
+        event.preventDefault();
+        event.target.reset();
+    };
+
     const register = () => {
         Axios.post('http://localhost:3011/register', {
             username: usernameReg,
@@ -29,13 +35,15 @@ const Register = (props) => {
         });
     };
 
+
+
     return (
         <div>
             <div className={s.login}>
                 <div>
                     <img src={Location} alt="search" width="809" height="706"/>
                 </div>
-                <form className={s.form}>
+                <form className={s.form} onSubmit={handleSubmit}>
                     <h1>Register</h1>
                     <Box mt={3} width="100%">
                         <TextField id="outlined-basic"

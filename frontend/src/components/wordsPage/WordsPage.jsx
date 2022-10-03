@@ -142,6 +142,7 @@ const WordsPage = (props) => {
                                        onChange={(e) => {
                                            setTarget(e.target.value);
                                        }}
+
                                       /* value={props.wordsData.newTranslationText}*//>
                             <Button variant="contained"
                                     startIcon={<AddIcon/>}
