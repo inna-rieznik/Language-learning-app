@@ -14,6 +14,14 @@ const CreateLesson = (props) => {
     const [grammarRuleTitle, setGrammarRuleTitle] = useState("");
     const [grammarRule, setGrammarRule] = useState("");
 
+
+
+    const handleSubmit = event => {
+        console.log('handleSubmit ran');
+        event.preventDefault();
+        event.target.reset();
+    };
+
     const addLesson = () => {
         Axios.post('http://localhost:3011/lessons', {
             title: title,
@@ -28,10 +36,11 @@ const CreateLesson = (props) => {
     return (
         <div>
             <h1>Create New Lesson</h1>
-            <Box
+            <form
                 sx={{
                     maxWidth: '100%',
                 }}
+                onSubmit={handleSubmit}
             >
                 <h2>Title</h2>
                 <TextField sx={{paddingBottom: 2}}
@@ -43,6 +52,8 @@ const CreateLesson = (props) => {
                 <h2>Some intro text</h2>
                 <TextField sx={{paddingBottom: 2}}
                            fullWidth id="addIntro"
+                           multiline
+                           maxRows={4}
                            onChange={(e) => {
                                setIntroText(e.target.value);
                            }}/>
@@ -57,6 +68,8 @@ const CreateLesson = (props) => {
                 <h2>Grammar rule</h2>
                 <TextField sx={{paddingBottom: 2}}
                            fullWidth id="addRule"
+                           multiline
+                           maxRows={4}
                            onChange={(e) => {
                                setGrammarRule(e.target.value);
                            }}/>
@@ -65,7 +78,7 @@ const CreateLesson = (props) => {
                         type="submit"
                         onClick={addLesson}
                         startIcon={<AddIcon/>}>Add Lesson</Button>
-            </Box>
+            </form>
         </div>
     );
 }
