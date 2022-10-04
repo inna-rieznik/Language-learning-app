@@ -4,6 +4,7 @@ import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
 import {useState} from "react";
 import Axios from "axios";
+import {useNavigate} from 'react-router-dom';
 
 
 const CreateLesson = (props) => {
@@ -13,12 +14,12 @@ const CreateLesson = (props) => {
     const [grammarRuleTitle, setGrammarRuleTitle] = useState("");
     const [grammarRule, setGrammarRule] = useState("");
 
-
+    const navigate = useNavigate();
 
     const handleSubmit = event => {
-        console.log('handleSubmit ran');
         event.preventDefault();
         event.target.reset();
+
     };
 
     const addLesson = () => {
@@ -26,8 +27,9 @@ const CreateLesson = (props) => {
             title: title,
             introText: introText,
             grammarRuleTitle: grammarRuleTitle,
-            grammarRule: grammarRule
+            grammarRule: grammarRule,
         }).then((response) => {
+            navigate('/');
             console.log(response.data);
         });
     };
@@ -74,7 +76,6 @@ const CreateLesson = (props) => {
                            }}/>
                 <Button type="submit"
                         variant="contained"
-                        type="submit"
                         onClick={addLesson}
                         startIcon={<AddIcon/>}>Add Lesson</Button>
             </form>

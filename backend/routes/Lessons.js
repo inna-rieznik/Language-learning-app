@@ -26,6 +26,22 @@ router.get('/', (req, res) => {
 
 });
 
+router.get('/id/:lessonId',(req,res) => {
+    const lessonId = req.params.lessonId;
+    db.query(
+        'SELECT * FROM mydb.lessons WHERE id_lesson = ?',
+        [lessonId],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({status: 'error', err})
+                return;
+            }
+            console.log(result);
+            res.send(result);
+        })
+})
+
 router.post('/', (req, res) => {
     //to access data from FE we use body
     const title = req.body.title;
