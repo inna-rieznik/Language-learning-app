@@ -10,5 +10,27 @@ const db = mysql.createConnection({
     database: process.env.DATABASE
 });
 
+router.post('/', (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    db.query(
+        "SELECT * FROM mydb.users WHERE email = ? AND password = ?",
+        [email, password],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({status: 'error', err});
+                return;
+            }
+            if (result.length > 0) {
+                res.send(result);
+            } else {
+                res.send({"message": "wrong email or password"});
+            }
+
+        })
+})
+
 
 module.exports = router;

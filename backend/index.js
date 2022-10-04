@@ -37,34 +37,16 @@ app.use("/lessons", lessonRouter);
 const registerRouter = require('./routes/Register')
 app.use("/register", registerRouter);
 
-
-app.post('/login', (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-
-    db.query(
-        "SELECT * FROM mydb.users WHERE email = ? AND password = ?",
-        [email, password],
-        (err, result) => {
-            if (err) {
-                console.log(err);
-                res.send({status: 'error', err});
-                return;
-            }
-            if (result.length > 0) {
-                res.send(result);
-            } else {
-                res.send({"message": "wrong email or password"});
-            }
-
-        })
-})
+const loginRouter = require('./routes/Login')
+app.use("/login", loginRouter);
 
 app.get('/api/test', (req, res) => {
     res.send({
         test: 233
     })
 })
+
+
 
 
 

@@ -13,10 +13,7 @@ const CreateLesson = (props) => {
     const [grammarRuleTitle, setGrammarRuleTitle] = useState("");
     const [grammarRule, setGrammarRule] = useState("");
 
-
-
     const handleSubmit = event => {
-        console.log('handleSubmit ran');
         event.preventDefault();
         event.target.reset();
     };
@@ -74,7 +71,6 @@ const CreateLesson = (props) => {
                            }}/>
                 <Button type="submit"
                         variant="contained"
-                        type="submit"
                         onClick={addLesson}
                         startIcon={<AddIcon/>}>Add Lesson</Button>
             </form>
