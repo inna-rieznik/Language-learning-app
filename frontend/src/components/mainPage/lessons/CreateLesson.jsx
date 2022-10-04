@@ -4,6 +4,7 @@ import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
 import {useState} from "react";
 import Axios from "axios";
+import {useNavigate} from 'react-router-dom';
 
 
 const CreateLesson = (props) => {
@@ -13,9 +14,12 @@ const CreateLesson = (props) => {
     const [grammarRuleTitle, setGrammarRuleTitle] = useState("");
     const [grammarRule, setGrammarRule] = useState("");
 
+    const navigate = useNavigate();
+
     const handleSubmit = event => {
         event.preventDefault();
         event.target.reset();
+
     };
 
     const addLesson = () => {
@@ -23,8 +27,9 @@ const CreateLesson = (props) => {
             title: title,
             introText: introText,
             grammarRuleTitle: grammarRuleTitle,
-            grammarRule: grammarRule
+            grammarRule: grammarRule,
         }).then((response) => {
+            navigate('/');
             console.log(response.data);
         });
     };
