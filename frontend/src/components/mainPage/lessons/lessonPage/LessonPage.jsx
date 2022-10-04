@@ -25,6 +25,8 @@ const LessonPage = (props) => {
                     <h1>Lesson {lessonId} </h1>
                     <h2>Title: {lessonObject.title}</h2>
                     <p>Intro text: {lessonObject.intro_text}</p>
+                    <h2>Grammar rule title: {lessonObject.grammar_rule_title}</h2>
+                    <p>Grammar rule: {lessonObject.grammar_rule}</p>
                 </div>
 
 

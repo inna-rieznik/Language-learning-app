@@ -40,6 +40,10 @@ app.use("/register", registerRouter);
 const loginRouter = require('./routes/Login')
 app.use("/login", loginRouter);
 
+const userRouter = require('./routes/User')
+app.use("/user", userRouter);
+
+
 app.get('/api/test', (req, res) => {
     res.send({
         test: 233
