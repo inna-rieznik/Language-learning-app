@@ -17,17 +17,17 @@ const LessonPage = (props) => {
         });
     }, [])
 
-    
+
     console.log(lessonObject)
     return (
-        <div  className={s.content}>
+        <div className={s.content}>
 
                 <div>
                     <h1>Lesson {lessonId} </h1>
                     <h2>Title: {lessonObject[0]?.title}</h2>
-                    <p>Intro text: {lessonObject.intro_text}</p>
-                    <h2>Grammar rule title: {lessonObject.grammar_rule_title}</h2>
-                    <p>Grammar rule: {lessonObject.grammar_rule}</p>
+                    <p>Intro text: {lessonObject[0]?.intro_text}</p>
+                    <h2>Grammar rule title: {lessonObject[0]?.grammar_rule_title}</h2>
+                    <p>Grammar rule: {lessonObject[0]?.grammar_rule}</p>
                 </div>
 
 

@@ -35,9 +35,10 @@ const Login = (props) => {
                 setLoginStatus(response.data.message);
             } else {
                 setLoginStatus(response.data[0].name);
+                navigate('/user');
             }
             console.log(response.data);
-            navigate('/user');
+
         });
     };
 
@@ -65,6 +66,9 @@ const Login = (props) => {
                                        setPassword(e.target.value);
                                    }}
                                    variant="outlined"/>
+                        <p style={{color: "red"}}>
+                            {loginStatus}
+                        </p>
                     </Box>
                     <Box mt={3} width="100%">
                         <Link underline="hover"
@@ -77,9 +81,7 @@ const Login = (props) => {
                         <Button onClick={login} variant="contained">Log in</Button>
                     </Box>
                     <div>
-                        <h1>
-                            {loginStatus}
-                        </h1>
+
                     </div>
                 </form>
 

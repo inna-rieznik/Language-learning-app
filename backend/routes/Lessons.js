@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
         })
 
 });
-
+//one lesson
 router.get('/id/:lessonId',(req,res) => {
     const lessonId = req.params.lessonId;
     db.query(
