@@ -40,9 +40,6 @@ const App = (props) => {
                                element={<CreateLesson/>}/>
                         <Route path='/review_grammar'
                                element={<ReviewGrammar/>}/>
-
-                        <Route path='/user'
-                               element={<UserPage/>}/>
                         <Route path='/login'
                                element={<Login/>}/>
                         <Route path='/register'
@@ -61,8 +58,10 @@ const App = (props) => {
                                element={<Question/>}/>
                         <Route path='/score'
                                element={<FinalScreen/>}/>
-                        <Route path={`lesson/:lessonId`}
+                        <Route path={`lessons/id/:lessonId`}
                                element={<LessonPage />}/>}
+                        <Route path={`/user/:userId`}
+                               element={<UserPage/>}/>
 
                     </Routes>
                 </div>

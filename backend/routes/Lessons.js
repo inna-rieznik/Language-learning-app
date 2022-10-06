@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
         })
 
 });
-//one lesson
+//get one lesson '/lessons/id/1'
 router.get('/id/:lessonId',(req,res) => {
     const lessonId = req.params.lessonId;
     db.query(
@@ -62,4 +62,5 @@ router.post('/', (req, res) => {
         })
 })
 
+//make sure wi can export routers
 module.exports = router;

@@ -17,8 +17,6 @@ const LessonPage = (props) => {
         });
     }, [])
 
-
-    console.log(lessonObject)
     return (
         <div className={s.content}>
 

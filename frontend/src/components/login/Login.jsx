@@ -18,6 +18,7 @@ const Login = (props) => {
     const [password, setPassword] = useState("");
 
     const [loginStatus, setLoginStatus] = useState("");
+    const [userId, setUserId] = useState("");
     const navigate = useNavigate();
 
     const handleSubmit = event => {
@@ -35,7 +36,8 @@ const Login = (props) => {
                 setLoginStatus(response.data.message);
             } else {
                 setLoginStatus(response.data[0].name);
-                navigate('/user');
+                setUserId(response.data[0]?.id_user);
+                navigate(`/user/${userId}`);
             }
             console.log(response.data);
 
@@ -67,7 +69,7 @@ const Login = (props) => {
                                    }}
                                    variant="outlined"/>
                         <p style={{color: "red"}}>
-                            {loginStatus}
+                            {loginStatus}, {userId}
                         </p>
                     </Box>
                     <Box mt={3} width="100%">
