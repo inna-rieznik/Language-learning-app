@@ -10,6 +10,7 @@ const db = mysql.createConnection({
     database: process.env.DATABASE
 });
 
+// /login
 router.post('/', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -26,10 +27,11 @@ router.post('/', (req, res) => {
             if (result.length > 0) {
                 res.send(result);
             } else {
-                res.send({"message": "wrong email or password"});
+                res.send({"message": "Wrong email or password"});
             }
 
-        })
+        }
+    )
 })
 
 

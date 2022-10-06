@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Axios from "axios";
 import {useState} from "react";
 import Link from "@mui/material/Link";
+import {useNavigate} from "react-router-dom";
 
 
 const Register = (props) => {
@@ -15,6 +16,9 @@ const Register = (props) => {
     const [usernameReg, setUsernameReg] = useState(""); //name + surname
     const [emailReg, setEmailReg] = useState("");
     const [passwordReg, setPasswordReg] = useState("");
+    const [registerStatus, setRegisterStatus] = useState("");
+
+    const navigate = useNavigate();
 
     const handleSubmit = event => {
         console.log('handleSubmit ran');
@@ -28,10 +32,14 @@ const Register = (props) => {
             email: emailReg,
             password: passwordReg
         }).then((response) => {
+            if (response.data.message) {
+                setRegisterStatus(response.data.message);
+            } else {
+                navigate('/user');
+            }
             console.log(response.data);
         });
     };
-
 
 
     return (
@@ -65,6 +73,9 @@ const Register = (props) => {
                                        setPasswordReg(e.target.value);
                                    }}
                                    variant="outlined"/>
+                        <p style={{color: "red"}}>
+                            {registerStatus}
+                        </p>
                     </Box>
                     <Box mt={3} width="100%">
                         <Link underline="hover"
@@ -74,7 +85,7 @@ const Register = (props) => {
                         </Link>
                     </Box>
                     <Box mt={3} width="100%">
-                        <Button variant="contained" onClick={register} >Register</Button>
+                        <Button variant="contained" onClick={register}>Register</Button>
                     </Box>
                 </form>
             </div>

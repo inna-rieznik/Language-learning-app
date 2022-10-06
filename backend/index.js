@@ -28,17 +28,17 @@ db.connect((error) => {
 
 
 //ROUTERS
-const wordRouter = require('./routes/Words')
-app.use("/words", wordRouter);
-
-const lessonRouter = require('./routes/Lessons')
-app.use("/lessons", lessonRouter);
-
 const registerRouter = require('./routes/Register')
 app.use("/register", registerRouter);
 
 const loginRouter = require('./routes/Login')
 app.use("/login", loginRouter);
+
+const lessonRouter = require('./routes/Lessons')
+app.use("/lessons", lessonRouter);
+
+const wordRouter = require('./routes/Words')
+app.use("/words", wordRouter);
 
 const userRouter = require('./routes/User')
 app.use("/user", userRouter);

@@ -8,25 +8,24 @@ import axios from "axios";
 const LessonPage = (props) => {
 
     let {lessonId} = useParams();
-    const [lessonObject, setLessonObject] = useState({});
+    const [lessonObject, setLessonObject] = useState([]);
 
     useEffect(() => {
         axios.get(`http://localhost:3011/lessons/id/${lessonId}`).then((response) => {
             setLessonObject(response.data);
             console.log(response.data);
         });
-    })
-
+    }, [])
 
     return (
-        <div  className={s.content}>
+        <div className={s.content}>
 
                 <div>
                     <h1>Lesson {lessonId} </h1>
-                    <h2>Title: {lessonObject.title}</h2>
-                    <p>Intro text: {lessonObject.intro_text}</p>
-                    <h2>Grammar rule title: {lessonObject.grammar_rule_title}</h2>
-                    <p>Grammar rule: {lessonObject.grammar_rule}</p>
+                    <h2>Title: {lessonObject[0]?.title}</h2>
+                    <p>Intro text: {lessonObject[0]?.intro_text}</p>
+                    <h2>Grammar rule title: {lessonObject[0]?.grammar_rule_title}</h2>
+                    <p>Grammar rule: {lessonObject[0]?.grammar_rule}</p>
                 </div>
 
 

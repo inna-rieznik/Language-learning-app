@@ -41,7 +41,7 @@ const Lessons = (props) => {
                         </CardContent>
                         <CardActions>
 
-                            <Button size="small" onClick={() => {navigate(`/lesson/${value.id_lesson}`)}}>start</Button>
+                            <Button size="small" onClick={() => {navigate(`lessons/id/${value.id_lesson}`)}}>start</Button>
                         </CardActions>
                     </Card>
                 </div>
