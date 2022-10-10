@@ -11,14 +11,12 @@ import {
 import Login from "./components/login/Login";
 import UserPage from "./components/userPage/UserPage";
 import WordsPage from "./components/wordsPage/WordsPage";
-import ReviewWords from "./components/mainPage/vocabulary/quiz/ReviewWords";
+import ReviewWords from "./components/mainPage/vocabulary/ReviewWords";
 import LessonPage from "./components/mainPage/lessons/lessonPage/LessonPage";
-import FinalScreen from "./components/mainPage/vocabulary/quiz/finalScreen/FinalScreen";
-import Question from "./components/mainPage/vocabulary/quiz/questions/Question";
 import Register from "./components/login/Register";
-import {Quiz} from "@mui/icons-material";
 import CreateLesson from "./components/mainPage/lessons/CreateLesson";
-import ReviewGrammar from "./components/mainPage/vocabulary/quiz/ReviewGrammar";
+import ReviewGrammar from "./components/mainPage/vocabulary/ReviewGrammar";
+import {Quiz} from "@mui/icons-material";
 
 
 
@@ -53,14 +51,12 @@ const App = (props) => {
                                />}/>
                         <Route path={'/review_words'}
                                element={<ReviewWords/>}/>
+
                         <Route path={'/review_grammar'}
                                element={<ReviewGrammar/>}/>
                         <Route path={'/review_words/quiz'}
                                element={<Quiz/>}/>
-                        <Route path='/questions'
-                               element={<Question/>}/>
-                        <Route path='/score'
-                               element={<FinalScreen/>}/>
+
                         <Route path={`lessons/id/:lessonId`}
                                element={<LessonPage />}/>}
                         <Route path={`/user/:userId`}

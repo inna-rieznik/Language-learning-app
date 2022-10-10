@@ -5,7 +5,7 @@ import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 
-import Action from "../action/Action";
+import Action from "./action/Action";
 
 const ReviewWords = (props) => {
 

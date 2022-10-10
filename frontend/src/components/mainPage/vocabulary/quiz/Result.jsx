@@ -2,10 +2,10 @@ import React from 'react';
 
 
 
-const Quiz = (props) => {
+const Result = (props) => {
     return (
         <div></div>
     );
 }
 
-export default Quiz;
+export default Result;
