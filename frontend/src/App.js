@@ -16,6 +16,8 @@ import LessonPage from "./components/mainPage/lessons/lessonPage/LessonPage";
 import Register from "./components/login/Register";
 import CreateLesson from "./components/mainPage/lessons/CreateLesson";
 import ReviewGrammar from "./components/mainPage/vocabulary/ReviewGrammar";
+import {Quiz} from "@mui/icons-material";
+
 
 
 const App = (props) => {
@@ -49,6 +51,12 @@ const App = (props) => {
                                />}/>
                         <Route path={'/review_words'}
                                element={<ReviewWords/>}/>
+
+                        <Route path={'/review_grammar'}
+                               element={<ReviewGrammar/>}/>
+                        <Route path={'/review_words/quiz'}
+                               element={<Quiz/>}/>
+
                         <Route path={`lessons/id/:lessonId`}
                                element={<LessonPage />}/>}
                         <Route path={`/user/:userId`}
