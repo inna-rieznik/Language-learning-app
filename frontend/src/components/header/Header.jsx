@@ -34,7 +34,7 @@ const Header = () => {
                         <p className={s.levelIndicator}>[********-------------------]</p>
                     </li>
                     <li className={s.item}>
-                        <IconButton aria-label="person" href="/user">
+                        <IconButton aria-label="person" href="/user/:userId}">
                             <PersonIcon />
                         </IconButton>
                        {/* <button  onClick={navigateToUserInfo}>

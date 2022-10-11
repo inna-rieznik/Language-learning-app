@@ -37,7 +37,7 @@ const Login = (props) => {
             } else {
                 setLoginStatus(response.data[0].name);
                 setUserId(response.data[0]?.id_user);
-                /*navigate(`/user/${userId}`);*/
+               /* navigate(`/user/${userId}`);*/
             }
             console.log(response.data);
 

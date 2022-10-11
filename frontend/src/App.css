@@ -29,9 +29,9 @@ h1 {
 
 
 html, body{
-  height: 100%;
   line-height: 1;
 }
+
 body{
   font-family: Noto Serif, serif;
   font-size: 14px;

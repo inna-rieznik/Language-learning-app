@@ -1,0 +1,53 @@
+.quiz {
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 77vh;
+}
+
+.modal{
+    width: 500px;
+    border-radius: 30px;
+    padding: 40px;
+    background-color: #fff;
+    position: relative;
+}
+
+.game ul {
+    list-style: none;
+    padding: 0;
+}
+
+.game li {
+    padding: 15px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+
+
+.game li:hover{
+    border: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+.progress{
+    height: 10px;
+    border-radius: 30px;
+    background-color: rgb(232, 232, 232);
+    margin-bottom: 25px;
+}
+
+.inner {
+     height: 100%;
+     border-radius: 30px;
+     width: 80%;
+     background: rgb(0, 48, 102);
+     transition: all 0.3s ease-in-out;
+     background: linear-gradient(90deg, rgb(0, 48, 102, 1) 0%, rgb(106, 167, 247, 1) 100%);
+ }
