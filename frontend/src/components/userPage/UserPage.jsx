@@ -43,8 +43,9 @@ const UserPage = (props) => {
             <h1>User Page</h1>
             <h2>Name: {userObject[0]?.name} </h2>
             <h2>Username: {userObject[0]?.username} </h2>
-            <h2>Level: {level}</h2>
-            <h2>Points: {userPoints}</h2>
+            <h2>Role: {userObject[0]?.role} </h2>
+            <h2>Level: {userObject[0]?.level}</h2>
+            <h2>Points: {userObject[0]?.score}</h2>
         </div>
     );
 }
