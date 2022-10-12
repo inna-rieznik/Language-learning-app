@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import './App.css';
 import MainPage from "./components/mainPage/MainPage";
 import {
@@ -16,12 +16,24 @@ import CreateLesson from "./components/mainPage/lessons/CreateLesson";
 import ReviewGrammar from "./components/mainPage/vocabulary/ReviewGrammar";
 import QuizPage from "./components/mainPage/vocabulary/quiz/QuizPage";
 import AuthenticatedLayout from "./AuthenticatedLayout";
-
+import {AuthContext} from "./components/login/Auth";
 const App = (props) => {
+
+    const [authTokens, setAuthTokens] = useState(
+        localStorage.getItem("tokens") || ""
+    );
+    const setTokens = (data) => {
+        localStorage.setItem("tokens", JSON.stringify(data));
+        setAuthTokens(data);
+    };
+
+    console.log("authTokens", authTokens);
+
 
 
     return (
         <BrowserRouter>
+            <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
             <div className="app-wrapper">
 
                 <Routes>
@@ -75,6 +87,7 @@ const App = (props) => {
 
                 </Routes>
             </div>
+            </AuthContext.Provider>
         </BrowserRouter>
     );
 }

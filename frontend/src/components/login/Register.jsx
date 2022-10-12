@@ -8,15 +8,17 @@ import Axios from "axios";
 import {useState} from "react";
 import Link from "@mui/material/Link";
 import {useNavigate} from "react-router-dom";
+import {useAuth} from "./Auth";
 
 
 const Register = (props) => {
 
-
+    const [isRegisteredIn, setRegisteredIn] = useState(false);
     const [usernameReg, setUsernameReg] = useState(""); //name + surname
     const [emailReg, setEmailReg] = useState("");
     const [passwordReg, setPasswordReg] = useState("");
     const [registerStatus, setRegisterStatus] = useState("");
+    const { setAuthTokens } =  useAuth();
 
     const navigate = useNavigate();
 
@@ -35,11 +37,17 @@ const Register = (props) => {
             if (response.data.message) {
                 setRegisterStatus(response.data.message);
             } else {
-                navigate('/user');
+                setAuthTokens(response.data);
+                setRegisteredIn(true);
+
             }
             console.log(response.data);
         });
     };
+
+    if (isRegisteredIn) {
+        return navigate('/');
+    } //else zobrazit login stranku
 
 
     return (

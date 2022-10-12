@@ -2,43 +2,49 @@ import React from 'react'
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import {useState} from "react";
+import {useAuth} from "./components/login/Auth";
+import {useNavigate} from "react-router-dom";
 
 const AuthenticatedLayout = ({children}) => {
     //na kazde autentication strance kontrola jestli user prihlaseny
     //kontrolu delat from local storage
-   // if(!neniPrihlaseny)
+    // if(!neniPrihlaseny)
+    const {authTokens} = useAuth();
+    const navigate = useNavigate();
+    /*
+        const [authTokens, setAuthTokens] = useState(
+            localStorage.getItem("tokens") || ""
+        );
+        const setTokens = (data) => {
+            localStorage.setItem("tokens", JSON.stringify(data));
+            setAuthTokens(data);
+        };
 
+        console.log("authTokens", authTokens);
 
-/*
-    const [authTokens, setAuthTokens] = useState(
-        localStorage.getItem("tokens") || ""
-    );
-    const setTokens = (data) => {
-        localStorage.setItem("tokens", JSON.stringify(data));
-        setAuthTokens(data);
-    };
+        const handleLogout = () => {
+            localStorage.removeItem("tokens");
+            setAuthTokens("");
+        };
+    */
 
-    console.log("authTokens", authTokens);
-
-    const handleLogout = () => {
-        localStorage.removeItem("tokens");
-        setAuthTokens("");
-    };
-*/
-
-
+    if (!authTokens) {
+        return navigate('/login');
+    }
 
     return (
-    <div>
-        <div className="headerContainer">
-            <Header/>
-        </div>
+        <div>
 
-        <div className="container">
-            {children}
+            <div className="headerContainer">
+                <Header/>
+            </div>
+            <div className="container">
+                {children}
+            </div>
+            <Footer/>
+
         </div>
-        <Footer/>
-    </div>
-    )}
+    )
+}
 
 export default AuthenticatedLayout
