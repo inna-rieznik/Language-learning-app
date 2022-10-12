@@ -46,7 +46,7 @@ const Register = (props) => {
         <div>
             <div className={s.login}>
                 <div>
-                    <img src={Location} alt="search" width="809" height="706"/>
+                    <img className={s.image} src={Location} alt="search" width="809" height="706"/>
                 </div>
                 <form className={s.form} onSubmit={handleSubmit}>
                     <h1>Register</h1>

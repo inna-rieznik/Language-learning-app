@@ -12,13 +12,15 @@ import {useNavigate} from 'react-router-dom';
 
 const Login = (props) => {
 
-
+    const [isLogedIn, setLoggedIn] = useState(false);
+    const [isError, setIsError] = useState(false);
     //this variable is used in index.js in req.body.variable
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const [loginStatus, setLoginStatus] = useState("");
     const [userId, setUserId] = useState("");
+    
     const navigate = useNavigate();
 
     const handleSubmit = event => {
@@ -37,7 +39,7 @@ const Login = (props) => {
             } else {
                 setLoginStatus(response.data[0].name);
                 setUserId(response.data[0]?.id_user);
-               /* navigate(`/user/${userId}`);*/
+                navigate(`/user/${response.data[0]?.id_user}`);
             }
             console.log(response.data);
 
@@ -49,7 +51,7 @@ const Login = (props) => {
         <div>
             <div className={s.login}>
                 <Box>
-                    <img src={Search} alt="search" width="809" height="607"/>
+                    <img className={s.image} src={Search} alt="search" width="809" height="607"/>
                 </Box>
                 <form className={s.form} onSubmit={handleSubmit}>
                     <h1>Log In</h1>
