@@ -8,11 +8,12 @@ import {useState} from "react";
 import Axios from "axios";
 import Link from "@mui/material/Link";
 import {useNavigate} from 'react-router-dom';
+import {useAuth} from "./Auth";
 
 
 const Login = (props) => {
 
-
+    const [isLoggedIn, setLoggedIn] = useState(false);
     //this variable is used in index.js in req.body.variable
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -20,12 +21,17 @@ const Login = (props) => {
     const [loginStatus, setLoginStatus] = useState("");
     const [userId, setUserId] = useState("");
     const navigate = useNavigate();
+    const { setAuthTokens } =  useAuth();
+
+
 
     const handleSubmit = event => {
         console.log('handleSubmit ran');
         event.preventDefault();
         event.target.reset();
     };
+
+
 
     const login = () => {
         Axios.post('http://localhost:3011/login', {
@@ -35,21 +41,27 @@ const Login = (props) => {
             if (response.data.message) {
                 setLoginStatus(response.data.message);
             } else {
+                setAuthTokens(response.data);
+                setLoggedIn(true);
                 setLoginStatus(response.data[0].name);
                 setUserId(response.data[0]?.id_user);
-               /* navigate(`/user/${userId}`);*/
+               /* navigate(`/user/${response.data[0]?.id_user}`);*/
+
             }
             console.log(response.data);
 
         });
     };
 
+    if (isLoggedIn) {
+        return navigate('/');
+    }
 
     return (
         <div>
             <div className={s.login}>
                 <Box>
-                    <img src={Search} alt="search" width="809" height="607"/>
+                    <img className={s.image} src={Search} alt="search" width="809" height="607"/>
                 </Box>
                 <form className={s.form} onSubmit={handleSubmit}>
                     <h1>Log In</h1>
@@ -69,7 +81,7 @@ const Login = (props) => {
                                    }}
                                    variant="outlined"/>
                         <p style={{color: "red"}}>
-                            {loginStatus}, {userId}
+                            {loginStatus}
                         </p>
                     </Box>
                     <Box mt={3} width="100%">

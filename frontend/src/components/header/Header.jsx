@@ -7,15 +7,19 @@ import {IconButton} from "@mui/material";
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 
+import {useState} from "react";
+
 const Header = () => {
-/*
-    const navigate = useNavigate();
-    const navigateToLogin = () => {
-        navigate('/login');
-    }
-    const navigateToUserInfo = () => {
-        navigate('/user');
-    }*/
+
+    const [authTokens, setAuthTokens] = useState(
+        localStorage.getItem("tokens") || ""
+    );
+
+    const handleLogout = () => {
+        localStorage.removeItem("tokens");
+        setAuthTokens("");
+    };
+
 
     return (
 
@@ -41,7 +45,7 @@ const Header = () => {
                         <img className={s.userIcon} src={UserIcon} alt="User icon" width="32" height="32"/></button>*/}
                     </li>
                     <li className={s.item}>
-                        <IconButton aria-label="logout" href="/login">
+                        <IconButton onClick={handleLogout} aria-label="logout" href="/login">
                             < LogoutIcon />
                         </IconButton>
                        {/* <button  onClick={navigateToLogin}><img className={s.logout} src={Logout} alt="Logout" width="32" height="32"/></button>*/}
