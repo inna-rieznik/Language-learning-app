@@ -4,6 +4,7 @@ import s from "./LessonPage.module.css";
 import * as React from 'react';
 import {useEffect, useState} from "react";
 import axios from "axios";
+import QuizPage from "../../vocabulary/quiz/QuizGame";
 
 const LessonPage = (props) => {
 
@@ -26,6 +27,7 @@ const LessonPage = (props) => {
                     <p>Intro text: {lessonObject[0]?.intro_text}</p>
                     <h2>Grammar rule title: {lessonObject[0]?.grammar_rule_title}</h2>
                     <p>Grammar rule: {lessonObject[0]?.grammar_rule}</p>
+                    <QuizPage/>
                 </div>
 
 

@@ -6,9 +6,6 @@ import {useAuth} from "./components/login/Auth";
 import {useNavigate} from "react-router-dom";
 
 const AuthenticatedLayout = ({children}) => {
-    //na kazde autentication strance kontrola jestli user prihlaseny
-    //kontrolu delat from local storage
-    // if(!neniPrihlaseny)
     const {authTokens} = useAuth();
     const navigate = useNavigate();
     /*
