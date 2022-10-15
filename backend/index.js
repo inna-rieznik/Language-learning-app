@@ -37,6 +37,9 @@ app.use("/login", loginRouter);
 const lessonRouter = require('./routes/Lessons')
 app.use("/lessons", lessonRouter);
 
+const quizRouter = require('./routes/QuizQuestions')
+app.use("/lessons", quizRouter);
+
 const wordRouter = require('./routes/Words')
 app.use("/words", wordRouter);
 

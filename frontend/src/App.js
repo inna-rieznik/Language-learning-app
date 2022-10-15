@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import './App.css';
 import MainPage from "./components/mainPage/MainPage";
 import {
@@ -17,6 +17,7 @@ import ReviewGrammar from "./components/mainPage/vocabulary/ReviewGrammar";
 import QuizPage from "./components/mainPage/vocabulary/quiz/QuizPage";
 import AuthenticatedLayout from "./AuthenticatedLayout";
 import {AuthContext} from "./components/login/Auth";
+
 const App = (props) => {
 
     const [authTokens, setAuthTokens] = useState(
@@ -30,63 +31,65 @@ const App = (props) => {
     console.log("authTokens", authTokens);
 
 
-
     return (
         <BrowserRouter>
-            <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
-            <div className="app-wrapper">
+            <AuthContext.Provider value={{authTokens, setAuthTokens: setTokens}}>
+                <div className="app-wrapper">
 
-                <Routes>
-                    <Route path='/login'
-                           element={<Login/>}/>
-                    <Route path='/register'
-                           element={<Register/>}/>
-                    <Route path='/'
-                           element={<AuthenticatedLayout>
-                               <MainPage lessonsData={props.state.lessonsData}
-                                         dispatch={props.dispatch}/>
-                           </AuthenticatedLayout>}/>
-                    <Route path='/create_lesson'
-                           element={<AuthenticatedLayout>
-                               <CreateLesson/>
-                           </AuthenticatedLayout>}/>
-                    <Route path='/review_grammar'
-                           element={<AuthenticatedLayout>
-                               <ReviewGrammar/>
-                           </AuthenticatedLayout>}/>
-                    <Route path={'/my_words'}
-                           element={<AuthenticatedLayout>
-                               <WordsPage wordsData={props.state.wordsData}
-                                          dispatch={props.dispatch}
-                                          newWordText={props.state.newWordText}
-                                          newTranslationText={props.state.newTranslationText}
-                               />
-                           </AuthenticatedLayout>}/>
-                    <Route path={'/review_words'}
-                           element={<AuthenticatedLayout>
-                               <ReviewWords/>
-                           </AuthenticatedLayout>}/>
+                    <Routes>
+                        <Route path='/'
+                               element={<AuthenticatedLayout>
+                                   <MainPage lessonsData={props.state.lessonsData}
+                                             dispatch={props.dispatch}/>
+                               </AuthenticatedLayout>}/>
 
-                    <Route path={'/review_grammar'}
-                           element={<AuthenticatedLayout>
-                               <ReviewGrammar/>
-                           </AuthenticatedLayout>}/>
-                    <Route path={'/review_words/quiz'}
-                           element={<AuthenticatedLayout>
-                               <QuizPage/>
-                           </AuthenticatedLayout>}/>
+                        <Route path='/create_lesson'
+                               element={<AuthenticatedLayout>
+                                   <CreateLesson/>
+                               </AuthenticatedLayout>}/>
+                        <Route path='/review_grammar'
+                               element={<AuthenticatedLayout>
+                                   <ReviewGrammar/>
+                               </AuthenticatedLayout>}/>
+                        <Route path={'/my_words'}
+                               element={<AuthenticatedLayout>
+                                   <WordsPage wordsData={props.state.wordsData}
+                                              dispatch={props.dispatch}
+                                              newWordText={props.state.newWordText}
+                                              newTranslationText={props.state.newTranslationText}
+                                   />
+                               </AuthenticatedLayout>}/>
+                        <Route path={'/review_words'}
+                               element={<AuthenticatedLayout>
+                                   <ReviewWords/>
+                               </AuthenticatedLayout>}/>
 
-                    <Route path={`lessons/id/:lessonId`}
-                           element={<AuthenticatedLayout>
-                               <LessonPage/>
-                           </AuthenticatedLayout>}/>}
-                    <Route path={`/user/:userId`}
-                           element={<AuthenticatedLayout>
-                               <UserPage/>
-                           </AuthenticatedLayout>}/>
+                        <Route path={'/review_grammar'}
+                               element={<AuthenticatedLayout>
+                                   <ReviewGrammar/>
+                               </AuthenticatedLayout>}/>
+                        <Route path={'/review_words/quiz'}
+                               element={<AuthenticatedLayout>
+                                   <QuizPage/>
+                               </AuthenticatedLayout>}/>
 
-                </Routes>
-            </div>
+                        <Route path={`lessons/id/:lessonId`}
+                               element={<AuthenticatedLayout>
+                                   <LessonPage/>
+                               </AuthenticatedLayout>}/>}
+                        <Route path={`/user/:userId`}
+                               element={<AuthenticatedLayout>
+                                   <UserPage/>
+                               </AuthenticatedLayout>}/>
+
+
+                        <Route path='/login'
+                               element={<Login/>}/>
+                        <Route path='/register'
+                               element={<Register/>}/>
+                    </Routes>
+
+                </div>
             </AuthContext.Provider>
         </BrowserRouter>
     );

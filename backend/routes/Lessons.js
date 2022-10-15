@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 
 });
 //get one lesson '/lessons/id/1'
-router.get('/id/:lessonId',(req,res) => {
+router.get('/id/:lessonId', (req, res) => {
     const lessonId = req.params.lessonId;
     db.query(
         'SELECT * FROM mydb.lessons WHERE id_lesson = ?',
@@ -39,7 +39,9 @@ router.get('/id/:lessonId',(req,res) => {
             }
             console.log(result);
             res.send(result);
-        })
+        }
+    )
+
 })
 
 router.post('/', (req, res) => {
@@ -51,7 +53,7 @@ router.post('/', (req, res) => {
 
     db.query(
         "INSERT INTO mydb.lessons (title, intro_text, grammar_rule_title, grammar_rule) values(?,?,?,?)",
-        [title, introText, grammarRuleTitle,grammarRule],
+        [title, introText, grammarRuleTitle, grammarRule],
         (err, result) => {
             if (err) {
                 console.log(err);
@@ -59,7 +61,8 @@ router.post('/', (req, res) => {
                 return;
             }
             res.send({status: 'ok'})
-        })
+        }
+    )
 })
 
 //make sure wi can export routers
