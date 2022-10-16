@@ -9,12 +9,12 @@ const db = mysql.createConnection({
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE
 });
-
+/*
 router.get('/id/:lessonId/quiz', (req, res) => {
     const lessonId = req.params.lessonId;
     db.query(
-        'select qq.id_quiz_questions, qq.content as quiz_question, qa.content as quiz_answer, qa.correct from mydb.quizes join mydb.quiz_questions qq on quizes.id_quizes = qq.id_quizes join mydb.quiz_answers qa on qq.id_quiz_questions = qa.id_quiz_questions join mydb.quiz_types qt on qt.id_question_types = quizes.id_question_types where id_lesson = ?',
-            [lessonId],
+        'select qq.id_quiz_questions as id_quiz_question, qq.content as quiz_question, qa.content as quiz_answer, qa.correct as quiz_correct_answer from mydb.quizes join mydb.quiz_questions qq on quizes.id_quizes = qq.id_quizes join mydb.quiz_answers qa on qq.id_quiz_questions = qa.id_quiz_questions join mydb.quiz_types qt on qt.id_question_types = quizes.id_question_types where id_lesson = ?',
+        [lessonId],
         (err, result) => {
             if (err) {
                 console.log(err);
@@ -22,7 +22,22 @@ router.get('/id/:lessonId/quiz', (req, res) => {
                 return;
             }
             console.log(result);
-            res.send(result);
+            res.json(result);
+        }
+    )
+})*/
+
+router.get('/', (req, res) => {
+    db.query(
+        'select qq.id_quiz_questions as id_quiz_question, qq.content as quiz_question, qa.content as quiz_answer, qa.correct as quiz_correct_answer from mydb.quizes join mydb.quiz_questions qq on quizes.id_quizes = qq.id_quizes join mydb.quiz_answers qa on qq.id_quiz_questions = qa.id_quiz_questions join mydb.quiz_types qt on qt.id_question_types = quizes.id_question_types',
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({status: 'error', err})
+                return;
+            }
+            console.log(result);
+            res.json(result);
         }
     )
 })

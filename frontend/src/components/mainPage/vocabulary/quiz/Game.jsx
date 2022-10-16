@@ -13,7 +13,7 @@ const Game = ({step, question, onClickVariant}) => {
             <div className={s.progress}>
                 <div style={{ width: `${percentage}%` }} className={s.inner}></div>
             </div>
-            <h2>{question.title} </h2>
+            <h2>{question.quiz_question} </h2>
             <div className={s.game}>
             <ul>
                 {question.variants.map((text, index) => <li onClick={() => onClickVariant(index)} key={text}>{text}</li>)}
