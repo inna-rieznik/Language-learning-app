@@ -2,6 +2,8 @@ import React from 'react';
 import Game from "./Game";
 import Result from "./Result";
 import s from "./QuizPage.module.css";
+import {useState} from "react";
+
 
 export const questions = [
     {
@@ -26,7 +28,10 @@ export const questions = [
     }
 ]
 
+
+
 const QuizPage = (props) => {
+
 
     const [step, setStep] = React.useState(0); //first element in array
     const [correct, setCorrect] = React.useState(0);
