@@ -31,7 +31,8 @@ router.post('/', (req, res) => {
                 return;
             } else {
                 db.query(
-                    "INSERT INTO mydb.users (username,password,id_language,id_role, name, email, registered_at) values(?,?,1,1,?,?,NULL)",
+                    "INSERT INTO mydb.users (username, password,id_language,id_role, name, email, registered_at) values(?,?,1,1,?,?, NULL) INSERT INTO mydb.users_progress (score, level, updated_at) values(0,1,NULL)",
+
                     [email, password, username, email],
                     (err, result) => {
                         if (err) {

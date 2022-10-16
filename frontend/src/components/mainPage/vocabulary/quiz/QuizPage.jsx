@@ -12,14 +12,13 @@ const QuizPage = (props) => {
 
     let {lessonId} = useParams();
 
- /*   useEffect(() => {
+
+  /*  useEffect(() => {
         axios.get(`http://localhost:3011/lessons/id/${lessonId}/quiz`).then((response) => {
             setQuizObject(response.data);
             console.log(response.data);
         });
     }, [])*/
-
-
 
     return (
         <div>
