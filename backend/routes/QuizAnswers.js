@@ -10,28 +10,32 @@ const db = mysql.createConnection({
     database: process.env.DATABASE
 });
 
-router.get('/', (req, res) => {
+router.get('/:questionId', (req, res) => {
+    const questionId = req.body.questionId;
     db.query(
-        'select id_quiz_questions, score, content from quiz_questions',
+        'select id_quiz_answers, id_quiz_questions, content, correct from quiz_answers where id_quiz_questions = ?',
+        [questionId],
         (err, result) => {
             if (err) {
                 console.log(err);
-                res.send({status: 'error', err})
+                res.json({status: 'error', err})
                 return;
             }
             console.log(result);
             res.json(result);
         }
     )
+
 })
 
-router.post('/', (req, res) => {
+router.post('/:questionId', (req, res) => {
     //to access data from FE we use body
-    const quizQuestion = req.body.quizQuestion;
-
+    const quizQuestionId = req.body.quizQuestionId;
+    const quizAnswer = req.body.quizAnswer;
+    const isCorrect = req.body.isCorrect;
     db.query(
-        "insert into mydb.quiz_questions(id_quizes, type, score, content) values (1,'quiz', 1, ?)",
-        [quizQuestion],
+        "insert into mydb.quiz_answers(id_quiz_questions, correct, content) VALUES (?, ?, ?);",
+        [quizQuestionId, isCorrect, quizAnswer],
         (err, result) => {
             if (err) {
                 console.log(err);
@@ -41,5 +45,8 @@ router.post('/', (req, res) => {
             res.send({status: 'ok'})
         })
 })
+
+
+
 
 module.exports = router;
