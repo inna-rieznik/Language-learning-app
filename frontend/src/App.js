@@ -37,13 +37,16 @@ const App = (props) => {
                 <div className="app-wrapper">
 
                     <Routes>
+                        <Route path='/login'
+                               element={<Login/>}/>
+
                         <Route path='/'
                                element={<AuthenticatedLayout>
                                    <MainPage lessonsData={props.state.lessonsData}
                                              dispatch={props.dispatch}/>
                                </AuthenticatedLayout>}/>
 
-                        <Route path='/create_lesson'
+                        <Route path='../create_lesson'
                                element={<AuthenticatedLayout>
                                    <CreateLesson/>
                                </AuthenticatedLayout>}/>
