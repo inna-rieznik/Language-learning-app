@@ -8,22 +8,7 @@ import {useNavigate} from "react-router-dom";
 const AuthenticatedLayout = ({children}) => {
     const {authTokens} = useAuth();
     const navigate = useNavigate();
-    /*
-        const [authTokens, setAuthTokens] = useState(
-            localStorage.getItem("tokens") || ""
-        );
-        const setTokens = (data) => {
-            localStorage.setItem("tokens", JSON.stringify(data));
-            setAuthTokens(data);
-        };
 
-        console.log("authTokens", authTokens);
-
-        const handleLogout = () => {
-            localStorage.removeItem("tokens");
-            setAuthTokens("");
-        };
-    */
 
     if (!authTokens) {
         return navigate('/login');

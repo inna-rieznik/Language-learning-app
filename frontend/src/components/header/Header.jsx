@@ -2,7 +2,7 @@ import Logo from '../../images/rocket-ship-svgrepo-com.svg'
 import UserIcon from '../../images/user-svgrepo-com.svg'
 import Logout from '../../images/logout.svg'
 import s from './Header.module.css'
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink, useNavigate, useParams} from "react-router-dom";
 import {IconButton} from "@mui/material";
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -19,6 +19,8 @@ const Header = () => {
         localStorage.removeItem("tokens");
         setAuthTokens("");
     };
+
+    const [userId, setUserId] = useState();
 
 
     return (
@@ -38,7 +40,7 @@ const Header = () => {
                         <p className={s.levelIndicator}>[********-------------------]</p>
                     </li>
                     <li className={s.item}>
-                        <IconButton aria-label="person" href="/user/:userId}">
+                        <IconButton aria-label="person" href="/user/:userId">
                             <PersonIcon />
                         </IconButton>
                        {/* <button  onClick={navigateToUserInfo}>
