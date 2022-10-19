@@ -46,7 +46,7 @@ const App = (props) => {
                                              dispatch={props.dispatch}/>
                                </AuthenticatedLayout>}/>
 
-                        <Route path='../create_lesson'
+                        <Route path='/create_lesson'
                                element={<AuthenticatedLayout>
                                    <CreateLesson/>
                                </AuthenticatedLayout>}/>
