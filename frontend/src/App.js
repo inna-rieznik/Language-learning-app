@@ -17,6 +17,7 @@ import ReviewGrammar from "./components/mainPage/vocabulary/ReviewGrammar";
 import QuizPage from "./components/mainPage/vocabulary/quiz/QuizPage";
 import AuthenticatedLayout from "./AuthenticatedLayout";
 import {AuthContext} from "./components/login/Auth";
+import Matching from "./components/mainPage/vocabulary/Matching/Matching";
 
 const App = (props) => {
 
@@ -74,6 +75,11 @@ const App = (props) => {
                         <Route path={'/review_words/quiz'}
                                element={<AuthenticatedLayout>
                                    <QuizPage/>
+                               </AuthenticatedLayout>}/>
+
+                        <Route path={'/review_words/matching_translation'}
+                               element={<AuthenticatedLayout>
+                                   <Matching/>
                                </AuthenticatedLayout>}/>
 
                         <Route path={`lessons/id/:lessonId`}
