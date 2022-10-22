@@ -12,7 +12,7 @@ const db = mysql.createConnection({
 
 router.get('/', (req, res) => {
     db.query(
-        'select id_quiz_questions, score, content from quiz_questions',
+        'select id_quiz_questions, content from quiz_questions',
         (err, result) => {
             if (err) {
                 console.log(err);

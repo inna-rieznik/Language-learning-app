@@ -1,0 +1,21 @@
+.score {
+    font-family: monospace;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 0.25rem;
+    margin: 1rem;
+    position: relative;
+    transition: opacity 0.2s;
+}
+
+.draggableItems{
+    display: flex;
+    justify-content: center;
+    margin: 1rem 1rem 1.5rem 1rem;
+    transition: opacity 0.5s;
+}
+
+.matchingPairs{
+    transition: opacity 0.5s;
+}

@@ -14,13 +14,11 @@ function handleClick(event) {
 
 const UserPage = (props) => {
 
-    let userPoints = 0;
-    let level = 1;
     let {userId} = useParams();
     const [userObject, setUserObject] = useState([]);
 
     useEffect(() => {
-        axios.get(`http:/localhost:3011/user/${userId}`).then((response) => {
+        axios.get(`http://localhost:3011/user/${userId}`).then((response) => {
             setUserObject(response.data);
             console.log(response.data);
         });
