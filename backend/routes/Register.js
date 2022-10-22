@@ -46,7 +46,7 @@ router.post('/', (req, res) => {
                 )
 
                 db.query(
-                   "INSERT INTO mydb.users_progress (score, level, updated_at) values(0,1,NULL)",
+                   "INSERT INTO mydb.users_progress (id_user,score, level, updated_at) values((select Max(id_user) from mydb.users),0,1,NULL)",
                     (err, result) => {
                         if (err) {
                             console.log(err);
