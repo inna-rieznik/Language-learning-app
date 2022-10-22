@@ -26,14 +26,27 @@ router.post('/', (req, res) => {
                 res.send({status: 'error', err});
                 return;
             }
+
             if (result.length > 0) {
                 res.send({"message": "User with the same username and email already exist"});
                 return;
+
             } else {
                 db.query(
-                    "INSERT INTO mydb.users (username, password,id_language,id_role, name, email, registered_at) values(?,?,1,1,?,?, NULL) INSERT INTO mydb.users_progress (score, level, updated_at) values(0,1,NULL)",
+                    "INSERT INTO mydb.users (username, password,id_language,id_role, name, email, registered_at) values(?,?,1,1,?,?, NULL)",
+                    [username, password, username, email],
+                    (err, result) => {
+                        if (err) {
+                            console.log(err);
+                            res.send({status: 'error', err})
+                            return;
+                        }
+                        res.send({status: 'ok'});
+                    }
+                )
 
-                    [email, password, username, email],
+                db.query(
+                   "INSERT INTO mydb.users_progress (score, level, updated_at) values(0,1,NULL)",
                     (err, result) => {
                         if (err) {
                             console.log(err);

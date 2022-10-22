@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './App.css';
 import MainPage from "./components/mainPage/MainPage";
 import {
@@ -21,28 +21,46 @@ import Matching from "./components/mainPage/vocabulary/Matching/Matching";
 
 const App = (props) => {
 
-    const [authTokens, setAuthTokens] = useState(
-        localStorage.getItem("tokens") || ""
-    );
+    const [authTokens, setAuthTokens] = useState(localStorage.getItem("tokens") || "");
+    let [userId, setUserId] = useState("");
+
+   useEffect(() => {
+       const user = JSON.parse(localStorage.getItem("tokens"));
+
+       user.forEach((key) => {
+           setUserId(key.id_user);
+       });
+
+   }, [])
+
+    console.log("user_id", userId);
+
     const setTokens = (data) => {
         localStorage.setItem("tokens", JSON.stringify(data));
         setAuthTokens(data);
     };
 
-    console.log("authTokens", authTokens);
+    const handleLogout = () => {
+        localStorage.removeItem("tokens");
+        setAuthTokens("");
+    };
 
+    console.log("authTokens", authTokens);
 
     return (
         <BrowserRouter>
-            <AuthContext.Provider value={{authTokens, setAuthTokens: setTokens}}>
+            <AuthContext.Provider value={{userId, authTokens, setAuthTokens: setTokens, handleLogout}}>
                 <div className="app-wrapper">
-
+                    {userId}
                     <Routes>
                         <Route path='/login'
-                               element={<Login/>}/>
+                               element={<Login userId={userId}/>}/>
+                        <Route path='/register'
+                               element={<Register userId={userId}/>}/>
+
 
                         <Route path='/'
-                               element={<AuthenticatedLayout>
+                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
                                    <MainPage lessonsData={props.state.lessonsData}
                                              dispatch={props.dispatch}/>
                                </AuthenticatedLayout>}/>
@@ -91,11 +109,6 @@ const App = (props) => {
                                    <UserPage/>
                                </AuthenticatedLayout>}/>
 
-
-                        <Route path='/login'
-                               element={<Login/>}/>
-                        <Route path='/register'
-                               element={<Register/>}/>
                     </Routes>
 
                 </div>

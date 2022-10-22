@@ -20,7 +20,7 @@ const UserPage = (props) => {
     const [userObject, setUserObject] = useState([]);
 
     useEffect(() => {
-        axios.get(`http:/localhost:3011/user/${userId}`).then((response) => {
+        axios.get(`http://localhost:3011/user/${userId}`).then((response) => {
             setUserObject(response.data);
             console.log(response.data);
         });

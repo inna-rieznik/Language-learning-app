@@ -1,12 +1,13 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
-import {useState} from "react";
+
 import {useAuth} from "./components/login/Auth";
 import {useNavigate} from "react-router-dom";
 
-const AuthenticatedLayout = ({children}) => {
+const AuthenticatedLayout = ({children, userId}) => {
     const {authTokens} = useAuth();
+
     const navigate = useNavigate();
 
 
@@ -18,7 +19,9 @@ const AuthenticatedLayout = ({children}) => {
         <div>
 
             <div className="headerContainer">
-                <Header/>
+
+                <Header authTokens={authTokens} userId={userId}/>
+
             </div>
             <div className="container">
                 {children}
