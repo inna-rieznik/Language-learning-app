@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
 
             } else {
                 db.query(
-                    "INSERT INTO mydb.users (username, password,id_language,id_role, name, email, registered_at) values(?,?,1,1,?,?, NULL)",
+                    "INSERT INTO mydb.users (username, password,id_language,id_role, name, email, registered_at) values(?,?,1,1,?,?, CURRENT_TIMESTAMP())",
                     [username, password, username, email],
                     (err, result) => {
                         if (err) {
@@ -46,7 +46,7 @@ router.post('/', (req, res) => {
                 )
 
                 db.query(
-                   "INSERT INTO mydb.users_progress (id_user,score, level, updated_at) values((select Max(id_user) from mydb.users),0,1,NULL)",
+                   "INSERT INTO mydb.users_progress (id_user,score, level, updated_at) values((select Max(id_user) from mydb.users),0,1,CURRENT_TIMESTAMP())",
                     (err, result) => {
                         if (err) {
                             console.log(err);

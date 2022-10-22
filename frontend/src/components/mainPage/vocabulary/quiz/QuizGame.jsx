@@ -39,28 +39,46 @@ const QuizPage = (props) => {
     const [countCorrect, setCountCorrect] = React.useState(0);
     const question = questions[step];
     const [quizObject, setQuizObject] = useState();
+   /* const questionDBid = quizObject[step].id_quiz_questions;*/
+ /*   const questionDB = quizObject[step].content;*/
 
     useEffect(() => {
-        axios.get(`http://localhost:3011/quiz`).then((response) => {
+        axios.get(`http://localhost:3011/quizQuestions`).then((response) => {
             setQuizObject(response.data);
-            console.log(response.data);
+            /*console.log(response.data);*/
         });
     }, [])
 
-    const onClickVariant = (index) => {
+  /*  useEffect(() => {
+        axios.get(`http://localhost:3011/quizAnswers/${quizObject[step].id_quiz_question}`).then((response) => {
+            setQuizObject(response.data);
+            /!*console.log(response.data);*!/
+        });
+    }, [])*/
+
+/*    console.log(quizObject);
+    console.log("firstID", questionDBid);*/
+/*
+    console.log("first", questionDB);
+*/
+
+   /* const onClickVariant = (index) => {
         console.log(step, index);
         setStep(step + 1 );
         if(index === question.correct) {
             setCountCorrect(countCorrect + 1);
         }
-    }
+    }*/
 
     return (
         <div>
             <div className={s.quiz}>
                 {(step !== questions.length) ?
                     <div className={s.modal}>
-                        <Game step={step} question={question} onClickVariant={onClickVariant}/>
+                       {/* <div>
+                            <h2>{quizObject[step].id_quiz_questions}. {quizObject[step].content} </h2>
+                        </div>*/}
+                      {/*  <Game step={step} question={question} onClickVariant={onClickVariant}/>*/}
                     </div> : <Result correct={countCorrect}/>
                 }
             </div>

@@ -14,8 +14,6 @@ function handleClick(event) {
 
 const UserPage = (props) => {
 
-    let userPoints = 0;
-    let level = 1;
     let {userId} = useParams();
     const [userObject, setUserObject] = useState([]);
 

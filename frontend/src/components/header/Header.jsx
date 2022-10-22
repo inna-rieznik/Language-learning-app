@@ -1,6 +1,4 @@
 import Logo from '../../images/rocket-ship-svgrepo-com.svg'
-import UserIcon from '../../images/user-svgrepo-com.svg'
-
 import s from './Header.module.css'
 import {NavLink, useNavigate, useParams} from "react-router-dom";
 import {IconButton} from "@mui/material";
@@ -11,8 +9,8 @@ import {AuthContext} from "../login/Auth";
 
 
 const Header = (props) => {
-    const  authTokens = useContext(AuthContext);
-
+    const authTokens = useContext(AuthContext);
+    const [userLevel, setUserLevel] = useState();
 
 
     return (
@@ -25,23 +23,20 @@ const Header = (props) => {
             <nav className={s.menu}>
                 <ul className={s.list}>
                     <li className={s.item}>
-                        <p className={s.level}>Level </p>
+                        <p className={s.level}>Level</p>
                     </li>
-                    <li className={s.item} >
+                    <li className={s.item}>
                         <p className={s.levelIndicator}>[********-------------------]</p>
                     </li>
                     <li className={s.item}>
                         <IconButton aria-label="person" href={`/user/${props.userId}`}>
-                            <PersonIcon />
+                            <PersonIcon/>
                         </IconButton>
-                       {/* <button  onClick={navigateToUserInfo}>
-                        <img className={s.userIcon} src={UserIcon} alt="User icon" width="32" height="32"/></button>*/}
                     </li>
                     <li className={s.item}>
                         <IconButton onClick={authTokens.handleLogout} aria-label="logout" href="/login">
-                            < LogoutIcon />
+                            < LogoutIcon/>
                         </IconButton>
-                       {/* <button  onClick={navigateToLogin}><img className={s.logout} src={Logout} alt="Logout" width="32" height="32"/></button>*/}
                     </li>
                 </ul>
             </nav>

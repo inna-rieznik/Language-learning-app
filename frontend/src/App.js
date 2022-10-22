@@ -18,19 +18,23 @@ import QuizPage from "./components/mainPage/vocabulary/quiz/QuizPage";
 import AuthenticatedLayout from "./AuthenticatedLayout";
 import {AuthContext} from "./components/login/Auth";
 import Matching from "./components/mainPage/vocabulary/Matching/Matching";
+import {createContext} from "react";
+
+
+export const UserContext = createContext(1);
 
 const App = (props) => {
 
     const [authTokens, setAuthTokens] = useState(localStorage.getItem("tokens") || "");
     let [userId, setUserId] = useState("");
+    const {userData} = useState("");
 
-   useEffect(() => {
-       const user = JSON.parse(localStorage.getItem("tokens"));
-
-       user?.forEach((key) => {
-           setUserId(key.id_user);
-       });
-   }, [userId])
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem("tokens"));
+        user?.forEach((key) => {
+            setUserId(key.id_user);
+        });
+    }, [userId])
 
     console.log("user_id", userId);
 
@@ -44,6 +48,7 @@ const App = (props) => {
         setAuthTokens("");
     };
 
+
     console.log("authTokens", authTokens);
 
     return (
@@ -56,7 +61,6 @@ const App = (props) => {
                                element={<Login userId={userId}/>}/>
                         <Route path='/register'
                                element={<Register userId={userId}/>}/>
-
 
                         <Route path='/'
                                element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>

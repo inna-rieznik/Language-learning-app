@@ -13,7 +13,7 @@ const db = mysql.createConnection({
 router.get('/:questionId', (req, res) => {
     const questionId = req.body.questionId;
     db.query(
-        'select id_quiz_answers, id_quiz_questions, content, correct from quiz_answers where id_quiz_questions = ?',
+        'select content, correct from mydb.quiz_answers where id_quiz_questions =  ?',
         [questionId],
         (err, result) => {
             if (err) {
