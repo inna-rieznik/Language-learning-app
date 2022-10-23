@@ -16,7 +16,7 @@ router.post('/', (req, res) => {
     const password = req.body.password;
 
     db.query(
-        "SELECT * FROM mydb.users WHERE email = ? AND password = ?",
+        "SELECT * FROM mydb.users JOIN roles r on users.id_role = r.id_role JOIN users_progress up on users.id_user = up.id_user WHERE email = ? AND password = ?",
         [email, password],
         (err, result) => {
             if (err) {

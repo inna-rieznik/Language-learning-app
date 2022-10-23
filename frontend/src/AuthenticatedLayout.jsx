@@ -4,7 +4,7 @@ import {useAuth} from "./components/login/Auth";
 import {useNavigate} from "react-router-dom";
 
 
-const AuthenticatedLayout = ({children, userId}) => {
+const AuthenticatedLayout = ({children}) => {
     const {authTokens} = useAuth();
     const navigate = useNavigate();
 
@@ -16,7 +16,7 @@ const AuthenticatedLayout = ({children, userId}) => {
     return (
         <div>
                 <div className="headerContainer">
-                    <Header authTokens={authTokens} userId={userId} />
+                    <Header/>
                 </div>
                 <div className="container">
                     {children}

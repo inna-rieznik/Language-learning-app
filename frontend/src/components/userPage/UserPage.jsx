@@ -5,6 +5,7 @@ import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {useAuth} from "../login/Auth";
  
 
 function handleClick(event) {
@@ -16,6 +17,7 @@ const UserPage = (props) => {
 
     let {userId} = useParams();
     const [userObject, setUserObject] = useState([]);
+
 
     useEffect(() => {
         axios.get(`http://localhost:3011/user/${userId}`).then((response) => {

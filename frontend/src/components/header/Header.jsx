@@ -5,12 +5,28 @@ import {IconButton} from "@mui/material";
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {useContext, useState} from "react";
-import {AuthContext} from "../login/Auth";
+import {AuthContext, useAuth} from "../login/Auth";
+import {useEffect} from "react";
+import axios from "axios";
 
 
 const Header = (props) => {
-    const authTokens = useContext(AuthContext);
-    const [userLevel, setUserLevel] = useState();
+    const {authTokens, userId, handleLogout} = useAuth();
+    const [user, setUser] = useState([]);
+    const [userScore, setUserScore] = useState([]);
+    const [userLevel, setUserLevel] = useState([]);
+
+    console.log("userId_header", userId);
+
+
+    useEffect(() => {
+        axios.get(`http://localhost:3011/user/${userId}`).then((response) => {
+            setUser(response.data[0]);
+            setUserScore(response.data[0].score);
+            setUserLevel(response.data[0].level);
+            console.log(response.data);
+        });
+    }, [])
 
 
     return (
@@ -23,18 +39,21 @@ const Header = (props) => {
             <nav className={s.menu}>
                 <ul className={s.list}>
                     <li className={s.item}>
-                        <p className={s.level}>Level</p>
+                        <p className={s.levelIndicator}>{user.name}</p>
                     </li>
                     <li className={s.item}>
-                        <p className={s.levelIndicator}>[********-------------------]</p>
+                        <p className={s.level}>Level {userLevel}</p>
                     </li>
                     <li className={s.item}>
-                        <IconButton aria-label="person" href={`/user/${props.userId}`}>
+                        <p className={s.levelIndicator}>{userScore}/100</p>
+                    </li>
+                    <li className={s.item}>
+                        <IconButton aria-label="person" href={`/user/${userId}`}>
                             <PersonIcon/>
                         </IconButton>
                     </li>
                     <li className={s.item}>
-                        <IconButton onClick={authTokens.handleLogout} aria-label="logout" href="/login">
+                        <IconButton onClick={handleLogout} aria-label="logout" href="/login">
                             < LogoutIcon/>
                         </IconButton>
                     </li>

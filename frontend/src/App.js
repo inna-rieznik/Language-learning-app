@@ -21,13 +21,18 @@ import Matching from "./components/mainPage/vocabulary/Matching/Matching";
 import {createContext} from "react";
 
 
-export const UserContext = createContext(1);
-
 const App = (props) => {
 
     const [authTokens, setAuthTokens] = useState(localStorage.getItem("tokens") || "");
     let [userId, setUserId] = useState("");
-    const {userData} = useState("");
+
+ /*   useEffect(() => {
+        const authTokensT = JSON.parse(localStorage.getItem('tokens'))
+        if (authTokensT) {
+            setAuthTokens(authTokensT)
+        }
+    }, [])
+*/
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("tokens"));
