@@ -19,6 +19,7 @@ import AuthenticatedLayout from "./AuthenticatedLayout";
 import {AuthContext} from "./components/login/Auth";
 import Matching from "./components/mainPage/vocabulary/Matching/Matching";
 import {createContext} from "react";
+import FlashcardsPage from "./components/mainPage/vocabulary/flashcards/FlashcardsPage";
 
 
 const App = (props) => {
@@ -101,6 +102,10 @@ const App = (props) => {
                         <Route path={'/review_words/quiz'}
                                element={<AuthenticatedLayout>
                                    <QuizPage/>
+                               </AuthenticatedLayout>}/>
+                        <Route path={'/review_words/flashcards'}
+                               element={<AuthenticatedLayout>
+                                   <FlashcardsPage/>
                                </AuthenticatedLayout>}/>
 
                         <Route path={'/review_words/matching_translation'}

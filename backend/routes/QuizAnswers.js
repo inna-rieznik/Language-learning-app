@@ -10,11 +10,11 @@ const db = mysql.createConnection({
     database: process.env.DATABASE
 });
 
-router.get('/:questionId', (req, res) => {
-    const questionId = req.body.questionId;
+router.get('/1', (req, res) => {
+   /* const questionId = req.body.questionId;*/
     db.query(
-        'select content, correct from mydb.quiz_answers where id_quiz_questions =  ?',
-        [questionId],
+        'select content, correct from mydb.quiz_answers where id_quiz_questions =  1',
+       /* [questionId],*/
         (err, result) => {
             if (err) {
                 console.log(err);
