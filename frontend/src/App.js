@@ -19,15 +19,21 @@ import AuthenticatedLayout from "./AuthenticatedLayout";
 import {AuthContext} from "./components/login/Auth";
 import Matching from "./components/mainPage/vocabulary/Matching/Matching";
 import {createContext} from "react";
+import FlashcardsPage from "./components/mainPage/vocabulary/flashcards/FlashcardsPage";
 
-
-export const UserContext = createContext(1);
 
 const App = (props) => {
 
     const [authTokens, setAuthTokens] = useState(localStorage.getItem("tokens") || "");
     let [userId, setUserId] = useState("");
-    const {userData} = useState("");
+
+ /*   useEffect(() => {
+        const authTokensT = JSON.parse(localStorage.getItem('tokens'))
+        if (authTokensT) {
+            setAuthTokens(authTokensT)
+        }
+    }, [])
+*/
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("tokens"));
@@ -96,6 +102,10 @@ const App = (props) => {
                         <Route path={'/review_words/quiz'}
                                element={<AuthenticatedLayout>
                                    <QuizPage/>
+                               </AuthenticatedLayout>}/>
+                        <Route path={'/review_words/flashcards'}
+                               element={<AuthenticatedLayout>
+                                   <FlashcardsPage/>
                                </AuthenticatedLayout>}/>
 
                         <Route path={'/review_words/matching_translation'}

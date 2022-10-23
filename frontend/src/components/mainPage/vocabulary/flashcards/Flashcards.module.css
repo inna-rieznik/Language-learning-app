@@ -1,0 +1,11 @@
+.card.flip {
+    --rotate-y: 180deg;
+}
+
+
+
+.card{
+    justify-content: center;
+    align-items: center;
+
+}

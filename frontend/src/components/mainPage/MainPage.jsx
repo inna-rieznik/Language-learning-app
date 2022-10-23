@@ -3,8 +3,11 @@ import s from './MainPage.module.css'
 import Lessons from "./lessons/Lessons";
 import Vocabulary from "./vocabulary/Vocabulary";
 import {NavLink} from "react-router-dom";
+import {useAuth} from "../login/Auth";
 
 const MainPage = (props) => {
+
+    const {authTokens, userId} = useAuth();
 
     return (
         <div className={s.content}>
