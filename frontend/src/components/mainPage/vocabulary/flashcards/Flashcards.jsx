@@ -20,9 +20,8 @@ const Flashcards = (props) => {
         });
     }, []);
 
-
     return (
-        <div className={s.flashcards}>
+        <div>
             <FlashcardsList flashcards={flashcards}/>
         </div>
     );
