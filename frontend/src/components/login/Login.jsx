@@ -21,7 +21,7 @@ const Login = (props) => {
     const [loginStatus, setLoginStatus] = useState("");
     const [userLoginId, setUserLoginId] = useState("");
     const navigate = useNavigate();
-    const { setAuthTokens } =  useAuth();
+    const { setAuthTokens, userId } =  useAuth();
 
 
 
@@ -42,10 +42,10 @@ const Login = (props) => {
                 setLoginStatus(response.data.message);
             } else {
                 setAuthTokens(response.data);
-                setLoggedIn(true);
                 setLoginStatus(response.data[0].name);
                 setUserLoginId(response.data[0]?.id_user);
-               /* navigate(`/user/${response.data[0]?.id_user}`);*/
+                setLoggedIn(true);
+                /* navigate(`/user/${response.data[0]?.id_user}`);*/
 
             }
             console.log(response.data);
@@ -53,7 +53,7 @@ const Login = (props) => {
         });
     };
 
-    if (isLoggedIn) {
+    if (userId > 0) {
         return navigate('/');
     }
 
