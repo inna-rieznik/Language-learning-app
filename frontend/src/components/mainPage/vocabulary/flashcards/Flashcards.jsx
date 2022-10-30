@@ -9,6 +9,7 @@ const Flashcards = (props) => {
     useEffect(() => {
         axios.get("http://localhost:3011/words").then((response) => {
             //setListOfWords(response.data);
+
             setFlashcards(response.data.map((wordItem, index) => {
                 return {
                     id: `${index}-${Date.now()}`,
