@@ -46,7 +46,9 @@ const App = (props) => {
 
     const setTokens = (data) => {
         localStorage.setItem("tokens", JSON.stringify(data));
-        setAuthTokens(data);
+         data?.forEach((key) => {
+             setUserId(key.id_user);
+         })
     };
 
     const handleLogout = () => {
@@ -61,7 +63,6 @@ const App = (props) => {
         <BrowserRouter>
             <AuthContext.Provider value={{userId, authTokens, setAuthTokens: setTokens, handleLogout}}>
                 <div className="app-wrapper">
-                    {userId}
                     <Routes>
                         <Route path='/login'
                                element={<Login userId={userId}/>}/>

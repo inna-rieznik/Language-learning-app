@@ -26,7 +26,7 @@ const Header = (props) => {
             setUserLevel(response.data[0].level);
             console.log(response.data);
         });
-    }, [])
+    }, [userId])
 
 
     return (
