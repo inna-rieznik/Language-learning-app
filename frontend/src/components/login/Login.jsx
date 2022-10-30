@@ -42,9 +42,9 @@ const Login = (props) => {
                 setLoginStatus(response.data.message);
             } else {
                 setAuthTokens(response.data);
-                setLoginStatus(response.data[0].name);
                 setUserLoginId(response.data[0]?.id_user);
                 setLoggedIn(true);
+                setLoginStatus(response.data[0].name);
                 /* navigate(`/user/${response.data[0]?.id_user}`);*/
 
             }
