@@ -8,12 +8,13 @@ import Button from "@mui/material/Button";
 
 const FlashcardsList = ({flashcards}) => {
     const [userAnswer, setUserAnswer] = useState("");
-    const [correctAnswer, setCorrectAnswer] = useState("");
+
     const [isCorrect, setIsCorrect] = useState(false);
 
 
     const compare = () => {
-        if (userAnswer === flashcards.correctAnswer){
+        setCorrectAnswer(flashcards.correctAnswer);
+        if (userAnswer === correctAnswer){
             setIsCorrect(true)
         } else {
             setIsCorrect(false)
@@ -29,14 +30,14 @@ const FlashcardsList = ({flashcards}) => {
                 <div className={s.wholeItem}>
 
                     <Flashcard compare={compare} flashcard={flashcard} key={flashcard.id} />
+
                     <TextField id="outlined-basic"
                                label="Write your answer there"
                                onChange={(e) => {
                                    setUserAnswer(e.target.value);
                                }}
                                variant="outlined"/>
-
-                    <Button  variant="contained">Check</Button>
+                    <Button onClick={compare} variant="contained">Check</Button>
                 </div>
             );
             })}

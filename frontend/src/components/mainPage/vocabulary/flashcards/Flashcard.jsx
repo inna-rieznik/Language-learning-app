@@ -11,6 +11,7 @@ const Flashcard = ({flashcard}) => {
     const frontEl = useRef();
     const backEl = useRef();
     const [isCorrect, setIsCorrect] = useState(false);
+    const [correctAnswer, setCorrectAnswer] = useState("");
 
     function setMaxHeight() {
         const frontHeight = frontEl.current.getBoundingClientRect().height
@@ -23,6 +24,10 @@ const Flashcard = ({flashcard}) => {
         window.addEventListener('resize', setMaxHeight)
         return () => window.removeEventListener('resize', setMaxHeight)
     }, [])
+
+
+
+
 
     return (
         <div  style={{ height: height }} className={flip ? `${s.card} ${s.flip}` : s.card}  onClick={() => setFlip(!flip)}>
