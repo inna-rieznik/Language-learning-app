@@ -7,7 +7,16 @@ const db = mysql.createConnection({
     user: process.env.DATABASE_USER,
     host: process.env.DATABASE_HOST,
     password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE
+    database: process.env.DATABASE,
+    typeCast: function castField(field, useDefaultTypeCasting) {
+        if ((field.type === "BIT") && (field.length === 1)) {
+            const bytes = field.buffer();
+            return (bytes[0] === 1);
+        }
+
+        return (useDefaultTypeCasting());
+
+    }
 });
 
 router.get('/', (req, res) => {
@@ -19,8 +28,31 @@ router.get('/', (req, res) => {
                 res.send({status: 'error', err})
                 return;
             }
-            console.log(result);
-            res.json(result);
+
+            const results = {};
+            for (const row of result) {
+                if (results[row.id_quiz_questions]) {
+                    results[row.id_quiz_questions].answers.push({
+                        value: row.answer,
+                        correct: row.correct
+                    })
+                } else {
+                    results[row.id_quiz_questions] = {
+                        question: row.question,
+                        answers: [{
+                            value: row.answer,
+                            correct: row.correct
+                        }]
+                    }
+                }
+            }
+
+            const response = []
+            for (const key of Object.keys(results)) {
+                response.push(results[key]);
+            }
+
+            res.json(response);
         }
     )
 })

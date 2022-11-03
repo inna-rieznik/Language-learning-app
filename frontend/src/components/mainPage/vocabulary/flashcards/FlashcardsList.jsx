@@ -11,25 +11,28 @@ const FlashcardsList = ({flashcards}) => {
 
     const [isCorrect, setIsCorrect] = useState(false);
 
+    const [correctAnswerB, setCorrectAnswerB] = useState("");
+
 
     const compare = () => {
-        setCorrectAnswer(flashcards.correctAnswer);
-        if (userAnswer === correctAnswer){
+        if (userAnswer === flashcards.correctAnswer){
             setIsCorrect(true)
         } else {
             setIsCorrect(false)
         }
     };
 
-    console.log("userAnswer", userAnswer, "correctAns", flashcards.correctAnswer, "is correct", isCorrect);
+    console.log("userAnswer:", userAnswer,",correct ans index:", flashcards.index, ",correctAns:", flashcards.correctAnswer, ",is correct:", isCorrect);
     return (
         <div className={s.cardGrid}>
             {flashcards.map(flashcard => {
+
+                console.log("answer back: ",correctAnswerB);
                 return (
 
                 <div className={s.wholeItem}>
 
-                    <Flashcard compare={compare} flashcard={flashcard} key={flashcard.id} />
+                    <Flashcard flashcard={flashcard} key={flashcard.id} />
 
                     <TextField id="outlined-basic"
                                label="Write your answer there"
