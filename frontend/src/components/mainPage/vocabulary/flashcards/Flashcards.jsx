@@ -5,6 +5,7 @@ import axios from "axios";
 
 const Flashcards = (props) => {
     const [flashcards, setFlashcards] = useState(SAMPLE_FLASHCARDS);
+    const [correctAnswer, setCorrectAnswer] = useState("");
 
     useEffect(() => {
         axios.get("http://localhost:3011/words").then((response) => {

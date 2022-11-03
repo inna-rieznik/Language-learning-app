@@ -10,8 +10,7 @@ const Flashcard = ({flashcard}) => {
     const [height, setHeight] = useState('initial')
     const frontEl = useRef();
     const backEl = useRef();
-    const [isCorrect, setIsCorrect] = useState(false);
-    const [correctAnswer, setCorrectAnswer] = useState("");
+    const [correctAnswerV, setCorrectAnswerV] = useState("");
 
     function setMaxHeight() {
         const frontHeight = frontEl.current.getBoundingClientRect().height
@@ -28,13 +27,11 @@ const Flashcard = ({flashcard}) => {
 
 
 
-
     return (
         <div  style={{ height: height }} className={flip ? `${s.card} ${s.flip}` : s.card}  onClick={() => setFlip(!flip)}>
            <div className={s.front} ref={frontEl}>
                <h2>{flashcard.question}</h2>
             </div>
-
             <div className={s.back} ref={backEl}>
                 <h2>{flashcard.correctAnswer}</h2>
             </div>
