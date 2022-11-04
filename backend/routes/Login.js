@@ -10,6 +10,10 @@ const db = mysql.createConnection({
     database: process.env.DATABASE
 });
 
+const jwt = require('jsonwebtoken');
+
+
+
 // /login
 router.post('/', (req, res) => {
     const email = req.body.email;
@@ -25,7 +29,13 @@ router.post('/', (req, res) => {
                 return;
             }
             if (result.length > 0) {
+                //create JWT
+                const accessToken = jwt.sign({"email" : email}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '60s'});
+                const refreshToken = jwt.sign({"email" : email}, process.env.REFRESH_TOKEN_SECRET, {expiresIn: '1d'});
                 res.send(result);
+                /*res.json(accessToken);*/
+            }else if(!email || !password){
+                res.send({"message": "Email and password are required"});
             } else {
                 res.send({"message": "Wrong email or password"});
             }
