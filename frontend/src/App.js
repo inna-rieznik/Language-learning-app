@@ -18,7 +18,6 @@ import QuizPage from "./components/mainPage/vocabulary/quiz/QuizPage";
 import AuthenticatedLayout from "./AuthenticatedLayout";
 import {AuthContext} from "./components/login/Auth";
 import Matching from "./components/mainPage/vocabulary/Matching/Matching";
-import {createContext} from "react";
 import FlashcardsPage from "./components/mainPage/vocabulary/flashcards/FlashcardsPage";
 
 
@@ -39,9 +38,9 @@ const App = (props) => {
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("tokens"));
-        user?.forEach((key) => {
+      /*  user?.forEach((key) => {
             setUserId(key.id_user);
-        });
+        });*/
     }, [userId])
 
     console.log("user_id", userId);

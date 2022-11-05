@@ -4,21 +4,31 @@ import {questions} from "./QuizGame";
 
 
 
-const Game = ({step, question, onClickVariant}) => {
+const Game = ({step, quiz, onClickVariant}) => {
     const percentage = Math.round((step/questions.length) * 100);
     console.log(percentage);
 
     return (
         <div>
             <div className={s.progress}>
-                <div style={{ width: `${percentage}%` }} className={s.inner}></div>
+                <div style={{width: `${percentage}%`}} className={s.inner}></div>
             </div>
-            <h2>{question.quiz_question} </h2>
-            <div className={s.game}>
-            <ul>
-                {question.variants.map((text, index) => <li onClick={() => onClickVariant(index)} key={text}>{text}</li>)}
-            </ul>
-            </div>
+            {quiz ? <>
+                <h2>{`Otazka je ${quiz.question}`}</h2>
+                <div className={s.game}>
+                    <ul>{quiz.answers.map((a, index) => {
+                        return (
+                            <div>
+                                <li onClick={() => onClickVariant(index)}>
+                                    {index} {a.value}
+                                    <p>{a.correct ? 'pravda' : 'nepravda'}</p>
+                                </li>
+
+                            </div>
+                        )
+                    })}</ul>
+                </div>
+            </> : 'Nevalidni otazka'}
         </div>
     );
 }

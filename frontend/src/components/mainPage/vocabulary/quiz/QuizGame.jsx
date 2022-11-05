@@ -4,6 +4,7 @@ import s from "./QuizPage.module.css";
 import {useEffect} from "react";
 import axios from "axios";
 import {useState} from "react";
+import Game from "./Game";
 
 
 export const questions = [
@@ -33,13 +34,10 @@ export const questions = [
 const QuizPage = (props) => {
     const [step, setStep] = React.useState(0); //first element in array
     const [countCorrect, setCountCorrect] = React.useState(0);
-    //const question = questions[step];
     const [quizes, setQuizes] = useState([]);
 
     useEffect(() => {
         axios.get(`http://localhost:3011/quizQuestions`).then((response) => {
-            //setListOfQuizQuestions(response.data);
-
             setQuizes(response.data)
             console.log("quizes data", response.data);
 
@@ -47,44 +45,28 @@ const QuizPage = (props) => {
     }, []);
     console.log("quizes object", quizes);
 
-    /*    const onClickVariant = (index) => {
-            console.log(step, index);
-            setStep(step + 1 );
-            if(index === question.correct) {
-                setCountCorrect(countCorrect + 1);
-            }
-        }*/
+    const onClickVariant = (index) => {
+        console.log("step: ", step, "index: ", index, "answ", quiz.answers[index].correct);
+        setStep(step + 1);
+        if (quiz.answers[index].correct) {
+            setCountCorrect(countCorrect + 1);
+        }
+    }
 
-    const quiz = quizes[step]
+    const quiz = quizes[step];
 
     return (
         <div>
             <div className={s.quiz}>
                 <div className={s.modal}>
-                    {quiz ? <>
-                        {`Otazka je ${quiz.question}`}
-                        {quiz.answers.map(a => {
-                            return (
-                                <div>
-                                    <h2>{a.value}</h2>
-                                    <p>{a.correct ? 'pravda' : 'nepravda'}</p>
-                                </div>
-                            )
-                        })}
-                    </> : 'Nevalidni otazka'}
+                    {(step !== quizes.length) ?
+                        <Game step={step} quiz={quiz} onClickVariant={onClickVariant}/>
+                        : <Result countCorrect={countCorrect}/>
+                    }
                 </div>
             </div>
 
 
-            {/*{(step !== questions.length) ?
-                    <div className={s.modal}>
-                        <div>
-
-                        </div>
-                        <Game step={step} question={question} onClickVariant={onClickVariant}/>
-                    </div> : <Result correct={countCorrect}/>
-                }*/
-            }
         </div>
     )
         ;
