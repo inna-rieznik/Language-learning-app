@@ -17,9 +17,9 @@ import ReviewGrammar from "./components/mainPage/vocabulary/ReviewGrammar";
 import QuizPage from "./components/mainPage/vocabulary/quiz/QuizPage";
 import AuthenticatedLayout from "./AuthenticatedLayout";
 import {AuthContext} from "./components/login/Auth";
-import Matching from "./components/mainPage/vocabulary/Matching/Matching";
 import FlashcardsPage from "./components/mainPage/vocabulary/flashcards/FlashcardsPage";
 import MatchingPage from "./components/mainPage/vocabulary/Matching/MatchingPage";
+import MatchingPage2 from "./components/mainPage/vocabulary/matching2/MatchingPage2";
 
 
 const App = (props) => {
@@ -114,6 +114,11 @@ const App = (props) => {
                         <Route path={'/review_words/matching_translation'}
                                element={<AuthenticatedLayout>
                                    <MatchingPage/>
+                               </AuthenticatedLayout>}/>
+
+                        <Route path={'/review_words/matching_sentences'}
+                               element={<AuthenticatedLayout>
+                                   <MatchingPage2/>
                                </AuthenticatedLayout>}/>
 
                         <Route path={`lessons/id/:lessonId`}
