@@ -38,7 +38,7 @@ const QuizPage = (props) => {
 
     useEffect(() => {
         axios.get(`http://localhost:3011/quizQuestions`).then((response) => {
-            setQuizes(response.data)
+            setQuizes(response.data);
             console.log("quizes data", response.data);
 
         });
@@ -68,8 +68,7 @@ const QuizPage = (props) => {
 
 
         </div>
-    )
-        ;
+    );
 }
 
 

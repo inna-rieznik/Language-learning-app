@@ -14,7 +14,7 @@ const Game = ({step, quiz, onClickVariant}) => {
                 <div style={{width: `${percentage}%`}} className={s.inner}></div>
             </div>
             {quiz ? <>
-                <h2>{`Otazka je ${quiz.question}`}</h2>
+                <h2>{`Question: ${quiz.question}`}</h2>
                 <div className={s.game}>
                     <ul>{quiz.answers.map((a, index) => {
                         return (

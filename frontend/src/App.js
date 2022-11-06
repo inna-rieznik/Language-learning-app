@@ -19,6 +19,7 @@ import AuthenticatedLayout from "./AuthenticatedLayout";
 import {AuthContext} from "./components/login/Auth";
 import Matching from "./components/mainPage/vocabulary/Matching/Matching";
 import FlashcardsPage from "./components/mainPage/vocabulary/flashcards/FlashcardsPage";
+import MatchingPage from "./components/mainPage/vocabulary/Matching/MatchingPage";
 
 
 const App = (props) => {
@@ -112,7 +113,7 @@ const App = (props) => {
 
                         <Route path={'/review_words/matching_translation'}
                                element={<AuthenticatedLayout>
-                                   <Matching/>
+                                   <MatchingPage/>
                                </AuthenticatedLayout>}/>
 
                         <Route path={`lessons/id/:lessonId`}
