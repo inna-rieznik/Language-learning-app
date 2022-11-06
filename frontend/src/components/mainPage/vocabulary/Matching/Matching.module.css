@@ -7,6 +7,7 @@
     margin: 1rem;
     position: relative;
     transition: opacity 0.2s;
+    background-color: #FFC2C2;
 }
 
 
@@ -31,7 +32,7 @@
 
 .board{
     width: 200px;
-    height: 50px;
-    border: 2px solid  #003066;
-    margin: 20px;
+    height: 70px;
+    border: 2px solid  #003066 ;
+    margin: 10px;
 }
