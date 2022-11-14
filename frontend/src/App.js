@@ -35,6 +35,8 @@ const App = (props) => {
     }, [])
 */
 
+    //kdyz zkousim ZAREGISTROVAT SE -> tohle zpusobi chyby !!!!!!!!!!!!!!!!
+
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("tokens"));
         user?.forEach((key) => {
@@ -46,7 +48,7 @@ const App = (props) => {
 
     const setTokens = (data) => {
         localStorage.setItem("tokens", JSON.stringify(data));
-         data?.forEach((key) => {
+        data?.forEach((key) => {
              setUserId(key.id_user);
          })
     };

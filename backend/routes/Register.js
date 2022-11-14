@@ -1,8 +1,10 @@
 const express = require('express');
 const mysql = require("mysql");
 const {response} = require("express");
+const bcrypt = require("bcrypt");
 
 const router = express.Router();
+
 
 const db = mysql.createConnection({
     user: process.env.DATABASE_USER,
@@ -11,10 +13,12 @@ const db = mysql.createConnection({
     database: process.env.DATABASE
 });
 
+
 router.post('/', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     const email = req.body.email;
+
 
     //if exist user with the same credentials
     db.query(
@@ -35,7 +39,7 @@ router.post('/', (req, res) => {
                 db.query(
                     "INSERT INTO mydb.users (username, password,id_language,id_role, name, email, registered_at) values(?,?,1,2,?,?, CURRENT_TIMESTAMP())",
                     [username, password, username, email],
-                    (err, result) => {
+                    (err, res) => {
                         if (err) {
                             console.log(err);
                             res.send({status: 'error', err})
@@ -50,8 +54,10 @@ router.post('/', (req, res) => {
                                     res.send(result);
                                 }
 
+
                             }
                         )
+
                     }
                 )
 
