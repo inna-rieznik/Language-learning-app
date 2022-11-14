@@ -39,9 +39,9 @@ const App = (props) => {
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("tokens"));
-      /*  user?.forEach((key) => {
+        user?.forEach((key) => {
             setUserId(key.id_user);
-        });*/
+        });
     }, [userId])
 
     console.log("user_id", userId);
@@ -113,12 +113,12 @@ const App = (props) => {
 
                         <Route path={'/review_words/matching_translation'}
                                element={<AuthenticatedLayout>
-                                   <MatchingPage/>
+                                   <MatchingPage2/>
                                </AuthenticatedLayout>}/>
 
                         <Route path={'/review_words/matching_sentences'}
                                element={<AuthenticatedLayout>
-                                   <MatchingPage2/>
+
                                </AuthenticatedLayout>}/>
 
                         <Route path={`lessons/id/:lessonId`}

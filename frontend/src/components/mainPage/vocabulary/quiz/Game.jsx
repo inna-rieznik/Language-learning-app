@@ -20,7 +20,7 @@ const Game = ({step, quiz, onClickVariant}) => {
                         return (
                             <div>
                                 <li onClick={() => onClickVariant(index)}>
-                                    {index} {a.value}
+                                    {a.value}
                                     <p>{a.correct ? 'pravda' : 'nepravda'}</p>
                                 </li>
 
@@ -28,7 +28,7 @@ const Game = ({step, quiz, onClickVariant}) => {
                         )
                     })}</ul>
                 </div>
-            </> : 'Nevalidni otazka'}
+            </> : 'Not valid question'}
         </div>
     );
 }

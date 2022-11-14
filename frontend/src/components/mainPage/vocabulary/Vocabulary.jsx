@@ -57,7 +57,6 @@ const Vocabulary = (props) => {
             <Action urlName='my_words' title='my words'/>
             <Button variant="contained" href='review_words'>Review words</Button>
             {/*  <Button variant="contained" href='modal_add_word'  startIcon={<AddIcon />} >add new word</Button>*/}
-            <Button onClick={handleOpen} variant="contained" startIcon={<AddIcon/>}>add new word</Button>
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
