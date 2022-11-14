@@ -1,6 +1,8 @@
 const express = require('express');
 const mysql = require("mysql");
 
+const jwt = require('jsonwebtoken');
+
 const router = express.Router();
 
 const db = mysql.createConnection({
@@ -14,6 +16,11 @@ const db = mysql.createConnection({
 router.post('/', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
+/*
+    const token = jwt.sign({
+        email,
+        role: 'admin'
+    }, 'secretKey12345');*/
 
     db.query(
         "SELECT * FROM mydb.users JOIN roles r on users.id_role = r.id_role JOIN users_progress up on users.id_user = up.id_user WHERE email = ? AND password = ?",
@@ -26,10 +33,11 @@ router.post('/', (req, res) => {
             }
             if (result.length > 0) {
                 res.send(result);
+              /*  res.send(token);*/
+
             } else {
                 res.send({"message": "Wrong email or password"});
             }
-
         }
     )
 })

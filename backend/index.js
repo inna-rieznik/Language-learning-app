@@ -2,7 +2,7 @@ const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
 const dotenv = require('dotenv');
-const jwt = require('jsonwebtoken');
+
 
 dotenv.config({path: './.env'});
 const app = express();

@@ -44,7 +44,7 @@ router.post('/', (req, res) => {
             res.send({status: 'ok'})
         })
     /*loop to add this word to every existed user */
-
+/*
     db.query(
         "INSERT INTO mydb.users_words (id_word,id_user) values((select Max(id_word) from mydb.words), 1)",
         [source, target],
@@ -55,7 +55,7 @@ router.post('/', (req, res) => {
                 return;
             }
             res.send({status: 'ok'})
-        })
+        })*/
 })
 
 

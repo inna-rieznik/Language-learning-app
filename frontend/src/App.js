@@ -37,9 +37,9 @@ const App = (props) => {
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("tokens"));
-      /*  user?.forEach((key) => {
+       user?.forEach((key) => {
             setUserId(key.id_user);
-        });*/
+        });
     }, [userId])
 
     console.log("user_id", userId);

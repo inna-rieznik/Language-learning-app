@@ -41,7 +41,7 @@ const UserPage = (props) => {
                 </Breadcrumbs>
             </div>
             <h1>User Page</h1>
-            <h2>Name: {userObject[0]?.name} </h2>
+            <h2>Name: {userObject[0]?.name}</h2>
             <h2>Username: {userObject[0]?.username} </h2>
             <h2>Role: {userObject[0]?.role} </h2>
             <h2>Level: {userObject[0]?.level}</h2>
