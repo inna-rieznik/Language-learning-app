@@ -22,6 +22,9 @@ import {useEffect, useState} from 'react';
 import axios from "axios";
 import Axios from "axios";
 
+const btnStyle = {
+    marginBottom : 20
+};
 
 const style = {
     position: 'absolute',
@@ -47,7 +50,7 @@ const WordsPage = (props) => {
             setListOfWords(response.data);
             console.log(response.data);
         });
-    }, []);
+    }, [listOfWords]);
 
     const addWord = () => {
         Axios.post('http://localhost:3011/words', {
@@ -100,7 +103,7 @@ const WordsPage = (props) => {
                 <Typography color="text.primary">My Words</Typography>
             </Breadcrumbs>
             <h1>My Words</h1>
-            <Button onClick={handleOpen} variant="contained" startIcon={<AddIcon/>}>add new word</Button>
+            <Button style={btnStyle} onClick={handleOpen} variant="contained" startIcon={<AddIcon/>}>add new word</Button>
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"

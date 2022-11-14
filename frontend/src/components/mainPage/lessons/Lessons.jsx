@@ -10,6 +10,9 @@ import Card from "@mui/material/Card";
 import * as React from "react";
 import {useNavigate} from 'react-router-dom';
 
+const btnStyle = {
+    marginBottom : 20
+};
 
 const Lessons = (props) => {
     const [listOfLessons, setListOfLessons] = useState();
@@ -19,14 +22,13 @@ const Lessons = (props) => {
         axios.get("http://localhost:3011/lessons").then((response) => {
             setListOfLessons(response.data);
         });
-    }, []);
+    }, [listOfLessons]);
 
     return (
         <div className={s.lessons}>
             <h1>Lessons</h1>
-
-            <Action urlName='review_grammar' title='review grammar'/>
             <Action urlName='create_lesson' title='create new lesson'/>
+            <Button style={btnStyle} variant="contained" href='review_grammar'>Review grammar</Button>
 
             {listOfLessons?.map((value, key) => (
                 <div>

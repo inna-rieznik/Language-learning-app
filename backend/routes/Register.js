@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
 
             } else {
                 db.query(
-                    "INSERT INTO mydb.users (username, password,id_language,id_role, name, email, registered_at) values(?,?,1,1,?,?, CURRENT_TIMESTAMP())",
+                    "INSERT INTO mydb.users (username, password,id_language,id_role, name, email, registered_at) values(?,?,1,2,?,?, CURRENT_TIMESTAMP())",
                     [username, password, username, email],
                     (err, result) => {
                         if (err) {
@@ -41,21 +41,21 @@ router.post('/', (req, res) => {
                             res.send({status: 'error', err})
                             return;
                         }
-                        res.send({status: 'ok'});
+                        /*res.send({status: 'ok'});*/
+                        db.query(
+                            "SELECT * FROM mydb.users JOIN roles r on users.id_role = r.id_role JOIN users_progress up on users.id_user = up.id_user WHERE email = ? AND password = ?",
+                            [email, password],
+                            (err, result) => {
+                                if (result.length > 0) {
+                                    res.send(result);
+                                }
+
+                            }
+                        )
                     }
                 )
 
-                db.query(
-                   "INSERT INTO mydb.users_progress (id_user,score, level, updated_at) values((select Max(id_user) from mydb.users),0,1,CURRENT_TIMESTAMP())",
-                    (err, result) => {
-                        if (err) {
-                            console.log(err);
-                            res.send({status: 'error', err})
-                            return;
-                        }
-                        res.send({status: 'ok'});
-                    }
-                )
+
 
             }
 

@@ -59,7 +59,7 @@ const Register = (props) => {
                 <form className={s.form} onSubmit={handleSubmit}>
                     <h1>Register</h1>
                     <Box mt={3} width="100%">
-                        <TextField id="outlined-basic"
+                        <TextField required id="outlined-basic"
                                    label="Name"
                                    onChange={(e) => {
                                        setUsernameReg(e.target.value);
@@ -67,7 +67,7 @@ const Register = (props) => {
                                    variant="outlined"/>
                     </Box>
                     <Box mt={3} width="100%">
-                        <TextField id="outlined-basic"
+                        <TextField required id="outlined-basic"
                                    label="Email"
                                    onChange={(e) => {
                                        setEmailReg(e.target.value);
@@ -75,7 +75,7 @@ const Register = (props) => {
                                    variant="outlined"/>
                     </Box>
                     <Box mt={3} width="100%">
-                        <TextField id="outlined-basic"
+                        <TextField required id="outlined-basic"
                                    label="Password"
                                    onChange={(e) => {
                                        setPasswordReg(e.target.value);
