@@ -22,7 +22,7 @@ const Lessons = (props) => {
         axios.get("http://localhost:3011/lessons").then((response) => {
             setListOfLessons(response.data);
         });
-    }, [listOfLessons]);
+    }, []);
 
     return (
         <div className={s.lessons}>

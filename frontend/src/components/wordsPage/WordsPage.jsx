@@ -50,7 +50,7 @@ const WordsPage = (props) => {
             setListOfWords(response.data);
             console.log(response.data);
         });
-    }, [listOfWords]);
+    }, []);
 
     const addWord = () => {
         Axios.post('http://localhost:3011/words', {

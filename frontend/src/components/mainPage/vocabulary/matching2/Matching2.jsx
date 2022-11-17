@@ -5,15 +5,13 @@ import Example from './Example'
 import {useState} from "react";
 
 
-
-
 const Matching2 = (props) => {
 
     return (
         <DndProvider backend={HTML5Backend}>
             <div>
-                <Parent data={[1, 2, 3, 4]}/>
-                <Example />
+                <Parent data={[1, 2, 3]}/>
+                <Example/>
             </div>
         </DndProvider>
 
@@ -36,27 +34,26 @@ const Parent = ({data}) => {
     const [val, changeVal] = useState({})
     const [error, changeError] = useState({})
 
-    return <div>
-        {data.map((v, index) => <Children error={error[index]} value={val[index] ?? 0} onClick={(childValue) => {
-            const newState = {...val};
-            newState[index] = childValue;
-            changeVal(newState)
-        }
-        }/>)}
-
-        <button onClick={() => {
-            const newErrorState = {}
-            for (let i = 0; i < data.length; i++) {
-                if (!val[i]) {
-                    newErrorState[i] = true;
-                }
+    return (
+        <div>
+            {data.map((v, index) => <Children error={error[index]} value={val[index] ?? 0} onClick={(childValue) => {
+                const newState = {...val};
+                newState[index] = childValue;
+                changeVal(newState);
             }
+            }/>)}
 
-            changeError(newErrorState)
-        }
-        }>Check
-        </button>
-    </div>
+            <button onClick={() => {
+                const newErrorState = {}
+                for (let i = 0; i < data.length; i++) {
+                    if (!val[i]) {
+                        newErrorState[i] = true;
+                    }
+                }
+                changeError(newErrorState)
+            }}>Check
+            </button>
+        </div>)
 }
 
 const Children = ({onClick, value, error}) => {
