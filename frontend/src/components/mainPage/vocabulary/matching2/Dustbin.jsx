@@ -1,5 +1,8 @@
 import {memo} from "react";
 import {useDrop} from "react-dnd";
+import Button from "@mui/material/Button";
+import * as React from "react";
+import {useState} from "react";
 
 const style = {
     height: "50px",
@@ -12,10 +15,7 @@ const style = {
     fontSize: "1rem",
     lineHeight: "normal"
 };
-export const Dustbin = memo(function Dustbin({target,
-                                                 lastDroppedItem,
-                                                 onDrop
-                                             }) {
+export const Dustbin = memo(function Dustbin({ error, target, lastDroppedItem, onDrop }) {
     const [{isOver, canDrop}, drop] = useDrop({
         accept: "div",
         drop: onDrop,
@@ -33,14 +33,18 @@ export const Dustbin = memo(function Dustbin({target,
     } else if (canDrop) {
         backgroundColor = "#ff777b";
     }
+
+
     return (
         <div>
             <h2>{target}</h2>
+            <div>{error ? <div style={{ backgroundColor: 'red', height: "20px", width: "12rem", color: 'white'}} >BAD</div> : null }</div>
             <div ref={drop} style={{...style, backgroundColor}} data-testid="dustbin">
                 {lastDroppedItem && (
                     <p>{JSON.stringify(lastDroppedItem.source)}</p>
                 )}
             </div>
+
         </div>
     );
 });
