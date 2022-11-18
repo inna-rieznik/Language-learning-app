@@ -19,7 +19,7 @@ const Login = (props) => {
     const [password, setPassword] = useState("");
 
     const [loginStatus, setLoginStatus] = useState("");
-    const [userLoginId, setUserLoginId] = useState("");
+   // const [userLoginId, setUserLoginId] = useState("");
     const navigate = useNavigate();
     const { setAuthTokens, userId } =  useAuth();
 
@@ -42,7 +42,7 @@ const Login = (props) => {
                 setLoginStatus(response.data.message);
             } else {
                 setAuthTokens(response.data);
-                setUserLoginId(response.data[0]?.id_user);
+               // setUserLoginId(response.data[0]?.id_user);
                 setLoggedIn(true);
                 setLoginStatus(response.data[0].name);
                 /* navigate(`/user/${response.data[0]?.id_user}`);*/

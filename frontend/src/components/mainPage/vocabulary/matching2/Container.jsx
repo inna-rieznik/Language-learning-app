@@ -17,7 +17,7 @@ export const Container = memo(function Container() {
 
 
     useEffect(() => {
-        axios.get("http://localhost:3011/words").then((response) => {
+        axios.get("http://localhost:3011/words/random/6").then((response) => {
 
             setWords2(response.data.map((wordItem, index) => {
                 return {
@@ -37,15 +37,16 @@ export const Container = memo(function Container() {
         });
     }, []);
 
+
     console.log("words2: ", words2);
     console.log("dustbin: ", dustbins);
-
 
 
 
     function isDropped(boxName) {
         return droppedWords.indexOf(boxName) > -1
     }
+
     const handleDrop = useCallback(
         (index, item) => {
             const { name } = item
@@ -68,7 +69,7 @@ export const Container = memo(function Container() {
 
     return (
         <div>
-            <div style={{ overflow: 'hidden', clear: 'both' }}>
+            <div style={{overflow: 'hidden', clear: 'both' }}>
                 {words2.map((word, index) => (
                     <Box
                         source={word.source}
@@ -79,7 +80,10 @@ export const Container = memo(function Container() {
                 ))}
             </div>
 
-            <div style={{ overflow: 'hidden', clear: 'both' }}>
+            <div style={{  display: 'grid',
+                           alignItems: 'center',
+                           gridTemplateColumns: 'repeat(auto-fill, minmax(500px, 1fr))',
+                           gap: '1rem', overflow: 'hidden', clear: 'both' }}>
                 {dustbins.map(({source, target, lastDroppedItem }, index) => (
                     <Dustbin
                         error={error[index]}
@@ -92,11 +96,13 @@ export const Container = memo(function Container() {
             </div>
 
             <Button onClick={() => {
-                const newErrorState = {}
+                const newErrorState = {};
+                console.log("error ",newErrorState)
                 for (let i=0; i < dustbins.length; i++){
-                    if(dustbins[i].lastDroppedItem.source !== words2[i].source ){
+                    if(dustbins[i].lastDroppedItem === null || dustbins[i].lastDroppedItem.source !== words2[i].source){
                         newErrorState[i] = true;
                     }
+
                     changeError(newErrorState);
                 }
 

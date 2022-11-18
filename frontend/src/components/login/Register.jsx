@@ -18,7 +18,7 @@ const Register = (props) => {
     const [emailReg, setEmailReg] = useState("");
     const [passwordReg, setPasswordReg] = useState("");
     const [registerStatus, setRegisterStatus] = useState("");
-    const { setAuthTokens } =  useAuth();
+    const { setAuthTokens, userId } =  useAuth();
 
     const navigate = useNavigate();
 
@@ -39,15 +39,19 @@ const Register = (props) => {
             } else {
                 setAuthTokens(response.data);
                 setRegisteredIn(true);
-
+                setRegisterStatus(response.data[0].name);
             }
             console.log(response.data);
         });
     };
 
-    if (isRegisteredIn) {
+  /*  if (isRegisteredIn) {
         return navigate('/');
-    } //else zobrazit login stranku
+    } //else zobrazit login stranku*/
+
+    if (userId > 0) {
+        return navigate('/');
+    }
 
 
     return (
