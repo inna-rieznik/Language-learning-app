@@ -30,12 +30,15 @@ const generateAccessToken = (id, role) =>{
 }
 
 
+const jwt = require('jsonwebtoken');
+
+
+
 // /login
 router.post('/',
     [body('email', 'Email can not be empty').notEmpty().isEmail(),
         body('password', 'Password can not be empty').notEmpty()],
     (req, res) => {
-
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({errors: errors.array()});

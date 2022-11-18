@@ -2,9 +2,12 @@ const express = require('express');
 const mysql = require("mysql");
 const bcrypt = require("bcrypt");
 const {response} = require("express");
+
 const  {body, validationResult} = require("express-validator");
 
+
 const router = express.Router();
+
 
 const db = mysql.createConnection({
     user: process.env.DATABASE_USER,
@@ -23,10 +26,10 @@ router.post('/',
                if (!errors.isEmpty()) {
                    return res.status(400).json({ errors: errors.array() });
                }
-
     const username = req.body.username;
     const password = req.body.password;
     const email = req.body.email;
+
 
     //if exist user with the same credentials
     db.query(
