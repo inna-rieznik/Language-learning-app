@@ -8,7 +8,7 @@ const Flashcards = (props) => {
     const [correctAnswer, setCorrectAnswer] = useState("");
 
     useEffect(() => {
-        axios.get("http://localhost:3011/words").then((response) => {
+        axios.get("http://localhost:3011/words/random/6").then((response) => {
             //setListOfWords(response.data);
 
             setFlashcards(response.data.map((wordItem, index) => {

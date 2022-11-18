@@ -26,6 +26,21 @@ router.get('/', (req, res) => {
 
 });
 
+router.get('/random/6', (req, res) => {
+    db.query('select * from mydb.words ORDER BY RAND() LIMIT 6',
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({status: 'error', err})
+                return;
+            }
+            console.log(result);
+            res.send(result);
+        })
+
+});
+
+
 //add word to db
 router.post('/', (req, res) => {
     //to access data from FE we use body

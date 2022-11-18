@@ -10,7 +10,7 @@ const Matching2 = (props) => {
     return (
         <DndProvider backend={HTML5Backend}>
             <div>
-                <Parent data={[1, 2, 3]}/>
+                {/*<Parent data={[1, 2, 3]}/>*/}
                 <Example/>
             </div>
         </DndProvider>
@@ -20,6 +20,7 @@ const Matching2 = (props) => {
 
 export default Matching2;
 
+/*
 const sumObject = (obj) => {
     let sum = 0;
 
@@ -29,6 +30,7 @@ const sumObject = (obj) => {
 
     return sum
 }
+
 
 const Parent = ({data}) => {
     const [val, changeVal] = useState({})
@@ -62,4 +64,4 @@ const Children = ({onClick, value, error}) => {
         {error ? <div>CHYBA</div> : null}
         <button onClick={() => onClick(value + 1)}>Click me</button>
     </div>
-}
+}*/

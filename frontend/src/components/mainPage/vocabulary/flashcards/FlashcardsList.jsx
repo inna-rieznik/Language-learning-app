@@ -13,15 +13,6 @@ const FlashcardsList = ({flashcards}) => {
 
     const [correctAnswerB, setCorrectAnswerB] = useState("");
 
-
-    const compare = () => {
-        if (userAnswer === flashcards.correctAnswer){
-            setIsCorrect(true)
-        } else {
-            setIsCorrect(false)
-        }
-    };
-
     console.log("userAnswer:", userAnswer,",correct ans index:", flashcards.index, ",correctAns:", flashcards.correctAnswer, ",is correct:", isCorrect);
     return (
         <div className={s.cardGrid}>
@@ -34,17 +25,16 @@ const FlashcardsList = ({flashcards}) => {
 
                     <Flashcard flashcard={flashcard} key={flashcard.id} />
 
-                    <TextField id="outlined-basic"
+                    <TextField style={{backgroundColor:'white', width: '400px'}} id="outlined-basic"
                                label="Write your answer there"
                                onChange={(e) => {
                                    setUserAnswer(e.target.value);
                                }}
                                variant="outlined"/>
-                    <Button onClick={compare} variant="contained">Check</Button>
                 </div>
             );
             })}
-
+            <Button variant="contained">Check</Button>
         </div>
     );
 }
