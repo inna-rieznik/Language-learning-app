@@ -1,5 +1,7 @@
 const express = require('express');
 const mysql = require("mysql");
+const authMiddleware = require("../middleware/authMidleware");
+const roleMiddleware = require("../middleware/roleMiddleware");
 
 const router = express.Router();
 
@@ -9,6 +11,7 @@ const db = mysql.createConnection({
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE
 });
+
 
 router.get('/1', (req, res) => {
    /* const questionId = req.body.questionId;*/
@@ -28,7 +31,8 @@ router.get('/1', (req, res) => {
 
 })
 
-router.post('/:questionId', (req, res) => {
+//only admin can add new questions and answers
+router.post('/:questionId', roleMiddleware(['admin']),   (req, res) => {
     //to access data from FE we use body
     const quizQuestionId = req.body.quizQuestionId;
     const quizAnswer = req.body.quizAnswer;

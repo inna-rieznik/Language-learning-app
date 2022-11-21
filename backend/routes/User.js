@@ -1,5 +1,6 @@
 const express = require('express');
 const mysql = require("mysql");
+const authMiddleware = require("../middleware/authMidleware");
 
 const router = express.Router();
 
@@ -11,11 +12,8 @@ const db = mysql.createConnection({
 });
 
 //it works return correct user in POSTMAN
-router.get('/:userId',(req,res) => {
-  /*  if (!isValid(req.headers['Authorization'])) {
-        res.status = 401;
-        return
-    }*/
+
+router.get('/:userId', (req,res) => {
 
     const userId = req.params.userId;
     db.query(

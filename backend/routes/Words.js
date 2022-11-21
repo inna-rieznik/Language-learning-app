@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql = require("mysql");
-
+const authMiddleware = require("../middleware/authMidleware");
+const roleMiddleware = require("../middleware/roleMiddleware");
 const router = express.Router();
 
 const db = mysql.createConnection({
@@ -12,52 +13,70 @@ const db = mysql.createConnection({
 
 
 //get list of words
-router.get('/', (req, res) => {
-    db.query('SELECT * FROM mydb.words',
-        (err, result) => {
-            if (err) {
-                console.log(err);
-                res.send({status: 'error', err})
-                return;
-            }
-            console.log(result);
-            res.send(result);
-        })
+router.get('/', roleMiddleware(['admin']), (req, res) => {
+
+    try {
+        db.query('SELECT * FROM mydb.words',
+            (err, result) => {
+                if (err) {
+                    console.log(err);
+                    res.send({status: 'error', err})
+                    return;
+                }
+                console.log(result);
+                res.send(result);
+            })
+    } catch (e) {
+        console.log(e)
+    }
+
 
 });
 
-router.get('/random/6', (req, res) => {
-    db.query('select * from mydb.words ORDER BY RAND() LIMIT 6',
-        (err, result) => {
-            if (err) {
-                console.log(err);
-                res.send({status: 'error', err})
-                return;
-            }
-            console.log(result);
-            res.send(result);
-        })
+router.get('/random/6', authMiddleware, (req, res) => {
+
+    try {
+        db.query('select * from mydb.words ORDER BY RAND() LIMIT 6',
+            (err, result) => {
+                if (err) {
+                    console.log(err);
+                    res.send({status: 'error', err})
+                    return;
+                }
+                console.log(result);
+                res.send(result);
+            })
+    } catch (e) {
+        console.log(e)
+    }
+
 
 });
 
 
 //add word to db
-router.post('/', (req, res) => {
+router.post('/', authMiddleware,(req, res) => {
     //to access data from FE we use body
-     const source = req.body.source;
-     const target = req.body.target;
+    try {
+        const source = req.body.source;
+        const target = req.body.target;
 
-    db.query(
-        "INSERT INTO mydb.words (id_lesson, id_state, id_language, source, target) values(1,1,1,?,?)",
-        [source, target],
-        (err, result) => {
-            if (err) {
-                console.log(err);
-                res.send({status: 'error', err})
-                return;
-            }
-            res.send({status: 'ok'})
-        })
+        db.query(
+            "INSERT INTO mydb.words (id_lesson, id_state, id_language, source, target) values(1,1,1,?,?)",
+            [source, target],
+            (err, result) => {
+                if (err) {
+                    console.log(err);
+                    res.send({status: 'error', err})
+                    return;
+                }
+                res.send({status: 'ok'})
+            })
+    } catch (e) {
+        console.log(e)
+    }
+
+
     /*loop to add this word to every existed user */
 
     /*db.query(

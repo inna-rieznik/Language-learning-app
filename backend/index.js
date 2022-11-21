@@ -27,12 +27,13 @@ db.connect((error) => {
 
 
 
-//ROUTERS
-const registerRouter = require('./routes/Register')
-app.use("/register", registerRouter);
 
-const loginRouter = require('./routes/Login')
-app.use("/login", loginRouter);
+//ROUTERS
+const registerRouter = require('./routes/Auth')
+app.use("/auth", registerRouter);
+
+/*const loginRouter = require('./routes/Login')
+app.use("/login", loginRouter);*/
 
 const lessonRouter = require('./routes/Lessons')
 app.use("/lessons", lessonRouter);

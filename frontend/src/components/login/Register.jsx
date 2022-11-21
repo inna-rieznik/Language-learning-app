@@ -29,7 +29,7 @@ const Register = (props) => {
     };
 
     const register = () => {
-        Axios.post('http://localhost:3011/register', {
+        Axios.post('http://localhost:3011/auth/register', {
             username: usernameReg,
             email: emailReg,
             password: passwordReg

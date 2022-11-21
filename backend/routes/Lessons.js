@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql = require("mysql");
-
+const authMiddleware = require("../middleware/authMidleware");
+const roleMiddleware = require("../middleware/roleMiddleware");
 const router = express.Router();
 
 const db = mysql.createConnection({
@@ -11,8 +12,8 @@ const db = mysql.createConnection({
 });
 
 
-//get list of LESSONS
-router.get('/', (req, res) => {
+//get list of LESSONS only for authorized user
+router.get('/',  (req, res) => {
     db.query('SELECT * FROM mydb.lessons',
         (err, result) => {
             if (err) {
@@ -22,10 +23,11 @@ router.get('/', (req, res) => {
             }
             console.log(result);
             res.send(result);
+            console.log(req.userData);
         })
 
 });
-//get one lesson '/lessons/id/1'
+//get one lesson only for authorized user '/lessons/id/1'
 router.get('/id/:lessonId', (req, res) => {
     const lessonId = req.params.lessonId;
     db.query(
@@ -43,8 +45,8 @@ router.get('/id/:lessonId', (req, res) => {
     )
 
 })
-
-router.post('/', (req, res) => {
+//only admin can add new lesson
+router.post('/', roleMiddleware(['admin']),(req, res) => {
     //to access data from FE we use body
     const title = req.body.title;
     const introText = req.body.introText;
@@ -65,5 +67,4 @@ router.post('/', (req, res) => {
     )
 })
 
-//make sure wi can export routers
 module.exports = router;
