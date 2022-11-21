@@ -56,7 +56,7 @@ const Login = (props) => {
         });
     };
 
-    if (userId > 0) {
+    if (isLoggedIn) {
         return navigate('/');
     }
 

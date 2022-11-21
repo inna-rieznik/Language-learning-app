@@ -12,7 +12,9 @@ const db = mysql.createConnection({
 });
 
 //it works return correct user in POSTMAN
+
 router.get('/:userId', (req,res) => {
+
     const userId = req.params.userId;
     db.query(
         'SELECT * FROM mydb.users JOIN roles r on users.id_role = r.id_role JOIN users_progress up on users.id_user = up.id_user WHERE users.id_user = ?',
