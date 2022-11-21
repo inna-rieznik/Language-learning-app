@@ -42,6 +42,9 @@ const Header = (props) => {
                         <p className={s.levelIndicator}>{user.name}</p>
                     </li>
                     <li className={s.item}>
+                        <p className={s.levelIndicator}>{user.role}</p>
+                    </li>
+                    <li className={s.item}>
                         <p className={s.level}>Level {userLevel}</p>
                     </li>
                     <li className={s.item}>

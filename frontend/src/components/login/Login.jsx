@@ -24,7 +24,6 @@ const Login = (props) => {
     const { setAuthTokens, userId } =  useAuth();
 
 
-
     const handleSubmit = event => {
         console.log('handleSubmit ran');
         event.preventDefault();
@@ -34,17 +33,21 @@ const Login = (props) => {
 
 
     const login = () => {
-        Axios.post('http://localhost:3011/login', {
+        Axios.post('http://localhost:3011/auth/login', {
             email: email,
             password: password
         }).then((response) => {
             if (response.data.message) {
                 setLoginStatus(response.data.message);
             } else {
+                const token  =  response.data.token;
+                //set JWT token to local
+                localStorage.setItem("token", token);
                 setAuthTokens(response.data);
                // setUserLoginId(response.data[0]?.id_user);
                 setLoggedIn(true);
-                setLoginStatus(response.data[0].name);
+                window.location.href = '/'
+                //setLoginStatus(response.data[0].name);
                 /* navigate(`/user/${response.data[0]?.id_user}`);*/
 
             }

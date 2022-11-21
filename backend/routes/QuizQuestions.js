@@ -1,5 +1,7 @@
 const express = require('express');
 const mysql = require("mysql");
+const authMiddleware = require("../middleware/authMidleware");
+const roleMiddleware = require("../middleware/roleMiddleware");
 
 const router = express.Router();
 
@@ -19,7 +21,7 @@ const db = mysql.createConnection({
     }
 });
 
-router.get('/', (req, res) => {
+router.get('/',  (req, res) => {
     db.query(
         'select quiz_questions.id_quiz_questions, score, quiz_questions.content as question, id_quiz_answers, correct, qa.content as answer from mydb.quiz_questions join mydb.quiz_answers qa on quiz_questions.id_quiz_questions = qa.id_quiz_questions',
         (err, result) => {
@@ -57,10 +59,11 @@ router.get('/', (req, res) => {
     )
 })
 
-router.post('/', (req, res) => {
+//only admin can add new quiz question
+router.post('/', roleMiddleware(['admin']),  (req, res) => {
     //to access data from FE we use body
     const quizQuestion = req.body.quizQuestion;
-
+    //add there lesson id and add it at create lesson page
     db.query(
         "insert into mydb.quiz_questions(id_quizes, type, score, content) values (1,'quiz', 1, ?)",
         [quizQuestion],

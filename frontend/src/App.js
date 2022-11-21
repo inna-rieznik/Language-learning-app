@@ -37,22 +37,24 @@ const App = (props) => {
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("tokens"));
-        user?.forEach((key) => {
-            setUserId(key.id_user);
-        });
+       /* Object.keys(user).forEach(key => {
+            setUserId(user[key].id_user);
+            console.log(user[key].id_user);
+        })*/
     }, [userId])
 
     console.log("user_id", userId);
 
     const setTokens = (data) => {
         localStorage.setItem("tokens", JSON.stringify(data));
-         data?.forEach((key) => {
-             setUserId(key.id_user);
-         })
+      /*  data?.forEach((key) => {
+            setUserId(key.id_user);
+        })*/
     };
 
     const handleLogout = () => {
         localStorage.removeItem("tokens");
+        localStorage.removeItem("token");
         setAuthTokens("");
     };
 
@@ -76,15 +78,15 @@ const App = (props) => {
                                </AuthenticatedLayout>}/>
 
                         <Route path='/create_lesson'
-                               element={<AuthenticatedLayout>
+                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
                                    <CreateLesson/>
                                </AuthenticatedLayout>}/>
                         <Route path='/review_grammar'
-                               element={<AuthenticatedLayout>
+                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
                                    <ReviewGrammar/>
                                </AuthenticatedLayout>}/>
                         <Route path={'/my_words'}
-                               element={<AuthenticatedLayout>
+                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
                                    <WordsPage wordsData={props.state.wordsData}
                                               dispatch={props.dispatch}
                                               newWordText={props.state.newWordText}
@@ -92,39 +94,39 @@ const App = (props) => {
                                    />
                                </AuthenticatedLayout>}/>
                         <Route path={'/review_words'}
-                               element={<AuthenticatedLayout>
+                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
                                    <ReviewWords/>
                                </AuthenticatedLayout>}/>
 
                         <Route path={'/review_grammar'}
-                               element={<AuthenticatedLayout>
+                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
                                    <ReviewGrammar/>
                                </AuthenticatedLayout>}/>
                         <Route path={'/review_words/quiz'}
-                               element={<AuthenticatedLayout>
+                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
                                    <QuizPage/>
                                </AuthenticatedLayout>}/>
                         <Route path={'/review_words/flashcards'}
-                               element={<AuthenticatedLayout>
+                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
                                    <FlashcardsPage/>
                                </AuthenticatedLayout>}/>
 
                         <Route path={'/review_words/matching_translation'}
-                               element={<AuthenticatedLayout>
+                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
                                    <MatchingPage2/>
                                </AuthenticatedLayout>}/>
 
                         <Route path={'/review_words/matching_sentences'}
-                               element={<AuthenticatedLayout>
+                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
 
                                </AuthenticatedLayout>}/>
 
                         <Route path={`lessons/id/:lessonId`}
-                               element={<AuthenticatedLayout>
+                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
                                    <LessonPage/>
                                </AuthenticatedLayout>}/>}
                         <Route path={`/user/:userId`}
-                               element={<AuthenticatedLayout>
+                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
                                    <UserPage/>
                                </AuthenticatedLayout>}/>
 
