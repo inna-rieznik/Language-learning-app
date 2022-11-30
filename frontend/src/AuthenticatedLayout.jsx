@@ -4,13 +4,15 @@ import {useAuth} from "./components/login/Auth";
 import {useNavigate} from "react-router-dom";
 
 
-const AuthenticatedLayout = ({children}) => {
+const AuthenticatedLayout = ({children, onlyAdmin}) => {
     const {authTokens} = useAuth();
     const navigate = useNavigate();
 
     if (!authTokens) {
         return navigate('/login');
     }
+
+    /*if (onlyAdmin)*/
 
 
     return (

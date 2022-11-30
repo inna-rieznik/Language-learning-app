@@ -21,6 +21,7 @@ import {addWordToVocabularyActionCreator, updateNewWordTextActionCreator} from "
 import {useEffect, useState} from 'react';
 import axios from "axios";
 import Axios from "axios";
+import {useAuth} from "../login/Auth";
 
 const btnStyle = {
     marginBottom : 20
@@ -46,7 +47,8 @@ const WordsPage = (props) => {
     const [listOfWords, setListOfWords] = useState();
 
     useEffect(() => {
-        axios.get("http://localhost:3011/words").then((response) => {
+        axios.get("http://localhost:3011/words",
+            ).then((response) => {
             setListOfWords(response.data);
             console.log(response.data);
         });

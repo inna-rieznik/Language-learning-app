@@ -39,21 +39,19 @@ const App = (props) => {
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("tokens"));
-       /* Object.keys(user).forEach(key => {
-            setUserId(user[key].id_user);
-            console.log(user[key].id_user);
-        })*/
+        if (user) {
+            Object.keys(user).forEach(key => {
+                setUserId(user[key].id_user);
+                console.log(user[key].id_user);
+            })
+        }
     }, [userId])
 
     console.log("user_id", userId);
 
     const setTokens = (data) => {
         localStorage.setItem("tokens", JSON.stringify(data));
-
-      /*  data?.forEach((key) => {
-            setUserId(key.id_user);
-        })*/
-
+        setUserId(data.user.id_user)
     };
 
     const handleLogout = () => {
@@ -76,7 +74,8 @@ const App = (props) => {
                                element={<Register userId={userId}/>}/>
 
                         <Route path='/'
-                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
+                                                       /* onlyAdmin={true}*/
+                               element={<AuthenticatedLayout  authTokens={authTokens} userId={userId}>
                                    <MainPage lessonsData={props.state.lessonsData}
                                              dispatch={props.dispatch}/>
                                </AuthenticatedLayout>}/>
