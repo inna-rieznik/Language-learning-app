@@ -13,7 +13,7 @@ const db = mysql.createConnection({
 
 
 //get list of words
-router.get('/', roleMiddleware(['admin']), (req, res) => {
+router.get('/', authMiddleware, (req, res) => {
 
     try {
         db.query('SELECT * FROM mydb.words',

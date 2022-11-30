@@ -5,6 +5,9 @@ import Button from "@mui/material/Button";
 import {useState} from "react";
 import Axios from "axios";
 import {useNavigate} from 'react-router-dom';
+import {useEffect} from "react";
+import axios from "axios";
+import {useAuth} from "../../login/Auth";
 
 
 const CreateLesson = (props) => {
@@ -13,6 +16,8 @@ const CreateLesson = (props) => {
     const [introText, setIntroText] = useState("");
     const [grammarRuleTitle, setGrammarRuleTitle] = useState("");
     const [grammarRule, setGrammarRule] = useState("");
+    const [user, setUser] = useState({})
+    const {userId} = useAuth();
 
     const navigate = useNavigate();
 
@@ -21,6 +26,12 @@ const CreateLesson = (props) => {
         event.target.reset();
 
     };
+
+    useEffect(() => {
+        axios.get(`http://localhost:3011/user/${userId}`).then((response) => {
+            setUser(response.data[0]);
+        });
+    }, [userId])
 
     const addLesson = () => {
         Axios.post('http://localhost:3011/lessons', {
@@ -33,6 +44,11 @@ const CreateLesson = (props) => {
             console.log(response.data);
         });
     };
+
+    if (user.role === 'student') {
+        window.location.href = '/'
+        return null
+    }
 
     return (
         <div>
