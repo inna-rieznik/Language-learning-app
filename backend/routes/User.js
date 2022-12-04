@@ -13,7 +13,7 @@ const db = mysql.createConnection({
 
 //it works return correct user in POSTMAN
 
-router.get('/:userId', (req,res) => {
+router.get('/:userId', authMiddleware, (req,res) => {
 
     const userId = req.params.userId;
     db.query(

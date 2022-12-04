@@ -13,6 +13,13 @@ function handleClick(event) {
     console.info('You clicked a breadcrumb.');
 }
 
+let reqInstance = axios.create({
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }
+);
+
 const UserPage = (props) => {
 
     let {userId} = useParams();
@@ -20,7 +27,7 @@ const UserPage = (props) => {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:3011/user/${userId}`).then((response) => {
+        reqInstance.get(`http://localhost:3011/user/${userId}`).then((response) => {
             setUserObject(response.data);
             console.log(response.data);
         });

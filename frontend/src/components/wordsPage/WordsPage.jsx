@@ -24,7 +24,7 @@ import Axios from "axios";
 import {useAuth} from "../login/Auth";
 
 const btnStyle = {
-    marginBottom : 20
+    marginBottom: 20
 };
 
 const style = {
@@ -39,20 +39,37 @@ const style = {
     p: 4,
 };
 
+let reqInstance = axios.create({
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }
+);
+
+
 const WordsPage = (props) => {
 
     const [source, setSource] = useState("");
     const [target, setTarget] = useState("");
+    const [user, setUser] = useState({})
+    const {userId} = useAuth();
 
     const [listOfWords, setListOfWords] = useState();
 
     useEffect(() => {
-        axios.get("http://localhost:3011/words",
-            ).then((response) => {
+        reqInstance.get("http://localhost:3011/words",
+        ).then((response) => {
             setListOfWords(response.data);
             console.log(response.data);
         });
     }, []);
+
+    useEffect(() => {
+        reqInstance.get(`http://localhost:3011/user/${userId}`).then((response) => {
+            setUser(response.data[0]);
+            console.log("user data", response.data[0]);
+        });
+    }, [userId]);
 
     const addWord = () => {
         Axios.post('http://localhost:3011/words', {
@@ -64,7 +81,6 @@ const WordsPage = (props) => {
     };
 
 
-
     //function to add data from inputs to wordsData
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -74,23 +90,23 @@ const WordsPage = (props) => {
     let newWordCz = React.createRef();
     let newWordEng = React.createRef();
 
-    let addWordToVocabulary = () => {
-        /*let word = newWordCz.current.value;
-        let translate = newWordEng.current.value;*/
-        /*props.addWordToVocabulary(word, translate);*/
-        let action = addWordToVocabularyActionCreator()
-        props.dispatch(action);
-        //props.updateNewWordText('','');
+    /* let addWordToVocabulary = () => {
+         /!*let word = newWordCz.current.value;
+         let translate = newWordEng.current.value;*!/
+         /!*props.addWordToVocabulary(word, translate);*!/
+         let action = addWordToVocabularyActionCreator()
+         props.dispatch(action);
+         //props.updateNewWordText('','');
 
 
-    };
+     };*/
 
-    let updateNewWordText = () => {
-        let word = newWordCz.current.value;
-        let translation = newWordEng.current.value;
-        let action = updateNewWordTextActionCreator(word, translation);
-        props.dispatch(action);
-    }
+    /* let updateNewWordText = () => {
+         let word = newWordCz.current.value;
+         let translation = newWordEng.current.value;
+         let action = updateNewWordTextActionCreator(word, translation);
+         props.dispatch(action);
+     }*/
 
     return (
         <div className={s.content}>
@@ -105,7 +121,10 @@ const WordsPage = (props) => {
                 <Typography color="text.primary">My Words</Typography>
             </Breadcrumbs>
             <h1>My Words</h1>
-            <Button style={btnStyle} onClick={handleOpen} variant="contained" startIcon={<AddIcon/>}>add new word</Button>
+            {(user.role === 'student') ? null :
+                <Button style={btnStyle} onClick={handleOpen} variant="contained" startIcon={<AddIcon/>}>add new
+                    word</Button>
+            }
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -136,7 +155,7 @@ const WordsPage = (props) => {
                                        onChange={(e) => {
                                            setSource(e.target.value);
                                        }}
-                                     /*  value={props.wordsData.newWordText}*//>
+                                /*  value={props.wordsData.newWordText}*//>
                             <Typography id="transition-modal-title">
                                 Translation
                             </Typography>
@@ -148,13 +167,15 @@ const WordsPage = (props) => {
                                            setTarget(e.target.value);
                                        }}
 
-                                      /* value={props.wordsData.newTranslationText}*//>
+                                /* value={props.wordsData.newTranslationText}*//>
+
                             <Button variant="contained"
                                     startIcon={<AddIcon/>}
                                     onClick={() => {
                                         addWord();
                                         handleClose();
                                     }}>add</Button>
+
                         </Box>
 
                     </Box>

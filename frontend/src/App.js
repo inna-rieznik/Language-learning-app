@@ -35,8 +35,6 @@ const App = (props) => {
     }, [])
 */
 
-    //kdyz zkousim ZAREGISTROVAT SE -> tohle zpusobi chyby !!!!!!!!!!!!!!!!
-
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("tokens"));
         if (user) {
@@ -51,7 +49,7 @@ const App = (props) => {
 
     const setTokens = (data) => {
         localStorage.setItem("tokens", JSON.stringify(data));
-        setUserId(data.user.id_user)
+        setUserId(data.id_user)
     };
 
     const handleLogout = () => {
