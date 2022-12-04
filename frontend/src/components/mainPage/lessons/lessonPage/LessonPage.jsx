@@ -5,14 +5,23 @@ import * as React from 'react';
 import {useEffect, useState} from "react";
 import axios from "axios";
 import QuizPage from "../../vocabulary/quiz/QuizGame";
+import {useAuth} from "../../../login/Auth";
+
+let reqInstance = axios.create({
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }
+);
 
 const LessonPage = (props) => {
 
     let {lessonId} = useParams();
     const [lessonObject, setLessonObject] = useState([]);
 
+
     useEffect(() => {
-        axios.get(`http://localhost:3011/lessons/id/${lessonId}`).then((response) => {
+        reqInstance.get(`http://localhost:3011/lessons/id/${lessonId}`).then((response) => {
             setLessonObject(response.data);
             console.log(response.data);
         });

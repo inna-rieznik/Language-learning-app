@@ -30,6 +30,12 @@ export const questions = [
     }
 ]
 
+let reqInstance = axios.create({
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }
+);
 
 const QuizPage = (props) => {
     const [step, setStep] = React.useState(0); //first element in array
@@ -37,7 +43,7 @@ const QuizPage = (props) => {
     const [quizes, setQuizes] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:3011/quizQuestions`).then((response) => {
+        reqInstance.get(`http://localhost:3011/quizQuestions`).then((response) => {
             setQuizes(response.data);
             console.log("quizes data", response.data);
 

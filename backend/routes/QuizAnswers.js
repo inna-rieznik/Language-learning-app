@@ -13,7 +13,7 @@ const db = mysql.createConnection({
 });
 
 
-router.get('/1', (req, res) => {
+router.get('/1', authMiddleware, (req, res) => {
    /* const questionId = req.body.questionId;*/
     db.query(
         'select content, correct from mydb.quiz_answers where id_quiz_questions =  1',

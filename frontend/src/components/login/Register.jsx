@@ -9,12 +9,18 @@ import {useState} from "react";
 import Link from "@mui/material/Link";
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "./Auth";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 
 
 const Register = (props) => {
 
     const [isRegisteredIn, setRegisteredIn] = useState(false);
     const [usernameReg, setUsernameReg] = useState(""); //name + surname
+    const [roleReg, setRoleReg] = useState("");
     const [emailReg, setEmailReg] = useState("");
     const [passwordReg, setPasswordReg] = useState("");
     const [registerStatus, setRegisterStatus] = useState("");
@@ -32,26 +38,30 @@ const Register = (props) => {
         Axios.post('http://localhost:3011/auth/register', {
             username: usernameReg,
             email: emailReg,
-            password: passwordReg
+            password: passwordReg,
+            role : roleReg
         }).then((response) => {
             if (response.data.message) {
                 setRegisterStatus(response.data.message);
             } else {
+                const token  =  response.data.token;
+                localStorage.setItem("token", token);
                 setAuthTokens(response.data);
                 setRegisteredIn(true);
-                setRegisterStatus(response.data[0].name);
+                window.location.href = '/'
+               // setRegisterStatus(response.data[0].name);
             }
             console.log(response.data);
         });
     };
 
-  /*  if (isRegisteredIn) {
-        return navigate('/');
-    } //else zobrazit login stranku*/
-
-    if (userId > 0) {
+   if (isRegisteredIn) {
         return navigate('/');
     }
+
+   /* if (userId > 0) {
+        return navigate('/');
+    }*/
 
 
     return (
@@ -89,6 +99,24 @@ const Register = (props) => {
                             {registerStatus}
                         </p>
                     </Box>
+                    <Box mt={3} width="100%">
+                        <FormControl>
+                            <FormLabel id="demo-radio-buttons-group-label">Role</FormLabel>
+                            <RadioGroup
+                                row
+                                aria-labelledby="demo-radio-buttons-group-label"
+                                defaultValue="female"
+                                name="radio-buttons-group"
+                                onChange={(e) => {
+                                    setRoleReg(e.target.value);
+                                }}
+                            >
+                                <FormControlLabel value="1" control={<Radio />} label="admin" />
+                                <FormControlLabel value="2" control={<Radio />} label="student" />
+                            </RadioGroup>
+                        </FormControl>
+                    </Box>
+
                     <Box mt={3} width="100%">
                         <Link underline="hover"
                               color="inherit"

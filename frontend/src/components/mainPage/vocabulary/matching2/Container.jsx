@@ -7,6 +7,14 @@ import axios from "axios";
 import Button from "@mui/material/Button";
 import * as React from "react";
 
+let reqInstance = axios.create({
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }
+);
+
+
 export const Container = memo(function Container() {
 
     const [words2, setWords2] = useState([]);
@@ -17,7 +25,7 @@ export const Container = memo(function Container() {
 
 
     useEffect(() => {
-        axios.get("http://localhost:3011/words/random/6").then((response) => {
+        reqInstance.get("http://localhost:3011/words/random/6").then((response) => {
 
             setWords2(response.data.map((wordItem, index) => {
                 return {

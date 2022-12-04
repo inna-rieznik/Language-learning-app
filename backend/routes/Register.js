@@ -1,3 +1,4 @@
+/*
 const express = require('express');
 const mysql = require("mysql");
 const bcrypt = require("bcrypt");
@@ -67,7 +68,7 @@ router.post('/',
                             }
 
                             res.send("User was successfully registered");
-                           /* db.query(
+                           /!* db.query(
                                 "SELECT * FROM mydb.users JOIN roles r on users.id_role = r.id_role JOIN users_progress up on users.id_user = up.id_user WHERE email = ?",
                                 [email],
                                 async (err, result) => {
@@ -84,7 +85,7 @@ router.post('/',
                                     }
 
                                 }
-                            )*/
+                            )*!/
                         }
                     )
                 }
@@ -95,4 +96,4 @@ router.post('/',
 })
 
 
-module.exports = router;
+module.exports = router;*/

@@ -9,6 +9,12 @@ import {AuthContext, useAuth} from "../login/Auth";
 import {useEffect} from "react";
 import axios from "axios";
 
+let reqInstance = axios.create({
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }
+);
 
 const Header = (props) => {
     const {authTokens, userId, handleLogout} = useAuth();
@@ -20,7 +26,7 @@ const Header = (props) => {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:3011/user/${userId}`).then((response) => {
+        reqInstance.get(`http://localhost:3011/user/${userId}`).then((response) => {
             setUser(response.data[0]);
             setUserScore(response.data[0].score);
             setUserLevel(response.data[0].level);
@@ -39,16 +45,16 @@ const Header = (props) => {
             <nav className={s.menu}>
                 <ul className={s.list}>
                     <li className={s.item}>
-                        <p className={s.levelIndicator}>{user.name}</p>
-                    </li>
-                    <li className={s.item}>
-                        <p className={s.levelIndicator}>{user.role}</p>
-                    </li>
-                    <li className={s.item}>
                         <p className={s.level}>Level {userLevel}</p>
                     </li>
                     <li className={s.item}>
                         <p className={s.levelIndicator}>{userScore}/100</p>
+                    </li>
+                    <li className={s.item}>
+                        <p className={s.levelIndicator}>{user.name}</p>
+                    </li>
+                    <li className={s.item}>
+                        <p className={s.levelIndicator}>({user.role})</p>
                     </li>
                     <li className={s.item}>
                         <IconButton aria-label="person" href={`/user/${userId}`}>

@@ -10,6 +10,13 @@ import axios from "axios";
 import {useAuth} from "../../login/Auth";
 
 
+let reqInstance = axios.create({
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }
+);
+
 const CreateLesson = (props) => {
 
     const [title, setTitle] = useState("");
@@ -27,14 +34,20 @@ const CreateLesson = (props) => {
 
     };
 
+
     useEffect(() => {
-        axios.get(`http://localhost:3011/user/${userId}`).then((response) => {
+        reqInstance.get(`http://localhost:3011/user/${userId}`).then((response) => {
             setUser(response.data[0]);
+            console.log("user data", response.data[0]);
         });
-    }, [userId])
+    }, [userId]);
+
+
+
+
 
     const addLesson = () => {
-        Axios.post('http://localhost:3011/lessons', {
+        reqInstance.post('http://localhost:3011/lessons', {
             title: title,
             introText: introText,
             grammarRuleTitle: grammarRuleTitle,
@@ -49,6 +62,8 @@ const CreateLesson = (props) => {
         window.location.href = '/'
         return null
     }
+
+    //console.log("user role", localStorage.);
 
     return (
         <div>

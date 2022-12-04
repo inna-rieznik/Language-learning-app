@@ -55,7 +55,7 @@ router.get('/random/6', authMiddleware, (req, res) => {
 
 
 //add word to db
-router.post('/', authMiddleware,(req, res) => {
+router.post('/', roleMiddleware(['admin']), (req, res) => {
     //to access data from FE we use body
     try {
         const source = req.body.source;

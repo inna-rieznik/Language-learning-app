@@ -2,6 +2,7 @@ import ProductLaunchImg from "../../images/Product Launch.png";
 import s from './MainPage.module.css'
 import Lessons from "./lessons/Lessons";
 import Vocabulary from "./vocabulary/Vocabulary";
+import {useAuth} from "../login/Auth";
 
 const MainPage = (props) => {
     return (
@@ -19,16 +20,16 @@ const MainPage = (props) => {
     );
 }
 
-// const OnlyAdmin = ({ children}) => {
-//     const {authTokens, userId} = useAuth();
-//     const user = {}
-//
-//     if (user.role === 'admin') {
-//         return <>{children}</>
-//     }
-//
-//     return null
-//
-// }
+/*const OnlyAdmin = ({children}) => {
+    const {authTokens, userId} = useAuth();
+    const user = {}
+
+    if (user.role === 'admin') {
+        return <>{children}</>
+    }
+
+    return null
+
+}*/
 
 export default MainPage;

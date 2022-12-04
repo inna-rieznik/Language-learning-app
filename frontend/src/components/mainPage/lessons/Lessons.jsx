@@ -9,25 +9,45 @@ import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import * as React from "react";
 import {useNavigate} from 'react-router-dom';
+import {useAuth} from "../../login/Auth";
 
 const btnStyle = {
     marginBottom : 20
 };
 
+let reqInstance = axios.create({
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }
+);
+
+
 const Lessons = (props) => {
     const [listOfLessons, setListOfLessons] = useState();
+    const [user, setUser] = useState({})
+    const {userId} = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get("http://localhost:3011/lessons").then((response) => {
+        reqInstance.get("http://localhost:3011/lessons").then((response) => {
             setListOfLessons(response.data);
         });
     }, []);
 
+
+    useEffect(() => {
+        reqInstance.get(`http://localhost:3011/user/${userId}`).then((response) => {
+            setUser(response.data[0]);
+            console.log("user data", response.data[0]);
+        });
+    }, [userId]);
+
     return (
         <div className={s.lessons}>
             <h1>Lessons</h1>
-            <Action urlName='create_lesson' title='create new lesson'/>
+            {(user.role === 'student') ? null : <Action urlName='create_lesson' title='create new lesson'/>}
+
             <Button style={btnStyle} variant="contained" href='review_grammar'>Review grammar</Button>
 
             {listOfLessons?.map((value, key) => (

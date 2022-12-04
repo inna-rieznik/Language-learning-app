@@ -3,12 +3,20 @@ import s from "./Flashcards.module.css";
 import FlashcardsList from "./FlashcardsList";
 import axios from "axios";
 
+
+let reqInstance = axios.create({
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }
+);
+
 const Flashcards = (props) => {
     const [flashcards, setFlashcards] = useState(SAMPLE_FLASHCARDS);
     const [correctAnswer, setCorrectAnswer] = useState("");
 
     useEffect(() => {
-        axios.get("http://localhost:3011/words/random/6").then((response) => {
+        reqInstance.get("http://localhost:3011/words/random/6").then((response) => {
             //setListOfWords(response.data);
 
             setFlashcards(response.data.map((wordItem, index) => {
