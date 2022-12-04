@@ -23,9 +23,6 @@ import axios from "axios";
 import Axios from "axios";
 import {useAuth} from "../login/Auth";
 
-const btnStyle = {
-    marginBottom: 20
-};
 
 const style = {
     position: 'absolute',
@@ -122,7 +119,7 @@ const WordsPage = (props) => {
             </Breadcrumbs>
             <h1>My Words</h1>
             {(user.role === 'student') ? null :
-                <Button style={btnStyle} onClick={handleOpen} variant="contained" startIcon={<AddIcon/>}>add new
+                <Button  style={{backgroundColor: "#FF777B", width: "400px", height: "50px", marginBottom: 20}} onClick={handleOpen} variant="contained" startIcon={<AddIcon/>}>add new
                     word</Button>
             }
             <Modal
@@ -187,15 +184,15 @@ const WordsPage = (props) => {
                 <TableContainer component={Paper}>
                     <Table sx={{minWidth: 650}} aria-label="simple table">
                         <TableHead>
-                            <TableRow>
-                                <TableCell>Id</TableCell>
-                                <TableCell align="left">Word</TableCell>
-                                <TableCell align="left">Translation</TableCell>
+                            <TableRow style={{backgroundColor: "rgba(255, 194, 194, 0.5)"}}>
+                                <TableCell style={{fontWeight: " 900", color: "#003066"}}>Id</TableCell>
+                                <TableCell style={{fontWeight: " 900", color: "#003066"}} align="left">Word</TableCell>
+                                <TableCell style={{fontWeight: " 900", color: "#003066"}} align="left">Translation</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {listOfWords?.map((row) => (
-                                <TableRow
+                                <TableRow style={{backgroundColor: "rgba(255, 194, 194, 0.2)" }}
                                     key={row.id_word}
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                 >

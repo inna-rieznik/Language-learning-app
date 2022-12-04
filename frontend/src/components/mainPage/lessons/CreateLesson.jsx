@@ -105,7 +105,7 @@ const CreateLesson = (props) => {
                            onChange={(e) => {
                                setGrammarRule(e.target.value);
                            }}/>
-                <Button type="submit"
+                <Button style={{backgroundColor: "#FF777B", width: "400px", height: "50px", marginBottom: 20}} type="submit"
                         variant="contained"
                         onClick={addLesson}
                         startIcon={<AddIcon/>}>Add Lesson</Button>

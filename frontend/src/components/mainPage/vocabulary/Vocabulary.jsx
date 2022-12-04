@@ -54,8 +54,8 @@ const Vocabulary = (props) => {
         <div className={s.vocabulary}>
             <h1>Vocabulary</h1>
 
+            <Button style={{backgroundColor: "#FF777B", width: "400px", height: "50px", marginBottom: 20 }} variant="contained" href='review_words'>Review words</Button>
             <Action urlName='my_words' title='my words'/>
-            <Button variant="contained" href='review_words'>Review words</Button>
             {/*  <Button variant="contained" href='modal_add_word'  startIcon={<AddIcon />} >add new word</Button>*/}
             <Modal
                 aria-labelledby="transition-modal-title"
@@ -95,7 +95,7 @@ const Vocabulary = (props) => {
                                        inputRef={newWordEng}
                                        onChange={updateNewWordText}
                                        value={props.newTranslationText}/>
-                            <Button variant="contained"
+                            <Button  variant="contained"
                                     startIcon={<AddIcon/>}
                                     onClick={() => {
                                         addWordToVocabulary();

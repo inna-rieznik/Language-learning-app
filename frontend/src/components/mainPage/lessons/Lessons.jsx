@@ -11,9 +11,6 @@ import * as React from "react";
 import {useNavigate} from 'react-router-dom';
 import {useAuth} from "../../login/Auth";
 
-const btnStyle = {
-    marginBottom : 20
-};
 
 let reqInstance = axios.create({
         headers: {
@@ -46,13 +43,17 @@ const Lessons = (props) => {
     return (
         <div className={s.lessons}>
             <h1>Lessons</h1>
-            {(user.role === 'student') ? null : <Action urlName='create_lesson' title='create new lesson'/>}
-
-            <Button style={btnStyle} variant="contained" href='review_grammar'>Review grammar</Button>
+            {(user.role === 'student') ? null :
+                <Button style={{backgroundColor: "#FF777B", width: "400px", height: "50px", marginBottom: 20}}
+                        variant="contained" href='create_lesson'>create new lesson</Button>
+            }
+            <Button style={{backgroundColor: "#FF777B", width: "400px", height: "50px", marginBottom: 20}}
+                    variant="contained" href='review_grammar'>Review grammar</Button>
 
             {listOfLessons?.map((value, key) => (
                 <div>
-                    <Card sx={{minWidth: 250}}>
+                    <Card style={{marginBottom: 20, backgroundColor: "rgba(255, 194, 194, 0.4)" , color: "#003066", borderRadius: "15px"}} >
+
                         <CardContent>
                             <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
                                 Lesson: {value.id_lesson}
@@ -63,7 +64,9 @@ const Lessons = (props) => {
                         </CardContent>
                         <CardActions>
 
-                            <Button size="small" onClick={() => {navigate(`lessons/id/${value.id_lesson}`)}}>start</Button>
+                            <Button size="small" onClick={() => {
+                                navigate(`lessons/id/${value.id_lesson}`)
+                            }}>start</Button>
                         </CardActions>
                     </Card>
                 </div>

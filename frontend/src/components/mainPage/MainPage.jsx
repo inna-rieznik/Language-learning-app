@@ -7,7 +7,7 @@ import {useAuth} from "../login/Auth";
 const MainPage = (props) => {
     return (
         <div className={s.content}>
-            <div className={s.subContent}>
+            <div style={{marginTop: "50px"}} className={s.subContent}>
                 {/*<OnlyAdmin>*/}
                 <Lessons lessonsData={props.lessonsData}/>
                 {/*</OnlyAdmin>*/}

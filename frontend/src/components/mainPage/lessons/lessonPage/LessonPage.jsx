@@ -30,7 +30,7 @@ const LessonPage = (props) => {
     return (
         <div className={s.content}>
 
-                <div>
+                <div style={{marginTop: "50px", width: "800px", margin: "0 auto"}}>
                     <h1>Lesson {lessonId} </h1>
                     <h2>Title: {lessonObject[0]?.title}</h2>
                     <p>Intro text: {lessonObject[0]?.intro_text}</p>
