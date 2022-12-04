@@ -6,6 +6,9 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import QuizPage from "../../vocabulary/quiz/QuizGame";
 import {useAuth} from "../../../login/Auth";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Link from "@mui/material/Link";
+import Typography from "@mui/material/Typography";
 
 let reqInstance = axios.create({
         headers: {
@@ -30,14 +33,25 @@ const LessonPage = (props) => {
     return (
         <div className={s.content}>
 
-                <div>
-                    <h1>Lesson {lessonId} </h1>
-                    <h2>Title: {lessonObject[0]?.title}</h2>
-                    <p>Intro text: {lessonObject[0]?.intro_text}</p>
-                    <h2>Grammar rule title: {lessonObject[0]?.grammar_rule_title}</h2>
-                    <p>Grammar rule: {lessonObject[0]?.grammar_rule}</p>
-                    <QuizPage/>
-                </div>
+            <div style={{ width: "800px", margin: "20px auto 0 auto"}}>
+                <Breadcrumbs aria-label="breadcrumb">
+                    <Link
+                        underline="hover"
+                        color="inherit"
+                        href="/"
+                    >
+                        Home
+                    </Link>
+                    <Typography color="text.primary">Lesson {lessonId}</Typography>
+                </Breadcrumbs>
+
+                <h1 style={{marginTop: "20px"}}>Lesson {lessonId} </h1>
+                <h2>Title: {lessonObject[0]?.title}</h2>
+                <p>Intro text: {lessonObject[0]?.intro_text}</p>
+                <h2>Grammar rule title: {lessonObject[0]?.grammar_rule_title}</h2>
+                <p>Grammar rule: {lessonObject[0]?.grammar_rule}</p>
+                <QuizPage/>
+            </div>
 
 
         </div>

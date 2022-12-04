@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useAuth} from "../login/Auth";
- 
+
 
 function handleClick(event) {
     event.preventDefault();
@@ -35,24 +35,26 @@ const UserPage = (props) => {
 
     return (
         <div className={s.content}>
-            <div role="presentation" onClick={handleClick}>
-                <Breadcrumbs aria-label="breadcrumb">
-                    <Link
-                        underline="hover"
-                        color="inherit"
-                        href="/"
-                    >
-                        Home
-                    </Link>
-                    <Typography color="text.primary">User Page</Typography>
-                </Breadcrumbs>
+            <div style={{ width: "800px", margin: "20px auto 20px auto"}}>
+                <div role="presentation" onClick={handleClick}>
+                    <Breadcrumbs aria-label="breadcrumb">
+                        <Link
+                            underline="hover"
+                            color="inherit"
+                            href="/"
+                        >
+                            Home
+                        </Link>
+                        <Typography color="text.primary">User Page</Typography>
+                    </Breadcrumbs>
+                </div>
+                <h1 style={{marginTop: "20px"}}>User Page</h1>
+                <h2>Name: {userObject[0]?.name} </h2>
+                <h2>Username: {userObject[0]?.username} </h2>
+                <h2>Role: {userObject[0]?.role} </h2>
+                <h2>Level: {userObject[0]?.level}</h2>
+                <h2>Points: {userObject[0]?.score}</h2>
             </div>
-            <h1>User Page</h1>
-            <h2>Name: {userObject[0]?.name} </h2>
-            <h2>Username: {userObject[0]?.username} </h2>
-            <h2>Role: {userObject[0]?.role} </h2>
-            <h2>Level: {userObject[0]?.level}</h2>
-            <h2>Points: {userObject[0]?.score}</h2>
         </div>
     );
 }

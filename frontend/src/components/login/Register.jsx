@@ -73,28 +73,28 @@ const Register = (props) => {
                 <form className={s.form} onSubmit={handleSubmit}>
                     <h1>Register</h1>
                     <Box mt={3} width="100%">
-                        <TextField required id="outlined-basic"
+                        <TextField style={{width: "400px" }} required id="outlined-basic"
                                    label="Name"
                                    onChange={(e) => {
                                        setUsernameReg(e.target.value);
                                    }}
-                                   variant="outlined"/>
+                                   variant="standard"/>
                     </Box>
                     <Box mt={3} width="100%">
-                        <TextField required id="outlined-basic"
+                        <TextField style={{width: "400px" }} required id="outlined-basic"
                                    label="Email"
                                    onChange={(e) => {
                                        setEmailReg(e.target.value);
                                    }}
-                                   variant="outlined"/>
+                                   variant="standard"/>
                     </Box>
                     <Box mt={3} width="100%">
-                        <TextField required id="outlined-basic"
+                        <TextField style={{width: "400px" }} required id="outlined-basic"
                                    label="Password"
                                    onChange={(e) => {
                                        setPasswordReg(e.target.value);
                                    }}
-                                   variant="outlined"/>
+                                   variant="standard"/>
                         <p style={{color: "red"}}>
                             {registerStatus}
                         </p>
@@ -125,7 +125,7 @@ const Register = (props) => {
                         </Link>
                     </Box>
                     <Box mt={3} width="100%">
-                        <Button variant="contained" onClick={register}>Register</Button>
+                        <Button style={{backgroundColor: "#FF777B", width: "400px" }} variant="contained" onClick={register}>Register</Button>
                     </Box>
                 </form>
             </div>
