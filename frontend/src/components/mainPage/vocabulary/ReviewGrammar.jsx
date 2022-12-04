@@ -11,24 +11,25 @@ const ReviewGrammar = (props) => {
 
     //Settings component
     return (
-        <div >
-            <Breadcrumbs aria-label="breadcrumb">
-                <Link
-                    underline="hover"
-                    color="inherit"
-                    href="/"
-                >
-                    Home
-                </Link>
-                <Typography color="text.primary">Review Grammar</Typography>
-            </Breadcrumbs>
-            <h1>Review Grammar</h1>
-            <Action urlName='select_form' title='Select the correct form of the word'/>
-            <Action urlName='write_word' title='Write the correct word'/>
-            <Action urlName='review_words/matching_sentence' title='Connect parts of the sentence'/>
-            <Action urlName='review_words/complete_sentences' title='Complete the sentence'/>
-            <Action urlName='review_words/fill_the_gap' title='Fill the gap'/>
-
+        <div className={s.content}>
+            <div style={{ width: "800px", margin: "20px auto 0 auto"}}>
+                <Breadcrumbs aria-label="breadcrumb">
+                    <Link
+                        underline="hover"
+                        color="inherit"
+                        href="/"
+                    >
+                        Home
+                    </Link>
+                    <Typography color="text.primary">Review Grammar</Typography>
+                </Breadcrumbs>
+                <h1  style={{marginTop: "20px"}}>Review Grammar</h1>
+                <Action urlName='select_form' title='Select the correct form of the word'/>
+                <Action urlName='write_word' title='Write the correct word'/>
+                <Action urlName='review_words/matching_sentence' title='Connect parts of the sentence'/>
+                <Action urlName='review_words/complete_sentences' title='Complete the sentence'/>
+                <Action urlName='review_words/fill_the_gap' title='Fill the gap'/>
+            </div>
         </div>
     );
 }

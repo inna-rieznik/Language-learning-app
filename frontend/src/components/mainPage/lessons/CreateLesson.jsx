@@ -8,6 +8,9 @@ import {useNavigate} from 'react-router-dom';
 import {useEffect} from "react";
 import axios from "axios";
 import {useAuth} from "../../login/Auth";
+import Link from "@mui/material/Link";
+import Typography from "@mui/material/Typography";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
 
 
 let reqInstance = axios.create({
@@ -66,8 +69,18 @@ const CreateLesson = (props) => {
     //console.log("user role", localStorage.);
 
     return (
-        <div>
-            <h1>Create New Lesson</h1>
+        <div style={{ width: "800px", margin: "20px auto 0 auto"}}>
+            <Breadcrumbs aria-label="breadcrumb">
+                <Link
+                    underline="hover"
+                    color="inherit"
+                    href="/"
+                >
+                    Home
+                </Link>
+                <Typography color="text.primary">Create New Lesson</Typography>
+            </Breadcrumbs>
+            <h1 style={{marginTop: "20px"}}>Create New Lesson</h1>
             <form
                 sx={{
                     maxWidth: '100%',
