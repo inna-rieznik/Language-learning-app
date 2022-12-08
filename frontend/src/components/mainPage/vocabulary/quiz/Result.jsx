@@ -4,6 +4,8 @@ import s from "./QuizPage.module.css";
 
 
 const Result = ({countCorrect}) => {
+
+
     return (
         <div>
             <h2>You answer {countCorrect} of 4 questions</h2>

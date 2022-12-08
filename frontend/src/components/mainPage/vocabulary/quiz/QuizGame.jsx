@@ -5,6 +5,7 @@ import {useEffect} from "react";
 import axios from "axios";
 import {useState} from "react";
 import Game from "./Game";
+import {useAuth} from "../../../login/Auth";
 
 
 export const questions = [
@@ -41,6 +42,7 @@ const QuizPage = (props) => {
     const [step, setStep] = React.useState(0); //first element in array
     const [countCorrect, setCountCorrect] = React.useState(0);
     const [quizes, setQuizes] = useState([]);
+    const {userScore} = useAuth();
 
     useEffect(() => {
         reqInstance.get(`http://localhost:3011/quizQuestions`).then((response) => {
@@ -49,7 +51,8 @@ const QuizPage = (props) => {
 
         });
     }, []);
-    console.log("quizes object", quizes);
+   // console.log("quizes object", quizes);
+    console.log("USER SCORE", userScore);
 
     const onClickVariant = (index) => {
         console.log("step: ", step, "index: ", index, "answ", quiz.answers[index].correct);
@@ -62,12 +65,12 @@ const QuizPage = (props) => {
     const quiz = quizes[step];
 
     return (
-        <div>
+        <div style={{ width: "800px", margin: "20px auto 0 auto"}}>
             <div className={s.quiz}>
                 <div className={s.modal}>
                     {(step !== quizes.length) ?
                         <Game step={step} quiz={quiz} onClickVariant={onClickVariant}/>
-                        : <Result countCorrect={countCorrect}/>
+                        : <Result countCorrect={countCorrect} userScore={userScore}/>
                     }
                 </div>
             </div>

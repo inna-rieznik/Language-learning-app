@@ -1,5 +1,8 @@
 import React from 'react';
 import Matching2 from "./Matching2";
+import Link from "@mui/material/Link";
+import Typography from "@mui/material/Typography";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
 
 
 
@@ -7,7 +10,24 @@ const MatchingPage2 = (props) => {
 
     return (
         <div>
-            <h1>Matching 2</h1>
+            <Breadcrumbs aria-label="breadcrumb">
+            <Link
+                underline="hover"
+                color="inherit"
+                href="/"
+            >
+                Home
+            </Link>
+            <Link
+                underline="hover"
+                color="inherit"
+                href="/review_words"
+            >
+                ReviewWords
+            </Link>
+            <Typography color="text.primary">Matching</Typography>
+        </Breadcrumbs>
+            <h1 style={{marginTop: "20px"}}>Matching</h1>
             <div>
 
             </div>

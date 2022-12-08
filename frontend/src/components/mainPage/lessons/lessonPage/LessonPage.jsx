@@ -45,11 +45,12 @@ const LessonPage = (props) => {
                     <Typography color="text.primary">Lesson {lessonId}</Typography>
                 </Breadcrumbs>
 
-                <h1 style={{marginTop: "20px"}}>Lesson {lessonId} </h1>
-                <h2>Title: {lessonObject[0]?.title}</h2>
-                <p>Intro text: {lessonObject[0]?.intro_text}</p>
-                <h2>Grammar rule title: {lessonObject[0]?.grammar_rule_title}</h2>
-                <p>Grammar rule: {lessonObject[0]?.grammar_rule}</p>
+                <h1 style={{marginTop: "20px", marginBottom: "20px"}}>Lesson {lessonId} </h1>
+                <h2 style={{marginBottom: "20px", fontSize: '30px'}}>Title: {lessonObject[0]?.title}</h2>
+                <p style={{marginBottom: "20px", fontSize: '15px'}}>Intro text: {lessonObject[0]?.intro_text}</p>
+                <h2 style={{marginBottom: "20px", fontSize: '30px'}}>Grammar rule title: {lessonObject[0]?.grammar_rule_title}</h2>
+                <p style={{marginBottom: "20px", fontSize: '15px'}}>Grammar rule: {lessonObject[0]?.grammar_rule}</p>
+                <h2 style={{marginBottom: "20px", fontSize: '30px'}}>Exercises</h2>
                 <QuizPage/>
             </div>
 

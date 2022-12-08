@@ -26,6 +26,7 @@ const App = (props) => {
 
     const [authTokens, setAuthTokens] = useState(localStorage.getItem("tokens") || "");
     let [userId, setUserId] = useState("");
+    let [userScore, setUserScore] = useState("");
 
  /*   useEffect(() => {
         const authTokensT = JSON.parse(localStorage.getItem('tokens'))
@@ -40,16 +41,19 @@ const App = (props) => {
         if (user) {
             Object.keys(user).forEach(key => {
                 setUserId(user[key].id_user);
+                setUserScore(user[key].score);
                 console.log(user[key].id_user);
             })
         }
     }, [userId])
 
     console.log("user_id", userId);
+    console.log("user_score", userScore);
 
     const setTokens = (data) => {
         localStorage.setItem("tokens", JSON.stringify(data));
-        setUserId(data.id_user)
+        setUserId(data.id_user);
+        setUserScore(data.score);
     };
 
     const handleLogout = () => {
@@ -63,7 +67,7 @@ const App = (props) => {
 
     return (
         <BrowserRouter>
-            <AuthContext.Provider value={{userId, authTokens, setAuthTokens: setTokens, handleLogout}}>
+            <AuthContext.Provider value={{userId, userScore, authTokens, setAuthTokens: setTokens, handleLogout}}>
                 <div className="app-wrapper">
                     <Routes>
                         <Route path='/login'
@@ -104,7 +108,7 @@ const App = (props) => {
                                    <ReviewGrammar/>
                                </AuthenticatedLayout>}/>
                         <Route path={'/review_words/quiz'}
-                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
+                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId} >
                                    <QuizPage/>
                                </AuthenticatedLayout>}/>
                         <Route path={'/review_words/flashcards'}
