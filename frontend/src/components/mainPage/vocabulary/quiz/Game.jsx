@@ -3,18 +3,21 @@ import s from "./QuizPage.module.css";
 import {questions} from "./QuizGame";
 
 
-
 const Game = ({step, quiz, onClickVariant}) => {
-    const percentage = Math.round((step/questions.length) * 100);
+    const percentage = Math.round((step / questions.length) * 100);
     console.log(percentage);
 
     return (
         <div>
-            <div className={s.progress}>
+            {/*<div className={s.progress}>
                 <div style={{width: `${percentage}%`}} className={s.inner}></div>
-            </div>
+            </div>*/}
             {quiz ? <>
-                <h2>{`Question: ${quiz.question}`}</h2>
+                <div>
+                    <h2> {`${step + 1}/${questions.length}`} </h2>
+
+                    <h2 style={{fontSize: '18px', fontWeight: '400'}}> {quiz.question} </h2>
+                </div>
                 <div className={s.game}>
                     <ul>{quiz.answers.map((a, index) => {
                         return (

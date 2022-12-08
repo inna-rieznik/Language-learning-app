@@ -6,10 +6,11 @@ import {useNavigate} from "react-router-dom";
 
 const AuthenticatedLayout = ({children, onlyAdmin}) => {
     const {authTokens} = useAuth();
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
     if (!authTokens) {
-        return navigate('/login');
+        window.location.href = '/login'
+        return null
     }
 
     /*if (onlyAdmin)*/

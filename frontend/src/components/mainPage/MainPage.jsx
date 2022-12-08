@@ -2,7 +2,7 @@ import ProductLaunchImg from "../../images/Product Launch.png";
 import s from './MainPage.module.css'
 import Lessons from "./lessons/Lessons";
 import Vocabulary from "./vocabulary/Vocabulary";
-import {useAuth} from "../login/Auth";
+
 
 const MainPage = (props) => {
     return (
