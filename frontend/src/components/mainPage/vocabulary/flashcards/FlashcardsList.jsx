@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import s from "./Flashcards.module.css";
-import Flashcards from "./Flashcards";
 import Flashcard from "./Flashcard";
 import {TextField} from "@mui/material";
 import {useState} from "react";
@@ -9,16 +8,12 @@ import Button from "@mui/material/Button";
 const FlashcardsList = ({flashcards}) => {
     const [userAnswer, setUserAnswer] = useState("");
 
-    const [isCorrect, setIsCorrect] = useState(false);
 
-    const [correctAnswerB, setCorrectAnswerB] = useState("");
-
-    console.log("userAnswer:", userAnswer,",correct ans index:", flashcards.index, ",correctAns:", flashcards.correctAnswer, ",is correct:", isCorrect);
+    console.log("userAnswer:", userAnswer,",correct ans index:", flashcards.index, ",correctAns:", flashcards.correctAnswer);
     return (
         <div className={s.cardGrid}>
             {flashcards.map(flashcard => {
 
-                console.log("answer back: ",correctAnswerB);
                 return (
 
                 <div className={s.wholeItem}>
