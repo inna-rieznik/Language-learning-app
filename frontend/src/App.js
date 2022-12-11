@@ -18,7 +18,7 @@ import QuizPage from "./components/mainPage/vocabulary/quiz/QuizPage";
 import AuthenticatedLayout from "./AuthenticatedLayout";
 import {AuthContext} from "./components/login/Auth";
 import FlashcardsPage from "./components/mainPage/vocabulary/flashcards/FlashcardsPage";
-import MatchingPage from "./components/mainPage/vocabulary/Matching/MatchingPage";
+import OpenQuestionsPage from "./components/mainPage/vocabulary/openQuestions/OpenQuestionsPage";
 import MatchingPage2 from "./components/mainPage/vocabulary/matching2/MatchingPage2";
 
 
@@ -47,8 +47,8 @@ const App = (props) => {
         }
     }, [userId])
 
-    console.log("user_id", userId);
-    console.log("user_score", userScore);
+   // console.log("user_id", userId);
+   // console.log("user_score", userScore);
 
     const setTokens = (data) => {
         localStorage.setItem("tokens", JSON.stringify(data));
@@ -63,7 +63,7 @@ const App = (props) => {
     };
 
 
-    console.log("authTokens", authTokens);
+   // console.log("authTokens", authTokens);
 
     return (
         <BrowserRouter>
@@ -110,6 +110,10 @@ const App = (props) => {
                         <Route path={'/review_words/quiz'}
                                element={<AuthenticatedLayout authTokens={authTokens} userId={userId} >
                                    <QuizPage/>
+                               </AuthenticatedLayout>}/>
+                        <Route path={'/review_words/translate'}
+                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId} >
+                                   <OpenQuestionsPage/>
                                </AuthenticatedLayout>}/>
                         <Route path={'/review_words/flashcards'}
                                element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>

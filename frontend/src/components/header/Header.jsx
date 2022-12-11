@@ -22,7 +22,7 @@ const Header = (props) => {
     const [userScore, setUserScore] = useState([]);
     const [userLevel, setUserLevel] = useState([]);
 
-    console.log("userId_header", userId);
+    //console.log("userId_header", userId);
 
 
     useEffect(() => {

@@ -13,12 +13,9 @@ let reqInstance = axios.create({
 
 const Flashcards = (props) => {
     const [flashcards, setFlashcards] = useState(SAMPLE_FLASHCARDS);
-    const [correctAnswer, setCorrectAnswer] = useState("");
 
     useEffect(() => {
         reqInstance.get("http://localhost:3011/words/random/6").then((response) => {
-            //setListOfWords(response.data);
-
             setFlashcards(response.data.map((wordItem, index) => {
                 return {
                     id: `${index}-${Date.now()}`,

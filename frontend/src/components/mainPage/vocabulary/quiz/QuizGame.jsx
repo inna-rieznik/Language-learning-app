@@ -8,29 +8,6 @@ import Game from "./Game";
 import {useAuth} from "../../../login/Auth";
 
 
-export const questions = [
-    {
-        quiz_question: 'Question 1',
-        variants: ['ans1', "ans2", "ans3"],
-        correct: 0,
-    },
-    {
-        quiz_question: 'Question 2',
-        variants: ['ans1', "ans2", "ans3"],
-        correct: 0,
-    },
-    {
-        quiz_question: 'Question 3',
-        variants: ['ans1', "ans2", "ans3"],
-        correct: 0,
-    },
-    {
-        quiz_question: 'Question 4',
-        variants: ['ans1', "ans2", "ans3"],
-        correct: 0,
-    }
-]
-
 let reqInstance = axios.create({
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -38,11 +15,12 @@ let reqInstance = axios.create({
     }
 );
 
-const QuizPage = (props) => {
+const QuizGame = (props) => {
     const [step, setStep] = React.useState(0); //first element in array
     const [countCorrect, setCountCorrect] = React.useState(0);
     const [quizes, setQuizes] = useState([]);
     const {userScore} = useAuth();
+    const size = quizes.length;
 
     useEffect(() => {
         reqInstance.get(`http://localhost:3011/quizQuestions`).then((response) => {
@@ -51,26 +29,36 @@ const QuizPage = (props) => {
 
         });
     }, []);
-   // console.log("quizes object", quizes);
+    // console.log("quizes object", quizes);
     console.log("USER SCORE", userScore);
 
+    const restartGame = () => {
+        setCountCorrect(0);
+        setStep(0);
+    }
+
     const onClickVariant = (index) => {
-        console.log("step: ", step, "index: ", index, "answ", quiz.answers[index].correct);
+        console.log("step: ", step, "index: ", index, "answ", quiz.answers[index].value, quiz.answers[index].correct);
         setStep(step + 1);
         if (quiz.answers[index].correct) {
             setCountCorrect(countCorrect + 1);
         }
+
     }
 
     const quiz = quizes[step];
 
     return (
-        <div style={{ width: "800px", margin: "20px auto 0 auto"}}>
+        <div style={{width: "800px", margin: "20px auto 0 auto"}}>
             <div className={s.quiz}>
                 <div className={s.modal}>
                     {(step !== quizes.length) ?
-                        <Game step={step} quiz={quiz} onClickVariant={onClickVariant}/>
-                        : <Result countCorrect={countCorrect} userScore={userScore}/>
+                        <Game step={step} quiz={quiz} quizes={quizes} onClickVariant={onClickVariant}/>
+                        : <Result
+                            countCorrect={countCorrect}
+                            size={size}
+                            restartGame={restartGame}
+                        />
                     }
                 </div>
             </div>
@@ -81,4 +69,4 @@ const QuizPage = (props) => {
 }
 
 
-export default QuizPage;
+export default QuizGame;

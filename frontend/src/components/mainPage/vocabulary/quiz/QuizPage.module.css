@@ -6,7 +6,7 @@
 }
 
 .modal{
-    width: 800px;
+    width: 600px;
     border-radius: 30px;
     padding: 40px;
     background-color: #ffffff;
@@ -32,6 +32,14 @@
     border: 2px solid rgba(0, 0, 0, 0.3);
 }
 
+.correct li{
+    border: 2px solid rgba(255, 0, 0, 0.3);
+}
+
+.wrong li{
+    border: 2px solid rgba(72, 255, 0, 0.3);
+}
+
 .progress{
     height: 10px;
     border-radius: 30px;
@@ -47,3 +55,13 @@
      transition: all 0.3s ease-in-out;
      background: linear-gradient(90deg, rgb(0, 48, 102, 1) 0%, rgb(106, 167, 247, 1) 100%);
  }
+
+
+.floatContainer{
+
+}
+
+.floatChild{
+    width: 50%;
+    float: left;
+}

@@ -1,10 +1,9 @@
 import React from 'react';
 import s from "./QuizPage.module.css";
-import {questions} from "./QuizGame";
 
 
-const Game = ({step, quiz, onClickVariant}) => {
-    const percentage = Math.round((step / questions.length) * 100);
+const Game = ({step, quiz, quizes, onClickVariant}) => {
+    const percentage = Math.round((step / quizes.length) * 100);
     console.log(percentage);
 
     return (
@@ -14,7 +13,7 @@ const Game = ({step, quiz, onClickVariant}) => {
             </div>*/}
             {quiz ? <>
                 <div>
-                    <h2> {`${step + 1}/${questions.length}`} </h2>
+                    <h2> {`${step + 1}/${quizes.length}`} </h2>
 
                     <h2 style={{fontSize: '18px', fontWeight: '400'}}> {quiz.question} </h2>
                 </div>
@@ -24,7 +23,7 @@ const Game = ({step, quiz, onClickVariant}) => {
                             <div>
                                 <li onClick={() => onClickVariant(index)}>
                                     {a.value}
-                                    <p>{a.correct ? 'pravda' : 'nepravda'}</p>
+                                   {/* <p>{a.correct ? 'pravda' : 'nepravda'}</p>*/}
                                 </li>
 
                             </div>

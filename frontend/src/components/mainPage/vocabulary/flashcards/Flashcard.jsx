@@ -10,7 +10,6 @@ const Flashcard = ({flashcard}) => {
     const [height, setHeight] = useState('initial')
     const frontEl = useRef();
     const backEl = useRef();
-    const [correctAnswerV, setCorrectAnswerV] = useState("");
 
     function setMaxHeight() {
         const frontHeight = frontEl.current.getBoundingClientRect().height
@@ -18,7 +17,7 @@ const Flashcard = ({flashcard}) => {
         setHeight(Math.max(frontHeight, backHeight, 100))
     }
 
-    useEffect(setMaxHeight, [flashcard.question, flashcard.answer, flashcard.options])
+    useEffect(setMaxHeight, flashcard.question)
     useEffect(() => {
         window.addEventListener('resize', setMaxHeight)
         return () => window.removeEventListener('resize', setMaxHeight)
