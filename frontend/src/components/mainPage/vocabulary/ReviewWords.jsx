@@ -25,7 +25,7 @@ const ReviewWords = (props) => {
                 </Breadcrumbs>
             <h1 style={{marginTop: "20px"}}>ReviewWords</h1>
             <Action urlName='quiz' title='Quiz'/>
-            <Action urlName='flashcards' title='Flashcards'/>
+            {/*<Action urlName='flashcards' title='Flashcards'/>*/}
             <Action urlName='translate' title='Word-Translation'/>
             <Action urlName='matching_translation' title='Matching: connect word with translation'/>
             {/*<Action urlName='matching_sentences' title='Complete the sentence'/>

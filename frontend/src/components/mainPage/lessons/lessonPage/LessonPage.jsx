@@ -9,6 +9,12 @@ import {useAuth} from "../../../login/Auth";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
+import OpenQuestionsPage from "../../vocabulary/openQuestions/OpenQuestionsPage";
+import QuizGame from "../../vocabulary/quiz/QuizGame";
+import WordTranslationGame from "../../vocabulary/openQuestions/WordTranslationGame";
+import Matching from "../../vocabulary/Matching/Matching";
+import Matching2 from "../../vocabulary/matching2/Matching2";
+import Button from "@mui/material/Button";
 
 let reqInstance = axios.create({
         headers: {
@@ -51,7 +57,15 @@ const LessonPage = (props) => {
                 <h2 style={{marginBottom: "20px", fontSize: '30px'}}>Grammar rule title: {lessonObject[0]?.grammar_rule_title}</h2>
                 <p style={{marginBottom: "20px", fontSize: '15px'}}>Grammar rule: {lessonObject[0]?.grammar_rule}</p>
                 <h2 style={{marginBottom: "20px", fontSize: '30px'}}>Exercises</h2>
-                <QuizPage/>
+                <h2 style={{marginBottom: "20px", fontSize: '25px'}}>Select correct answer</h2>
+                <QuizGame/>
+              {/*  <h2 style={{marginBottom: "20px", fontSize: '30px', marginTop: "20px"}}>Vocabulary exercises</h2>*/}
+                <h2 style={{marginBottom: "20px", marginTop: "20px" ,fontSize: '25px'}}>Write correct answer</h2>
+                <WordTranslationGame/>
+                <h2 style={{marginBottom: "20px", marginTop: "20px" ,fontSize: '25px'}}>Connect word with its translation</h2>
+                <Matching2/>
+                <Button style={{backgroundColor: "#FF777B", width: "400px", height: "50px", marginBottom: "20px", marginTop: "30px" }} variant="contained" href='review_words'>Finish Lesson </Button>
+
             </div>
 
 
