@@ -1,6 +1,6 @@
 import s from "../vocabulary/Vocabulary.module.css";
 import * as React from 'react';
-import Action from "./action/Action";
+import Card from "./action/Card";
 //import Button from "./action/Button";
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
@@ -10,7 +10,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { addWordToVocabularyActionCreator, updateNewWordTextActionCreator} from "../../redux/WordsReducer";
+import {addWordToVocabularyActionCreator, updateNewWordTextActionCreator} from "../../redux/WordsReducer";
 
 
 const style = {
@@ -35,11 +35,11 @@ const Vocabulary = (props) => {
     let newWordEng = React.createRef();
 
     let addWordToVocabulary = () => {
-       /* let word = newWordCz.current.value;
-        let translate = newWordEng.current.value;
-        addWordToVocabulary(word, translate);
-        newWordCz.current.value = null;
-        newWordEng.current.value = null;*/
+        /* let word = newWordCz.current.value;
+         let translate = newWordEng.current.value;
+         addWordToVocabulary(word, translate);
+         newWordCz.current.value = null;
+         newWordEng.current.value = null;*/
         let action = addWordToVocabularyActionCreator()
         props.dispatch(action);
     };
@@ -54,8 +54,9 @@ const Vocabulary = (props) => {
         <div className={s.vocabulary}>
             <h1>Vocabulary</h1>
 
-            <Button style={{backgroundColor: "#FF777B", width: "400px", height: "50px", marginBottom: 20 }} variant="contained" href='review_words'>Review words</Button>
-            <Action urlName='my_words' title='my words'/>
+            <Button style={{backgroundColor: "#FF777B", width: "400px", height: "50px", marginBottom: 20}}
+                    variant="contained" href='review_words'>Review words</Button>
+            <Card to='my_words'>MY WORDS</Card>
             {/*  <Button variant="contained" href='modal_add_word'  startIcon={<AddIcon />} >add new word</Button>*/}
             <Modal
                 aria-labelledby="transition-modal-title"
@@ -95,7 +96,7 @@ const Vocabulary = (props) => {
                                        inputRef={newWordEng}
                                        onChange={updateNewWordText}
                                        value={props.newTranslationText}/>
-                            <Button  variant="contained"
+                            <Button variant="contained"
                                     startIcon={<AddIcon/>}
                                     onClick={() => {
                                         addWordToVocabulary();

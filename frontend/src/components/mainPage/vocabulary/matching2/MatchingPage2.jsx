@@ -9,7 +9,7 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 const MatchingPage2 = (props) => {
 
     return (
-        <div>
+        <div style={{ width: "800px", margin: "20px auto 0 auto"}}>
             <Breadcrumbs aria-label="breadcrumb">
             <Link
                 underline="hover"
@@ -27,7 +27,7 @@ const MatchingPage2 = (props) => {
             </Link>
             <Typography color="text.primary">Matching</Typography>
         </Breadcrumbs>
-            <h1 style={{marginTop: "20px"}}>Matching</h1>
+            <h1  style={{marginTop: "20px", marginBottom: "20px"}}>Matching</h1>
             <div>
 
             </div>

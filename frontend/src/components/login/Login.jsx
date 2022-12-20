@@ -31,6 +31,12 @@ const Login = (props) => {
     };
 
 
+    if (localStorage.getItem("token")) {
+        window.location.href = '/'
+        return null
+    }
+
+
 
     const login = () => {
         Axios.post('http://localhost:3011/auth/login', {

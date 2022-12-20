@@ -140,7 +140,6 @@ const App = (props) => {
                                </AuthenticatedLayout>}/>
 
                     </Routes>
-
                 </div>
             </AuthContext.Provider>
         </BrowserRouter>
