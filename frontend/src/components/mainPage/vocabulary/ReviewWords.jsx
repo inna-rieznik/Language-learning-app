@@ -5,7 +5,7 @@ import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 
-import Action from "./action/Action";
+import Card from "./action/Card";
 
 const ReviewWords = (props) => {
 
@@ -24,12 +24,12 @@ const ReviewWords = (props) => {
                     <Typography color="text.primary">ReviewWords</Typography>
                 </Breadcrumbs>
             <h1 style={{marginTop: "20px"}}>ReviewWords</h1>
-            <Action urlName='quiz' title='Quiz'/>
-            {/*<Action urlName='flashcards' title='Flashcards'/>*/}
-            <Action urlName='translate' title='Word-Translation'/>
-            <Action urlName='matching_translation' title='Matching: connect word with translation'/>
-            {/*<Action urlName='matching_sentences' title='Complete the sentence'/>
-            <Action urlName='fill_the_gap' title='Fill the gap'/>*/}
+            <Card urlName='quiz' title='Quiz'/>
+            {/*<Card urlName='flashcards' title='Flashcards'/>*/}
+            <Card urlName='translate' title='Word-Translation'/>
+            <Card urlName='matching_translation' title='Matching: connect word with translation'/>
+            {/*<Card urlName='matching_sentences' title='Complete the sentence'/>
+            <Card urlName='fill_the_gap' title='Fill the gap'/>*/}
             </div>
         </div>
     );

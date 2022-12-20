@@ -5,7 +5,7 @@ import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 
-import Action from "./action/Action";
+import Card from "./action/Card";
 
 const ReviewGrammar = (props) => {
 
@@ -24,11 +24,11 @@ const ReviewGrammar = (props) => {
                     <Typography color="text.primary">Review Grammar</Typography>
                 </Breadcrumbs>
                 <h1  style={{marginTop: "20px"}}>Review Grammar</h1>
-                <Action urlName='select_form' title='Select the correct form of the word'/>
-                <Action urlName='write_word' title='Write the correct word'/>
-                <Action urlName='review_words/matching_sentence' title='Connect parts of the sentence'/>
-                <Action urlName='review_words/complete_sentences' title='Complete the sentence'/>
-                <Action urlName='review_words/fill_the_gap' title='Fill the gap'/>
+                <Card urlName='select_form' title='Select the correct form of the word'/>
+                <Card urlName='write_word' title='Write the correct word'/>
+                <Card urlName='review_words/matching_sentence' title='Connect parts of the sentence'/>
+                <Card urlName='review_words/complete_sentences' title='Complete the sentence'/>
+                <Card urlName='review_words/fill_the_gap' title='Fill the gap'/>
             </div>
         </div>
     );

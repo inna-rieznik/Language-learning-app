@@ -2,13 +2,14 @@ import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import {useAuth} from "./components/login/Auth";
 import {useNavigate} from "react-router-dom";
+import {Fragment} from "react";
 
 
 const AuthenticatedLayout = ({children, onlyAdmin}) => {
     const {authTokens} = useAuth();
     //const navigate = useNavigate();
 
-    if (!authTokens) {
+    if (!localStorage.getItem("token")) {
         window.location.href = '/login'
         return null
     }
@@ -17,7 +18,7 @@ const AuthenticatedLayout = ({children, onlyAdmin}) => {
 
 
     return (
-        <div>
+        <Fragment>
                 <div className="headerContainer">
                     <Header/>
                 </div>
@@ -25,7 +26,7 @@ const AuthenticatedLayout = ({children, onlyAdmin}) => {
                     {children}
                 </div>
                 <Footer/>
-        </div>
+        </Fragment>
     )
 }
 

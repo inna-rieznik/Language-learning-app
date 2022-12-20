@@ -13,7 +13,7 @@ const db = mysql.createConnection({
 
 
 //get list of LESSONS only for authorized user
-router.get('/',  authMiddleware,(req, res) => {
+/*router.get('/',  authMiddleware,(req, res) => {
     db.query('SELECT * FROM mydb.lessons',
         (err, result) => {
             if (err) {
@@ -26,7 +26,27 @@ router.get('/',  authMiddleware,(req, res) => {
             console.log(req.userData);
         })
 
+});*/
+
+
+
+router.get('/',  authMiddleware,(req, res) => {
+        db.query('select * from mydb.users_lessons join mydb.lessons on users_lessons.id_lesson = lessons.id_lesson where id_user = 9',
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({status: 'error', err})
+                return;
+            }
+            console.log(result);
+            res.send(result);
+            console.log(req.userData);
+        })
+
 });
+
+
+
 //get one lesson only for authorized user '/lessons/id/1'
 router.get('/id/:lessonId', authMiddleware, (req, res) => {
     const lessonId = req.params.lessonId;

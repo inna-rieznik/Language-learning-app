@@ -1,10 +1,9 @@
-.action{
-    height: 100px;
-    width: auto;
-    font-size: 30px;
+.root {
+    cursor: pointer;
+    font-size: 27px;
     margin-bottom: 20px;
-    text-transform: uppercase;
     border-radius: 15px;
     background-color: #FFC2C2;
-    text-align: center;
+    color: #003066;
+    padding: 12px 8px;
 }
