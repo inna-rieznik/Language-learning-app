@@ -99,23 +99,7 @@ const Register = (props) => {
                             {registerStatus}
                         </p>
                     </Box>
-                    <Box mt={3} width="100%">
-                        <FormControl>
-                            <FormLabel id="demo-radio-buttons-group-label">Role</FormLabel>
-                            <RadioGroup
-                                row
-                                aria-labelledby="demo-radio-buttons-group-label"
-                                defaultValue="female"
-                                name="radio-buttons-group"
-                                onChange={(e) => {
-                                    setRoleReg(e.target.value);
-                                }}
-                            >
-                                <FormControlLabel value="1" control={<Radio />} label="admin" />
-                                <FormControlLabel value="2" control={<Radio />} label="student" />
-                            </RadioGroup>
-                        </FormControl>
-                    </Box>
+
 
                     <Box mt={3} width="100%">
                         <Link underline="hover"

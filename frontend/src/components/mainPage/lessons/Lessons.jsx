@@ -52,16 +52,16 @@ const Lessons = (props) => {
                 display: 'block',
                 backgroundColor: "#FF777B",
                 height: "50px",
-                marginBottom: '20px',
+                marginBottom: '40px',
             }}
                     variant="contained" href='review_grammar'>Review grammar</Button>
 
             {listOfLessons?.map((value) => (
                 <div>
-                    <Card to={`lessons/id/${value.id_lesson}`} bgColor={value.id_lesson === 1 ? 'gray' : undefined}>
+                    <Card to={`lessons/id/${value.id_lesson}`} bgColor={value.id_state === 4 ? '#e1e1e1' : undefined} color={value.id_state === 4 ? 'gray' : undefined}>
                         <div className={s.cardContent}>
                             <img src={Check} alt='check' width={49} height={49}
-                                 style={{marginRight: '16px', opacity: value.id_lesson === 1 ? 1 : 0}}/>
+                                 style={{marginRight: '16px', opacity: value.id_state === 3 ? 1 : 0}}/>
                             <div>
                                 Lesson {value.id_lesson}:
                             </div>
