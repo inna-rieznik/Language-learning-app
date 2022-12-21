@@ -31,14 +31,16 @@ const db = mysql.createConnection({
 
 
 router.get('/',  authMiddleware,(req, res) => {
-        db.query('select * from mydb.users_lessons join mydb.lessons on users_lessons.id_lesson = lessons.id_lesson where id_user = 9',
+    const userId = req.userData.id;
+        db.query('select * from mydb.users_lessons join mydb.lessons on users_lessons.id_lesson = lessons.id_lesson where id_user = ?',
+        [userId],
         (err, result) => {
             if (err) {
                 console.log(err);
                 res.send({status: 'error', err})
                 return;
             }
-            console.log(result);
+            console.log(userId);
             res.send(result);
             console.log(req.userData);
         })

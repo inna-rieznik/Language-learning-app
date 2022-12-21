@@ -14,9 +14,11 @@ const db = mysql.createConnection({
 
 //get list of words
 router.get('/', authMiddleware, (req, res) => {
+    const userId = req.userData.id;
 
     try {
-        db.query('SELECT * FROM mydb.words',
+        db.query('select * from mydb.users_words join mydb.words on users_words.id_word = words.id_word where id_user = ?',
+            [userId],
             (err, result) => {
                 if (err) {
                     console.log(err);
