@@ -1,5 +1,4 @@
 import s from "./ReviewWords.module.css";
-import {NavLink} from "react-router-dom";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
@@ -24,10 +23,11 @@ const ReviewWords = (props) => {
                     <Typography color="text.primary">ReviewWords</Typography>
                 </Breadcrumbs>
             <h1 style={{marginTop: "20px"}}>ReviewWords</h1>
-            <Card urlName='quiz' title='Quiz'/>
+                <Card to='quiz'>Quiz</Card>
             {/*<Card urlName='flashcards' title='Flashcards'/>*/}
-            <Card urlName='translate' title='Word-Translation'/>
-            <Card urlName='matching_translation' title='Matching: connect word with translation'/>
+                <Card to='translate'>Word - Translation (CZ-ENG)</Card>
+                <Card to='translate'>Translation - Word (ENG-CZ)</Card>
+                <Card to='matching_translation'>Matching: connect word with translation</Card>
             {/*<Card urlName='matching_sentences' title='Complete the sentence'/>
             <Card urlName='fill_the_gap' title='Fill the gap'/>*/}
             </div>

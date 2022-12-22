@@ -1,11 +1,11 @@
-import s from "../mainPage/MainPage.module.css";
-import {NavLink, useParams} from "react-router-dom";
+import s from "./UserPage.module.css";
+import {useParams} from "react-router-dom";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {useAuth} from "../login/Auth";
+import User from '../../images/user-svgrepo-com.svg'
 
 
 function handleClick(event) {
@@ -48,12 +48,26 @@ const UserPage = (props) => {
                         <Typography color="text.primary">User Page</Typography>
                     </Breadcrumbs>
                 </div>
+
                 <h1 style={{marginTop: "20px"}}>User Page</h1>
-                <h2>Name: {userObject[0]?.name} </h2>
-                <h2>Username: {userObject[0]?.username} </h2>
-                <h2>Role: {userObject[0]?.role} </h2>
-                <h2>Level: {userObject[0]?.level}</h2>
-                <h2>Points: {userObject[0]?.score}</h2>
+                <div className={s.modal}>
+                    <div className={s.modalInside}>
+                        <div className={s.user}>
+                        <img src={User} alt="UserIcon" width="100" height="100"/>
+                        </div>
+                        <h1>{userObject[0]?.username} </h1>
+                        <h2>{userObject[0]?.role} </h2>
+                    </div>
+                    <div className={s.modalInside}>
+                        <div className={s.level}>
+                            <h3>Level: {userObject[0]?.level}</h3>
+                            <h3>Points: {userObject[0]?.score}</h3>
+                        </div>
+                        <h3>Email: {userObject[0]?.email}</h3>
+                    </div>
+
+                </div>
+
             </div>
         </div>
     );
