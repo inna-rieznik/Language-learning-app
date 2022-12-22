@@ -24,11 +24,8 @@ const ReviewGrammar = (props) => {
                     <Typography color="text.primary">Review Grammar</Typography>
                 </Breadcrumbs>
                 <h1  style={{marginTop: "20px"}}>Review Grammar</h1>
-                <Card urlName='select_form' title='Select the correct form of the word'/>
-                <Card urlName='write_word' title='Write the correct word'/>
-                <Card urlName='review_words/matching_sentence' title='Connect parts of the sentence'/>
-                <Card urlName='review_words/complete_sentences' title='Complete the sentence'/>
-                <Card urlName='review_words/fill_the_gap' title='Fill the gap'/>
+                <Card to='write_word'>Select the correct form of the word</Card>
+
             </div>
         </div>
     );

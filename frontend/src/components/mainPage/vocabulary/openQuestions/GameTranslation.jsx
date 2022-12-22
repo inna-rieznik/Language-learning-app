@@ -22,9 +22,8 @@ const GameTranslation = ({step, word, words, onClickVariant}) => {
             </div>*/}
             {word ? <>
                 <div>
-                    <h2> {`${step + 1}/${words.length}`} Write the correct translation of the word</h2>
+                    <h2> {`${step + 1}/${words.length}`} Write the correct translation of the word {word.source.toUpperCase()}</h2>
 
-                    <h2 style={{fontSize: '18px', fontWeight: '400'}}> {word.source} </h2>
                 </div>
                 <div className={s.game}>
                     <TextField style={{backgroundColor: 'white', width: '400px'}} id="outlined-basic"

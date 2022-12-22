@@ -52,10 +52,10 @@ const LessonPage = (props) => {
                 </Breadcrumbs>
 
                 <h1 style={{marginTop: "20px", marginBottom: "20px"}}>Lesson {lessonId} </h1>
-                <h2 style={{marginBottom: "20px", fontSize: '30px'}}>Title: {lessonObject[0]?.title}</h2>
-                <p style={{marginBottom: "20px", fontSize: '15px'}}>Intro text: {lessonObject[0]?.intro_text}</p>
-                <h2 style={{marginBottom: "20px", fontSize: '30px'}}>Grammar rule title: {lessonObject[0]?.grammar_rule_title}</h2>
-                <p style={{marginBottom: "20px", fontSize: '15px'}}>Grammar rule: {lessonObject[0]?.grammar_rule}</p>
+                <h2 style={{marginBottom: "20px", fontSize: '35px'}}>{lessonObject[0]?.title}</h2>
+                <p style={{marginBottom: "20px", fontSize: '25px'}}>{lessonObject[0]?.intro_text}</p>
+                <h2 style={{marginBottom: "20px", fontSize: '30px'}}>{lessonObject[0]?.grammar_rule_title}</h2>
+                <p style={{marginBottom: "20px", fontSize: '25px'}}>{lessonObject[0]?.grammar_rule}</p>
                 <h2 style={{marginBottom: "20px", fontSize: '30px'}}>Exercises</h2>
                 <h2 style={{marginBottom: "20px", fontSize: '25px'}}>Select correct answer</h2>
                 <QuizGame/>

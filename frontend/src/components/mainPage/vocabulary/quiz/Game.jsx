@@ -13,9 +13,8 @@ const Game = ({step, quiz, quizes, onClickVariant}) => {
             </div>*/}
             {quiz ? <>
                 <div>
-                    <h2> {`${step + 1}/${quizes.length}`} </h2>
+                    <h2> {`${step + 1}/${quizes.length}`} {quiz.question} </h2>
 
-                    <h2 style={{fontSize: '18px', fontWeight: '400'}}> {quiz.question} </h2>
                 </div>
                 <div className={s.game}>
                     <ul>{quiz.answers.map((a, index) => {
