@@ -53,8 +53,21 @@ const Vocabulary = (props) => {
     return (
         <div className={s.vocabulary}>
             <h1>Vocabulary</h1>
+{/*
+            <Button sx={{
+                display: 'block',
+                backgroundColor: "#FF777B",
+                height: "50px",
+                marginBottom: '20px'
+            }}
+                    variant="contained" href='create_lesson'>
+                Add new word</Button>*/}
 
-            <Button style={{backgroundColor: "#FF777B", width: "400px", height: "50px", marginBottom: 20}}
+            <Button style={{backgroundColor: "#FF777B", width: "600px", height: "50px", marginBottom: 20}}
+                    onClick={handleOpen} variant="contained" startIcon={<AddIcon/>}>add new
+                word</Button>
+
+            <Button style={{backgroundColor: "#FF777B", width: "600px", height: "50px", marginBottom: '40px'}}
                     variant="contained" href='review_words'>Review words</Button>
             <Card to='my_words'>MY WORDS</Card>
             {/*  <Button variant="contained" href='modal_add_word'  startIcon={<AddIcon />} >add new word</Button>*/}

@@ -29,11 +29,12 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    width: 600,
+    backgroundColor: '#FFC2C2',
     boxShadow: 24,
     p: 4,
+    borderRadius: '20px'
+
 };
 
 let reqInstance = axios.create({
@@ -73,7 +74,8 @@ const WordsPage = (props) => {
             source: source,
             target: target
         }).then((response) => {
-            console.log(response.data);
+            const wordToAdd = {source: source, target: target}
+            setListOfWords([...listOfWords, wordToAdd]);
         });
     };
 
@@ -137,16 +139,16 @@ const WordsPage = (props) => {
                 >
                     <Fade in={open}>
                         <Box sx={style}>
-                            <Typography id="transition-modal-title" variant="h6" component="h2">
+                            <h2 id="transition-modal-title" variant="h6" component="h2">
                                 Add new word
-                            </Typography>
+                            </h2>
                             <Box component="form"
                                  sx={{'& > :not(style)': {m: 1, width: '25ch'},}}
                                  noValidate
                                  autoComplete="off">
-                                <Typography id="transition-modal-title">
+                                <h3 id="transition-modal-title">
                                     Word
-                                </Typography>
+                                </h3>
                                 <TextField id="outlined-basic"
                                            label="Type word in czech"
                                            variant="outlined"
@@ -154,10 +156,11 @@ const WordsPage = (props) => {
                                            onChange={(e) => {
                                                setSource(e.target.value);
                                            }}
+                                           style={{width: "500px"}}
                                     /*  value={props.wordsData.newWordText}*//>
-                                <Typography id="transition-modal-title">
+                                <h3 id="transition-modal-title">
                                     Translation
-                                </Typography>
+                                </h3>
                                 <TextField id="outlined-basic"
                                            label="Type word in eng"
                                            variant="outlined"
@@ -165,6 +168,7 @@ const WordsPage = (props) => {
                                            onChange={(e) => {
                                                setTarget(e.target.value);
                                            }}
+                                           style={{width: "500px"}}
 
                                     /* value={props.wordsData.newTranslationText}*//>
 
@@ -173,7 +177,9 @@ const WordsPage = (props) => {
                                         onClick={() => {
                                             addWord();
                                             handleClose();
-                                        }}>add</Button>
+                                        }}
+                                        style={{width: "500px", marginTop: "20px"}}
+                                >add</Button>
 
                             </Box>
 
