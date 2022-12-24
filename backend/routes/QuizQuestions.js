@@ -59,13 +59,58 @@ router.get('/', authMiddleware, (req, res) => {
     )
 })
 
+router.get('/:lessonId', authMiddleware, (req, res) => {
+    const lessonId = req.params.lessonId;
+    db.query(
+        'select qq.id_quiz_questions, score, qq.content as question, id_quiz_answers, correct, qa.content as answer\n' +
+        '    from mydb.quizes\n' +
+        '    join quiz_questions qq on quizes.id_quizes = qq.id_quizes\n' +
+        '    join quiz_answers qa on qq.id_quiz_questions = qa.id_quiz_questions where id_lesson=?',
+        [lessonId],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({status: 'error', err})
+                return;
+            }
+
+            const results = {};
+            for (const row of result) {
+                if (results[row.id_quiz_questions]) {
+                    results[row.id_quiz_questions].answers.push({
+                        value: row.answer,
+                        correct: row.correct
+                    })
+                } else {
+                    results[row.id_quiz_questions] = {
+                        question: row.question,
+                        answers: [{
+                            value: row.answer,
+                            correct: row.correct
+                        }]
+                    }
+                }
+            }
+
+            const response = []
+            for (const key of Object.keys(results)) {
+                response.push(results[key]);
+            }
+
+            res.json(response);
+        }
+    )
+})
+
+
+
 //only admin can add new quiz question
 router.post('/', roleMiddleware(['admin']),  (req, res) => {
     //to access data from FE we use body
     const quizQuestion = req.body.quizQuestion;
     //add there lesson id and add it at create lesson page
     db.query(
-        "insert into mydb.quiz_questions(id_quizes, type, score, content) values (1,'quiz', 1, ?)",
+        "insert into mydb.quiz_questions(id_quizes, type, score, content) values (select Max(id_quiz_questions),'quiz', 1, ?)",
         [quizQuestion],
         (err, result) => {
             if (err) {

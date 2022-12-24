@@ -64,7 +64,7 @@ router.post('/', roleMiddleware(['admin']), (req, res) => {
         const target = req.body.target;
 
         db.query(
-            "INSERT INTO mydb.words (id_lesson, id_state, id_language, source, target) values(1,1,1,?,?)",
+            "INSERT INTO mydb.words (id_lesson, id_state, id_language, source, target) values(1,0,2,?,?)",
             [source, target],
             (err, result) => {
                 if (err) {
@@ -72,7 +72,19 @@ router.post('/', roleMiddleware(['admin']), (req, res) => {
                     res.send({status: 'error', err})
                     return;
                 }
-                res.send({status: 'ok'})
+
+                db.query(
+                    'INSERT INTO mydb.users_words (id_word, id_user, id_state, started_at) SELECT (select Max(id_word) from mydb.words), id_user, 0, null FROM mydb.users',
+                    (err, result) => {
+                        if (err) {
+                            console.log(err);
+                            res.send({status: 'error', err})
+                            return;
+                        }
+                    }
+                )
+
+
             })
     } catch (e) {
         console.log(e)
