@@ -17,10 +17,8 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import TextField from '@mui/material/TextField';
-import {addWordToVocabularyActionCreator, updateNewWordTextActionCreator} from "../redux/WordsReducer";
 import {useEffect, useState} from 'react';
 import axios from "axios";
-import Axios from "axios";
 import {useAuth} from "../login/Auth";
 
 
@@ -58,24 +56,27 @@ const WordsPage = (props) => {
         reqInstance.get("http://localhost:3011/words",
         ).then((response) => {
             setListOfWords(response.data);
-            console.log(response.data);
+           // console.log(response.data);
         });
     }, []);
 
-    useEffect(() => {
+/*    useEffect(() => {
         reqInstance.get(`http://localhost:3011/user/${userId}`).then((response) => {
             setUser(response.data[0]);
             console.log("user data", response.data[0]);
         });
-    }, [userId]);
+    }, [userId]);*/
+
 
     const addWord = () => {
-        Axios.post('http://localhost:3011/words', {
+        reqInstance.post('http://localhost:3011/words', {
             source: source,
             target: target
         }).then((response) => {
             const wordToAdd = {source: source, target: target}
             setListOfWords([...listOfWords, wordToAdd]);
+            console.log("list:", listOfWords);
+
         });
     };
 
@@ -139,7 +140,7 @@ const WordsPage = (props) => {
                 >
                     <Fade in={open}>
                         <Box sx={style}>
-                            <h2 id="transition-modal-title" variant="h6" component="h2">
+                            <h2 id="transition-modal-title">
                                 Add new word
                             </h2>
                             <Box component="form"

@@ -40,21 +40,10 @@ const Lessons = (props) => {
     return (
         <div className={s.lessons}>
             <h1>Lessons</h1>
-            {user && user.role === 'admin' ? <Button sx={{
-                display: 'block',
-                backgroundColor: "#FF777B",
-                height: "50px",
-                marginBottom: '20px'
-            }}
-                                                     variant="contained" href='create_lesson'>create new
-                lesson</Button> : null}
-            <Button sx={{
-                display: 'block',
-                backgroundColor: "#FF777B",
-                height: "50px",
-                marginBottom: '40px',
-            }}
-                    variant="contained" href='review_grammar'>Review grammar</Button>
+            {user && user.role === 'admin' ?
+
+            <Button style={{backgroundColor: "#FF777B", width: "600px", height: "50px", marginBottom: '40px'}} variant="contained" href='create_lesson'>create new lesson</Button> : null}
+            <Button style={{backgroundColor: "#FF777B", width: "600px", height: "50px", marginBottom: '40px'}} variant="contained" href='review_grammar'>Review grammar</Button>
 
             {listOfLessons?.map((value) => (
                 <div>

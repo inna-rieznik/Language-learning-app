@@ -63,63 +63,15 @@ const Vocabulary = (props) => {
                     variant="contained" href='create_lesson'>
                 Add new word</Button>*/}
 
-            <Button style={{backgroundColor: "#FF777B", width: "600px", height: "50px", marginBottom: 20}}
+{/*            <Button style={{backgroundColor: "#FF777B", width: "600px", height: "50px", marginBottom: 20}}
                     onClick={handleOpen} variant="contained" startIcon={<AddIcon/>}>add new
-                word</Button>
+                word</Button>*/}
 
             <Button style={{backgroundColor: "#FF777B", width: "600px", height: "50px", marginBottom: '40px'}}
                     variant="contained" href='review_words'>Review words</Button>
             <Card to='my_words'>MY WORDS</Card>
             {/*  <Button variant="contained" href='modal_add_word'  startIcon={<AddIcon />} >add new word</Button>*/}
-            <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                open={open}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade in={open}>
-                    <Box sx={style}>
-                        <Typography id="transition-modal-title" variant="h6" component="h2">
-                            Add new word
-                        </Typography>
-                        <Box component="form"
-                             sx={{'& > :not(style)': {m: 1, width: '25ch'},}}
-                             noValidate
-                             autoComplete="off">
-                            <Typography id="transition-modal-title">
-                                Word
-                            </Typography>
-                            <TextField id="outlined-basic"
-                                       label="Type smth"
-                                       variant="outlined"
-                                       inputRef={newWordCz}
-                                       onChange={updateNewWordText}
-                                       value={props.newWordText}/>
-                            <Typography id="transition-modal-title">
-                                Translation
-                            </Typography>
-                            <TextField id="outlined-basic"
-                                       label="Type smth"
-                                       variant="outlined"
-                                       inputRef={newWordEng}
-                                       onChange={updateNewWordText}
-                                       value={props.newTranslationText}/>
-                            <Button variant="contained"
-                                    startIcon={<AddIcon/>}
-                                    onClick={() => {
-                                        addWordToVocabulary();
-                                        handleClose();
-                                    }}>add</Button>
-                        </Box>
 
-                    </Box>
-                </Fade>
-            </Modal>
             {/*<Button  urlName='quiz' buttonAction='review words'/>
             <Button  urlName='modal_add_word' buttonAction='+add new word'/>*/}
 
