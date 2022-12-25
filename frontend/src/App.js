@@ -20,6 +20,7 @@ import {AuthContext} from "./components/login/Auth";
 import FlashcardsPage from "./components/mainPage/vocabulary/flashcards/FlashcardsPage";
 import OpenQuestionsPage from "./components/mainPage/vocabulary/openQuestions/OpenQuestionsPage";
 import MatchingPage2 from "./components/mainPage/vocabulary/matching2/MatchingPage2";
+import PageNotFound from "./components/PageNotFound";
 
 
 const App = (props) => {
@@ -137,6 +138,10 @@ const App = (props) => {
                         <Route path={`/user/:userId`}
                                element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
                                    <UserPage/>
+                               </AuthenticatedLayout>}/>
+                        <Route path={`*`}
+                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
+                                   <PageNotFound/>
                                </AuthenticatedLayout>}/>
 
                     </Routes>

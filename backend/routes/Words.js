@@ -72,17 +72,17 @@ router.post('/', roleMiddleware(['admin']), (req, res) => {
                     res.send({status: 'error', err})
                     return;
                 }
+                const wordId = result.insertId;
 
                 db.query(
-                    'INSERT INTO mydb.users_words (id_word, id_user, id_state, started_at) SELECT (select Max(id_word) from mydb.words), id_user, 0, null FROM mydb.users',
+                    "INSERT INTO mydb.users_words (id_word, id_user, id_state, started_at) SELECT ?, id_user, 0, null FROM mydb.users",
+                    [wordId],
                     (err, result) => {
                         if (err) {
                             console.log(err);
                             res.send({status: 'error', err})
-                            return;
                         }
-                    }
-                )
+                    })
 
 
             })
