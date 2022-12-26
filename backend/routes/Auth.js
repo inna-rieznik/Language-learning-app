@@ -35,7 +35,7 @@ router.post('/register',
     (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({errors: errors.array()});
+            return res.status(400).send({errors: errors.array()});
         }
         try {
             const {username, password, email, role} = req.body;
@@ -148,7 +148,7 @@ router.post('/login',
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
-                return res.status(400).json({errors: errors.array()});
+                return res.json({message: "* Fields can't be empty"})
             }
             const {email, password} = req.body;
 
@@ -166,17 +166,14 @@ router.post('/login',
                         const validPassword = bcrypt.compareSync(password, passwordDB);
                         if (!validPassword) {
                             return res.send({
-                                "message": "Password verification failed",
-                                password,
-                                passwordDB,
-                                validPassword
+                                "message": "* Password verification failed",
                             });
                         }
                         const token = generateAccessToken(result[0].id_user, result[0].role);
                         return res.send({token, user: result[0]});
                         //return res.redirect('http://localhost:3000/')
-                    } else {
-                        return res.send({"message": "User do not exist"})
+                    } else{
+                        return res.send({"message": "* User do not exist"})
                     }
                 }
             )

@@ -24,6 +24,7 @@ const Register = (props) => {
     const [emailReg, setEmailReg] = useState("");
     const [passwordReg, setPasswordReg] = useState("");
     const [registerStatus, setRegisterStatus] = useState("");
+    const [errorStatus, setErrorStatus] = useState("");
     const { setAuthTokens, userId } =  useAuth();
 
     const navigate = useNavigate();
@@ -33,6 +34,8 @@ const Register = (props) => {
         event.preventDefault();
         event.target.reset();
     };
+
+
 
     const register = () => {
         Axios.post('http://localhost:3011/auth/register', {
@@ -97,6 +100,7 @@ const Register = (props) => {
                                    variant="standard"/>
                         <p style={{color: "red"}}>
                             {registerStatus}
+                            {errorStatus}
                         </p>
                     </Box>
 
@@ -109,7 +113,7 @@ const Register = (props) => {
                         </Link>
                     </Box>
                     <Box mt={3} width="100%">
-                        <Button style={{backgroundColor: "#FF777B", width: "400px" }} variant="contained" onClick={register}>Register</Button>
+                        <Button style={{backgroundColor: "#FF777B", width: "400px" }} type="submit" variant="contained" onClick={register}>Register</Button>
                     </Box>
                 </form>
             </div>

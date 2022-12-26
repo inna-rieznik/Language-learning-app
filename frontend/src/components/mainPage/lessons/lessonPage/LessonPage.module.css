@@ -5,3 +5,11 @@
     flex-direction: column;
     min-height: 500px;
 }
+
+.parent{
+    display: flex;
+}
+
+.child{
+    width: 50%;
+}

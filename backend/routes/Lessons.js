@@ -29,10 +29,9 @@ const db = mysql.createConnection({
 });*/
 
 
-
-router.get('/',  authMiddleware,(req, res) => {
+router.get('/', authMiddleware, (req, res) => {
     const userId = req.userData.id;
-        db.query('select * from mydb.users_lessons join mydb.lessons on users_lessons.id_lesson = lessons.id_lesson where id_user = ?',
+    db.query('select * from mydb.users_lessons join mydb.lessons on users_lessons.id_lesson = lessons.id_lesson where id_user = ?',
         [userId],
         (err, result) => {
             if (err) {
@@ -46,7 +45,6 @@ router.get('/',  authMiddleware,(req, res) => {
         })
 
 });
-
 
 
 //get one lesson only for authorized user '/lessons/id/1'
@@ -68,7 +66,7 @@ router.get('/id/:lessonId', authMiddleware, (req, res) => {
 
 })
 //only admin can add new lesson
-router.post('/', roleMiddleware(['admin']),(req, res) => {
+router.post('/', roleMiddleware(['admin']), (req, res) => {
     //to access data from FE we use body
     const title = req.body.title;
     const introText = req.body.introText;
@@ -88,5 +86,37 @@ router.post('/', roleMiddleware(['admin']),(req, res) => {
         }
     )
 })
+
+
+router.delete('/:lessonId', roleMiddleware(['admin']), (req, res) => {
+    const lessonId = req.params.lessonId;
+
+    db.query(
+        "DELETE from mydb.users_lessons where id_lesson = ?",
+        [lessonId],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({status: 'error', err})
+                return;
+            }
+
+
+            db.query(
+                "DELETE from mydb.lessons where id_lesson = ?",
+                [lessonId],
+                (err, result) => {
+                    if (err) {
+                        console.log(err);
+                        res.send({status: 'error', err})
+                        return;
+                    }
+                    res.send({status: 'Deleted successfully'})
+                }
+            )
+        }
+    )
+})
+
 
 module.exports = router;

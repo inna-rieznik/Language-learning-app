@@ -20,6 +20,11 @@ import TextField from '@mui/material/TextField';
 import {useEffect, useState} from 'react';
 import axios from "axios";
 import {useAuth} from "../login/Auth";
+import LogoutIcon from "@mui/icons-material/Logout";
+import {IconButton} from "@mui/material";
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import EditIcon from '@mui/icons-material/Edit';
+import {useParams} from "react-router-dom";
 
 
 const style = {
@@ -49,36 +54,53 @@ const WordsPage = (props) => {
     const [target, setTarget] = useState("");
     const [user, setUser] = useState({})
     const {userId} = useAuth();
+    let {wordId} = useParams();
 
     const [listOfWords, setListOfWords] = useState();
+    const [wordsCount, setWordsCount] = useState();
 
     useEffect(() => {
-        reqInstance.get("http://localhost:3011/words",
+        reqInstance.get("http://localhost:3011/words/forUser",
         ).then((response) => {
             setListOfWords(response.data);
+            setWordsCount(response.data.length);
            // console.log(response.data);
         });
     }, []);
 
-/*    useEffect(() => {
+   useEffect(() => {
         reqInstance.get(`http://localhost:3011/user/${userId}`).then((response) => {
             setUser(response.data[0]);
-            console.log("user data", response.data[0]);
+           // console.log("user data", response.data[0]);
         });
-    }, [userId]);*/
+    }, [userId]);
+
+    const deleteWord = (wordId) => {
+        reqInstance.delete(`http://localhost:3011/words/${wordId}`).then((response) => {
+            const wordIdf = wordId;
+            setWordsCount(listOfWords.length - 1);
+            //setListOfWords(listOfWords.filter((data, idx) => data !== wordIdf ))
+            console.log("list:", listOfWords);
+            console.log(wordIdf);
+        });
+
+    };
 
 
     const addWord = () => {
-        reqInstance.post('http://localhost:3011/words', {
+        reqInstance.post('http://localhost:3011/words/byStudent', {
             source: source,
             target: target
         }).then((response) => {
             const wordToAdd = {source: source, target: target}
             setListOfWords([...listOfWords, wordToAdd]);
+            setWordsCount(listOfWords.length + 1)
             console.log("list:", listOfWords);
 
         });
     };
+
+
 
 
     //function to add data from inputs to wordsData
@@ -122,11 +144,11 @@ const WordsPage = (props) => {
                     <Typography color="text.primary">My Words</Typography>
                 </Breadcrumbs>
                 <h1 style={{marginTop: "20px"}}>My Words</h1>
-                {(user.role === 'student') ? null :
+               {/* {(user.role === 'student') ? null :*/}
                     <Button style={{backgroundColor: "#FF777B", width: "400px", height: "50px", marginBottom: 20}}
                             onClick={handleOpen} variant="contained" startIcon={<AddIcon/>}>add new
                         word</Button>
-                }
+                {/* }  */}
                 <Modal
                     aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description"
@@ -190,15 +212,22 @@ const WordsPage = (props) => {
 
 
                 <div>
+                    <h2>Words ({wordsCount})</h2>
                     <TableContainer component={Paper}>
-                        <Table sx={{minWidth: 650}} aria-label="simple table">
+                        <Table sx={{minWidth: 800}} aria-label="simple table">
                             <TableHead>
                                 <TableRow style={{backgroundColor: "rgba(255, 194, 194, 0.5)"}}>
-                                    <TableCell style={{fontWeight: " 900", color: "#003066"}}>Id</TableCell>
                                     <TableCell style={{fontWeight: " 900", color: "#003066"}}
                                                align="left">Word</TableCell>
                                     <TableCell style={{fontWeight: " 900", color: "#003066"}}
                                                align="left">Translation</TableCell>
+                                    {(user.role === 'student') ? null :
+                                    <TableCell style={{fontWeight: " 900", color: "#003066", width: "100px"}}
+                                               align="right">Edit</TableCell>}
+                                    {(user.role === 'student') ? null :
+                                    <TableCell style={{fontWeight: " 900", color: "#003066", width: "100px"}}
+                                               align="right">Delete</TableCell>}
+
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -207,11 +236,20 @@ const WordsPage = (props) => {
                                               key={row.id_word}
                                               sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                     >
-                                        <TableCell component="th" scope="row">
-                                            {row.id_word}
-                                        </TableCell>
                                         <TableCell align="left">{row.source}</TableCell>
                                         <TableCell align="left">{row.target}</TableCell>
+                                        {(user.role === 'student') ? null :
+                                        <TableCell align="right">
+                                        <IconButton >
+                                            <EditIcon/>
+                                        </IconButton>
+                                        </TableCell>}
+                                        {(user.role === 'student') ? null :
+                                        <TableCell align="right">
+                                             <IconButton  onClick={() => {deleteWord(row.id_word)}}>
+                                                <DeleteOutlinedIcon/>
+                                            </IconButton>
+                                        </TableCell>}
                                     </TableRow>
                                 ))}
                             </TableBody>

@@ -12,8 +12,8 @@ const db = mysql.createConnection({
 });
 
 
-//get list of words
-router.get('/', authMiddleware, (req, res) => {
+//get list of words for authenticated user - student
+router.get('/forUser', authMiddleware, (req, res) => {
     const userId = req.userData.id;
 
     try {
@@ -32,6 +32,26 @@ router.get('/', authMiddleware, (req, res) => {
         console.log(e)
     }
 
+});
+
+
+//show all words only for admin
+router.get('/all', roleMiddleware(['admin']), (req, res) => {
+
+    try {
+        db.query('select * from mydb.words',
+            (err, result) => {
+                if (err) {
+                    console.log(err);
+                    res.send({status: 'error', err})
+                    return;
+                }
+                console.log(result);
+                res.send(result);
+            })
+    } catch (e) {
+        console.log(e)
+    }
 
 });
 
@@ -56,54 +76,126 @@ router.get('/random/6', authMiddleware, (req, res) => {
 });
 
 
-//add word to db
-router.post('/', roleMiddleware(['admin']), (req, res) => {
-    //to access data from FE we use body
-    try {
-        const source = req.body.source;
-        const target = req.body.target;
+//add word only for logged user
+router.post('/byStudent', authMiddleware, (req, res) => {
+        //to access data from FE we use body
+        try {
+            const source = req.body.source;
+            const target = req.body.target;
+            const userId = req.userData.id;
+            db.query(
+                "INSERT INTO mydb.words (id_lesson, id_state, id_language, source, target) values(1,0,2,?,?)",
+                [source, target],
+                (err, result) => {
+                    if (err) {
+                        console.log(err);
+                        res.send({status: 'error', err})
+                        return;
+                    }
 
-        db.query(
-            "INSERT INTO mydb.words (id_lesson, id_state, id_language, source, target) values(1,0,2,?,?)",
-            [source, target],
-            (err, result) => {
-                if (err) {
-                    console.log(err);
-                    res.send({status: 'error', err})
-                    return;
-                }
-                const wordId = result.insertId;
+                    const wordId = result.insertId;
 
-                db.query(
-                    "INSERT INTO mydb.users_words (id_word, id_user, id_state, started_at) SELECT ?, id_user, 0, null FROM mydb.users",
-                    [wordId],
-                    (err, result) => {
-                        if (err) {
-                            console.log(err);
-                            res.send({status: 'error', err})
+                    db.query(
+                        "INSERT INTO mydb.users_words (id_word, id_user, id_state, started_at) VALUES (?, ?, 0, null)",
+                        [wordId, userId],
+                        (err, result) => {
+                            if (err) {
+                                console.log(err);
+                                res.send({status: 'error', err})
+                            }
+                            res.send({status: 'ok'})
                         }
-                    })
-
-
-            })
-    } catch (e) {
-        console.log(e)
+                    )
+                }
+            )
+        } catch (e) {
+            console.log(e)
+        }
     }
+);
+/*loop to add this word to every existed user */
+
+/*db.query(
+    "INSERT INTO mydb.users_words (id_word,id_user) values((select Max(id_word) from mydb.words), 1)",
+    [source, target],
+    (err, result) => {
+        if (err) {
+            console.log(err);
+            res.send({status: 'error', err})
+            return;
+        }
+        res.send({status: 'ok'})
+    })*/
 
 
-    /*loop to add this word to every existed user */
+//add word for all users
+router.post('/', roleMiddleware(['admin']), (req, res) => {
+        //to access data from FE we use body
+        try {
+            const source = req.body.source;
+            const target = req.body.target;
 
-    /*db.query(
-        "INSERT INTO mydb.users_words (id_word,id_user) values((select Max(id_word) from mydb.words), 1)",
-        [source, target],
+            db.query(
+                "INSERT INTO mydb.words (id_lesson, id_state, id_language, source, target) values(1,0,2,?,?)",
+                [source, target],
+                (err, result) => {
+                    if (err) {
+                        console.log(err);
+                        res.send({status: 'error', err})
+                        return;
+                    }
+                    const wordId = result.insertId;
+
+                    db.query(
+                        "INSERT INTO mydb.users_words (id_word, id_user, id_state, started_at) SELECT ?, id_user, 0, null FROM mydb.users",
+                        [wordId],
+                        (err, result) => {
+                            if (err) {
+                                console.log(err);
+                                res.send({status: 'error', err})
+                            }
+                            res.send({status: 'ok'})
+                        }
+                    )
+                }
+            )
+        } catch (e) {
+            console.log(e)
+        }
+    }
+)
+
+
+
+router.delete('/:wordId', roleMiddleware(['admin']), (req, res) => {
+
+    const wordId = req.params.wordId;
+
+    db.query(
+        "DELETE from mydb.users_words where id_word = ?",
+        [wordId],
         (err, result) => {
             if (err) {
                 console.log(err);
                 res.send({status: 'error', err})
                 return;
             }
-            res.send({status: 'ok'})
-        })*/
+
+
+            db.query(
+                "DELETE from mydb.words where id_word = ?",
+                [wordId],
+                (err, result) => {
+                    if (err) {
+                        console.log(err);
+                        res.send({status: 'error', err})
+                        return;
+                    }
+                    res.send({status: 'Deleted successfully'})
+                }
+            )
+        }
+    )
 })
 
 
