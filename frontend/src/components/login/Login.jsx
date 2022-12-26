@@ -57,7 +57,7 @@ const Login = (props) => {
                 /* navigate(`/user/${response.data[0]?.id_user}`);*/
 
             }
-            console.log(response.data);
+            //console.log(response.data);
 
         });
     };
@@ -101,7 +101,7 @@ const Login = (props) => {
                         </Link>
                     </Box>
                     <Box mt={3} width="100%">
-                        <Button style={{backgroundColor: "#FF777B", width: "400px" }} onClick={login} variant="contained">Log in</Button>
+                        <Button style={{backgroundColor: "#FF777B", width: "400px" }} type="submit" onClick={login} variant="contained">Log in</Button>
                     </Box>
                     <div>
 

@@ -32,8 +32,7 @@ const GameTranslation = ({step, word, words, onClickVariant}) => {
                                }}
                                inputRef={textRef}
                                variant="outlined" />
-                    <Button onClick={() => {onClickVariant(userAnswer); onButtonClick() }} variant="contained">send</Button>
-
+                    <Button onClick={() => {onClickVariant(userAnswer); onButtonClick() }} type="submit" variant="contained">send</Button>
 
                 </div>
             </> : 'Not valid question'}
