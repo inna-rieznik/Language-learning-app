@@ -13,7 +13,7 @@ const db = mysql.createConnection({
 
 
 //get list of words for authenticated user - student
-router.get('/forUser', authMiddleware, (req, res) => {
+router.get('/forStudent', authMiddleware, (req, res) => {
     const userId = req.userData.id;
 
     try {
@@ -129,7 +129,7 @@ router.post('/byStudent', authMiddleware, (req, res) => {
 
 
 //add word for all users
-router.post('/', roleMiddleware(['admin']), (req, res) => {
+router.post('/byAdmin', roleMiddleware(['admin']), (req, res) => {
         //to access data from FE we use body
         try {
             const source = req.body.source;

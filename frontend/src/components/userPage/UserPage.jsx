@@ -35,7 +35,7 @@ const UserPage = (props) => {
 
     return (
         <div className={s.content}>
-            <div style={{ width: "800px", margin: "20px auto 20px auto"}}>
+            <div style={{width: "800px", margin: "20px auto 20px auto"}}>
                 <div role="presentation" onClick={handleClick}>
                     <Breadcrumbs aria-label="breadcrumb">
                         <Link
@@ -53,10 +53,14 @@ const UserPage = (props) => {
                 <div className={s.modal}>
                     <div className={s.modalInside}>
                         <div className={s.user}>
-                        <img src={User} alt="UserIcon" width="100" height="100"/>
+                            <img src={User} alt="UserIcon" width="100" height="100"/>
                         </div>
-                        <h1>{userObject[0]?.username} </h1>
-                        <h2>{userObject[0]?.role} </h2>
+                        <div style={{ display: "flex",justifyContent: "center"}}>
+                            <h1>{userObject[0]?.username} </h1>
+                        </div>
+                        <div style={{ display: "flex",justifyContent: "center"}}>
+                            <h2>{userObject[0]?.role} </h2>
+                        </div>
                     </div>
                     <div className={s.modalInside}>
                         <div className={s.level}>

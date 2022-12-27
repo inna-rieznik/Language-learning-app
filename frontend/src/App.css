@@ -53,6 +53,7 @@ body {
 
 }
 
+
 /* ---------------------------- */
 .app-wrapper{
   background-color: #f5f5f5;
@@ -80,6 +81,7 @@ body {
     display: flex;
     flex-direction: column;
     background-color: #6aa7f7;
+
 }
 
 

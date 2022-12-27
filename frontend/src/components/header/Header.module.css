@@ -5,7 +5,12 @@
     align-items: center;
     justify-content: space-between;
     margin: 5px 20px 5px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
 }
+
 
 .logo {
 
@@ -24,7 +29,7 @@
 
 .menu {
     display: flex;
-    flex: 0 0 540px;
+    flex: 0 0 800px;
     justify-content: flex-end;
 }
 
@@ -42,5 +47,27 @@ button {
 }
 
 .logout {
+}
+
+
+.progress{
+    height: 20px;
+    background-color: #FFC2C2;
+    width: 150px;
+    display: flex;
+}
+
+
+.inner {
+    height: 100%;
+    width: 80%;
+    transition: all 0.3s ease-in-out;
+    background: #FF777B;
+
 
 }
+
+.points{
+    margin: 3px 0 0 3px;
+}
+

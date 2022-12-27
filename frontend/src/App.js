@@ -43,7 +43,7 @@ const App = (props) => {
             Object.keys(user).forEach(key => {
                 setUserId(user[key].id_user);
                 setUserScore(user[key].score);
-                console.log(user[key].id_user);
+                //console.log(user[key].id_user);
             })
         }
     }, [userId])

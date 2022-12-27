@@ -20,7 +20,6 @@ import TextField from '@mui/material/TextField';
 import {useEffect, useState} from 'react';
 import axios from "axios";
 import {useAuth} from "../login/Auth";
-import LogoutIcon from "@mui/icons-material/Logout";
 import {IconButton} from "@mui/material";
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import EditIcon from '@mui/icons-material/Edit';
@@ -59,21 +58,37 @@ const WordsPage = (props) => {
     const [listOfWords, setListOfWords] = useState();
     const [wordsCount, setWordsCount] = useState();
 
-    useEffect(() => {
-        reqInstance.get("http://localhost:3011/words/forUser",
-        ).then((response) => {
-            setListOfWords(response.data);
-            setWordsCount(response.data.length);
-           // console.log(response.data);
-        });
-    }, []);
+
+
+
 
    useEffect(() => {
-        reqInstance.get(`http://localhost:3011/user/${userId}`).then((response) => {
+        reqInstance.get(`http://localhost:3011/user/${userId}`)
+            .then((response) => {
             setUser(response.data[0]);
            // console.log("user data", response.data[0]);
         });
     }, [userId]);
+
+    useEffect(() => {
+        {
+            (user.role === 'student') ?
+                reqInstance.get("http://localhost:3011/words/forStudent")
+                    .then((response) => {
+                        setListOfWords(response.data);
+                        setWordsCount(response.data.length);
+                        // console.log(response.data);
+                    })
+                :
+                reqInstance.get("http://localhost:3011/words/all")
+                    .then((response) => {
+                        setListOfWords(response.data);
+                        setWordsCount(response.data.length);
+                        // console.log(response.data);
+                    })
+        }
+
+    }, []);
 
     const deleteWord = (wordId) => {
         reqInstance.delete(`http://localhost:3011/words/${wordId}`).then((response) => {
@@ -87,7 +102,7 @@ const WordsPage = (props) => {
     };
 
 
-    const addWord = () => {
+    const addWordAsStudent = () => {
         reqInstance.post('http://localhost:3011/words/byStudent', {
             source: source,
             target: target
@@ -99,6 +114,21 @@ const WordsPage = (props) => {
 
         });
     };
+
+    const addWordAsAdmin = () => {
+        reqInstance.post('http://localhost:3011/words/byAdmin', {
+            source: source,
+            target: target
+        }).then((response) => {
+            const wordToAdd = {source: source, target: target}
+            setListOfWords([...listOfWords, wordToAdd]);
+            setWordsCount(listOfWords.length + 1)
+            console.log("list:", listOfWords);
+
+        });
+    };
+
+
 
 
 
@@ -198,7 +228,7 @@ const WordsPage = (props) => {
                                 <Button variant="contained"
                                         startIcon={<AddIcon/>}
                                         onClick={() => {
-                                            addWord();
+                                             {(user.role === 'student') ? addWordAsStudent() : addWordAsAdmin()}
                                             handleClose();
                                         }}
                                         style={{width: "500px", marginTop: "20px"}}
