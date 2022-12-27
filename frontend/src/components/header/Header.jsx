@@ -16,12 +16,17 @@ let reqInstance = axios.create({
     }
 );
 
+
+
 const Header = (props) => {
     const {authTokens, userId, handleLogout} = useAuth();
     const [user, setUser] = useState([]);
-    const [userScore, setUserScore] = useState([]);
-    const [userLevel, setUserLevel] = useState([]);
+    const [userScore, setUserScore] = useState();
+    let [userLevel, setUserLevel] = useState();
 
+
+    const percentage = Math.round((userScore / 100) * 100);
+    //console.log(percentage);
     //console.log("userId_header", userId);
 
 
@@ -30,9 +35,27 @@ const Header = (props) => {
             setUser(response.data[0]);
             setUserScore(response.data[0].score);
             setUserLevel(response.data[0].level);
-            console.log(response.data);
+            //console.log(response.data);
         });
     }, [userId])
+
+
+
+
+
+    function  updateLevel(score){
+        if (score >= 100){
+            setUserLevel(userLevel + 1);
+            setUserScore(0);
+        }
+
+
+    }
+
+
+
+  //  console.log("user score : ", userScore)
+ //   console.log("user level : ", userLevel);
 
 
     return (
@@ -45,11 +68,22 @@ const Header = (props) => {
             <nav className={s.menu}>
                 <ul className={s.list}>
                     <li className={s.item}>
-                        <p className={s.level}>Level {userLevel}</p>
+                        <p className={s.level} onChange={updateLevel(userScore)}>Level {userLevel}</p>
                     </li>
-                    <li className={s.item}>
+                    {/*<li className={s.item}>
                         <p className={s.levelIndicator}>{userScore}/100</p>
+                    </li>*/}
+                    <li className={s.item}>
+                        <div className={s.progress}>
+                            <div style={{width: `${percentage}%`}} className={s.inner}>
+                                <p className={s.points}>{userScore}/100</p>
+                            </div>
+                        </div>
+
                     </li>
+                   {/* <li>
+                         <div className={s.points}> <p className={s.levelIndicator}>{userScore}/100</p></div>
+                    </li>*/}
                     <li className={s.item}>
                         <p className={s.levelIndicator}>{user.name}</p>
                     </li>

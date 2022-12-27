@@ -33,7 +33,7 @@ const Lessons = (props) => {
     useEffect(() => {
         reqInstance.get(`http://localhost:3011/user/${userId}`).then((response) => {
             setUser(response.data[0]);
-            console.log("user data", response.data[0]);
+            //console.log("user data", response.data[0]);
         });
     }, [userId]);
 
@@ -46,8 +46,8 @@ const Lessons = (props) => {
             <Button style={{backgroundColor: "#FF777B", width: "600px", height: "50px", marginBottom: '40px'}} variant="contained" href='review_grammar'>Review grammar</Button>
 
             {listOfLessons?.map((value) => (
-                <div>
-                    <Card to={`lessons/id/${value.id_lesson}`} bgColor={value.id_state === 4 ? '#e1e1e1' : undefined} color={value.id_state === 4 ? 'gray' : undefined}>
+                <div key={value.id_lesson}>
+                    <Card to={`lessons/id/${value.id_lesson}`} disabled={(value.id_state === 4) ? true : false} bgColor={value.id_state === 4 ? '#e1e1e1' : undefined} color={value.id_state === 4 ? 'gray' : undefined}>
                         <div className={s.cardContent}>
                             <img src={Check} alt='check' width={49} height={49}
                                  style={{marginRight: '16px', opacity: value.id_state === 3 ? 1 : 0}}/>
