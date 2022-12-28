@@ -51,6 +51,11 @@ const WordsPage = (props) => {
     const [listOfWords, setListOfWords] = useState();
     const [wordsCount, setWordsCount] = useState();
 
+    //function to add data from inputs to wordsData
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
 
     useEffect(() => {
         reqInstance.get(`http://localhost:3011/user/${userId}`)
@@ -116,10 +121,7 @@ const WordsPage = (props) => {
     };
 
 
-    //function to add data from inputs to wordsData
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+
 
     //function to add data from inputs to wordsData
     let newWordCz = React.createRef();
