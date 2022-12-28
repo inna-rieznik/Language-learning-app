@@ -17,8 +17,33 @@ router.get('/forStudent', authMiddleware, (req, res) => {
     const userId = req.userData.id;
 
     try {
-        db.query('select * from mydb.users_words join mydb.words on users_words.id_word = words.id_word where id_user = ?',
+        db.query("select * " +
+            "from mydb.users_words " +
+            "join mydb.words on users_words.id_word = words.id_word where id_user = ?",
             [userId],
+            (err, result) => {
+                if (err) {
+                    console.log(err);
+                    res.send({status: 'error', err})
+                    return;
+                }
+                console.log(result);
+                res.send(result);
+            })
+    } catch (e) {
+        console.log(e)
+    }
+
+});
+
+//get list of words for authenticated user - student
+router.get('/forStudent/:lessonId', authMiddleware, (req, res) => {
+    const userId = req.userData.id;
+    const lessonId = req.params.lessonId;
+
+    try {
+        db.query("select * from mydb.users_words join mydb.words on users_words.id_word = words.id_word where id_user = ? and id_lesson = ?",
+            [userId, lessonId],
             (err, result) => {
                 if (err) {
                     console.log(err);
@@ -55,6 +80,28 @@ router.get('/all', roleMiddleware(['admin']), (req, res) => {
 
 });
 
+
+router.get('/all/:lessonId', roleMiddleware(['admin']), (req, res) => {
+    const lessonId = req.params.lessonId;
+    try {
+        db.query('select * from mydb.words where id_lesson = ?',
+            [lessonId],
+            (err, result) => {
+                if (err) {
+                    console.log(err);
+                    res.send({status: 'error', err})
+                    return;
+                }
+                console.log(result);
+                res.send(result);
+            })
+    } catch (e) {
+        console.log(e)
+    }
+
+});
+
+//get random 6 words
 router.get('/random/6', authMiddleware, (req, res) => {
 
     try {
@@ -76,7 +123,7 @@ router.get('/random/6', authMiddleware, (req, res) => {
 });
 
 
-//add word only for logged user
+//add word only for authenticated user student
 router.post('/byStudent', authMiddleware, (req, res) => {
         //to access data from FE we use body
         try {
@@ -113,22 +160,10 @@ router.post('/byStudent', authMiddleware, (req, res) => {
         }
     }
 );
-/*loop to add this word to every existed user */
-
-/*db.query(
-    "INSERT INTO mydb.users_words (id_word,id_user) values((select Max(id_word) from mydb.words), 1)",
-    [source, target],
-    (err, result) => {
-        if (err) {
-            console.log(err);
-            res.send({status: 'error', err})
-            return;
-        }
-        res.send({status: 'ok'})
-    })*/
 
 
-//add word for all users
+
+//add word for all users only for admin
 router.post('/byAdmin', roleMiddleware(['admin']), (req, res) => {
         //to access data from FE we use body
         try {

@@ -2,28 +2,24 @@ import React from 'react';
 import Result from "./Result";
 import s from "./QuizPage.module.css";
 import {useEffect} from "react";
-import axios from "axios";
 import {useState} from "react";
 import Game from "./Game";
 import {useAuth} from "../../../login/Auth";
+import {useParams} from "react-router-dom";
+import {reqInstance} from '../../../../utils/auth'
 
+const QuizGameBase = (props) => {
+    const {fetchDataEndpoint} = props
 
-let reqInstance = axios.create({
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-    }
-);
-
-const QuizGame = (props) => {
     const [step, setStep] = React.useState(0); //first element in array
+    const {lessonId} = useParams()
     const [countCorrect, setCountCorrect] = React.useState(0);
     const [quizes, setQuizes] = useState([]);
     const {userScore} = useAuth();
     const size = quizes.length;
 
     useEffect(() => {
-        reqInstance.get(`http://localhost:3011/quizQuestions`).then((response) => {
+        reqInstance.get(fetchDataEndpoint ?? `http://localhost:3011/quizQuestions/word`).then((response) => {
             setQuizes(response.data);
             console.log("quizes data", response.data);
 
@@ -69,4 +65,4 @@ const QuizGame = (props) => {
 }
 
 
-export default QuizGame;
+export default QuizGameBase;

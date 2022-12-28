@@ -1,9 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
 import s from "./Flashcards.module.css";
-import Card from "@mui/material/Card";
-import {CardActionArea, TextField} from "@mui/material";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
 
 const Flashcard = ({flashcard}) => {
     const [flip, setFlip] = useState(false);

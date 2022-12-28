@@ -14,13 +14,14 @@ import LessonPage from "./components/mainPage/lessons/lessonPage/LessonPage";
 import Register from "./components/login/Register";
 import CreateLesson from "./components/mainPage/lessons/CreateLesson";
 import ReviewGrammar from "./components/mainPage/vocabulary/ReviewGrammar";
-import QuizPage from "./components/mainPage/vocabulary/quiz/QuizPage";
+import QuizWordsPage from "./components/mainPage/vocabulary/quiz/QuizWordsPage";
 import AuthenticatedLayout from "./AuthenticatedLayout";
 import {AuthContext} from "./components/login/Auth";
 import FlashcardsPage from "./components/mainPage/vocabulary/flashcards/FlashcardsPage";
 import OpenQuestionsPage from "./components/mainPage/vocabulary/openQuestions/OpenQuestionsPage";
 import MatchingPage2 from "./components/mainPage/vocabulary/matching2/MatchingPage2";
 import PageNotFound from "./components/PageNotFound";
+import QuizGrammarPage from "./components/mainPage/vocabulary/quiz/QuizGrammarPage";
 
 
 const App = (props) => {
@@ -108,9 +109,13 @@ const App = (props) => {
                                element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
                                    <ReviewGrammar/>
                                </AuthenticatedLayout>}/>
+                        <Route path={'/review_grammar/quiz'}
+                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId} >
+                                   <QuizGrammarPage/>
+                               </AuthenticatedLayout>}/>
                         <Route path={'/review_words/quiz'}
                                element={<AuthenticatedLayout authTokens={authTokens} userId={userId} >
-                                   <QuizPage/>
+                                   <QuizWordsPage/>
                                </AuthenticatedLayout>}/>
                         <Route path={'/review_words/translate'}
                                element={<AuthenticatedLayout authTokens={authTokens} userId={userId} >

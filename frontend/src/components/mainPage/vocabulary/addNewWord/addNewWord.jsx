@@ -1,3 +1,4 @@
+/*
 import s from "./AddNewWord.module.css";
 
 
@@ -14,4 +15,4 @@ const AddNewWord = (props) => {
     );
 }
 
-export default AddNewWord;
+export default AddNewWord;*/

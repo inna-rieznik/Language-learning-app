@@ -55,12 +55,11 @@ body {
 
 
 /* ---------------------------- */
-.app-wrapper{
-  background-color: #f5f5f5;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+.app-wrapper {
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 
 }
 
@@ -78,6 +77,9 @@ body {
 }
 
 .headerContainer {
+    z-index: 100;
+    position: sticky;
+    top: 0;
     display: flex;
     flex-direction: column;
     background-color: #6aa7f7;
@@ -85,3 +87,26 @@ body {
 }
 
 
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .example {
+        background: red;
+    }
+}
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .example {
+        background: blue;
+    }
+}
+
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .example {
+        background: pink;
+    }
+
+}

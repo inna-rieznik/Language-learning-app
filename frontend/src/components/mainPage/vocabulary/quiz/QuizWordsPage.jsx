@@ -1,12 +1,12 @@
 import React from 'react';
 import s from "./QuizPage.module.css";
-import QuizGame from "./QuizGame";
+import QuizGameBase from "./QuizGameBase";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 
 
-const QuizPage = (props) => {
+const QuizWordsPage = (props) => {
 
     return (
         <div style={{ width: "800px", margin: "20px auto 0 auto"}}>
@@ -25,16 +25,15 @@ const QuizPage = (props) => {
                 >
                     ReviewWords
                 </Link>
-                <Typography color="text.primary">Quiz</Typography>
+                <Typography color="text.primary">Quiz Words</Typography>
             </Breadcrumbs>
-            <h1 style={{marginTop: "20px"}}>Quiz</h1>
+            <h1 style={{marginTop: "20px"}}>Quiz Words</h1>
 
             <div className={s.quiz} >
-                <QuizGame />
-
+                <QuizGameBase fetchDataEndpoint={'http://localhost:3011/quizQuestions/word'}/>
             </div>
         </div>
     );
 }
 
-export default QuizPage;
+export default QuizWordsPage;

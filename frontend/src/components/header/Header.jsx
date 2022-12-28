@@ -7,15 +7,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import {useContext, useState} from "react";
 import {AuthContext, useAuth} from "../login/Auth";
 import {useEffect} from "react";
-import axios from "axios";
 
-let reqInstance = axios.create({
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-    }
-);
-
+import {reqInstance} from "../../utils/auth";
 
 
 const Header = (props) => {
@@ -26,9 +19,6 @@ const Header = (props) => {
 
 
     const percentage = Math.round((userScore / 100) * 100);
-    //console.log(percentage);
-    //console.log("userId_header", userId);
-
 
     useEffect(() => {
         reqInstance.get(`http://localhost:3011/user/${userId}`).then((response) => {
@@ -40,28 +30,17 @@ const Header = (props) => {
     }, [userId])
 
 
-
-
-
     function  updateLevel(score){
         if (score >= 100){
             setUserLevel(userLevel + 1);
             setUserScore(0);
         }
-
-
     }
-
-
-
-  //  console.log("user score : ", userScore)
- //   console.log("user level : ", userLevel);
 
 
     return (
 
         <header className={s.header}>
-
             <NavLink to='/'>
                 <img className={s.logo} src={Logo} alt="Logo" width="44" height="44"/>
             </NavLink>
@@ -81,9 +60,6 @@ const Header = (props) => {
                         </div>
 
                     </li>
-                   {/* <li>
-                         <div className={s.points}> <p className={s.levelIndicator}>{userScore}/100</p></div>
-                    </li>*/}
                     <li className={s.item}>
                         <p className={s.levelIndicator}>{user.name}</p>
                     </li>
@@ -102,7 +78,6 @@ const Header = (props) => {
                     </li>
                 </ul>
             </nav>
-
         </header>
     );
 }

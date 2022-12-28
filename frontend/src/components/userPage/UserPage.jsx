@@ -8,10 +8,6 @@ import axios from "axios";
 import User from '../../images/user-svgrepo-com.svg'
 
 
-function handleClick(event) {
-    event.preventDefault();
-    console.info('You clicked a breadcrumb.');
-}
 
 let reqInstance = axios.create({
         headers: {
@@ -36,7 +32,7 @@ const UserPage = (props) => {
     return (
         <div className={s.content}>
             <div style={{width: "800px", margin: "20px auto 20px auto"}}>
-                <div role="presentation" onClick={handleClick}>
+                <div role="presentation">
                     <Breadcrumbs aria-label="breadcrumb">
                         <Link
                             underline="hover"
