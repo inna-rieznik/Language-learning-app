@@ -24,7 +24,7 @@ import {IconButton} from "@mui/material";
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import EditIcon from '@mui/icons-material/Edit';
 import {useParams} from "react-router-dom";
-
+import {reqInstance} from '../../utils/auth'
 
 const style = {
     position: 'absolute',
@@ -39,13 +39,6 @@ const style = {
 
 };
 
-let reqInstance = axios.create({
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-    }
-);
-
 
 const WordsPage = (props) => {
 
@@ -53,22 +46,22 @@ const WordsPage = (props) => {
     const [target, setTarget] = useState("");
     const [user, setUser] = useState({})
     const {userId} = useAuth();
-    let {wordId} = useParams();
+    //let {wordId} = useParams();
 
     const [listOfWords, setListOfWords] = useState();
     const [wordsCount, setWordsCount] = useState();
 
 
-
-
-
-   useEffect(() => {
+    useEffect(() => {
         reqInstance.get(`http://localhost:3011/user/${userId}`)
             .then((response) => {
-            setUser(response.data[0]);
-           // console.log("user data", response.data[0]);
-        });
+                setUser(response.data[0]);
+                // console.log("user data", response.data[0]);
+            });
     }, [userId]);
+
+   // console.log("role", user.role);
+
 
     useEffect(() => {
         {
@@ -88,17 +81,13 @@ const WordsPage = (props) => {
                     })
         }
 
-    }, []);
+    }, [user.role]);
 
     const deleteWord = (wordId) => {
         reqInstance.delete(`http://localhost:3011/words/${wordId}`).then((response) => {
-            const wordIdf = wordId;
             setWordsCount(listOfWords.length - 1);
-            //setListOfWords(listOfWords.filter((data, idx) => data !== wordIdf ))
-            console.log("list:", listOfWords);
-            console.log(wordIdf);
+            setListOfWords(listOfWords.filter((data) => data.id_word !== wordId))
         });
-
     };
 
 
@@ -123,14 +112,8 @@ const WordsPage = (props) => {
             const wordToAdd = {source: source, target: target}
             setListOfWords([...listOfWords, wordToAdd]);
             setWordsCount(listOfWords.length + 1)
-            console.log("list:", listOfWords);
-
         });
     };
-
-
-
-
 
 
     //function to add data from inputs to wordsData
@@ -162,7 +145,7 @@ const WordsPage = (props) => {
 
     return (
         <div className={s.content}>
-            <div style={{ width: "800px", margin: "20px auto 20px auto"}}>
+            <div style={{width: "800px", margin: "20px auto 20px auto"}}>
                 <Breadcrumbs aria-label="breadcrumb">
                     <Link
                         underline="hover"
@@ -174,10 +157,10 @@ const WordsPage = (props) => {
                     <Typography color="text.primary">My Words</Typography>
                 </Breadcrumbs>
                 <h1 style={{marginTop: "20px"}}>My Words</h1>
-               {/* {(user.role === 'student') ? null :*/}
-                    <Button style={{backgroundColor: "#FF777B", width: "400px", height: "50px", marginBottom: 20}}
-                            onClick={handleOpen} variant="contained" startIcon={<AddIcon/>}>add new
-                        word</Button>
+                {/* {(user.role === 'student') ? null :*/}
+                <Button style={{backgroundColor: "#FF777B", width: "400px", height: "50px", marginBottom: 20}}
+                        onClick={handleOpen} variant="contained" startIcon={<AddIcon/>}>add new
+                    word</Button>
                 {/* }  */}
                 <Modal
                     aria-labelledby="transition-modal-title"
@@ -228,7 +211,9 @@ const WordsPage = (props) => {
                                 <Button variant="contained"
                                         startIcon={<AddIcon/>}
                                         onClick={() => {
-                                             {(user.role === 'student') ? addWordAsStudent() : addWordAsAdmin()}
+                                            {
+                                                (user.role === 'student') ? addWordAsStudent() : addWordAsAdmin()
+                                            }
                                             handleClose();
                                         }}
                                         style={{width: "500px", marginTop: "20px"}}
@@ -252,11 +237,11 @@ const WordsPage = (props) => {
                                     <TableCell style={{fontWeight: " 900", color: "#003066"}}
                                                align="left">Translation</TableCell>
                                     {(user.role === 'student') ? null :
-                                    <TableCell style={{fontWeight: " 900", color: "#003066", width: "100px"}}
-                                               align="right">Edit</TableCell>}
+                                        <TableCell style={{fontWeight: " 900", color: "#003066", width: "100px"}}
+                                                   align="right">Edit</TableCell>}
                                     {(user.role === 'student') ? null :
-                                    <TableCell style={{fontWeight: " 900", color: "#003066", width: "100px"}}
-                                               align="right">Delete</TableCell>}
+                                        <TableCell style={{fontWeight: " 900", color: "#003066", width: "100px"}}
+                                                   align="right">Delete</TableCell>}
 
                                 </TableRow>
                             </TableHead>
@@ -269,17 +254,19 @@ const WordsPage = (props) => {
                                         <TableCell align="left">{row.source}</TableCell>
                                         <TableCell align="left">{row.target}</TableCell>
                                         {(user.role === 'student') ? null :
-                                        <TableCell align="right">
-                                        <IconButton >
-                                            <EditIcon/>
-                                        </IconButton>
-                                        </TableCell>}
+                                            <TableCell align="right">
+                                                <IconButton>
+                                                    <EditIcon/>
+                                                </IconButton>
+                                            </TableCell>}
                                         {(user.role === 'student') ? null :
-                                        <TableCell align="right">
-                                             <IconButton  onClick={() => {deleteWord(row.id_word)}}>
-                                                <DeleteOutlinedIcon/>
-                                            </IconButton>
-                                        </TableCell>}
+                                            <TableCell align="right">
+                                                <IconButton onClick={() => {
+                                                    deleteWord(row.id_word)
+                                                }}>
+                                                    <DeleteOutlinedIcon/>
+                                                </IconButton>
+                                            </TableCell>}
                                     </TableRow>
                                 ))}
                             </TableBody>

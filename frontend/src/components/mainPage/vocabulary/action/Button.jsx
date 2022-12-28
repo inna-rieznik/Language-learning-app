@@ -1,3 +1,4 @@
+/*
 import s from "./Button.module.css";
 import {NavLink} from "react-router-dom";
 
@@ -12,4 +13,4 @@ const Button = (props) => {
     );
 }
 
-export default Button;
+export default Button;*/

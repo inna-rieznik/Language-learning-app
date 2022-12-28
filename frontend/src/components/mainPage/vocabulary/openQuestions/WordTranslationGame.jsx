@@ -1,21 +1,13 @@
 import React from 'react';
 import s from "../quiz/QuizPage.module.css";
 import {useEffect} from "react";
-import axios from "axios";
 import {useState} from "react";
-
 import {useAuth} from "../../../login/Auth";
 import GameTranslation from "./GameTranslation";
-import Result from "../quiz/Result";
 import ResultOpenAnswers from "./ResultOpenAnswers";
+import {reqInstance} from "../../../../utils/auth";
 
 
-let reqInstance = axios.create({
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-    }
-);
 
 const WordTranslationGame = (props) => {
     const [step, setStep] = React.useState(0); //first element in array

@@ -40,7 +40,8 @@ export const Dustbin = memo(function Dustbin({error, target, lastDroppedItem, on
 
             <div>
                 <h3>{target}</h3>
-                {error ? <div style={{backgroundColor: 'red', height: "20px", width: "12rem", color: 'white'}}>BAD</div> : null}
+                {error ? <div style={{backgroundColor: 'red', height: "20px", width: "12rem", color: 'white'}}>BAD</div>
+                    : null }
                 <div ref={drop} style={{...style, backgroundColor}} data-testid="dustbin">
                     {lastDroppedItem && (
                         <h3>{lastDroppedItem.source}</h3>

@@ -1,7 +1,15 @@
 .lessons {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
     text-transform: uppercase;
     margin: 0 auto;
     text-align: center;
+}
+
+.lessons > * {
+    min-width: 600px;
+    max-width: 600px;
 }
 
 .cardContent {
@@ -12,4 +20,27 @@
     justify-content: start;
     padding: 20px;
     gap: 4px;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .example {
+        background: red;
+    }
+}
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .example {
+        background: pink;
+    }
+
 }

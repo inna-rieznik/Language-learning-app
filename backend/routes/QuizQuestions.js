@@ -21,6 +21,8 @@ const db = mysql.createConnection({
     }
 });
 
+
+//get all questions
 router.get('/', authMiddleware, (req, res) => {
     db.query(
         'select quiz_questions.id_quiz_questions, score, quiz_questions.content as question, id_quiz_answers, correct, qa.content as answer from mydb.quiz_questions join mydb.quiz_answers qa on quiz_questions.id_quiz_questions = qa.id_quiz_questions',
@@ -48,7 +50,6 @@ router.get('/', authMiddleware, (req, res) => {
                     }
                 }
             }
-
             const response = []
             for (const key of Object.keys(results)) {
                 response.push(results[key]);
@@ -59,13 +60,104 @@ router.get('/', authMiddleware, (req, res) => {
     )
 })
 
-router.get('/:lessonId', authMiddleware, (req, res) => {
+
+//get WORD questions
+router.get('/word', authMiddleware, (req, res) => {
+    db.query(
+        "select quiz_questions.id_quiz_questions, score, quiz_questions.content as question, id_quiz_answers, correct, qa.content as answer " +
+        "from mydb.quiz_questions join mydb.quiz_answers qa on quiz_questions.id_quiz_questions = qa.id_quiz_questions " +
+        "join quizes q on q.id_quizes = quiz_questions.id_quizes " +
+        "where id_quiz_types = '1'",
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({status: 'error', err})
+                return;
+            }
+
+            const results = {};
+            for (const row of result) {
+                if (results[row.id_quiz_questions]) {
+                    results[row.id_quiz_questions].answers.push({
+                        value: row.answer,
+                        correct: row.correct
+                    })
+                } else {
+                    results[row.id_quiz_questions] = {
+                        question: row.question,
+                        answers: [{
+                            value: row.answer,
+                            correct: row.correct
+                        }]
+                    }
+                }
+            }
+            const response = []
+            for (const key of Object.keys(results)) {
+                response.push(results[key]);
+            }
+
+            res.json(response);
+        }
+    )
+})
+
+
+
+//get GRAMMAR questions
+router.get('/grammar', authMiddleware, (req, res) => {
+    db.query(
+        "select quiz_questions.id_quiz_questions, score, quiz_questions.content as question, id_quiz_answers, correct, qa.content as answer " +
+        "from mydb.quiz_questions join mydb.quiz_answers qa on quiz_questions.id_quiz_questions = qa.id_quiz_questions " +
+        "join quizes q on q.id_quizes = quiz_questions.id_quizes " +
+        "where id_quiz_types = '2'",
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({status: 'error', err})
+                return;
+            }
+
+            const results = {};
+            for (const row of result) {
+                if (results[row.id_quiz_questions]) {
+                    results[row.id_quiz_questions].answers.push({
+                        value: row.answer,
+                        correct: row.correct
+                    })
+                } else {
+                    results[row.id_quiz_questions] = {
+                        question: row.question,
+                        answers: [{
+                            value: row.answer,
+                            correct: row.correct
+                        }]
+                    }
+                }
+            }
+            const response = []
+            for (const key of Object.keys(results)) {
+                response.push(results[key]);
+            }
+
+            res.json(response);
+        }
+    )
+})
+
+
+
+
+//get WORD question in lesson N
+router.get('/word/:lessonId', authMiddleware, (req, res) => {
     const lessonId = req.params.lessonId;
     db.query(
-        'select qq.id_quiz_questions, score, qq.content as question, id_quiz_answers, correct, qa.content as answer\n' +
-        '    from mydb.quizes\n' +
-        '    join quiz_questions qq on quizes.id_quizes = qq.id_quizes\n' +
-        '    join quiz_answers qa on qq.id_quiz_questions = qa.id_quiz_questions where id_lesson=?',
+        "select quiz_questions.id_quiz_questions, score, quiz_questions.content as question, id_quiz_answers, correct, qa.content as answer\n" +
+        "from mydb.quiz_questions\n" +
+        "         join mydb.quiz_answers qa on quiz_questions.id_quiz_questions = qa.id_quiz_questions\n" +
+        "         join quizes q on q.id_quizes = quiz_questions.id_quizes\n" +
+        "         join lessons l on l.id_lesson = q.id_lesson\n" +
+        "where id_quiz_types = '1' and l.id_lesson = ?",
         [lessonId],
         (err, result) => {
             if (err) {
@@ -102,7 +194,51 @@ router.get('/:lessonId', authMiddleware, (req, res) => {
     )
 })
 
+//get GRAMMAR question in lesson N
+router.get('/grammar/:lessonId', authMiddleware, (req, res) => {
+    const lessonId = req.params.lessonId;
+    db.query(
+        "select quiz_questions.id_quiz_questions, score, quiz_questions.content as question, id_quiz_answers, correct, qa.content as answer\n" +
+        "from mydb.quiz_questions\n" +
+        "         join mydb.quiz_answers qa on quiz_questions.id_quiz_questions = qa.id_quiz_questions\n" +
+        "         join quizes q on q.id_quizes = quiz_questions.id_quizes\n" +
+        "         join lessons l on l.id_lesson = q.id_lesson\n" +
+        "where id_quiz_types = '2' and l.id_lesson = ?",
+        [lessonId],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({status: 'error', err})
+                return;
+            }
 
+            const results = {};
+            for (const row of result) {
+                if (results[row.id_quiz_questions]) {
+                    results[row.id_quiz_questions].answers.push({
+                        value: row.answer,
+                        correct: row.correct
+                    })
+                } else {
+                    results[row.id_quiz_questions] = {
+                        question: row.question,
+                        answers: [{
+                            value: row.answer,
+                            correct: row.correct
+                        }]
+                    }
+                }
+            }
+
+            const response = []
+            for (const key of Object.keys(results)) {
+                response.push(results[key]);
+            }
+
+            res.json(response);
+        }
+    )
+})
 
 //only admin can add new quiz question
 router.post('/', roleMiddleware(['admin']),  (req, res) => {

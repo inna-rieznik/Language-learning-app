@@ -11,14 +11,8 @@ import {useAuth} from "../../login/Auth";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
+import {reqInstance} from "../../../utils/auth";
 
-
-let reqInstance = axios.create({
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-    }
-);
 
 const CreateLesson = (props) => {
 
@@ -38,7 +32,6 @@ const CreateLesson = (props) => {
         event.target.reset();
 
     };
-
 
     useEffect(() => {
         reqInstance.get(`http://localhost:3011/user/${userId}`).then((response) => {

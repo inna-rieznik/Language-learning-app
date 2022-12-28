@@ -20,10 +20,10 @@ const ReviewWords = (props) => {
                     >
                         Home
                     </Link>
-                    <Typography color="text.primary">ReviewWords</Typography>
+                    <Typography color="text.primary">Review Words</Typography>
                 </Breadcrumbs>
-            <h1 style={{marginTop: "20px"}}>ReviewWords</h1>
-                <Card to='quiz'>Quiz</Card>
+            <h1 style={{marginTop: "20px"}}>Review Words</h1>
+                <Card to='quiz'>Quiz Words</Card>
             {/*<Card urlName='flashcards' title='Flashcards'/>*/}
                 <Card to='translate'>Word - Translation (CZ-ENG)</Card>
                 <Card to='translate'>Translation - Word (ENG-CZ)</Card>

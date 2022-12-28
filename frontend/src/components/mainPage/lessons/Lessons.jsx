@@ -7,14 +7,7 @@ import {useNavigate} from 'react-router-dom';
 import {useAuth} from "../../login/Auth";
 import Card from "../vocabulary/action/Card";
 import Check from '../../../images/check.svg'
-
-
-let reqInstance = axios.create({
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-    }
-);
+import {reqInstance} from "../../../utils/auth";
 
 
 const Lessons = (props) => {
@@ -47,10 +40,10 @@ const Lessons = (props) => {
 
             {listOfLessons?.map((value) => (
                 <div key={value.id_lesson}>
-                    <Card to={`lessons/id/${value.id_lesson}`} disabled={(value.id_state === 4) ? true : false} bgColor={value.id_state === 4 ? '#e1e1e1' : undefined} color={value.id_state === 4 ? 'gray' : undefined}>
+                    <Card to={`lessons/id/${value.id_lesson}`} disabled={value.id_state === 4 ? true : false} bgColor={value.id_state === 4 ? '#e1e1e1' : undefined} color={value.id_state === 4 ? 'gray' : undefined}>
                         <div className={s.cardContent}>
-                            <img src={Check} alt='check' width={49} height={49}
-                                 style={{marginRight: '16px', opacity: value.id_state === 3 ? 1 : 0}}/>
+                            <img className={s.image} src={Check} alt='check' width={49} height={49}
+                                 style={{marginRight: '16px', opacity: value.id_state === 1 ? 1 : 0}}/>
                             <div>
                                 Lesson {value.id_lesson}:
                             </div>
