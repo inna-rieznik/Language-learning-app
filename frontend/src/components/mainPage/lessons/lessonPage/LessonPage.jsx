@@ -7,12 +7,14 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import {IconButton} from "@mui/material";
+import {IconButton, TextField} from "@mui/material";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import GrammarPartOfLesson from "./GrammarPartOfLesson";
 import WordPartOfLesson from "./WordPartOfLesson";
 import {reqInstance} from "../../../../utils/auth";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
 
 
 const LessonPage = (props) => {
@@ -21,6 +23,26 @@ const LessonPage = (props) => {
     //const [lessonObject, setLessonObject] = useState([]);
     const {userId} = useAuth();
     const [user, setUser] = useState({})
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const [title, setTitle] = useState("");
+    const [introText, setIntroText] = useState("");
+    const [grammarRuleTitle, setGrammarRuleTitle] = useState("");
+    const [grammarRule, setGrammarRule] = useState("");
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 600,
+        backgroundColor: '#FFC2C2',
+        boxShadow: 24,
+        p: 4,
+        borderRadius: '20px'
+    };
 
 
     const deleteLesson = () => {
@@ -36,6 +58,16 @@ const LessonPage = (props) => {
         });
     }, [userId]);
 
+    const editLesson = () => {
+        reqInstance.put(`http://localhost:3011/lessons/${lessonId}`, {
+            title: title,
+            introText: introText,
+            grammarRuleTitle: grammarRuleTitle,
+            grammarRule: grammarRule
+        }).then((response) => {
+            console.log(response.data);
+        });
+    }
 
     return (
         <div className={s.content}>
@@ -58,9 +90,60 @@ const LessonPage = (props) => {
                     </div>
                     {(user.role === 'student') ? null :
                         <div className={s.child} style={{display: "flex", justifyContent: "flex-end"}}>
-                            <IconButton href="/" style={{marginTop: "20px", marginBottom: "20px", alignItems: "right"}}>
+                            <IconButton onClick={handleOpen}
+                                        style={{marginTop: "20px", marginBottom: "20px", alignItems: "right"}}>
                                 <EditIcon style={{width: "40px", height: "auto", color: "green"}}/>
                             </IconButton>
+
+
+                            <Modal
+                                open={open}
+                                onClose={handleClose}
+                                aria-labelledby="modal-modal-title"
+                                aria-describedby="modal-modal-description"
+                            >
+                                <Box sx={style}>
+                                    <Typography id="modal-modal-title" variant="h4" component="h1">
+                                        Edit Lesson {lessonId}
+                                    </Typography>
+                                   {/* <Typography id="modal-modal-description" sx={{mt: 2}}>
+                                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                                    </Typography>*/}
+                                    <h2>Title</h2>
+                                    <TextField sx={{paddingBottom: 2}}
+                                               fullWidth id="addTitle"
+                                               onChange={(e) => {
+                                                   setTitle(e.target.value);
+                                               }}/>
+
+                                    <h2>Some intro text</h2>
+                                    <TextField sx={{paddingBottom: 2}}
+                                               fullWidth id="addIntro"
+                                               multiline
+                                               maxRows={4}
+                                               onChange={(e) => {
+                                                   setIntroText(e.target.value);
+                                               }}/>
+
+                                    <h2>Grammar rule title</h2>
+                                    <TextField sx={{paddingBottom: 2}}
+                                               fullWidth id="addRuleTitle"
+                                               onChange={(e) => {
+                                                   setGrammarRuleTitle(e.target.value);
+                                               }}/>
+
+                                    <h2>Grammar rule</h2>
+                                    <TextField sx={{paddingBottom: 2}}
+                                               fullWidth id="addRule"
+                                               multiline
+                                               maxRows={4}
+                                               onChange={(e) => {
+                                                   setGrammarRule(e.target.value);
+                                               }}/>
+                                    <Button variant="contained" onClick={() => {editLesson(); handleClose()}}>Edit</Button>
+                                </Box>
+                            </Modal>
+
                             <IconButton onClick={deleteLesson}
                                         style={{marginTop: "20px", marginBottom: "20px", alignItems: "right"}}>
                                 <DeleteOutlinedIcon style={{width: "40px", height: "auto", color: "red"}}/>

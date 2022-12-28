@@ -88,6 +88,30 @@ router.post('/', roleMiddleware(['admin']), (req, res) => {
 })
 
 
+//only admin can add new lesson
+router.put('/:lessonId', roleMiddleware(['admin']), (req, res) => {
+    //to access data from FE we use body
+    const title = req.body.title;
+    const introText = req.body.introText;
+    const grammarRuleTitle = req.body.grammarRuleTitle;
+    const grammarRule = req.body.grammarRule;
+    const lessonId = req.params.lessonId;
+
+    db.query(
+        "UPDATE mydb.lessons set title = ?, intro_text=?, grammar_rule_title=?, grammar_rule=? WHERE id_lesson = ?",
+        [title, introText, grammarRuleTitle, grammarRule,lessonId],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({status: 'error', err})
+                return;
+            }
+            res.send({status: 'ok'})
+        }
+    )
+})
+
+
 router.delete('/:lessonId', roleMiddleware(['admin']), (req, res) => {
     const lessonId = req.params.lessonId;
 
