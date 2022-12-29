@@ -56,12 +56,7 @@ let store = {
         this._rerenderTree = observer; //override rerenderTree by observer from index.js
     },
 
-    dispatch(action) {
 
-        this._state.wordsData = wordsReducer(this._state.wordsData, action);
-
-        this._rerenderTree(this._state);
-    }
 }
 
 

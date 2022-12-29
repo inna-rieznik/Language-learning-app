@@ -50,6 +50,9 @@ app.use("/words", wordRouter);
 const userRouter = require('./routes/User')
 app.use("/user", userRouter);
 
+const scoreRouter = require('./routes/Score')
+app.use("/score", scoreRouter);
+
 
 app.get('/api/test', (req, res) => {
     res.send({

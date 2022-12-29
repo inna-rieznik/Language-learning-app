@@ -130,6 +130,55 @@ router.put('/:lessonId', roleMiddleware(['admin']), (req, res) => {
     )
 })
 
+router.put('/:lessonId/state', authMiddleware, (req, res) => {
+    //to access data from FE we use body
+
+    const lessonId = req.params.lessonId;
+    const userId = req.userData.id;
+
+    db.query(
+        "UPDATE mydb.users_lessons set id_state = 3 WHERE id_lesson = ? and id_user = ?",
+        [lessonId, userId],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({status: 'error', err})
+                return;
+            }
+            //res.send({status: 'ok'})
+            db.query(
+                "SELECT * FROM mydb.users_lessons  WHERE id_lesson > ? and id_user = ? LIMIT 1",
+                [lessonId, userId],
+                (err, lessonResult) => {
+                    if (err) {
+                        console.log(err);
+                        res.send({status: 'error', err})
+                        return;
+                    }
+
+                    if (result.length === 0) {
+                        res.send({status: 'ok'})
+                        return
+                    }
+
+                    db.query(
+                        "UPDATE mydb.users_lessons  SET id_state = 1 WHERE id_lesson = ? and id_user = ?",
+                        [lessonResult[0].id_lesson, userId],
+                        (err, result) => {
+                            if (err) {
+                                console.log(err);
+                                res.send({status: 'error', err})
+                                return;
+                            }
+                            res.send({status: 'ok'})
+                        }
+                    )
+                }
+            )
+        }
+    )
+})
+
 
 router.delete('/:lessonId', roleMiddleware(['admin']), (req, res) => {
     const lessonId = req.params.lessonId;

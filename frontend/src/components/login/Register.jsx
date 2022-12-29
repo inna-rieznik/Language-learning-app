@@ -9,6 +9,7 @@ import {useState} from "react";
 import Link from "@mui/material/Link";
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "./Auth";
+import {API_URL} from "../../utils/url";
 
 
 const Register = (props) => {
@@ -33,7 +34,7 @@ const Register = (props) => {
 
 
     const register = () => {
-        Axios.post('http://localhost:3011/auth/register', {
+        Axios.post(`${API_URL}/auth/register`, {
             username: usernameReg,
             email: emailReg,
             password: passwordReg,

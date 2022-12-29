@@ -103,7 +103,6 @@ router.get('/word', authMiddleware, (req, res) => {
 })
 
 
-
 //get GRAMMAR questions
 router.get('/grammar', authMiddleware, (req, res) => {
     db.query(
@@ -144,8 +143,6 @@ router.get('/grammar', authMiddleware, (req, res) => {
         }
     )
 })
-
-
 
 
 //get WORD question in lesson N
@@ -241,20 +238,67 @@ router.get('/grammar/:lessonId', authMiddleware, (req, res) => {
 })
 
 //only admin can add new quiz question
-router.post('/', roleMiddleware(['admin']),  (req, res) => {
+//GRAMMAR
+router.post('/grammar', roleMiddleware(['admin']), (req, res) => {
     //to access data from FE we use body
     const quizQuestion = req.body.quizQuestion;
+    const lessonId = req.body.lessonId;
     //add there lesson id and add it at create lesson page
+
     db.query(
-        "insert into mydb.quiz_questions(id_quizes, type, score, content) values (select Max(id_quiz_questions),'quiz', 1, ?)",
-        [quizQuestion],
+        "insert into mydb.quizes(id_lesson, id_quiz_types) VALUES (?, 2)",
+        [lessonId],
         (err, result) => {
             if (err) {
                 console.log(err);
-                res.send({status: 'error', err})
+                res.send({status: 'error one', err})
                 return;
             }
-            res.send({status: 'ok'})
+            db.query(
+                "insert into mydb.quiz_questions(id_quizes, score, content) values ((Select Max(id_quizes) from quizes), 1, ?)",
+                 [quizQuestion],
+                (err, result) => {
+                    if (err) {
+                        console.log(err);
+                        res.send({status: 'error two', err})
+                        return;
+                    }
+
+                    res.send({status: 'ok'})
+                })
+        })
+})
+
+
+//only admin can add new quiz question
+//WORD
+router.post('/word', roleMiddleware(['admin']), (req, res) => {
+    //to access data from FE we use body
+    const quizQuestion = req.body.quizQuestion;
+    const lessonId = req.body.lessonId;
+    //add there lesson id and add it at create lesson page
+
+    db.query(
+        "insert into mydb.quizes(id_lesson, id_quiz_types) VALUES (?, 1)",
+        [lessonId],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({status: 'error one', err})
+                return;
+            }
+            db.query(
+                "insert into mydb.quiz_questions(id_quizes, score, content) values ((Select Max(id_quizes) from quizes), 1, ?)",
+                [quizQuestion],
+                (err, result) => {
+                    if (err) {
+                        console.log(err);
+                        res.send({status: 'error two', err})
+                        return;
+                    }
+
+                    res.send({status: 'ok'})
+                })
         })
 })
 

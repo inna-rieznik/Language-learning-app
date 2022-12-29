@@ -25,6 +25,7 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import EditIcon from '@mui/icons-material/Edit';
 import {useParams} from "react-router-dom";
 import {reqInstance} from '../../utils/auth'
+import {API_URL} from "../../utils/url";
 
 const style = {
     position: 'absolute',
@@ -66,7 +67,7 @@ const WordsPage = (props) => {
 
 
     useEffect(() => {
-        reqInstance.get(`http://localhost:3011/user/${userId}`)
+        reqInstance.get(`${API_URL}/user/${userId}`)
             .then((response) => {
                 setUser(response.data[0]);
                 // console.log("user data", response.data[0]);
@@ -79,14 +80,14 @@ const WordsPage = (props) => {
     useEffect(() => {
         {
             (user.role === 'student') ?
-                reqInstance.get("http://localhost:3011/words/forStudent")
+                reqInstance.get(`${API_URL}/words/forStudent`)
                     .then((response) => {
                         setListOfWords(response.data);
                         setWordsCount(response.data.length);
                         // console.log(response.data);
                     })
                 :
-                reqInstance.get("http://localhost:3011/words/all")
+                reqInstance.get(`${API_URL}/words/all`)
                     .then((response) => {
                         setListOfWords(response.data);
                         setWordsCount(response.data.length);
@@ -97,7 +98,7 @@ const WordsPage = (props) => {
     }, [user.role]);
 
     const deleteWord = (wordId) => {
-        reqInstance.delete(`http://localhost:3011/words/${wordId}`).then((response) => {
+        reqInstance.delete(`${API_URL}/words/${wordId}`).then((response) => {
             setWordsCount(listOfWords.length - 1);
             setListOfWords(listOfWords.filter((data) => data.id_word !== wordId))
         });
@@ -107,7 +108,7 @@ const WordsPage = (props) => {
 
         const source = prompt("Enter New Word: ");
         const target = prompt("Enter New Translation: ");
-        reqInstance.put(`http://localhost:3011/words/${wordId}`, {
+        reqInstance.put(`${API_URL}/words/${wordId}`, {
             source: source,
             target: target
         }).then((response) => {
@@ -119,7 +120,7 @@ const WordsPage = (props) => {
 
 
     const addWordAsStudent = () => {
-        reqInstance.post('http://localhost:3011/words/byStudent', {
+        reqInstance.post(`${API_URL}/words/byStudent`, {
             source: source,
             target: target
         }).then((response) => {
@@ -132,7 +133,7 @@ const WordsPage = (props) => {
     };
 
     const addWordAsAdmin = () => {
-        reqInstance.post('http://localhost:3011/words/byAdmin', {
+        reqInstance.post(`${API_URL}/words/byAdmin`, {
             source: source,
             target: target
         }).then((response) => {

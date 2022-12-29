@@ -8,6 +8,7 @@ import {useAuth} from "../../login/Auth";
 import Card from "../vocabulary/action/Card";
 import Check from '../../../images/check.svg'
 import {reqInstance} from "../../../utils/auth";
+import {API_URL} from "../../../utils/url";
 
 
 const Lessons = (props) => {
@@ -17,7 +18,7 @@ const Lessons = (props) => {
     const {userId} = useAuth();
 
     useEffect(() => {
-        reqInstance.get(`http://localhost:3011/user/${userId}`).then((response) => {
+        reqInstance.get(`${API_URL}/user/${userId}`).then((response) => {
             setUser(response.data[0]);
             //console.log("user data", response.data[0]);
         });
@@ -26,12 +27,12 @@ const Lessons = (props) => {
 
     useEffect(() => {
         (user.role === 'student') ?
-            reqInstance.get("http://localhost:3011/lessons/forStudent")
+            reqInstance.get(`${API_URL}/lessons/forStudent`)
                 .then((response) => {
                     setListOfLessons(response.data);
                 })
             :
-            reqInstance.get("http://localhost:3011/lessons/all")
+            reqInstance.get(`${API_URL}/lessons/all`)
                 .then((response) => {
                     setListOfLessons(response.data);
                 })
@@ -57,7 +58,7 @@ const Lessons = (props) => {
                           color={value.id_state === 4 ? 'gray' : undefined}>
                         <div className={s.cardContent}>
                             <img className={s.image} src={Check} alt='check' width={49} height={49}
-                                 style={{marginRight: '16px', opacity: value.id_state === 1 ? 1 : 0}}/>
+                                 style={{marginRight: '16px', opacity: value.id_state === 3 ? 1 : 0}}/>
                             <div>
                                 Lesson {value.id_lesson}:
                             </div>

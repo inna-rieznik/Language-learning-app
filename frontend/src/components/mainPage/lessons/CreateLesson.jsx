@@ -12,6 +12,7 @@ import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import {reqInstance} from "../../../utils/auth";
+import {API_URL} from "../../../utils/url";
 
 
 const CreateLesson = (props) => {
@@ -34,7 +35,7 @@ const CreateLesson = (props) => {
     };
 
     useEffect(() => {
-        reqInstance.get(`http://localhost:3011/user/${userId}`).then((response) => {
+        reqInstance.get(`${API_URL}/user/${userId}`).then((response) => {
             setUser(response.data[0]);
             console.log("user data", response.data[0]);
         });
@@ -45,7 +46,7 @@ const CreateLesson = (props) => {
 
 
     const addLesson = () => {
-        reqInstance.post('http://localhost:3011/lessons', {
+        reqInstance.post(`${API_URL}/lessons`, {
             title: title,
             introText: introText,
             grammarRuleTitle: grammarRuleTitle,

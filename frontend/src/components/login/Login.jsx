@@ -9,6 +9,7 @@ import Axios from "axios";
 import Link from "@mui/material/Link";
 import {useNavigate} from 'react-router-dom';
 import {useAuth} from "./Auth";
+import {API_URL} from "../../utils/url";
 
 
 const Login = (props) => {
@@ -39,7 +40,7 @@ const Login = (props) => {
 
 
     const login = () => {
-        Axios.post('http://localhost:3011/auth/login', {
+        Axios.post(`${API_URL}/auth/login`, {
             email: email,
             password: password
         }).then((response) => {
