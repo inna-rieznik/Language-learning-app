@@ -20,10 +20,10 @@ const WordPartOfLesson = (props) => {
             <QuizGameBase fetchDataEndpoint={`http://localhost:3011/quizQuestions/word/${lessonId}`}/>
             {/*  <h2 style={{marginBottom: "20px", fontSize: '30px', marginTop: "20px"}}>Vocabulary exercises</h2>*/}
             <h2 style={{marginBottom: "20px", marginTop: "20px", fontSize: '25px'}}>Write correct answer</h2>
-            <WordTranslationGame/>
+            <WordTranslationGame fetchDataEndpoint={`http://localhost:3011/words/forStudent/${lessonId}`}/>
             <h2 style={{marginBottom: "20px", marginTop: "20px", fontSize: '25px'}}>Connect word with its
                 translation</h2>
-            <Matching2/>
+            <Matching2 fetchDataEndpoint={`http://localhost:3011/words/forStudent/${lessonId}`}/>
         </div>
     );
 }

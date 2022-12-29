@@ -20,7 +20,7 @@ import TextField from '@mui/material/TextField';
 import {useEffect, useState} from 'react';
 import axios from "axios";
 import {useAuth} from "../login/Auth";
-import {IconButton} from "@mui/material";
+import {Dialog, IconButton} from "@mui/material";
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import EditIcon from '@mui/icons-material/Edit';
 import {useParams} from "react-router-dom";
@@ -52,9 +52,17 @@ const WordsPage = (props) => {
     const [wordsCount, setWordsCount] = useState();
 
     //function to add data from inputs to wordsData
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const [openAdd, setOpenAdd] = React.useState(false);
+    const [openEdit, setOpenEdit] = React.useState(false);
+
+    const handleOpenAdd = () => setOpenAdd(true);
+    const handleCloseAdd = () => setOpenAdd(false);
+
+    const handleOpenEdit = () => setOpenEdit(true);
+    const handleCloseEdit = () => setOpenEdit(true);
+
+    let newWordCz = React.createRef();
+    let newWordEng = React.createRef();
 
 
     useEffect(() => {
@@ -65,7 +73,7 @@ const WordsPage = (props) => {
             });
     }, [userId]);
 
-   // console.log("role", user.role);
+    // console.log("role", user.role);
 
 
     useEffect(() => {
@@ -95,6 +103,20 @@ const WordsPage = (props) => {
         });
     };
 
+    const editWord = (wordId) => {
+
+        const source = prompt("Enter New Word: ");
+        const target = prompt("Enter New Translation: ");
+        reqInstance.put(`http://localhost:3011/words/${wordId}`, {
+            source: source,
+            target: target
+        }).then((response) => {
+            setListOfWords(listOfWords);
+            console.log(response.data);
+        });
+
+    }
+
 
     const addWordAsStudent = () => {
         reqInstance.post('http://localhost:3011/words/byStudent', {
@@ -120,12 +142,6 @@ const WordsPage = (props) => {
         });
     };
 
-
-
-
-    //function to add data from inputs to wordsData
-    let newWordCz = React.createRef();
-    let newWordEng = React.createRef();
 
     /* let addWordToVocabulary = () => {
          /!*let word = newWordCz.current.value;
@@ -161,70 +177,62 @@ const WordsPage = (props) => {
                 <h1 style={{marginTop: "20px"}}>My Words</h1>
                 {/* {(user.role === 'student') ? null :*/}
                 <Button style={{backgroundColor: "#FF777B", width: "400px", height: "50px", marginBottom: 20}}
-                        onClick={handleOpen} variant="contained" startIcon={<AddIcon/>}>add new
+                        onClick={handleOpenAdd} variant="contained" startIcon={<AddIcon/>}>add new
                     word</Button>
                 {/* }  */}
                 <Modal
-                    aria-labelledby="transition-modal-title"
-                    aria-describedby="transition-modal-description"
-                    open={open}
-                    onClose={handleClose}
-                    closeAfterTransition
-                    BackdropComponent={Backdrop}
-                    BackdropProps={{
-                        timeout: 500,
-                    }}
+                    open={openAdd}
+                    onClose={handleCloseAdd}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
                 >
-                    <Fade in={open}>
-                        <Box sx={style}>
-                            <h2 id="transition-modal-title">
-                                Add new word
-                            </h2>
-                            <Box component="form"
-                                 sx={{'& > :not(style)': {m: 1, width: '25ch'},}}
-                                 noValidate
-                                 autoComplete="off">
-                                <h3 id="transition-modal-title">
-                                    Word
-                                </h3>
-                                <TextField id="outlined-basic"
-                                           label="Type word in czech"
-                                           variant="outlined"
-                                           inputRef={newWordCz}
-                                           onChange={(e) => {
-                                               setSource(e.target.value);
-                                           }}
-                                           style={{width: "500px"}}
-                                    /*  value={props.wordsData.newWordText}*//>
-                                <h3 id="transition-modal-title">
-                                    Translation
-                                </h3>
-                                <TextField id="outlined-basic"
-                                           label="Type word in eng"
-                                           variant="outlined"
-                                           inputRef={newWordEng}
-                                           onChange={(e) => {
-                                               setTarget(e.target.value);
-                                           }}
-                                           style={{width: "500px"}}
+                    <Box sx={style}>
+                        <Typography id="modal-modal-title" variant="h4" component="h1">
+                            Add new word
+                        </Typography>
+                        <h3>
+                            Word
+                        </h3>
+                        <TextField
+                            sx={{paddingBottom: 2}}
+                            fullWidth
+                            id="outlined-basic"
+                            label="Type word in czech"
+                            variant="outlined"
+                            inputRef={newWordCz}
+                            onChange={(e) => {
+                                setSource(e.target.value);
+                            }}
+                        />
+                        <h3>
+                            Translation
+                        </h3>
+                        <TextField
+                            sx={{paddingBottom: 2}}
+                            fullWidth
+                            id="outlined-basic"
+                            label="Type word in eng"
+                            variant="outlined"
+                            inputRef={newWordEng}
+                            onChange={(e) => {
+                                setTarget(e.target.value);
+                            }}
 
-                                    /* value={props.wordsData.newTranslationText}*//>
+                        />
 
-                                <Button variant="contained"
-                                        startIcon={<AddIcon/>}
-                                        onClick={() => {
-                                            {
-                                                (user.role === 'student') ? addWordAsStudent() : addWordAsAdmin()
-                                            }
-                                            handleClose();
-                                        }}
-                                        style={{width: "500px", marginTop: "20px"}}
-                                >add</Button>
+                        <Button variant="contained"
+                                startIcon={<AddIcon/>}
+                                onClick={() => {
+                                    {
+                                        (user.role === 'student') ? addWordAsStudent() : addWordAsAdmin()
+                                    }
+                                    handleCloseAdd();
+                                }}
+                                style={{width: "500px", marginTop: "20px"}}
+                        >add</Button>
 
-                            </Box>
+                    </Box>
 
-                        </Box>
-                    </Fade>
                 </Modal>
 
 
@@ -253,14 +261,83 @@ const WordsPage = (props) => {
                                               key={row.id_word}
                                               sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                     >
-                                        <TableCell align="left">{row.source}</TableCell>
-                                        <TableCell align="left">{row.target}</TableCell>
+                                        <TableCell align="left">
+                                            {row.source}
+                                        </TableCell>
+
+                                        <TableCell align="left">
+                                            {row.target}
+                                        </TableCell>
+
+                                        {/*{(user.role === 'student') ? null :
+                                            <TableCell align="right">
+
+                                                                                                <Modal
+                                                    open={openEdit}
+                                                    onClose={handleCloseEdit}
+                                                    aria-labelledby="modal-modal-title"
+                                                    aria-describedby="modal-modal-description"
+
+                                                >
+
+                                                    <Box sx={style}>
+
+                                                        <Typography id="modal-modal-title" variant="h4" component="h1">
+                                                            Edit word
+                                                        </Typography>
+                                                        <h3>
+                                                            Word
+                                                        </h3>
+                                                        <TextField
+                                                            sx={{paddingBottom: 2}}
+                                                            fullWidth
+                                                            id="outlined-basic"
+                                                            label="Type word in czech"
+                                                            variant="outlined"
+                                                            inputRef={newWordCz}
+                                                            onChange={(e) => {
+                                                                setSource(e.target.value);
+                                                            }}
+                                                        />
+                                                        <h3>
+                                                            Translation
+                                                        </h3>
+                                                        <TextField
+                                                            sx={{paddingBottom: 2}}
+                                                            fullWidth
+                                                            id="outlined-basic"
+                                                            label="Type word in eng"
+                                                            variant="outlined"
+                                                            inputRef={newWordEng}
+                                                            onChange={(e) => {
+                                                                setTarget(e.target.value);
+                                                            }}
+
+                                                        />
+
+                                                        <Button variant="contained"
+                                                                onClick={() => {
+                                                                    editWord(row.id_word);
+                                                                    handleCloseEdit();
+                                                                }}
+                                                                style={{width: "500px", marginTop: "20px"}}
+                                                        >edit</Button>
+
+                                                    </Box>
+                                                </Modal>
+                                            </TableCell>}
+                                        */}
+
                                         {(user.role === 'student') ? null :
                                             <TableCell align="right">
-                                                <IconButton>
+                                                <IconButton onClick={() => {
+                                                    editWord(row.id_word);
+                                                }}>
                                                     <EditIcon/>
                                                 </IconButton>
-                                            </TableCell>}
+                                            </TableCell>
+                                        }
+
                                         {(user.role === 'student') ? null :
                                             <TableCell align="right">
                                                 <IconButton onClick={() => {
@@ -276,6 +353,8 @@ const WordsPage = (props) => {
                     </TableContainer>
                 </div>
             </div>
+
+
         </div>
     );
 }
