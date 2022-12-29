@@ -7,11 +7,9 @@ import Vocabulary from "./vocabulary/Vocabulary";
 const MainPage = (props) => {
     return (
         <div className={s.content}>
-            <div style={{marginTop: "50px"}} className={s.subContent}>
-                {/*<OnlyAdmin>*/}
-                <Lessons lessonsData={props.lessonsData}/>
-                {/*</OnlyAdmin>*/}
-                <Vocabulary dispatch={props.dispatch}/>
+            <div className={s.subContent}>
+                <Lessons />
+                <Vocabulary />
             </div>
             <div className={s.image}>
                 <img src={ProductLaunchImg} alt="Product Launch Img" width="981" height="736"/>
@@ -19,6 +17,9 @@ const MainPage = (props) => {
         </div>
     );
 }
+export default MainPage;
+
+
 
 /*const OnlyAdmin = ({children}) => {
     const {authTokens, userId} = useAuth();
@@ -31,5 +32,3 @@ const MainPage = (props) => {
     return null
 
 }*/
-
-export default MainPage;

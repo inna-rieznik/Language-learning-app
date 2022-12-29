@@ -3,13 +3,14 @@ import {useEffect, useState} from "react";
 import QuizGameBase from "../../vocabulary/quiz/QuizGameBase";
 import * as React from "react";
 import {reqInstance} from "../../../../utils/auth";
+import {API_URL} from "../../../../utils/url";
 
 const GrammarPartOfLesson = (props) => {
     let {lessonId} = useParams();
 
     const [lessonObject, setLessonObject] = useState([]);
     useEffect(() => {
-        reqInstance.get(`http://localhost:3011/lessons/id/${lessonId}`).then((response) => {
+        reqInstance.get(`${API_URL}/lessons/id/${lessonId}`).then((response) => {
             setLessonObject(response.data);
             console.log(response.data);
         });
@@ -23,7 +24,7 @@ const GrammarPartOfLesson = (props) => {
             <p style={{marginBottom: "20px", fontSize: '20px'}}>{lessonObject[0]?.grammar_rule}</p>
             <h2 style={{marginBottom: "20px", fontSize: '30px'}}>Grammar exercises</h2>
             <h2 style={{marginBottom: "20px", fontSize: '20px'}}>Choose one correct answer out of the three offered.</h2>
-            <QuizGameBase fetchDataEndpoint={`http://localhost:3011/quizQuestions/grammar/${lessonId}`}/>
+            <QuizGameBase fetchDataEndpoint={`${API_URL}/quizQuestions/grammar/${lessonId}`}/>
         </div>
     );
 }

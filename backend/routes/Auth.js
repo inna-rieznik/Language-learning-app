@@ -86,9 +86,9 @@ router.post('/register',
                                             }
 
                                             db.query(
-                                                "INSERT INTO mydb.users_words (id_user, id_word, id_state, started_at) SELECT ?, id_word, 0, null FROM mydb.words",
+                                                "UPDATE  mydb.users_lessons SET id_state = 1 WHERE id_user = ? AND id_lesson = 1",
                                                 [userId],
-                                                (err, lessonResult) => {
+                                                async (err, result) => {
                                                     if (err) {
                                                         console.error(err)
                                                         res.send({status: 'error', err})
@@ -96,37 +96,49 @@ router.post('/register',
                                                     }
 
 
-                                                    /*res.send("User was successfully registered");*/
                                                     db.query(
-                                                        "SELECT * FROM mydb.users JOIN roles r on users.id_role = r.id_role JOIN users_progress up on users.id_user = up.id_user WHERE email = ?",
-                                                        [email, password],
-                                                        async (err, result) => {
-                                                            if (result.length > 0) {
-                                                                const passwordDB = result[0].password; //vytahnu hash
-                                                                const validPassword = bcrypt.compareSync(password, passwordDB);
-                                                                if (!validPassword) {
-                                                                    return res.status(400).json({
-                                                                        message: "Password verification failed",
-
-                                                                    });
-                                                                } else {
-                                                                    const token = generateAccessToken(result[0].id_user, result[0].role);
-                                                                    return res.status(200).json({
-                                                                        userId: result[0].id_user,
-                                                                        passwordDB,
-                                                                        validPassword,
-                                                                        password,
-                                                                        hashedPassword,
-                                                                        token,
-                                                                        user: result[0]
-                                                                    });
-                                                                }
-
-                                                                // const refreshToken = generateRefreshToken(result[0].id_user, result[0].role);
-                                                                // res.cookie('refreshToken', refreshToken, {maxAge: 30*24*60*6*1000, httpOnly:true});
-
+                                                        "INSERT INTO mydb.users_words (id_user, id_word, id_state, started_at) SELECT ?, id_word, 0, null FROM mydb.words",
+                                                        [userId],
+                                                        (err, updateResult) => {
+                                                            if (err) {
+                                                                console.error(err)
+                                                                res.send({status: 'error', err})
+                                                                return;
                                                             }
 
+
+                                                            /*res.send("User was successfully registered");*/
+                                                            db.query(
+                                                                "SELECT * FROM mydb.users JOIN roles r on users.id_role = r.id_role JOIN users_progress up on users.id_user = up.id_user WHERE email = ?",
+                                                                [email, password],
+                                                                async (err, result) => {
+                                                                    if (result.length > 0) {
+                                                                        const passwordDB = result[0].password; //vytahnu hash
+                                                                        const validPassword = bcrypt.compareSync(password, passwordDB);
+                                                                        if (!validPassword) {
+                                                                            return res.status(400).json({
+                                                                                message: "Password verification failed",
+
+                                                                            });
+                                                                        } else {
+                                                                            const token = generateAccessToken(result[0].id_user, result[0].role);
+                                                                            return res.status(200).json({
+                                                                                userId: result[0].id_user,
+                                                                                passwordDB,
+                                                                                validPassword,
+                                                                                password,
+                                                                                hashedPassword,
+                                                                                token,
+                                                                                user: result[0]
+                                                                            });
+                                                                        }
+
+                                                                        // const refreshToken = generateRefreshToken(result[0].id_user, result[0].role);
+                                                                        // res.cookie('refreshToken', refreshToken, {maxAge: 30*24*60*6*1000, httpOnly:true});
+
+                                                                    }
+
+                                                                })
                                                         })
                                                 })
                                         })
@@ -172,7 +184,7 @@ router.post('/login',
                         const token = generateAccessToken(result[0].id_user, result[0].role);
                         return res.send({token, user: result[0]});
                         //return res.redirect('http://localhost:3000/')
-                    } else{
+                    } else {
                         return res.send({"message": "* User do not exist"})
                     }
                 }

@@ -2,6 +2,7 @@ import {reqInstance} from '../../../../utils/auth'
 import {useEffect, useState} from "react";
 import {useAuth} from "../../../login/Auth";
 import {useParams} from "react-router-dom";
+import {API_URL} from "../../../../utils/url";
 
 
 const WordsInLesson = (props) => {
@@ -12,7 +13,7 @@ const WordsInLesson = (props) => {
     let {lessonId} = useParams();
 
     useEffect(() => {
-        reqInstance.get(`http://localhost:3011/user/${userId}`)
+        reqInstance.get(`${API_URL}/user/${userId}`)
             .then((response) => {
                 setUser(response.data[0]);
                 // console.log("user data", response.data[0]);
@@ -22,13 +23,13 @@ const WordsInLesson = (props) => {
     useEffect(() => {
         {
             (user.role === 'student') ?
-                reqInstance.get(`http://localhost:3011/words/forStudent/${lessonId}`)
+                reqInstance.get(`${API_URL}/words/forStudent/${lessonId}`)
                     .then((response) => {
                         setListOfWords(response.data);
                         // console.log(response.data);
                     })
                 :
-                reqInstance.get(`http://localhost:3011/words/all/${lessonId}`)
+                reqInstance.get(`${API_URL}/words/all/${lessonId}`)
                     .then((response) => {
                         setListOfWords(response.data);
                         // console.log(response.data);

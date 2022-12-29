@@ -3,6 +3,7 @@ import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import WordTranslationGame from "./WordTranslationGame";
+import {API_URL} from "../../../../utils/url";
 
 
 const OpenQuestionsPage = (props) => {
@@ -29,7 +30,7 @@ const OpenQuestionsPage = (props) => {
             <h1 style={{marginTop: "20px"}}>Word-Translation(CZ-ENG)</h1>
 
             <div >
-                <WordTranslationGame fetchDataEndpoint={`http://localhost:3011/words/forStudent/random/6`}/>
+                <WordTranslationGame fetchDataEndpoint={`${API_URL}/words/forStudent/random/6`}/>
             </div>
         </div>
     );

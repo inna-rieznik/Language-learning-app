@@ -4,6 +4,7 @@ import QuizGameBase from "./QuizGameBase";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
+import {API_URL} from "../../../../utils/url";
 
 
 const QuizGrammarPage = (props) => {
@@ -30,7 +31,7 @@ const QuizGrammarPage = (props) => {
             <h1 style={{marginTop: "20px"}}>Quiz Grammar</h1>
 
             <div className={s.quiz} >
-                <QuizGameBase fetchDataEndpoint={'http://localhost:3011/quizQuestions/grammar'}/>
+                <QuizGameBase fetchDataEndpoint={`${API_URL}/quizQuestions/grammar`}/>
             </div>
         </div>
     );

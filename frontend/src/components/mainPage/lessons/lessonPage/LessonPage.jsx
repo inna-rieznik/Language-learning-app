@@ -15,6 +15,7 @@ import WordPartOfLesson from "./WordPartOfLesson";
 import {reqInstance} from "../../../../utils/auth";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import {API_URL} from "../../../../utils/url";
 
 
 const LessonPage = (props) => {
@@ -46,24 +47,32 @@ const LessonPage = (props) => {
 
 
     const deleteLesson = () => {
-        reqInstance.delete(`http://localhost:3011/lessons/${lessonId}`).then((response) => {
+        reqInstance.delete(`${API_URL}/lessons/${lessonId}`).then((response) => {
             window.location.href = '/'
         });
     };
 
     useEffect(() => {
-        reqInstance.get(`http://localhost:3011/user/${userId}`).then((response) => {
+        reqInstance.get(`${API_URL}/user/${userId}`).then((response) => {
             setUser(response.data[0]);
             // console.log("user data", response.data[0]);
         });
     }, [userId]);
 
     const editLesson = () => {
-        reqInstance.put(`http://localhost:3011/lessons/${lessonId}`, {
+        reqInstance.put(`${API_URL}/lessons/${lessonId}`, {
             title: title,
             introText: introText,
             grammarRuleTitle: grammarRuleTitle,
             grammarRule: grammarRule
+        }).then((response) => {
+            console.log(response.data);
+        });
+    }
+
+    const editLessonState = () => {
+        reqInstance.put(`${API_URL}/lessons/${lessonId}/state`, {
+
         }).then((response) => {
             console.log(response.data);
         });
@@ -162,7 +171,7 @@ const LessonPage = (props) => {
                     height: "50px",
                     marginBottom: "20px",
                     marginTop: "30px"
-                }} variant="contained" href='/'>Finish Lesson</Button>
+                }} variant="contained" href='/' onClick={editLessonState}>Finish Lesson</Button>
 
             </div>
 

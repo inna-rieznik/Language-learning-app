@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import s from "./Flashcards.module.css";
 import FlashcardsList from "./FlashcardsList";
 import axios from "axios";
+import {API_URL} from "../../../../utils/url";
 
 
 let reqInstance = axios.create({
@@ -15,7 +16,7 @@ const Flashcards = (props) => {
     const [flashcards, setFlashcards] = useState(SAMPLE_FLASHCARDS);
 
     useEffect(() => {
-        reqInstance.get("http://localhost:3011/words/random/6").then((response) => {
+        reqInstance.get(`${API_URL}/words/random/6`).then((response) => {
             setFlashcards(response.data.map((wordItem, index) => {
                 return {
                     id: `${index}-${Date.now()}`,

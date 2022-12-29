@@ -24,19 +24,21 @@ import PageNotFound from "./components/PageNotFound";
 import QuizGrammarPage from "./components/mainPage/vocabulary/quiz/QuizGrammarPage";
 
 
+
 const App = (props) => {
 
     const [authTokens, setAuthTokens] = useState(localStorage.getItem("tokens") || "");
     let [userId, setUserId] = useState("");
     let [userScore, setUserScore] = useState("");
+    let [userLevel, setUserLevel] = useState("");
 
- /*   useEffect(() => {
-        const authTokensT = JSON.parse(localStorage.getItem('tokens'))
-        if (authTokensT) {
-            setAuthTokens(authTokensT)
-        }
-    }, [])
-*/
+    /*   useEffect(() => {
+           const authTokensT = JSON.parse(localStorage.getItem('tokens'))
+           if (authTokensT) {
+               setAuthTokens(authTokensT)
+           }
+       }, [])
+   */
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("tokens"));
@@ -44,13 +46,14 @@ const App = (props) => {
             Object.keys(user).forEach(key => {
                 setUserId(user[key].id_user);
                 setUserScore(user[key].score);
+                setUserLevel(user[key].level);
                 //console.log(user[key].id_user);
             })
         }
     }, [userId])
 
-   // console.log("user_id", userId);
-   // console.log("user_score", userScore);
+    // console.log("user_id", userId);
+    // console.log("user_score", userScore);
 
     const setTokens = (data) => {
         localStorage.setItem("tokens", JSON.stringify(data));
@@ -65,11 +68,20 @@ const App = (props) => {
     };
 
 
-   // console.log("authTokens", authTokens);
+    // console.log("authTokens", authTokens);
 
     return (
         <BrowserRouter>
-            <AuthContext.Provider value={{userId, userScore, authTokens, setAuthTokens: setTokens, handleLogout}}>
+            <AuthContext.Provider value={{
+                userId,
+                userScore,
+                userLevel,
+                authTokens,
+                setUserLevel,
+                setUserScore,
+                setAuthTokens: setTokens,
+                handleLogout
+            }}>
                 <div className="app-wrapper">
                     <Routes>
                         <Route path='/login'
@@ -78,8 +90,8 @@ const App = (props) => {
                                element={<Register userId={userId}/>}/>
 
                         <Route path='/'
-                                                       /* onlyAdmin={true}*/
-                               element={<AuthenticatedLayout  authTokens={authTokens} userId={userId}>
+                            /* onlyAdmin={true}*/
+                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
                                    <MainPage lessonsData={props.state.lessonsData}
                                              dispatch={props.dispatch}/>
                                </AuthenticatedLayout>}/>
@@ -110,15 +122,15 @@ const App = (props) => {
                                    <ReviewGrammar/>
                                </AuthenticatedLayout>}/>
                         <Route path={'/review_grammar/quiz'}
-                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId} >
+                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
                                    <QuizGrammarPage/>
                                </AuthenticatedLayout>}/>
                         <Route path={'/review_words/quiz'}
-                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId} >
+                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
                                    <QuizWordsPage/>
                                </AuthenticatedLayout>}/>
                         <Route path={'/review_words/translate'}
-                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId} >
+                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
                                    <OpenQuestionsPage/>
                                </AuthenticatedLayout>}/>
                         <Route path={'/review_words/flashcards'}

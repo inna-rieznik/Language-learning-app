@@ -9,19 +9,18 @@ import {AuthContext, useAuth} from "../login/Auth";
 import {useEffect} from "react";
 
 import {reqInstance} from "../../utils/auth";
+import {API_URL} from "../../utils/url";
 
 
 const Header = (props) => {
-    const {authTokens, userId, handleLogout} = useAuth();
+    const {authTokens, userScore, userLevel, setUserScore, setUserLevel, userId, handleLogout} = useAuth();
     const [user, setUser] = useState([]);
-    const [userScore, setUserScore] = useState();
-    let [userLevel, setUserLevel] = useState();
 
 
     const percentage = Math.round((userScore / 100) * 100);
 
     useEffect(() => {
-        reqInstance.get(`http://localhost:3011/user/${userId}`).then((response) => {
+        reqInstance.get(`${API_URL}/user/${userId}`).then((response) => {
             setUser(response.data[0]);
             setUserScore(response.data[0].score);
             setUserLevel(response.data[0].level);

@@ -9,6 +9,7 @@
 .subContent {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    marginTop: 50px;
 }
 
 .image {

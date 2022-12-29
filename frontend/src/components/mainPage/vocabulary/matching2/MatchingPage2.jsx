@@ -4,6 +4,7 @@ import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import {useParams} from "react-router-dom";
+import {API_URL} from "../../../../utils/url";
 
 
 
@@ -35,7 +36,7 @@ const MatchingPage2 = (props) => {
             </div>
 
             <div>
-                <Matching2 fetchDataEndpoint={`http://localhost:3011/words/forStudent/random/6`}/>
+                <Matching2 fetchDataEndpoint={`${API_URL}/words/forStudent/random/6`}/>
 
             </div>
         </div>

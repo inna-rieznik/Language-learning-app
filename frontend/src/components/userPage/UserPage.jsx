@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import User from '../../images/user-svgrepo-com.svg'
+import {API_URL} from "../../utils/url";
 
 
 
@@ -23,7 +24,7 @@ const UserPage = (props) => {
 
 
     useEffect(() => {
-        reqInstance.get(`http://localhost:3011/user/${userId}`).then((response) => {
+        reqInstance.get(`${API_URL}/user/${userId}`).then((response) => {
             setUserObject(response.data);
             console.log(response.data);
         });

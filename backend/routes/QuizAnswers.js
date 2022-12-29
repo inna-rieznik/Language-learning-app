@@ -13,11 +13,11 @@ const db = mysql.createConnection({
 });
 
 
-router.get('/1', authMiddleware, (req, res) => {
-   /* const questionId = req.body.questionId;*/
+/*router.get('/1', authMiddleware, (req, res) => {
+   /!* const questionId = req.body.questionId;*!/
     db.query(
         'select content, correct from mydb.quiz_answers where id_quiz_questions =  1',
-       /* [questionId],*/
+       /!* [questionId],*!/
         (err, result) => {
             if (err) {
                 console.log(err);
@@ -29,12 +29,13 @@ router.get('/1', authMiddleware, (req, res) => {
         }
     )
 
-})
+})*/
+
 
 //only admin can add new questions and answers
 router.post('/:questionId', roleMiddleware(['admin']),   (req, res) => {
     //to access data from FE we use body
-    const quizQuestionId = req.body.quizQuestionId;
+    const quizQuestionId = req.params.questionId;
     const quizAnswer = req.body.quizAnswer;
     const isCorrect = req.body.isCorrect;
     db.query(
