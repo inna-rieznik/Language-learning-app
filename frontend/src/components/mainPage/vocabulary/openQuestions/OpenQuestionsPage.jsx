@@ -29,7 +29,7 @@ const OpenQuestionsPage = (props) => {
             <h1 style={{marginTop: "20px"}}>Word-Translation(CZ-ENG)</h1>
 
             <div >
-                <WordTranslationGame/>
+                <WordTranslationGame fetchDataEndpoint={`http://localhost:3011/words/forStudent/random/6`}/>
             </div>
         </div>
     );

@@ -6,26 +6,25 @@ import {useEffect} from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import * as React from "react";
-
-let reqInstance = axios.create({
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-    }
-);
+import {useParams} from "react-router-dom";
+import {reqInstance} from "../../../../utils/auth";
 
 
-export const Container = memo(function Container() {
+export const Container = memo(function Container(props) {
+
+    const {fetchDataEndpoint} = props;
 
     const [words2, setWords2] = useState([]);
     const [droppedWords, setDroppedWords] = useState([]);
     const [dustbins, setDustbins] = useState([]);
     const [error, changeError] = useState({});
+    const [correct, changeCorrect] = useState({});
+    const [countCorrect, setCountCorrect] = React.useState(0);
     const [lastDroppedItem, setLastDroppedItem] = useState([]);
 
 
     useEffect(() => {
-        reqInstance.get("http://localhost:3011/words/random/6").then((response) => {
+        reqInstance.get(fetchDataEndpoint).then((response) => {
 
             setWords2(response.data.map((wordItem, index) => {
                 return {
@@ -75,10 +74,18 @@ export const Container = memo(function Container() {
         [droppedWords, dustbins],
     )
 
+
+    let shuffled = words2
+        .map(word => ({word, sort : Math.random()}))
+        .sort((a,b) => a.sort - b.sort)
+        .map(({word}) => word);
+
     return (
         <div>
             <div style={{overflow: 'hidden', clear: 'both' }}>
-                {words2.map((word, index) => (
+                {}
+
+                {shuffled.map((word, index) => (
                     <Box
                         source={word.source}
                         target={word.target}
@@ -87,7 +94,6 @@ export const Container = memo(function Container() {
                     />
                 ))}
             </div>
-
             <div style={{  display: 'grid',
                            alignItems: 'center',
                            gridTemplateColumns: 'repeat(auto-fill, minmax(500px, 1fr))',
@@ -95,6 +101,8 @@ export const Container = memo(function Container() {
                 {dustbins.map(({source, target, lastDroppedItem }, index) => (
                     <Dustbin
                         error={error[index]}
+                        correct={correct[index]}
+                        countCorrect={countCorrect}
                         target={target}
                         lastDroppedItem={lastDroppedItem}
                         onDrop={(item) => handleDrop(index, item)}
@@ -105,14 +113,20 @@ export const Container = memo(function Container() {
 
             <Button onClick={() => {
                 const newErrorState = {};
+                const newCorrectState = {};
                 console.log("error ",newErrorState)
+
                 for (let i=0; i < dustbins.length; i++){
                     if(dustbins[i].lastDroppedItem === null || dustbins[i].lastDroppedItem.source !== words2[i].source){
                         newErrorState[i] = true;
-                    }
+                    }else{
+                        newCorrectState[i] = true;
 
+                    }
                     changeError(newErrorState);
+                    changeCorrect(newCorrectState);
                 }
+
 
             }} variant="contained">check</Button>
         </div>

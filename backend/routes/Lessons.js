@@ -28,8 +28,26 @@ const db = mysql.createConnection({
 
 });*/
 
+//get ALL lessons for admin
+router.get('/all', roleMiddleware(['admin']), (req, res) => {
 
-router.get('/', authMiddleware, (req, res) => {
+    try {
+        db.query('select * from mydb.lessons',
+            (err, result) => {
+                if (err) {
+                    console.log(err);
+                    res.send({status: 'error', err})
+                    return;
+                }
+                res.send(result);
+            })
+    }catch (e){
+        console.log(e)
+    }
+
+});
+
+router.get('/forStudent', authMiddleware, (req, res) => {
     const userId = req.userData.id;
     db.query('select * from mydb.users_lessons join mydb.lessons on users_lessons.id_lesson = lessons.id_lesson where id_user = ?',
         [userId],
@@ -45,6 +63,7 @@ router.get('/', authMiddleware, (req, res) => {
         })
 
 });
+
 
 
 //get one lesson only for authorized user '/lessons/id/1'

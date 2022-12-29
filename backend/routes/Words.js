@@ -13,13 +13,40 @@ const db = mysql.createConnection({
 
 
 //get list of words for authenticated user - student
+router.get('/forStudent/random/6', authMiddleware, (req, res) => {
+    const userId = req.userData.id;
+
+    try {
+        db.query("select * " +
+            "from mydb.users_words " +
+            "join mydb.words on users_words.id_word = words.id_word " +
+            "where id_user = ? " +
+            "ORDER BY RAND() LIMIT 6",
+            [userId],
+            (err, result) => {
+                if (err) {
+                    console.log(err);
+                    res.send({status: 'error', err})
+                    return;
+                }
+                console.log(result);
+                res.send(result);
+            })
+    } catch (e) {
+        console.log(e)
+    }
+
+});
+
+
 router.get('/forStudent', authMiddleware, (req, res) => {
     const userId = req.userData.id;
 
     try {
         db.query("select * " +
             "from mydb.users_words " +
-            "join mydb.words on users_words.id_word = words.id_word where id_user = ?",
+            "join mydb.words on users_words.id_word = words.id_word " +
+            "where id_user = ?",
             [userId],
             (err, result) => {
                 if (err) {
@@ -71,7 +98,6 @@ router.get('/all', roleMiddleware(['admin']), (req, res) => {
                     res.send({status: 'error', err})
                     return;
                 }
-                console.log(result);
                 res.send(result);
             })
     } catch (e) {
@@ -199,6 +225,81 @@ router.post('/byAdmin', roleMiddleware(['admin']), (req, res) => {
         }
     }
 )
+
+router.post('/byAdmin/:lessonId', roleMiddleware(['admin']), (req, res) => {
+        //to access data from FE we use body
+        try {
+            const source = req.body.source;
+            const target = req.body.target;
+            const lessonId = req.params.lessonId;
+            db.query(
+                "INSERT INTO mydb.words (id_lesson, id_state, id_language, source, target) values(?,0,2,?,?)",
+                [lessonId, source, target],
+                (err, result) => {
+                    if (err) {
+                        console.log(err);
+                        res.send({status: 'error', err})
+                        return;
+                    }
+                    const wordId = result.insertId;
+
+                    db.query(
+                        "INSERT INTO mydb.users_words (id_word, id_user, id_state, started_at) SELECT ?, id_user, 0, null FROM mydb.users",
+                        [wordId],
+                        (err, result) => {
+                            if (err) {
+                                console.log(err);
+                                res.send({status: 'error', err})
+                            }
+                            res.send({status: 'ok'})
+                        }
+                    )
+                }
+            )
+        } catch (e) {
+            console.log(e)
+        }
+    }
+)
+
+
+router.put('/:wordId', roleMiddleware(['admin']), (req, res) => {
+    //to access data from FE we use body
+    const source = req.body.source;
+    const target = req.body.target;
+    const wordId = req.params.wordId;
+
+    db.query(
+        "UPDATE mydb.words set source = ?, target = ? WHERE id_word = ?",
+        [source, target, wordId],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({status: 'error', err})
+                return;
+            }
+            res.send({status: 'ok'})
+        }
+    )
+})
+
+router.put('/:wordId/target', roleMiddleware(['admin']), (req, res) => {
+    const target = req.body;
+    const wordId = req.params.wordId;
+
+    db.query(
+        "UPDATE mydb.words set target = ? WHERE id_word = ?",
+        [target, wordId],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({status: 'error', err})
+                return;
+            }
+            res.send({status: 'ok'})
+        }
+    )
+})
 
 
 

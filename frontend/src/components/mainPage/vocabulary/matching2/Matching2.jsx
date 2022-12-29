@@ -3,15 +3,19 @@ import {DndProvider} from "react-dnd";
 import {HTML5Backend} from 'react-dnd-html5-backend';
 import Example from './Example'
 import {useState} from "react";
+import {useParams} from "react-router-dom";
 
 
 const Matching2 = (props) => {
+
+
+    const {fetchDataEndpoint} = props;
 
     return (
         <DndProvider backend={HTML5Backend}>
             <div>
                 {/*<Parent data={[1, 2, 3]}/>*/}
-                <Example/>
+                <Example fetchDataEndpoint={fetchDataEndpoint}/>
             </div>
         </DndProvider>
 

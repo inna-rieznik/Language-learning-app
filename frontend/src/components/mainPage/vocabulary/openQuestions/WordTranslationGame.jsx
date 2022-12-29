@@ -17,9 +17,10 @@ const WordTranslationGame = (props) => {
     const size = words.length;
     const [usersAnswers, setUsersAnswers] =useState([]);
     const [correctAnswers, setCorrectAnswers] =useState([]);
+    const {fetchDataEndpoint} = props
 
    useEffect(() => {
-        reqInstance.get(`http://localhost:3011/words/random/6`).then((response) => {
+        reqInstance.get(fetchDataEndpoint).then((response) => {
             setWords(response.data);
             console.log(response.data)
         });
@@ -44,9 +45,9 @@ const WordTranslationGame = (props) => {
         setUsersAnswers(current => [...current, userAnswer]);
         setCorrectAnswers(current => [...current, word.target]);
 
-        console.log("step: ", step, ", answer: ", userAnswer, ", count correct: ", countCorrect);
+       /* console.log("step: ", step, ", answer: ", userAnswer, ", count correct: ", countCorrect);
         console.log("usersAnswers: ", usersAnswers);
-        console.log("usersAnswers: ", word.target);
+        console.log("usersAnswers: ", word.target);*/
     }
 
 

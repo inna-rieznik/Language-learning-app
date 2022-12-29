@@ -12,14 +12,14 @@ const QuizGameBase = (props) => {
     const {fetchDataEndpoint} = props
 
     const [step, setStep] = React.useState(0); //first element in array
-    const {lessonId} = useParams()
+
     const [countCorrect, setCountCorrect] = React.useState(0);
     const [quizes, setQuizes] = useState([]);
     const {userScore} = useAuth();
     const size = quizes.length;
 
     useEffect(() => {
-        reqInstance.get(fetchDataEndpoint ?? `http://localhost:3011/quizQuestions/word`).then((response) => {
+        reqInstance.get(fetchDataEndpoint).then((response) => {
             setQuizes(response.data);
             console.log("quizes data", response.data);
 

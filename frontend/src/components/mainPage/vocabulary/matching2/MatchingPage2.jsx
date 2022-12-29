@@ -3,10 +3,12 @@ import Matching2 from "./Matching2";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
+import {useParams} from "react-router-dom";
 
 
 
 const MatchingPage2 = (props) => {
+
 
     return (
         <div style={{ width: "800px", margin: "20px auto 0 auto"}}>
@@ -33,7 +35,7 @@ const MatchingPage2 = (props) => {
             </div>
 
             <div>
-                <Matching2 />
+                <Matching2 fetchDataEndpoint={`http://localhost:3011/words/forStudent/random/6`}/>
 
             </div>
         </div>

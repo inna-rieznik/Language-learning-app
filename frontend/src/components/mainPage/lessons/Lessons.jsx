@@ -17,30 +17,44 @@ const Lessons = (props) => {
     const {userId} = useAuth();
 
     useEffect(() => {
-        reqInstance.get("http://localhost:3011/lessons").then((response) => {
-            setListOfLessons(response.data);
-        });
-    }, []);
-
-
-    useEffect(() => {
         reqInstance.get(`http://localhost:3011/user/${userId}`).then((response) => {
             setUser(response.data[0]);
             //console.log("user data", response.data[0]);
         });
     }, [userId]);
 
+
+    useEffect(() => {
+        (user.role === 'student') ?
+            reqInstance.get("http://localhost:3011/lessons/forStudent")
+                .then((response) => {
+                    setListOfLessons(response.data);
+                })
+            :
+            reqInstance.get("http://localhost:3011/lessons/all")
+                .then((response) => {
+                    setListOfLessons(response.data);
+                })
+    }, [user.role]);
+
+
+
+
     return (
         <div className={s.lessons}>
             <h1>Lessons</h1>
             {user && user.role === 'admin' ?
 
-            <Button style={{backgroundColor: "#FF777B", width: "600px", height: "50px", marginBottom: '40px'}} variant="contained" href='create_lesson'>create new lesson</Button> : null}
-            <Button style={{backgroundColor: "#FF777B", width: "600px", height: "50px", marginBottom: '40px'}} variant="contained" href='review_grammar'>Review grammar</Button>
+                <Button style={{backgroundColor: "#FF777B", width: "600px", height: "50px", marginBottom: '40px'}}
+                        variant="contained" href='create_lesson'>create new lesson</Button> : null}
+            <Button style={{backgroundColor: "#FF777B", width: "600px", height: "50px", marginBottom: '40px'}}
+                    variant="contained" href='review_grammar'>Review grammar</Button>
 
             {listOfLessons?.map((value) => (
                 <div key={value.id_lesson}>
-                    <Card to={`lessons/id/${value.id_lesson}`} disabled={value.id_state === 4 ? true : false} bgColor={value.id_state === 4 ? '#e1e1e1' : undefined} color={value.id_state === 4 ? 'gray' : undefined}>
+                    <Card to={`lessons/id/${value.id_lesson}`} disabled={value.id_state === 4 ? true : false}
+                          bgColor={value.id_state === 4 ? '#e1e1e1' : undefined}
+                          color={value.id_state === 4 ? 'gray' : undefined}>
                         <div className={s.cardContent}>
                             <img className={s.image} src={Check} alt='check' width={49} height={49}
                                  style={{marginRight: '16px', opacity: value.id_state === 1 ? 1 : 0}}/>

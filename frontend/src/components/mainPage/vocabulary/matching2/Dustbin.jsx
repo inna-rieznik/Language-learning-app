@@ -15,7 +15,7 @@ const style = {
     fontSize: "1rem",
     lineHeight: "normal"
 };
-export const Dustbin = memo(function Dustbin({error, target, lastDroppedItem, onDrop}) {
+export const Dustbin = memo(function Dustbin({error, correct, countCorrect,  target, lastDroppedItem, onDrop}) {
     const [{isOver, canDrop}, drop] = useDrop({
         accept: "div",
         drop: onDrop,
@@ -41,6 +41,8 @@ export const Dustbin = memo(function Dustbin({error, target, lastDroppedItem, on
             <div>
                 <h3>{target}</h3>
                 {error ? <div style={{backgroundColor: 'red', height: "20px", width: "12rem", color: 'white'}}>BAD</div>
+                    : null }
+                {correct ? <div style={{backgroundColor: 'green', height: "20px", width: "12rem", color: 'white'}}>CORRECT</div>
                     : null }
                 <div ref={drop} style={{...style, backgroundColor}} data-testid="dustbin">
                     {lastDroppedItem && (
