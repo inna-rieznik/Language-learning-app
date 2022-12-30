@@ -5,9 +5,8 @@ import {useNavigate} from "react-router-dom";
 import {Fragment} from "react";
 
 
-const AuthenticatedLayout = ({children, onlyAdmin}) => {
-    const {authTokens} = useAuth();
-    //const navigate = useNavigate();
+const AuthenticatedLayout = ({children}) => {
+
 
     if (!localStorage.getItem("token")) {
         window.location.href = '/login'

@@ -41,11 +41,11 @@ router.get('/forStudent/random/6', authMiddleware, (req, res) => {
 
 router.get('/forStudent', authMiddleware, (req, res) => {
     const userId = req.userData.id;
-
     try {
         db.query("select * " +
             "from mydb.users_words " +
-            "join mydb.words on users_words.id_word = words.id_word " +
+            "join mydb.words " +
+            "on users_words.id_word = words.id_word " +
             "where id_user = ?",
             [userId],
             (err, result) => {
@@ -60,7 +60,6 @@ router.get('/forStudent', authMiddleware, (req, res) => {
     } catch (e) {
         console.log(e)
     }
-
 });
 
 //get list of words for authenticated user - student
@@ -127,6 +126,7 @@ router.get('/all/:lessonId', roleMiddleware(['admin']), (req, res) => {
 
 });
 
+/*
 //get random 6 words
 router.get('/random/6', authMiddleware, (req, res) => {
 
@@ -146,7 +146,7 @@ router.get('/random/6', authMiddleware, (req, res) => {
     }
 
 
-});
+});*/
 
 
 //add word only for authenticated user student
@@ -186,7 +186,6 @@ router.post('/byStudent', authMiddleware, (req, res) => {
         }
     }
 );
-
 
 
 //add word for all users only for admin
@@ -300,7 +299,6 @@ router.put('/:wordId/target', roleMiddleware(['admin']), (req, res) => {
         }
     )
 })
-
 
 
 router.delete('/:wordId', roleMiddleware(['admin']), (req, res) => {

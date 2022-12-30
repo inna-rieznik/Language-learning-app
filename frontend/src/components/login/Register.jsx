@@ -10,6 +10,7 @@ import Link from "@mui/material/Link";
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "./Auth";
 import {API_URL} from "../../utils/url";
+import ProductLaunchImg from "../../images/Product Launch.png";
 
 
 const Register = (props) => {
@@ -32,7 +33,6 @@ const Register = (props) => {
     };
 
 
-
     const register = () => {
         Axios.post(`${API_URL}/auth/register`, {
             username: usernameReg,
@@ -45,26 +45,22 @@ const Register = (props) => {
             } else {
                 const token  =  response.data.token;
                 localStorage.setItem("token", token);
-                setAuthTokens(response.data);
-                setRegisteredIn(true);
                 window.location.href = '/'
-               // setRegisterStatus(response.data[0].name);
             }
             console.log(response.data);
         });
     };
 
-   if (isRegisteredIn) {
-        return navigate('/');
-    }
+
 
 
     return (
         <div>
             <div className={s.login}>
                 <div>
-                    <img className={s.image} src={Location} alt="search" width="809" height="706"/>
+                    <img className={s.image} src={Location} alt="search" width="809" height="680"/>
                 </div>
+
                 <form className={s.form} onSubmit={handleSubmit}>
                     <h1>Register</h1>
                     <Box mt={3} width="100%">

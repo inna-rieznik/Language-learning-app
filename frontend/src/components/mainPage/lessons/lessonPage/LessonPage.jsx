@@ -72,7 +72,6 @@ const LessonPage = (props) => {
 
     const editLessonState = () => {
         reqInstance.put(`${API_URL}/lessons/${lessonId}/state`, {
-
         }).then((response) => {
             console.log(response.data);
         });
