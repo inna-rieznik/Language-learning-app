@@ -25,20 +25,14 @@ import QuizGrammarPage from "./components/mainPage/vocabulary/quiz/QuizGrammarPa
 
 
 
+
 const App = (props) => {
+
 
     const [authTokens, setAuthTokens] = useState(localStorage.getItem("tokens") || "");
     let [userId, setUserId] = useState("");
     let [userScore, setUserScore] = useState("");
     let [userLevel, setUserLevel] = useState("");
-
-    /*   useEffect(() => {
-           const authTokensT = JSON.parse(localStorage.getItem('tokens'))
-           if (authTokensT) {
-               setAuthTokens(authTokensT)
-           }
-       }, [])
-   */
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("tokens"));
@@ -47,13 +41,10 @@ const App = (props) => {
                 setUserId(user[key].id_user);
                 setUserScore(user[key].score);
                 setUserLevel(user[key].level);
-                //console.log(user[key].id_user);
             })
         }
     }, [userId])
 
-    // console.log("user_id", userId);
-    // console.log("user_score", userScore);
 
     const setTokens = (data) => {
         localStorage.setItem("tokens", JSON.stringify(data));
@@ -67,9 +58,6 @@ const App = (props) => {
         setAuthTokens("");
     };
 
-
-    // console.log("authTokens", authTokens);
-
     return (
         <BrowserRouter>
             <AuthContext.Provider value={{
@@ -82,90 +70,80 @@ const App = (props) => {
                 setAuthTokens: setTokens,
                 handleLogout
             }}>
+                {/* a*/}
                 <div className="app-wrapper">
                     <Routes>
                         <Route path='/login'
-                               element={<Login userId={userId}/>}/>
+                               element={<Login/>}/>
                         <Route path='/register'
-                               element={<Register userId={userId}/>}/>
-
+                               element={<Register/>}/>
                         <Route path='/'
-                            /* onlyAdmin={true}*/
-                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
-                                   <MainPage lessonsData={props.state.lessonsData}
-                                             dispatch={props.dispatch}/>
+                               element={<AuthenticatedLayout>
+                                   <MainPage/>
                                </AuthenticatedLayout>}/>
-
                         <Route path='/create_lesson'
-                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
+                               element={<AuthenticatedLayout>
                                    <CreateLesson/>
                                </AuthenticatedLayout>}/>
                         <Route path='/review_grammar'
-                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
+                               element={<AuthenticatedLayout>
                                    <ReviewGrammar/>
                                </AuthenticatedLayout>}/>
                         <Route path={'/my_words'}
-                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
-                                   <WordsPage wordsData={props.state.wordsData}
-                                              dispatch={props.dispatch}
-                                              newWordText={props.state.newWordText}
-                                              newTranslationText={props.state.newTranslationText}
-                                   />
+                               element={<AuthenticatedLayout>
+                                   <WordsPage/>
                                </AuthenticatedLayout>}/>
                         <Route path={'/review_words'}
-                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
+                               element={<AuthenticatedLayout>
                                    <ReviewWords/>
                                </AuthenticatedLayout>}/>
-
                         <Route path={'/review_grammar'}
-                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
+                               element={<AuthenticatedLayout>
                                    <ReviewGrammar/>
                                </AuthenticatedLayout>}/>
                         <Route path={'/review_grammar/quiz'}
-                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
+                               element={<AuthenticatedLayout>
                                    <QuizGrammarPage/>
                                </AuthenticatedLayout>}/>
                         <Route path={'/review_words/quiz'}
-                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
+                               element={<AuthenticatedLayout>
                                    <QuizWordsPage/>
                                </AuthenticatedLayout>}/>
                         <Route path={'/review_words/translate'}
-                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
+                               element={<AuthenticatedLayout>
                                    <OpenQuestionsPage/>
                                </AuthenticatedLayout>}/>
                         <Route path={'/review_words/flashcards'}
-                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
+                               element={<AuthenticatedLayout>
                                    <FlashcardsPage/>
                                </AuthenticatedLayout>}/>
-
                         <Route path={'/review_words/matching_translation'}
-                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
+                               element={<AuthenticatedLayout>
                                    <MatchingPage2/>
                                </AuthenticatedLayout>}/>
-
                         <Route path={'/review_words/matching_sentences'}
-                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
-
+                               element={<AuthenticatedLayout>
                                </AuthenticatedLayout>}/>
-
                         <Route path={`lessons/id/:lessonId`}
-                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
+                               element={<AuthenticatedLayout>
                                    <LessonPage/>
                                </AuthenticatedLayout>}/>}
                         <Route path={`/user/:userId`}
-                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
+                               element={<AuthenticatedLayout>
                                    <UserPage/>
                                </AuthenticatedLayout>}/>
                         <Route path={`*`}
-                               element={<AuthenticatedLayout authTokens={authTokens} userId={userId}>
+                               element={<AuthenticatedLayout>
                                    <PageNotFound/>
                                </AuthenticatedLayout>}/>
-
                     </Routes>
                 </div>
             </AuthContext.Provider>
         </BrowserRouter>
-    );
+
+
+    )
+        ;
 }
 
 export default App;

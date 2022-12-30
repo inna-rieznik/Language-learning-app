@@ -21,12 +21,6 @@ const generateAccessToken = (id, role) => {
     return jwt.sign(payload, process.env.JWT_ACCESS_SECRET, {expiresIn: "30d"})
 }
 
-const generateRefreshToken = (id, role) => {
-    const payload = {
-        id, role
-    }
-    return jwt.sign(payload, process.env.JWT_REFRESH_SECRET, {expiresIn: "30d"})
-}
 
 router.post('/register',
     [body('username', 'User can not be empty').notEmpty(),
