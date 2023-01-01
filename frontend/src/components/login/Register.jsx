@@ -81,6 +81,7 @@ const Register = (props) => {
                     </Box>
                     <Box mt={3} width="100%">
                         <TextField style={{width: "400px" }} required id="outlined-basic"
+                                   type="password"
                                    label="Password"
                                    onChange={(e) => {
                                        setPasswordReg(e.target.value);

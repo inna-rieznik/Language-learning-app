@@ -52,11 +52,11 @@ const UserPage = (props) => {
                         <div className={s.user}>
                             <img src={User} alt="UserIcon" width="100" height="100"/>
                         </div>
-                        <div style={{ display: "flex",justifyContent: "center"}}>
-                            <h1>{userObject[0]?.username} </h1>
+                        <div style={{ display: "flex",justifyContent: "center", marginTop: "15px"}}>
+                            <h2>{userObject[0]?.username} </h2>
                         </div>
                         <div style={{ display: "flex",justifyContent: "center"}}>
-                            <h2>{userObject[0]?.role} </h2>
+                            <h3>{userObject[0]?.role} </h3>
                         </div>
                     </div>
                     <div className={s.modalInside}>

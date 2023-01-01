@@ -33,7 +33,7 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 600,
-    backgroundColor: '#FFC2C2',
+    backgroundColor: 'white',
     boxShadow: 24,
     p: 4,
     borderRadius: '20px'
