@@ -86,6 +86,7 @@ const Login = (props) => {
                     <Box mt={3} width="100%">
                         <TextField style={{width: "400px" }} required id="outlined-basic"
                                    label="Password"
+                                   type="password"
                                    onChange={(e) => {
                                        setPassword(e.target.value);
                                    }}
