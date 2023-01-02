@@ -15,6 +15,6 @@ module.exports = function (req, res, next) {
         req.userData = decodedToken;
         next();
     } catch (e) {
-        console.log(e)
+       // console.log(e)
     }
 };

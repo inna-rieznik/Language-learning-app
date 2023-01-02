@@ -26,7 +26,7 @@ router.post('/', authMiddleware, (req, res) => {
                 [userId],
                 (err, result) => {
                     if (err) {
-                        console.log(err);
+                      //  console.log(err);
                         res.send({status: 'error', err})
                         return;
                     }
@@ -45,7 +45,7 @@ router.post('/', authMiddleware, (req, res) => {
                         [newScore, newLevel, userId],
                         (err, result) => {
                             if (err) {
-                                console.log(err);
+                                //console.log(err);
                                 res.send({status: 'error', err})
                                 return;
                             }
@@ -63,7 +63,7 @@ router.post('/', authMiddleware, (req, res) => {
             )
         } catch
             (e) {
-            console.log(e)
+           // console.log(e)
         }
 
     }

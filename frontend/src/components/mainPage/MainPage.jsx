@@ -12,23 +12,9 @@ const MainPage = (props) => {
                 <Vocabulary/>
             </div>
             <div className={s.image}>
-              {/*  <img src={ProductLaunchImg} alt="Product Launch Img" width="981" height="736"/>*/}
-
             </div>
         </div>
     );
 }
 export default MainPage;
 
-
-/*const OnlyAdmin = ({children}) => {
-    const {authTokens, userId} = useAuth();
-    const user = {}
-
-    if (user.role === 'admin') {
-        return <>{children}</>
-    }
-
-    return null
-
-}*/

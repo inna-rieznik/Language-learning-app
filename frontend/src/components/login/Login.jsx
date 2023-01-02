@@ -26,7 +26,7 @@ const Login = (props) => {
 
 
     const handleSubmit = event => {
-        console.log('handleSubmit ran');
+       // console.log('handleSubmit ran');
         event.preventDefault();
         event.target.reset();
     };

@@ -49,7 +49,7 @@ let store = {
     },
 
     _rerenderTree() {
-        console.log("state was changed");
+       // console.log("state was changed");
     },
 
     subscribe(observer) { //here I can call function from index.js

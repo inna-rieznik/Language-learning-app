@@ -21,12 +21,9 @@ const QuizGameBase = (props) => {
     useEffect(() => {
         reqInstance.get(fetchDataEndpoint).then((response) => {
             setQuizes(response.data);
-            console.log("quizes data", response.data);
 
         });
     }, []);
-    // console.log("quizes object", quizes);
-    console.log("USER SCORE", userScore);
 
     const restartGame = () => {
         setCountCorrect(0);
@@ -34,7 +31,7 @@ const QuizGameBase = (props) => {
     }
 
     const onClickVariant = (index) => {
-        console.log("step: ", step, "index: ", index, "answ", quiz.answers[index].value, quiz.answers[index].correct);
+       // console.log("step: ", step, "index: ", index, "answ", quiz.answers[index].value, quiz.answers[index].correct);
         setStep(step + 1);
         if (quiz.answers[index].correct) {
             setCountCorrect(countCorrect + 1);

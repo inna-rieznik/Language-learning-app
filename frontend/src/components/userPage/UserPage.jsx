@@ -7,15 +7,9 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import User from '../../images/user-svgrepo-com.svg'
 import {API_URL} from "../../utils/url";
+import {reqInstance} from "../../utils/auth";
 
 
-
-let reqInstance = axios.create({
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-    }
-);
 
 const UserPage = (props) => {
 
@@ -26,7 +20,7 @@ const UserPage = (props) => {
     useEffect(() => {
         reqInstance.get(`${API_URL}/user/${userId}`).then((response) => {
             setUserObject(response.data);
-            console.log(response.data);
+            //console.log(response.data);
         });
     }, [])
 

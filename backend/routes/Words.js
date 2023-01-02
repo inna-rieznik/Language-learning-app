@@ -25,15 +25,15 @@ router.get('/forStudent/random/6', authMiddleware, (req, res) => {
             [userId],
             (err, result) => {
                 if (err) {
-                    console.log(err);
+                   // console.log(err);
                     res.send({status: 'error', err})
                     return;
                 }
-                console.log(result);
+              //  console.log(result);
                 res.send(result);
             })
     } catch (e) {
-        console.log(e)
+      //  console.log(e)
     }
 
 });
@@ -50,15 +50,15 @@ router.get('/forStudent', authMiddleware, (req, res) => {
             [userId],
             (err, result) => {
                 if (err) {
-                    console.log(err);
+                  //  console.log(err);
                     res.send({status: 'error', err})
                     return;
                 }
-                console.log(result);
+               // console.log(result);
                 res.send(result);
             })
     } catch (e) {
-        console.log(e)
+      //  console.log(e)
     }
 });
 
@@ -72,15 +72,15 @@ router.get('/forStudent/:lessonId', authMiddleware, (req, res) => {
             [userId, lessonId],
             (err, result) => {
                 if (err) {
-                    console.log(err);
+                    //console.log(err);
                     res.send({status: 'error', err})
                     return;
                 }
-                console.log(result);
+               // console.log(result);
                 res.send(result);
             })
     } catch (e) {
-        console.log(e)
+       // console.log(e)
     }
 
 });
@@ -93,14 +93,14 @@ router.get('/all', roleMiddleware(['admin']), (req, res) => {
         db.query('select * from mydb.words',
             (err, result) => {
                 if (err) {
-                    console.log(err);
+                    //console.log(err);
                     res.send({status: 'error', err})
                     return;
                 }
                 res.send(result);
             })
     } catch (e) {
-        console.log(e)
+       // console.log(e)
     }
 
 });
@@ -113,15 +113,15 @@ router.get('/all/:lessonId', roleMiddleware(['admin']), (req, res) => {
             [lessonId],
             (err, result) => {
                 if (err) {
-                    console.log(err);
+                 //   console.log(err);
                     res.send({status: 'error', err})
                     return;
                 }
-                console.log(result);
+               // console.log(result);
                 res.send(result);
             })
     } catch (e) {
-        console.log(e)
+      //  console.log(e)
     }
 
 });
@@ -161,7 +161,7 @@ router.post('/byStudent', authMiddleware, (req, res) => {
                 [source, target],
                 (err, result) => {
                     if (err) {
-                        console.log(err);
+                     //   console.log(err);
                         res.send({status: 'error', err})
                         return;
                     }
@@ -173,7 +173,7 @@ router.post('/byStudent', authMiddleware, (req, res) => {
                         [wordId, userId],
                         (err, result) => {
                             if (err) {
-                                console.log(err);
+                               // console.log(err);
                                 res.send({status: 'error', err})
                             }
                             res.send({status: 'ok'})
@@ -182,7 +182,7 @@ router.post('/byStudent', authMiddleware, (req, res) => {
                 }
             )
         } catch (e) {
-            console.log(e)
+            //console.log(e)
         }
     }
 );
@@ -200,7 +200,7 @@ router.post('/byAdmin', roleMiddleware(['admin']), (req, res) => {
                 [source, target],
                 (err, result) => {
                     if (err) {
-                        console.log(err);
+                      //  console.log(err);
                         res.send({status: 'error', err})
                         return;
                     }
@@ -211,7 +211,7 @@ router.post('/byAdmin', roleMiddleware(['admin']), (req, res) => {
                         [wordId],
                         (err, result) => {
                             if (err) {
-                                console.log(err);
+                                //console.log(err);
                                 res.send({status: 'error', err})
                             }
                             res.send({status: 'ok'})
@@ -220,7 +220,7 @@ router.post('/byAdmin', roleMiddleware(['admin']), (req, res) => {
                 }
             )
         } catch (e) {
-            console.log(e)
+           // console.log(e)
         }
     }
 )
@@ -236,7 +236,7 @@ router.post('/byAdmin/:lessonId', roleMiddleware(['admin']), (req, res) => {
                 [lessonId, source, target],
                 (err, result) => {
                     if (err) {
-                        console.log(err);
+                        //console.log(err);
                         res.send({status: 'error', err})
                         return;
                     }
