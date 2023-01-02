@@ -12,18 +12,14 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import * as React from 'react';
-import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
 import TextField from '@mui/material/TextField';
 import {useEffect, useState} from 'react';
-import axios from "axios";
 import {useAuth} from "../login/Auth";
-import {Dialog, IconButton} from "@mui/material";
+import { IconButton} from "@mui/material";
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import EditIcon from '@mui/icons-material/Edit';
-import {useParams} from "react-router-dom";
 import {reqInstance} from '../../utils/auth'
 import {API_URL} from "../../utils/url";
 
@@ -54,13 +50,10 @@ const WordsPage = (props) => {
 
     //function to add data from inputs to wordsData
     const [openAdd, setOpenAdd] = React.useState(false);
-    const [openEdit, setOpenEdit] = React.useState(false);
 
     const handleOpenAdd = () => setOpenAdd(true);
     const handleCloseAdd = () => setOpenAdd(false);
 
-    const handleOpenEdit = () => setOpenEdit(true);
-    const handleCloseEdit = () => setOpenEdit(true);
 
     let newWordCz = React.createRef();
     let newWordEng = React.createRef();
@@ -74,7 +67,6 @@ const WordsPage = (props) => {
             });
     }, [userId]);
 
-    // console.log("role", user.role);
 
 
     useEffect(() => {
@@ -84,14 +76,12 @@ const WordsPage = (props) => {
                     .then((response) => {
                         setListOfWords(response.data);
                         setWordsCount(response.data.length);
-                        // console.log(response.data);
                     })
                 :
                 reqInstance.get(`${API_URL}/words/all`)
                     .then((response) => {
                         setListOfWords(response.data);
                         setWordsCount(response.data.length);
-                        // console.log(response.data);
                     })
         }
 
@@ -113,7 +103,7 @@ const WordsPage = (props) => {
             target: target
         }).then((response) => {
             setListOfWords(listOfWords);
-            console.log(response.data);
+            //console.log(response.data);
         });
 
     }
@@ -127,7 +117,7 @@ const WordsPage = (props) => {
             const wordToAdd = {source: source, target: target}
             setListOfWords([...listOfWords, wordToAdd]);
             setWordsCount(listOfWords.length + 1)
-            console.log("list:", listOfWords);
+            //console.log("list:", listOfWords);
 
         });
     };
@@ -143,24 +133,6 @@ const WordsPage = (props) => {
         });
     };
 
-
-    /* let addWordToVocabulary = () => {
-         /!*let word = newWordCz.current.value;
-         let translate = newWordEng.current.value;*!/
-         /!*props.addWordToVocabulary(word, translate);*!/
-         let action = addWordToVocabularyActionCreator()
-         props.dispatch(action);
-         //props.updateNewWordText('','');
-
-
-     };*/
-
-    /* let updateNewWordText = () => {
-         let word = newWordCz.current.value;
-         let translation = newWordEng.current.value;
-         let action = updateNewWordTextActionCreator(word, translation);
-         props.dispatch(action);
-     }*/
 
     return (
         <div className={s.content}>
@@ -270,64 +242,6 @@ const WordsPage = (props) => {
                                             {row.target}
                                         </TableCell>
 
-                                        {/*{(user.role === 'student') ? null :
-                                            <TableCell align="right">
-
-                                                                                                <Modal
-                                                    open={openEdit}
-                                                    onClose={handleCloseEdit}
-                                                    aria-labelledby="modal-modal-title"
-                                                    aria-describedby="modal-modal-description"
-
-                                                >
-
-                                                    <Box sx={style}>
-
-                                                        <Typography id="modal-modal-title" variant="h4" component="h1">
-                                                            Edit word
-                                                        </Typography>
-                                                        <h3>
-                                                            Word
-                                                        </h3>
-                                                        <TextField
-                                                            sx={{paddingBottom: 2}}
-                                                            fullWidth
-                                                            id="outlined-basic"
-                                                            label="Type word in czech"
-                                                            variant="outlined"
-                                                            inputRef={newWordCz}
-                                                            onChange={(e) => {
-                                                                setSource(e.target.value);
-                                                            }}
-                                                        />
-                                                        <h3>
-                                                            Translation
-                                                        </h3>
-                                                        <TextField
-                                                            sx={{paddingBottom: 2}}
-                                                            fullWidth
-                                                            id="outlined-basic"
-                                                            label="Type word in eng"
-                                                            variant="outlined"
-                                                            inputRef={newWordEng}
-                                                            onChange={(e) => {
-                                                                setTarget(e.target.value);
-                                                            }}
-
-                                                        />
-
-                                                        <Button variant="contained"
-                                                                onClick={() => {
-                                                                    editWord(row.id_word);
-                                                                    handleCloseEdit();
-                                                                }}
-                                                                style={{width: "500px", marginTop: "20px"}}
-                                                        >edit</Button>
-
-                                                    </Box>
-                                                </Modal>
-                                            </TableCell>}
-                                        */}
 
                                         {(user.role === 'student') ? null :
                                             <TableCell align="right">

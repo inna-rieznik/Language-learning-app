@@ -24,7 +24,7 @@ const Flashcards = (props) => {
                     correctAnswer: wordItem.target
                 }
             }))
-            console.log(response.data);
+           // console.log(response.data);
         });
     }, []);
 

@@ -4,7 +4,7 @@ import s from "./QuizPage.module.css";
 
 const Game = ({step, quiz, quizes, onClickVariant}) => {
     const percentage = Math.round((step / quizes.length) * 100);
-    console.log(percentage);
+   // console.log(percentage);
 
     return (
         <div>

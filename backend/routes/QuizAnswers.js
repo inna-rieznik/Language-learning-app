@@ -43,7 +43,7 @@ router.post('/:questionId', roleMiddleware(['admin']),   (req, res) => {
         [quizQuestionId, isCorrect, quizAnswer],
         (err, result) => {
             if (err) {
-                console.log(err);
+               // console.log(err);
                 res.send({status: 'error', err})
                 return;
             }

@@ -22,11 +22,11 @@ const WordTranslationGame = (props) => {
    useEffect(() => {
         reqInstance.get(fetchDataEndpoint).then((response) => {
             setWords(response.data);
-            console.log(response.data)
+           // console.log(response.data)
         });
     }, []);
 
-    console.log(words.length)
+    //console.log(words.length)
 
     const restartGame = () => {
         setCountCorrect(0);

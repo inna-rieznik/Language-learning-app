@@ -9,7 +9,7 @@ const FlashcardsList = ({flashcards}) => {
     const [userAnswer, setUserAnswer] = useState("");
 
 
-    console.log("userAnswer:", userAnswer,",correct ans index:", flashcards.index, ",correctAns:", flashcards.correctAnswer);
+  //  console.log("userAnswer:", userAnswer,",correct ans index:", flashcards.index, ",correctAns:", flashcards.correctAnswer);
     return (
         <div className={s.cardGrid}>
             {flashcards.map(flashcard => {

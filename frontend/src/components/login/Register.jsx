@@ -27,7 +27,7 @@ const Register = (props) => {
     const navigate = useNavigate();
 
     const handleSubmit = event => {
-        console.log('handleSubmit ran');
+        //console.log('handleSubmit ran');
         event.preventDefault();
         event.target.reset();
     };
@@ -47,7 +47,7 @@ const Register = (props) => {
                 localStorage.setItem("token", token);
                 window.location.href = '/'
             }
-            console.log(response.data);
+           // console.log(response.data);
         });
     };
 

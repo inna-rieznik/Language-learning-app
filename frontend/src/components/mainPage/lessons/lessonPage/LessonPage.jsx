@@ -66,14 +66,11 @@ const LessonPage = (props) => {
             grammarRuleTitle: grammarRuleTitle,
             grammarRule: grammarRule
         }).then((response) => {
-            console.log(response.data);
-        });
-    }
+    });
 
     const editLessonState = () => {
         reqInstance.put(`${API_URL}/lessons/${lessonId}/state`, {
         }).then((response) => {
-            console.log(response.data);
         });
     }
 
@@ -177,7 +174,7 @@ const LessonPage = (props) => {
 
         </div>
     );
-}
+}}
 export default LessonPage;
 
 

@@ -19,9 +19,9 @@ const db = mysql.createConnection({
 
 db.connect((error) => {
     if (error) {
-        console.log(error);
+        //console.log(error);
     } else {
-        console.log("MYSQL connected");
+       // console.log("MYSQL connected");
     }
 })
 
@@ -65,6 +65,6 @@ app.get('/api/test', (req, res) => {
 
 
 app.listen(3011, (hostname) => {
-    console.log(`Running server on ${hostname}, port 3011`);
+    //console.log(`Running server on ${hostname}, port 3011`);
 });
 

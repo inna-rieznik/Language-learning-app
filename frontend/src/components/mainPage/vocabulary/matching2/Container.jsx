@@ -40,13 +40,13 @@ export const Container = memo(function Container(props) {
                     lastDroppedItem: null
                 }
             }))
-            console.log(response.data);
+          //  console.log(response.data);
         });
     }, []);
 
 
-    console.log("words2: ", words2);
-    console.log("dustbin: ", dustbins);
+    //console.log("words2: ", words2);
+   // console.log("dustbin: ", dustbins);
 
 
 
@@ -114,7 +114,7 @@ export const Container = memo(function Container(props) {
             <Button onClick={() => {
                 const newErrorState = {};
                 const newCorrectState = {};
-                console.log("error ",newErrorState)
+               // console.log("error ",newErrorState)
 
                 for (let i=0; i < dustbins.length; i++){
                     if(dustbins[i].lastDroppedItem === null || dustbins[i].lastDroppedItem.source !== words2[i].source){
