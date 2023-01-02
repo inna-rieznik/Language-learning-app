@@ -39,7 +39,7 @@ router.post('/register',
                 [email, username],
                 (err, result) => {
                     if (err) {
-                       // console.log(err);
+                        console.log(err);
                         res.send({status: 'error', err});
                         return;
                     }
@@ -54,7 +54,7 @@ router.post('/register',
                         [username, hashedPassword, username, email],
                         (err, result) => {
                             if (err) {
-                               // console.log(err);
+                                console.log(err);
                                 res.send({status: 'error', err})
                                 return;
                             }
@@ -64,7 +64,7 @@ router.post('/register',
                                 "INSERT INTO mydb.users_progress (id_user,score, level, updated_at) values((select Max(id_user) from mydb.users),0,1,CURRENT_TIMESTAMP())",
                                 (err, result) => {
                                     if (err) {
-                                       // console.log(err);
+                                        console.log(err);
                                         res.send({status: 'error', err})
                                         return;
                                     }
@@ -140,7 +140,7 @@ router.post('/register',
                         })
                 })
         } catch (e) {
-            //console.log(e);
+            console.log(e);
             res.status(400).json({message: "Registration error"})
         }
     })
@@ -162,7 +162,7 @@ router.post('/login',
                 "SELECT * FROM mydb.users JOIN roles r on users.id_role = r.id_role JOIN users_progress up on users.id_user = up.id_user WHERE email = ?",
                 [email], (err, result) => {
                     if (err) {
-                       // console.log(err);
+                        console.log(err);
                         res.send({status: 'error', err});
                         return;
                     }
@@ -184,7 +184,7 @@ router.post('/login',
                 }
             )
         } catch (e) {
-            //console.log(e);
+            console.log(e);
             res.status(400).json({message: "Login error"})
         }
 

@@ -28,7 +28,7 @@ router.get('/', authMiddleware, (req, res) => {
         'select quiz_questions.id_quiz_questions, score, quiz_questions.content as question, id_quiz_answers, correct, qa.content as answer from mydb.quiz_questions join mydb.quiz_answers qa on quiz_questions.id_quiz_questions = qa.id_quiz_questions',
         (err, result) => {
             if (err) {
-               // console.log(err);
+                console.log(err);
                 res.send({status: 'error', err})
                 return;
             }
@@ -70,7 +70,7 @@ router.get('/word', authMiddleware, (req, res) => {
         "where id_quiz_types = '1'",
         (err, result) => {
             if (err) {
-               // console.log(err);
+                console.log(err);
                 res.send({status: 'error', err})
                 return;
             }
@@ -112,7 +112,7 @@ router.get('/grammar', authMiddleware, (req, res) => {
         "where id_quiz_types = '2'",
         (err, result) => {
             if (err) {
-               // console.log(err);
+                console.log(err);
                 res.send({status: 'error', err})
                 return;
             }
@@ -158,7 +158,7 @@ router.get('/word/:lessonId', authMiddleware, (req, res) => {
         [lessonId],
         (err, result) => {
             if (err) {
-             //   console.log(err);
+                console.log(err);
                 res.send({status: 'error', err})
                 return;
             }
@@ -204,7 +204,7 @@ router.get('/grammar/:lessonId', authMiddleware, (req, res) => {
         [lessonId],
         (err, result) => {
             if (err) {
-               // console.log(err);
+                console.log(err);
                 res.send({status: 'error', err})
                 return;
             }
@@ -251,7 +251,7 @@ router.post('/grammar/:lessonId', roleMiddleware(['admin']), (req, res) => {
         [lessonId],
         (err, result) => {
             if (err) {
-               // console.log(err);
+                console.log(err);
                 res.send({status: 'error one', err})
                 return;
             }
@@ -260,7 +260,7 @@ router.post('/grammar/:lessonId', roleMiddleware(['admin']), (req, res) => {
                  [quizQuestion],
                 (err, result) => {
                     if (err) {
-                      //  console.log(err);
+                        console.log(err);
                         res.send({status: 'error two', err})
                         return;
                     }
@@ -284,7 +284,7 @@ router.post('/word/:lessonId', roleMiddleware(['admin']), (req, res) => {
         [lessonId],
         (err, result) => {
             if (err) {
-               // console.log(err);
+                console.log(err);
                 res.send({status: 'error one', err})
                 return;
             }
@@ -293,7 +293,7 @@ router.post('/word/:lessonId', roleMiddleware(['admin']), (req, res) => {
                 [quizQuestion],
                 (err, result) => {
                     if (err) {
-                       // console.log(err);
+                        console.log(err);
                         res.send({status: 'error two', err})
                         return;
                     }

@@ -21,11 +21,11 @@ router.get('/:userId', authMiddleware, (req,res) => {
         [userId],
         (err, result) => {
             if (err) {
-                //console.log(err);
+                console.log(err);
                 res.send({status: 'error', err})
                 return;
             }
-           // console.log(result);
+           //console.log(result);
             res.send(result);
         })
 })

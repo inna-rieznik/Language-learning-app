@@ -40,7 +40,7 @@ const GrammarPartOfLesson = (props) => {
         });
     }, [])
 
-/*    const addQuizQuestion = () => {
+   const addQuizQuestion = () => {
         reqInstance.post(`${API_URL}/quizQuestions/grammar/${lessonId}`, {
             quizQuestion: quizQuestion
         }).then((response) => {
@@ -52,7 +52,7 @@ const GrammarPartOfLesson = (props) => {
             quizAnswer: quizQuestion
         }).then((response) => {
         });
-    }*/
+    }
 
 
     return (
@@ -65,7 +65,7 @@ const GrammarPartOfLesson = (props) => {
             <h2 style={{marginBottom: "20px", fontSize: '20px'}}>Choose one correct answer out of the three offered.</h2>
             <QuizGameBase fetchDataEndpoint={`${API_URL}/quizQuestions/grammar/${lessonId}`}/>
 
-{/*            <Button style={{marginBottom: 20}}
+{/*           <Button style={{marginBottom: 20}}
                     onClick={handleOpenAdd} variant="contained" startIcon={<AddIcon/>}>Add</Button>
 
 
