@@ -24,7 +24,7 @@ module.exports = function (roles) {
 
                 if (roles.includes(userRoles[key])) {
                     hasRole = true;
-                   // console.log(hasRole);
+                    //console.log(hasRole);
                 }
             })
 
@@ -37,7 +37,7 @@ module.exports = function (roles) {
             next();
 
         } catch (e) {
-            //console.log(e)
+            console.log(e)
         }
 
     }

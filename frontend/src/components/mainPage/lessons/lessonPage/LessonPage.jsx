@@ -66,7 +66,8 @@ const LessonPage = (props) => {
             grammarRuleTitle: grammarRuleTitle,
             grammarRule: grammarRule
         }).then((response) => {
-    });
+        })
+    }
 
     const editLessonState = () => {
         reqInstance.put(`${API_URL}/lessons/${lessonId}/state`, {
@@ -97,7 +98,7 @@ const LessonPage = (props) => {
                         <div className={s.child} style={{display: "flex", justifyContent: "flex-end"}}>
                             <IconButton onClick={handleOpen}
                                         style={{marginTop: "20px", marginBottom: "20px", alignItems: "right"}}>
-                                <EditIcon style={{width: "40px", height: "auto", color: "green"}}/>
+                                <EditIcon style={{width: "30px", height: "auto", color: "green"}}/>
                             </IconButton>
 
 
@@ -151,7 +152,7 @@ const LessonPage = (props) => {
 
                             <IconButton onClick={deleteLesson}
                                         style={{marginTop: "20px", marginBottom: "20px", alignItems: "right"}}>
-                                <DeleteOutlinedIcon style={{width: "40px", height: "auto", color: "red"}}/>
+                                <DeleteOutlinedIcon style={{width: "30px", height: "auto", color: "red"}}/>
                             </IconButton>
                         </div>
                     }
@@ -174,7 +175,7 @@ const LessonPage = (props) => {
 
         </div>
     );
-}}
+}
 export default LessonPage;
 
 

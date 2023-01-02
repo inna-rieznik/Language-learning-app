@@ -35,14 +35,14 @@ router.get('/all', roleMiddleware(['admin']), (req, res) => {
         db.query('select * from mydb.lessons',
             (err, result) => {
                 if (err) {
-                    //console.log(err);
+                    console.log(err);
                     res.send({status: 'error', err})
                     return;
                 }
                 res.send(result);
             })
     }catch (e){
-       // console.log(e)
+        console.log(e)
     }
 
 });
@@ -53,7 +53,7 @@ router.get('/forStudent', authMiddleware, (req, res) => {
         [userId],
         (err, result) => {
             if (err) {
-               // console.log(err);
+                console.log(err);
                 res.send({status: 'error', err})
                 return;
             }
@@ -74,11 +74,11 @@ router.get('/id/:lessonId', authMiddleware, (req, res) => {
         [lessonId],
         (err, result) => {
             if (err) {
-              //  console.log(err);
+                console.log(err);
                 res.send({status: 'error', err})
                 return;
             }
-            //console.log(result);
+            console.log(result);
             res.send(result);
         }
     )
@@ -100,7 +100,7 @@ router.post('/', roleMiddleware(['admin']), (req, res) => {
         [title, introText, grammarRuleTitle, grammarRule],
         (err, result) => {
             if (err) {
-                //console.log(err);
+                console.log(err);
                 res.send({status: 'error', err})
                 return;
             }
@@ -124,7 +124,7 @@ router.put('/:lessonId', roleMiddleware(['admin']), (req, res) => {
         [title, introText, grammarRuleTitle, grammarRule,lessonId],
         (err, result) => {
             if (err) {
-                //console.log(err);
+                console.log(err);
                 res.send({status: 'error', err})
                 return;
             }
@@ -144,7 +144,7 @@ router.put('/:lessonId/state', authMiddleware, (req, res) => {
         [lessonId, userId],
         (err, result) => {
             if (err) {
-                //console.log(err);
+                console.log(err);
                 res.send({status: 'error', err})
                 return;
             }
@@ -154,7 +154,7 @@ router.put('/:lessonId/state', authMiddleware, (req, res) => {
                 [lessonId, userId],
                 (err, lessonResult) => {
                     if (err) {
-                        //console.log(err);
+                        console.log(err);
                         res.send({status: 'error', err})
                         return;
                     }
@@ -169,7 +169,7 @@ router.put('/:lessonId/state', authMiddleware, (req, res) => {
                         [lessonResult[0].id_lesson, userId],
                         (err, result) => {
                             if (err) {
-                                //console.log(err);
+                                console.log(err);
                                 res.send({status: 'error', err})
                                 return;
                             }
@@ -191,7 +191,7 @@ router.delete('/:lessonId', roleMiddleware(['admin']), (req, res) => {
         [lessonId],
         (err, result) => {
             if (err) {
-                //console.log(err);
+                console.log(err);
                 res.send({status: 'error', err})
                 return;
             }
@@ -202,7 +202,7 @@ router.delete('/:lessonId', roleMiddleware(['admin']), (req, res) => {
                 [lessonId],
                 (err, result) => {
                     if (err) {
-                        //console.log(err);
+                        console.log(err);
                         res.send({status: 'error', err})
                         return;
                     }

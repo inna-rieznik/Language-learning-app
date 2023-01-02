@@ -26,7 +26,7 @@ const ReviewWords = (props) => {
                 <Card to='quiz'>Quiz Words</Card>
             {/*<Card urlName='flashcards' title='Flashcards'/>*/}
                 <Card to='translate'>Word - Translation (CZ-ENG)</Card>
-                <Card to='translate'>Translation - Word (ENG-CZ)</Card>
+               {/* <Card to='translate'>Translation - Word (ENG-CZ)</Card>*/}
                 <Card to='matching_translation'>Matching: connect word with translation</Card>
             {/*<Card urlName='matching_sentences' title='Complete the sentence'/>
             <Card urlName='fill_the_gap' title='Fill the gap'/>*/}
